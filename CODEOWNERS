@@ -1,0 +1,8 @@
+# This file is a CODEOWNERS file list your teams ownership areas here,
+# when a change is made to one of these domain areas the team will be added as requested on PRs
+
+# These owners are the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# these will be requested for
+# review when someone opens a pull request.
+*                          @jasonruesch

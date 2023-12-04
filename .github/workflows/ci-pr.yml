@@ -7,7 +7,10 @@ env:
   NX_BRANCH: ${{ github.event.number }}
   NX_RUN_GROUP: ${{ github.run_id }}
 
-on: pull_request
+on:
+  pull_request:
+    branches: ['main']
+    types: [ready_for_review]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
