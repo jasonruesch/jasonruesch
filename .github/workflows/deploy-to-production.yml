@@ -1,0 +1,71 @@
+# This workflow will build and deploy a site to another repo when a tag is pushed
+
+name: Deploy to Production
+
+on:
+  release:
+    types: [published]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'production'
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npx nx build jasonruesch
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jasonruesch
+          path: ./dist/jasonruesch
+          overwrite: true
+
+  # Deployment job
+  deploy:
+    name: Deploy
+    environment:
+      name: production
+      url: https://jasonruesch.dev
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: jasonruesch
+          path: ./dist/jasonruesch
+
+      - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: dist/jasonruesch/
+          destination-github-username: 'jasonruesch'
+          destination-repository-name: 'jasonruesch.github.io'
+          user-email: jason.ruesch@me.com
+          commit-message: 'chore(release): ${{  github.ref_name }}'
+          target-branch: main

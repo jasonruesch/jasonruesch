@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write # needed for provenance data generation
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production releases to complete.
+concurrency:
+  group: 'release'
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Print Environment Info
+        run: npx nx report
+
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Release
+        run: npx nx release --skip-publish
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      # There is a limit of 3 tags pushed to trigger a workflow.
+      - name: Push commit and tags
+        run: |
+          git fetch --tags -f
+          git pull --rebase
+          git push
+          git push --tags
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}

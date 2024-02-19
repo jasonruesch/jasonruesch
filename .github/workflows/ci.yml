@@ -1,20 +1,25 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
 
 permissions:
   actions: read
   contents: read
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# Cancel in-progress runs.
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
-  main:
+  pull_request:
+    name: Pull Request
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -22,13 +27,20 @@ jobs:
       # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
       # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
 
-      # Cache node_modules
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-      - run: npm ci
-      - uses: nrwl/nx-set-shas@v4
+          cache: npm
 
-      - run: npx nx-cloud record -- nx format:check
-      - run: npx nx affected -t lint test build e2e-ci
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set SHAs for Nx
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Run format check
+        run: npx nx-cloud record -- nx format:check
+
+      - name: Run affected
+        run: npx nx affected -t lint test build e2e-ci
