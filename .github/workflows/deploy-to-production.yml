@@ -49,7 +49,7 @@ jobs:
   deploy:
     name: Deploy
     environment:
-      name: production
+      name: Production
       url: https://jasonruesch.dev
     runs-on: ubuntu-latest
     needs: build
