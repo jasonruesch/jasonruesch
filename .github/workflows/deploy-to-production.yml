@@ -42,7 +42,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: jasonruesch
-          path: ./dist/jasonruesch
+          path: ./dist/apps/jasonruesch
           overwrite: true
 
   # Deployment job
@@ -57,13 +57,13 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: jasonruesch
-          path: ./dist/jasonruesch
+          path: ./dist/apps/jasonruesch
 
       - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: dist/jasonruesch/
+          source-directory: dist/apps/jasonruesch/
           destination-github-username: 'jasonruesch'
           destination-repository-name: 'jasonruesch.github.io'
           user-email: jason.ruesch@me.com
