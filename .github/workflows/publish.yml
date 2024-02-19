@@ -50,7 +50,7 @@ jobs:
         run: npx nx report
 
       - name: Build
-        run: npx nx build ${GITHUB_REF_NAME%%@*}
+        run: npx nx build ${GITHUB_REF_NAME%%@*} --skip-nx-cache
 
       - name: Publish package
         run: npx nx release publish -p ${GITHUB_REF_NAME%%@*}
