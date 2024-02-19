@@ -16,6 +16,7 @@
     "@commitlint/config-conventional": "^18.6.2",
     "@commitlint/config-nx-scopes": "^18.6.1",
     "@commitlint/cz-commitlint": "^18.6.1",
+    "@jasonruesch/tailwind": "file:libs/tailwind",
     "@nx/cypress": "18.0.4",
     "@nx/devkit": "18.0.4",
     "@nx/eslint": "18.0.4",
@@ -31,6 +32,7 @@
     "@swc/cli": "~0.1.62",
     "@swc/core": "~1.3.85",
     "@swc/helpers": "~0.5.2",
+    "@tailwindcss/forms": "^0.5.7",
     "@testing-library/react": "14.0.0",
     "@types/node": "18.16.9",
     "@types/react": "18.2.33",
@@ -54,15 +56,23 @@
     "lint-staged": "^15.2.2",
     "nx": "18.0.4",
     "postcss": "^8.4.35",
-    "prettier": "^2.6.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
+    "tailwindcss-safe-area": "^0.5.1",
+    "tw-colors": "^3.3.1",
     "typescript": "~5.3.2",
+    "verdaccio": "^5.0.4",
     "vite": "~5.0.0",
+    "vite-plugin-dts": "~2.3.0",
     "vitest": "^1.0.4"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/@commitlint/cz-commitlint"
     }
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

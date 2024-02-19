@@ -52,5 +52,47 @@
       }
     }
   },
-  "nxCloudAccessToken": "MWVjNWZhYmMtZDU4MC00ODIyLTg1ZGItYzBjNjMxNzY1YmE5fHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MWVjNWZhYmMtZDU4MC00ODIyLTg1ZGItYzBjNjMxNzY1YmE5fHJlYWQtd3JpdGU=",
+  "targetDefaults": {
+    "@nx/vite:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "release": {
+    "changelog": {
+      "workspaceChangelog": false,
+      "projectChangelogs": true,
+      "automaticFromRef": true
+    },
+    "version": {
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk"
+      }
+    },
+    "groups": {
+      "jasonruesch": {
+        "projects": "jasonruesch",
+        "projectsRelationship": "independent",
+        "changelog": {
+          "createRelease": "github",
+          "file": "{projectRoot}/CHANGELOG.md",
+          "renderOptions": {
+            "authors": false
+          }
+        }
+      },
+      "publishable": {
+        "projects": "tag:publishable",
+        "projectsRelationship": "independent",
+        "changelog": {
+          "renderOptions": {
+            "commitRefefences": false
+          }
+        }
+      }
+    }
+  }
 }

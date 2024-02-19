@@ -1,0 +1,26 @@
+{
+  "name": "tailwind",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/tailwind/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/tailwind",
+        "main": "libs/tailwind/src/index.ts",
+        "tsConfig": "libs/tailwind/tsconfig.lib.json",
+        "assets": ["libs/tailwind/*.md"]
+      }
+    },
+    "nx-release-publish": {
+      "executor": "@nx/js:release-publish",
+      "options": {
+        "packageRoot": "./dist/libs/tailwind",
+        "registry": "https://npm.pkg.github.com/"
+      }
+    }
+  },
+  "tags": ["scope:tailwind", "type:ui", "publishable"]
+}
