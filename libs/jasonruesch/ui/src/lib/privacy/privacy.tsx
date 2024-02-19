@@ -67,7 +67,7 @@ export function Privacy() {
         navigate(`#${target}`);
       }
     },
-    [hash, navigate]
+    [hash, navigate],
   );
 
   useEffect(() => {

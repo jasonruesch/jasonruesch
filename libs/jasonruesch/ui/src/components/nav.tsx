@@ -14,7 +14,7 @@ export const Nav = ({ className }: NavProps) => {
           className={({ isActive }) =>
             clsx(
               'hover:text-primary-600 dark:hover:text-primary-500',
-              isActive ? 'text-primary-500 dark:text-primary-400' : ''
+              isActive ? 'text-primary-500 dark:text-primary-400' : '',
             )
           }
         >
@@ -25,7 +25,7 @@ export const Nav = ({ className }: NavProps) => {
           className={({ isActive }) =>
             clsx(
               'hover:text-primary-600 dark:hover:text-primary-500',
-              isActive ? 'text-primary-500 dark:text-primary-400' : ''
+              isActive ? 'text-primary-500 dark:text-primary-400' : '',
             )
           }
         >
@@ -36,7 +36,7 @@ export const Nav = ({ className }: NavProps) => {
           className={({ isActive }) =>
             clsx(
               'hover:text-primary-600 dark:hover:text-primary-500',
-              isActive ? 'text-primary-500 dark:text-primary-400' : ''
+              isActive ? 'text-primary-500 dark:text-primary-400' : '',
             )
           }
         >

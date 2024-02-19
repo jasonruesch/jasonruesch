@@ -53,13 +53,13 @@ export function Layout() {
         </Routes>
       </main>
 
-      <footer className="flex flex-col items-center justify-center gap-1 py-4 px-safe-offset-4 sm:flex-row lg:px-safe-offset-8 text-sm">
-        <span className="text-center text-neutral-400 dark:text-neutral-300">
+      <footer className="flex flex-col items-center justify-center gap-1 py-4 px-safe-offset-4 sm:flex-row lg:px-safe-offset-8 text-sm text-neutral-400 dark:text-neutral-300">
+        <span>
           &copy; {new Date().getFullYear()} Jason Ruesch. All rights reserved.
         </span>
-        <span className="text-neutral-400 dark:text-neutral-300">
-          v{packageVersion}
-        </span>
+        <span className="hidden sm:flex">&bull;</span>
+        <span>v{packageVersion}</span>
+        <span className="hidden sm:flex">&bull;</span>
         <Link
           to="/privacy"
           className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
