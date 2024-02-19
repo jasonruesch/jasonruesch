@@ -3,8 +3,8 @@ name: Publish
 on:
   push:
     tags:
-      - '*@*.*.*'
-      - '!jasonruesch@*.*.*'
+      - '*@*'
+      - '!jasonruesch@*'
 
 permissions:
   contents: read
