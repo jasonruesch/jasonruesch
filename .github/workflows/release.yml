@@ -51,16 +51,8 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Release
-        run: npx nx release --skip-publish
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
-
-      # There is a limit of 3 tags pushed to trigger a workflow.
-      - name: Push commit and tags
         run: |
-          git fetch --tags -f
-          git pull --rebase
-          git push
-          git push --tags
+          npx nx release --skip-publish
+          git push --follow-tags
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
