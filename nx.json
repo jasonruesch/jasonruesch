@@ -64,8 +64,7 @@
   "release": {
     "changelog": {
       "workspaceChangelog": false,
-      "projectChangelogs": true,
-      "automaticFromRef": true
+      "projectChangelogs": true
     },
     "version": {
       "conventionalCommits": true,
@@ -79,19 +78,20 @@
         "projectsRelationship": "independent",
         "changelog": {
           "createRelease": "github",
-          "file": "{projectRoot}/CHANGELOG.md",
           "renderOptions": {
             "authors": false
-          }
+          },
+          "automaticFromRef": true
         }
       },
       "publishable": {
-        "projects": "tag:publishable",
+        "projects": ["tag:publishable"],
         "projectsRelationship": "independent",
         "changelog": {
           "renderOptions": {
             "commitRefefences": false
-          }
+          },
+          "automaticFromRef": true
         }
       }
     }
