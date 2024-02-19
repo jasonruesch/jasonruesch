@@ -31,7 +31,7 @@ export function Layout() {
           'fixed inset-x-0 z-20 flex h-14 items-center transition-shadow px-safe-offset-4 lg:h-16 lg:px-safe-offset-8',
           scrollPosition > 0
             ? 'bg-neutral-50 shadow-sm dark:bg-neutral-900 dark:shadow-black'
-            : 'bg-transparent'
+            : 'bg-transparent',
         )}
       >
         <div className="flex-1 leading-none">
@@ -57,16 +57,15 @@ export function Layout() {
         <span className="text-center text-neutral-400 dark:text-neutral-300">
           &copy; {new Date().getFullYear()} Jason Ruesch. All rights reserved.
         </span>
+        <span className="text-neutral-400 dark:text-neutral-300">
+          v{packageVersion}
+        </span>
         <Link
           to="/privacy"
           className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
         >
           Privacy Policy
         </Link>
-        <span className="text-neutral-400 dark:text-neutral-300">&bull;</span>
-        <span className="text-neutral-400 dark:text-neutral-300">
-          v{packageVersion}
-        </span>
       </footer>
     </div>
   );
