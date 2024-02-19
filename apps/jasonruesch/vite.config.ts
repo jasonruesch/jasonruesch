@@ -2,6 +2,7 @@
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import packageJson from './package.json';
 
 export default defineConfig({
@@ -18,7 +19,18 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths()],
+  plugins: [
+    react(),
+    nxViteTsPaths(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'package.json',
+          dest: '',
+        },
+      ],
+    }),
+  ],
 
   // Uncomment this if you are using workers.
   // worker: {
