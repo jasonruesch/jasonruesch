@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jasonruesch/jasonruesch-ui": ["libs/jasonruesch/ui/src/index.ts"],
       "@jasonruesch/tailwind": ["libs/tailwind/src/index.ts"]
     }
   },

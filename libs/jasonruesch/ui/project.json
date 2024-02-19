@@ -1,0 +1,8 @@
+{
+  "name": "jasonruesch-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/jasonruesch/ui/src",
+  "projectType": "library",
+  "tags": ["scope:jasonruesch", "type:ui"],
+  "targets": {}
+}
