@@ -1,3 +1,10 @@
+## 0.5.1 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** set test color to cyan
+
 ## 0.5.0 (2024-02-20)
 
 

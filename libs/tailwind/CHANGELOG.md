@@ -1,3 +1,15 @@
+## 0.5.1 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **tailwind:** set test color to cyan
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.5.0 (2024-02-20)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@jasonruesch/tailwind",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "type": "module",
   "dependencies": {
     "tailwindcss": "^3.4.1",
