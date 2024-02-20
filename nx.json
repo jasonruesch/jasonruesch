@@ -75,8 +75,8 @@
       }
     },
     "groups": {
-      "jasonruesch": {
-        "projects": "jasonruesch",
+      "apps": {
+        "projects": ["jasonruesch"],
         "projectsRelationship": "independent",
         "changelog": {
           "renderOptions": {

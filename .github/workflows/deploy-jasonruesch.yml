@@ -1,6 +1,6 @@
 # This workflow will build and deploy a site to another repo when a tag is pushed
 
-name: Deploy
+name: Deploy Jason Ruesch
 
 on:
   push:
@@ -58,12 +58,12 @@ jobs:
       - name: Build
         run: npx nx build jasonruesch --skip-nx-cache
 
-      - name: Upload artifact for GitHub Pages
+      - name: Upload GitHub Pages artifact for jasonruesch
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist/apps/jasonruesch
 
-      - name: Upload artifact
+      - name: Upload artifact for jasonruesch
         uses: actions/upload-artifact@v4
         with:
           name: jasonruesch
