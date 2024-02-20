@@ -1,3 +1,15 @@
+## 0.1.3 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **tailwind:** set test color to violet
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.1.2 (2024-02-19)
 
 
