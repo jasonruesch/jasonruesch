@@ -58,8 +58,13 @@ jobs:
       - name: Build
         run: npx nx build jasonruesch --skip-nx-cache
 
-      - name: Upload artifact
+      - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist/apps/jasonruesch
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: jasonruesch
           path: ./dist/apps/jasonruesch
@@ -76,8 +81,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: jasonruesch
 
   # Deployment job
   deploy-production:

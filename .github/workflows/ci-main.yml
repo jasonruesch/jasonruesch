@@ -100,7 +100,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: jasonruesch
           path: ./dist/apps/jasonruesch
 
       - name: Commit version bump
@@ -123,5 +122,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: jasonruesch
