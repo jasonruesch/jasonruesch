@@ -93,16 +93,24 @@ jobs:
         with:
           path: ./dist/apps/jasonruesch
 
-      # Other apps...
+      # Jason Ruesch app
+      - name: Get package version for Jason Ruesch
+        id: jasonruesch_package_version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: ./apps/jasonruesch
 
-      # Commit any app version bumps
-      - name: Commit version bumps
+      # Jsaon Ruesch app
+      - name: Commit version bump for Jason Ruesch
+        if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
         run: |
-          git add -A
-          git commit -m "chore(release): staging" -n
+          git add ./apps/jasonruesch/package.json
+          git commit -m "chore(release): jasonruesch@${{ steps.jasonruesch_package_version.outputs.current-version }}" -n
           git push
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      # Other apps...
 
   # Deployment job for jasonruesch
   deploy-jasonruesch:
