@@ -14,9 +14,6 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npm install",
-          "git add package-lock.json",
-          "git commit --amend --no-edit -n",
           "git fetch --tags -f",
           "git pull --rebase",
           "git push",
