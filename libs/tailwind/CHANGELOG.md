@@ -1,3 +1,15 @@
+## 0.7.1 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **tailwind:** set test color to gray
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.7.0 (2024-02-20)
 
 

@@ -1,3 +1,10 @@
+## 0.7.1 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** set test color to gray
+
 ## 0.7.0 (2024-02-20)
 
 
