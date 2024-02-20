@@ -1,6 +1,6 @@
 # This workflow will build and deploy a site to another repo when a tag is pushed
 
-name: Deploy to Production
+name: Deploy
 
 on:
   push:
@@ -9,14 +9,16 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: 'production'
-  cancel-in-progress: false
+  group: 'deploy'
+  cancel-in-progress: true
 
 jobs:
   # Build job
@@ -24,8 +26,17 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -33,8 +44,16 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Configure Git Identity
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Build
         run: npx nx build jasonruesch --skip-nx-cache
@@ -46,13 +65,28 @@ jobs:
           overwrite: true
 
   # Deployment job
-  deploy:
-    name: Deploy
+  deploy-staging:
+    name: Deploy to Staging
+    environment:
+      name: Staging
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: jasonruesch
+
+  # Deployment job
+  deploy-production:
+    name: Deploy to Production
     environment:
       name: Production
       url: https://jasonruesch.dev
     runs-on: ubuntu-latest
-    needs: build
+    needs: deploy-staging
     steps:
       - uses: actions/download-artifact@v4
         with:

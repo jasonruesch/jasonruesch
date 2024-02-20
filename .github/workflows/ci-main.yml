@@ -1,4 +1,4 @@
-name: Deploy to Staging
+name: Main Branch CI
 
 on:
   push:
@@ -14,9 +14,9 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production publishes to complete.
+# However, do NOT cancel in-progress runs as we want to allow these deployments to complete.
 concurrency:
-  group: 'staging'
+  group: 'main'
   cancel-in-progress: false
 
 jobs:
