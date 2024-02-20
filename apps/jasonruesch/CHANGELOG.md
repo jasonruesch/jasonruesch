@@ -1,3 +1,10 @@
+## 0.6.0 (2024-02-20)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to teal
+
 ## 0.5.1 (2024-02-20)
 
 

@@ -1,3 +1,15 @@
+## 0.6.0 (2024-02-20)
+
+
+### 🚀 Features
+
+- **tailwind:** set test color to teal
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.5.1 (2024-02-20)
 
 
