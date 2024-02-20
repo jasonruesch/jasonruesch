@@ -14,10 +14,10 @@ permissions:
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# Cancel in-progress runs.
 concurrency:
   group: 'staging'
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   main:
@@ -70,8 +70,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
-        # with:
-        #   token: ${{ steps.generate-token.outputs.token }}
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -100,7 +100,7 @@ jobs:
       - name: Commit version bump
         run: |
           git add -A
-          git commit -m "chore(release): staging"
+          git commit -m "chore(release): staging" -n
           git push
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
