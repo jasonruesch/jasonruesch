@@ -1,3 +1,10 @@
+## 0.2.0 (2024-02-20)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to black ([2b1491a](https://github.com/jasonruesch/jasonruesch/commit/2b1491a))
+
 ## 0.1.4 (2024-02-20)
 
 
