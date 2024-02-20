@@ -9,6 +9,17 @@
         "config": ".verdaccio/config.yml",
         "storage": "tmp/local-registry/storage"
       }
+    },
+    "post-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "git fetch --tags -f",
+          "git pull --rebase",
+          "git push --follow-tags"
+        ],
+        "parallel": false
+      }
     }
   }
 }
