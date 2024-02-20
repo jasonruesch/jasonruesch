@@ -19,7 +19,8 @@
           "git commit --amend --no-edit -n",
           "git fetch --tags -f",
           "git pull --rebase",
-          "git push --follow-tags"
+          "git push",
+          "git push --tags"
         ],
         "parallel": false
       }
