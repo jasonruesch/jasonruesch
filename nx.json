@@ -70,7 +70,8 @@
     "version": {
       "conventionalCommits": true,
       "generatorOptions": {
-        "fallbackCurrentVersionResolver": "disk"
+        "fallbackCurrentVersionResolver": "disk",
+        "skipLockFileUpdate": true
       }
     },
     "groups": {
