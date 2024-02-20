@@ -16,14 +16,11 @@ concurrency:
 
 jobs:
   release:
-    # if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     name: Release
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      # Disable this workflow by exiting early
-      - run: exit 0
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -57,8 +54,7 @@ jobs:
       - name: Release
         run: |
           npx nx release --skip-publish
-          npm install
-          git add .
-          git push --follow-tags
+          git push
+          git push --tags
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
