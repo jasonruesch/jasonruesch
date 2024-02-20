@@ -24,7 +24,7 @@ jobs:
   # Build job
   build:
     if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
-    name: Main
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Generate a token
@@ -106,11 +106,18 @@ jobs:
         run: |
           git add ./apps/jasonruesch/package.json
           git commit -m "chore(release): jasonruesch@${{ steps.jasonruesch_package_version.outputs.current-version }}" -n
-          git push
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
       # Other apps...
+
+      # Push changes for all apps that may have commited version bumps
+      - name: Push changes
+        run: |
+          git pull --rebase
+          git push
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
   # Deployment job for jasonruesch
   deploy-jasonruesch:
