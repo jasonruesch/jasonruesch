@@ -1,3 +1,15 @@
+## 0.6.1 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **tailwind:** set test color to pink
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.6.0 (2024-02-20)
 
 

@@ -1,3 +1,10 @@
+## 0.6.1 (2024-02-20)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** set test color to pink
+
 ## 0.6.0 (2024-02-20)
 
 
