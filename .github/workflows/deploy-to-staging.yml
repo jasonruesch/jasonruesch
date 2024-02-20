@@ -100,7 +100,7 @@ jobs:
       - name: Commit version bump
         run: |
           git add -A
-          git commit -m "chore(release): staging" -n
+          HUSKY=0 git commit -m "chore(release): staging" -n
           git push
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
