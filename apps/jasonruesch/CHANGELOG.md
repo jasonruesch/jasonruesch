@@ -1,3 +1,10 @@
+## 0.3.0 (2024-02-20)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to blue
+
 ## 0.2.0 (2024-02-20)
 
 
