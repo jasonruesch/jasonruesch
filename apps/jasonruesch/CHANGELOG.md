@@ -1,3 +1,10 @@
+## 0.4.0 (2024-02-20)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to red
+
 ## 0.3.0 (2024-02-20)
 
 
