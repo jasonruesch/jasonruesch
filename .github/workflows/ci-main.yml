@@ -129,6 +129,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Check if artifact exists
+        uses: LIT-Protocol/artifact-exists-action@v0
+        id: check_artifact
+        with:
+          name: 'github-pages'
+
       - name: Deploy to GitHub Pages
+        if: steps.check_artifact.outputs.exists == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
