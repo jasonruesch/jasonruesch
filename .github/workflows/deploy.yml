@@ -58,11 +58,11 @@ jobs:
       - name: Build
         run: npx nx build jasonruesch --skip-nx-cache
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           name: jasonruesch
           path: ./dist/apps/jasonruesch
-          overwrite: true
 
   # Deployment job
   deploy-staging:
