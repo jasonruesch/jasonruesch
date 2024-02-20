@@ -1,3 +1,10 @@
+## 0.7.0 (2024-02-20)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to purple
+
 ## 0.6.1 (2024-02-20)
 
 
