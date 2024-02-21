@@ -79,8 +79,10 @@
         "projects": ["jasonruesch"],
         "projectsRelationship": "independent",
         "changelog": {
+          "createRelease": "github",
           "renderOptions": {
-            "authors": false
+            "authors": false,
+            "commitRefefences": true
           }
         }
       },
@@ -89,7 +91,7 @@
         "projectsRelationship": "independent",
         "changelog": {
           "renderOptions": {
-            "commitRefefences": false
+            "commitRefefences": true
           }
         }
       }
