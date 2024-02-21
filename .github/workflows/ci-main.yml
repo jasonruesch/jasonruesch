@@ -27,18 +27,19 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Generate a token
-        id: generate-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      # - name: Generate a token
+      #   id: generate-token
+      #   uses: actions/create-github-app-token@v1
+      #   with:
+      #     app-id: ${{ secrets.APP_ID }}
+      #     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ steps.generate-token.outputs.token }}
+          # token: ${{ steps.generate-token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -108,7 +109,8 @@ jobs:
           git add ./apps/jasonruesch/package.json
           git commit -m "chore(release): jasonruesch@${{ steps.jasonruesch_package_version.outputs.current-version }}" -n
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          # GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Other apps...
 
@@ -118,7 +120,8 @@ jobs:
           git pull --rebase
           git push
         env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          # GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Deployment job for jasonruesch
   deploy-jasonruesch:
