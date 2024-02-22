@@ -1,3 +1,15 @@
+## 0.10.0 (2024-02-22)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to red ([9493831](https://github.com/jasonruesch/jasonruesch/commit/9493831))
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** increment test color label ([c2113bf](https://github.com/jasonruesch/jasonruesch/commit/c2113bf))
+
 ## 0.9.1 (2024-02-22)
 
 
