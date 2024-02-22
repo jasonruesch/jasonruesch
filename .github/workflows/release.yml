@@ -55,9 +55,8 @@ jobs:
       - name: Release
         run: |
           npx nx release --skip-publish
-          git fetch --tags -f
           git pull --rebase
           git push
-          git push --tags
+          git push --tags -f
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
