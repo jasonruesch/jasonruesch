@@ -1,3 +1,15 @@
+## 0.12.0 (2024-02-22)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to purple ([6e1bd51](https://github.com/jasonruesch/jasonruesch/commit/6e1bd51))
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** increment test color label ([b40170f](https://github.com/jasonruesch/jasonruesch/commit/b40170f))
+
 ## 0.11.0 (2024-02-22)
 
 
