@@ -63,6 +63,16 @@ jobs:
       - name: Run affected lint and tests
         run: npx nx affected -t lint test e2e-ci
 
+      # Preemptively bump version for each affected app
+
+      # Jason Ruesch app
+      - name: Update version for Jason Ruesch
+        id: jasonruesch_version
+        working-directory: ./apps/jasonruesch
+        run: |
+          VERSION=$(npm version prerelease --preid=staging --no-git-tag-version)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       # Build affected apps
       - name: Build
         run: npx nx affected -t build
@@ -79,19 +89,6 @@ jobs:
       - name: Setup Pages for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
         uses: actions/configure-pages@v4
-      # Jason Ruesch app
-      - name: Update version for Jason Ruesch
-        if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
-        id: jasonruesch_version
-        working-directory: ./apps/jasonruesch
-        run: |
-          VERSION=$(npm version prerelease --preid=staging --no-git-tag-version)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-      # Jason Ruesch app
-      - name: Update built version for Jason Ruesch
-        if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
-        working-directory: ./dist/apps/jasonruesch
-        run: npm version ${{ steps.jasonruesch_version.outputs.version }} --no-git-tag-version
       # Jason Ruesch app
       - name: Upload GitHub Pages artifact for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
