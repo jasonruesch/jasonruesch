@@ -17,8 +17,11 @@ permissions:
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
-  group: 'deploy'
+  group: 'deploy-jasonruesch'
   cancel-in-progress: true
+
+env:
+  PROJECT_NAME: ${GITHUB_REF_NAME%%@*}
 
 jobs:
   # Build job
@@ -57,18 +60,18 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Build
-        run: npx nx build jasonruesch --skip-nx-cache
+        run: npx nx build ${PROJECT_NAME} --skip-nx-cache
 
-      - name: Upload GitHub Pages artifact for jasonruesch
+      - name: Upload GitHub Pages artifact for ${PROJECT_NAME}
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/apps/jasonruesch
+          path: ./dist/apps/${PROJECT_NAME}
 
-      - name: Upload artifact for jasonruesch
+      - name: Upload artifact for ${PROJECT_NAME}
         uses: actions/upload-artifact@v4
         with:
-          name: jasonruesch
-          path: ./dist/apps/jasonruesch
+          name: ${PROJECT_NAME}
+          path: ./dist/apps/${PROJECT_NAME}
 
   # Deployment job
   deploy-staging:
@@ -94,14 +97,14 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: jasonruesch
-          path: ./dist/apps/jasonruesch
+          name: ${PROJECT_NAME}
+          path: ./dist/apps/${PROJECT_NAME}
 
       - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: dist/apps/jasonruesch/
+          source-directory: dist/apps/${PROJECT_NAME}/
           destination-github-username: 'jasonruesch'
           destination-repository-name: 'jasonruesch.github.io'
           user-email: jason.ruesch@me.com

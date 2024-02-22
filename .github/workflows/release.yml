@@ -51,7 +51,6 @@ jobs:
       - name: Print Environment Info
         run: npx nx report
 
-      # After the release, we need to run npm install to refresh the package lock file for accuracy
       - name: Release
         run: |
           npx nx release --skip-publish
