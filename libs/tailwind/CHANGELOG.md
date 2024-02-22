@@ -1,3 +1,15 @@
+## 0.10.0 (2024-02-22)
+
+
+### 🚀 Features
+
+- **tailwind:** set test color to white
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.9.0 (2024-02-22)
 
 

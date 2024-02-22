@@ -1,3 +1,10 @@
+## 0.11.0 (2024-02-22)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to white ([bdef023](https://github.com/jasonruesch/jasonruesch/commit/bdef023))
+
 ## 0.10.0 (2024-02-22)
 
 
