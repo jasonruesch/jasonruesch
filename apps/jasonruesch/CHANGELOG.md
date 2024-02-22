@@ -1,3 +1,17 @@
+## 0.8.0 (2024-02-22)
+
+
+### 🚀 Features
+
+- **jasonruesch:** set test color to blue ([0591b49](https://github.com/jasonruesch/jasonruesch/commit/0591b49))
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** increment test color label ([cb16a46](https://github.com/jasonruesch/jasonruesch/commit/cb16a46))
+
+- **jasonruesch:** increment test color label ([c76425c](https://github.com/jasonruesch/jasonruesch/commit/c76425c))
+
 ## 0.7.1 (2024-02-20)
 
 
