@@ -4,5 +4,5 @@
   "sourceRoot": "apps/jasonruesch/src",
   "projectType": "application",
   "targets": {},
-  "tags": []
+  "tags": ["scope:jasonruesch", "type:app"]
 }

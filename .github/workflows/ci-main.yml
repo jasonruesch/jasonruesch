@@ -67,7 +67,7 @@ jobs:
       - name: Affected build projects
         id: affected
         run: |
-          PROJECTS=$(npx nx show projects --affected --with-target build --json)
+          PROJECTS=$(npx nx show projects --projects jasonruesch --affected --with-target build --json)
           echo "projects=$PROJECTS" >> $GITHUB_OUTPUT
 
   # Build job
