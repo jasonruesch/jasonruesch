@@ -1,3 +1,10 @@
+## 0.12.1 (2024-02-22)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** increment test color label ([4c23910](https://github.com/jasonruesch/jasonruesch/commit/4c23910))
+
 ## 0.12.0 (2024-02-22)
 
 
