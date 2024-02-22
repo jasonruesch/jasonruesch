@@ -85,9 +85,14 @@
           }
         }
       },
-      "publishable": {
-        "projects": ["tag:publishable"],
-        "projectsRelationship": "independent"
+      "libs": {
+        "projects": ["tailwind"],
+        "projectsRelationship": "independent",
+        "changelog": {
+          "renderOptions": {
+            "commitRefefences": false
+          }
+        }
       }
     }
   }

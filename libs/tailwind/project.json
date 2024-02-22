@@ -22,5 +22,5 @@
       }
     }
   },
-  "tags": ["scope:tailwind", "type:ui", "publishable"]
+  "tags": ["scope:tailwind", "type:ui"]
 }
