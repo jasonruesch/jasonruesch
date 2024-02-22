@@ -85,8 +85,8 @@ jobs:
         id: jasonruesch_version
         working-directory: ./apps/jasonruesch
         run: |
-          VAR=$(npm version prerelease --preid=staging --no-git-tag-version)
-          echo "::set-output name=version::$VAR"
+          VERSION=$(npm version prerelease --preid=staging --no-git-tag-version)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
       # Jason Ruesch app
       - name: Update built version for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
