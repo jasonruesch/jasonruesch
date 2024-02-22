@@ -81,19 +81,13 @@
         "changelog": {
           "createRelease": "github",
           "renderOptions": {
-            "authors": false,
-            "commitRefefences": true
+            "authors": false
           }
         }
       },
       "publishable": {
         "projects": ["tag:publishable"],
-        "projectsRelationship": "independent",
-        "changelog": {
-          "renderOptions": {
-            "commitRefefences": true
-          }
-        }
+        "projectsRelationship": "independent"
       }
     }
   }
