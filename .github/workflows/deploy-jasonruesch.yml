@@ -20,9 +20,6 @@ concurrency:
   group: 'deploy-jasonruesch'
   cancel-in-progress: true
 
-env:
-  PROJECT_NAME: ${GITHUB_REF_NAME%%@*}
-
 jobs:
   # Build job
   build:
@@ -60,18 +57,18 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Build
-        run: npx nx build ${PROJECT_NAME} --skip-nx-cache
+        run: npx nx build ${GITHUB_REF_NAME%%@*} --skip-nx-cache
 
-      - name: Upload GitHub Pages artifact for ${PROJECT_NAME}
+      - name: Upload GitHub Pages artifact for ${GITHUB_REF_NAME%%@*}
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/apps/${PROJECT_NAME}
+          path: ./dist/apps/${GITHUB_REF_NAME%%@*}
 
-      - name: Upload artifact for ${PROJECT_NAME}
+      - name: Upload artifact for ${GITHUB_REF_NAME%%@*}
         uses: actions/upload-artifact@v4
         with:
-          name: ${PROJECT_NAME}
-          path: ./dist/apps/${PROJECT_NAME}
+          name: ${GITHUB_REF_NAME%%@*}
+          path: ./dist/apps/${GITHUB_REF_NAME%%@*}
 
   # Deployment job
   deploy-staging:
@@ -97,14 +94,14 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: ${PROJECT_NAME}
-          path: ./dist/apps/${PROJECT_NAME}
+          name: ${GITHUB_REF_NAME%%@*}
+          path: ./dist/apps/${GITHUB_REF_NAME%%@*}
 
       - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: dist/apps/${PROJECT_NAME}/
+          source-directory: dist/apps/${GITHUB_REF_NAME%%@*}/
           destination-github-username: 'jasonruesch'
           destination-repository-name: 'jasonruesch.github.io'
           user-email: jason.ruesch@me.com
