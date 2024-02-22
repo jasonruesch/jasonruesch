@@ -82,12 +82,16 @@ jobs:
       # Jason Ruesch app
       - name: Update version for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
+        id: jasonruesch_version
         working-directory: ./apps/jasonruesch
-        run: npm version prerelease --preid=staging --no-git-tag-version
+        run: |
+          VAR=$(npm version prerelease --preid=staging --no-git-tag-version)
+          echo "::set-output name=version::$VAR"
       # Jason Ruesch app
-      - name: Build Jason Ruesch
+      - name: Update built version for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
-        run: npx nx build jasonruesch # Rebuild with updated version
+        working-directory: ./dist/apps/jasonruesch
+        run: npm version ${{ steps.jasonruesch_version.outputs.version }} --no-git-tag-version
       # Jason Ruesch app
       - name: Upload GitHub Pages artifact for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
@@ -95,18 +99,11 @@ jobs:
         with:
           path: ./dist/apps/jasonruesch
       # Jason Ruesch app
-      - name: Get package version for Jason Ruesch
-        if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
-        id: jasonruesch_package_version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
-        with:
-          path: ./apps/jasonruesch
-      # Jsaon Ruesch app
       - name: Commit version bump for Jason Ruesch
         if: steps.jasonruesch_check_files.outputs.files_exists == 'true'
         run: |
           git add ./apps/jasonruesch/package.json
-          git commit -m "chore(release): jasonruesch@${{ steps.jasonruesch_package_version.outputs.current-version }}" -n
+          git commit -m "chore(release): jasonruesch@${{ steps.jasonruesch_version.outputs.version }}" -n
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
