@@ -17,7 +17,7 @@ permissions:
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
-  group: 'deploy-jasonruesch'
+  group: 'deploy-${{ github.ref_name }}'
   cancel-in-progress: true
 
 jobs:
