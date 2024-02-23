@@ -3,8 +3,7 @@ name: Main Branch CI
 on:
   push:
     branches:
-      - ci-main
-      # - 'main'
+      - 'main'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -56,8 +55,7 @@ jobs:
       - name: Affected projects
         id: projects
         run: |
-          # PROJECTS=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
-          PROJECTS=$(npx nx show projects --projects jasonruesch --with-target build | tr '\n' ' ' | xargs)
+          PROJECTS=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
           echo "projects=($PROJECTS)" >> $GITHUB_OUTPUT
 
       - name: Affected versions
@@ -67,6 +65,7 @@ jobs:
           items="["
           for project in "${projects[@]}"; do
             version=$(npm version prerelease --preid=staging --no-git-tag-version --prefix ./apps/$project/)
+            version=${version##v}
             items+="{\"project\":\"$project\",\"version\":\"$version\"},"
           done
           items=$(echo "$items" | sed 's/,$//g')
