@@ -2,6 +2,7 @@ import forms from '@tailwindcss/forms';
 import type { Config } from 'tailwindcss';
 import tailwindcssSafeArea from 'tailwindcss-safe-area';
 import plugin from 'tailwindcss/plugin';
+import { PluginAPI } from 'tailwindcss/types/config';
 import { createThemes } from 'tw-colors';
 import colors from '../base/colors';
 import headings from '../base/headings';
@@ -43,8 +44,7 @@ export const tailwindPreset = {
       backgroundSize: {
         '300%': '300% 300%',
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      backgroundImage: ({ theme }: any) => ({
+      backgroundImage: ({ theme }: { theme: PluginAPI['theme'] }) => ({
         'gradient-500-sm': `linear-gradient(145deg, ${theme(
           'colors.primary-500',
         )} 45%, ${theme('colors.secondary-500')}, ${theme(
