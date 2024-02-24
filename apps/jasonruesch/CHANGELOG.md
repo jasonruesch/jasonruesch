@@ -1,3 +1,10 @@
+## 0.14.0 (2024-02-24)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add README and copy to build output ([ee10ca4](https://github.com/jasonruesch/jasonruesch/commit/ee10ca4))
+
 ## 0.13.0 (2024-02-24)
 
 

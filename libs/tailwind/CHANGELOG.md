@@ -1,3 +1,20 @@
+## 0.13.0 (2024-02-24)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add README and copy to build output
+
+
+### 🩹 Fixes
+
+- **tailwind:** replace any type for theme function with proper type
+
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.12.0 (2024-02-24)
 
 
