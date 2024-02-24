@@ -28,6 +28,10 @@ export default defineConfig({
           src: 'package.json',
           dest: '',
         },
+        {
+          src: 'README.md',
+          dest: '',
+        },
       ],
     }),
   ],
