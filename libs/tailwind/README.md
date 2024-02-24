@@ -9,12 +9,13 @@ This library is a custom configuration of Tailwind CSS for use in applications b
 To use Tailwind in your application, you need to install the `@jasonruesch/tailwind` package:
 
 ```bash
-npm install @jasonruesch/tailwind
+npm install -D @jasonruesch/tailwind
 ```
 
-Once installed, you can use the `@jasonruesch/tailwind` package to generate a `tailwind.config.js` file in your project:
+Once installed, you can install and use the `tailwindcss` package to generate a `tailwind.config.js` file in your project:
 
 ```bash
+npm install -D tailwindcss
 npx tailwindcss init
 ```
 
