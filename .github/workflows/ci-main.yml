@@ -46,11 +46,11 @@ jobs:
       - name: Set SHAs for Nx
         uses: nrwl/nx-set-shas@v4
 
-      # - name: Run format check
-      #   run: npx nx-cloud record -- nx format:check
+      - name: Run format check
+        run: npx nx-cloud record -- nx format:check
 
-      # - name: Run affected lint and tests
-      #   run: npx nx affected -t lint test e2e-ci
+      - name: Run affected lint and tests
+        run: npx nx affected -t lint test e2e-ci
 
       - name: Affected projects
         id: projects
