@@ -27,11 +27,11 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     outputs:
-      project_name: ${{ steps.parse_tag.outputs.project_name }}
+      project: ${{ steps.parse-tag.outputs.project }}
     steps:
       - name: Parse tag for project name
-        id: parse_tag
-        run: echo "project_name=${GITHUB_REF_NAME%%@*}" >> $GITHUB_OUTPUT
+        id: parse-tag
+        run: echo "project=${GITHUB_REF_NAME%%@*}" >> $GITHUB_OUTPUT
 
       - name: Generate a token
         id: generate-token
@@ -63,18 +63,18 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Build
-        run: npx nx build ${{ steps.parse_tag.outputs.project_name }} --skip-nx-cache
+        run: npx nx build ${{ steps.parse-tag.outputs.project }} --skip-nx-cache
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/apps/${{ steps.parse_tag.outputs.project_name }}
+          path: ./dist/apps/${{ steps.parse-tag.outputs.project }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.parse_tag.outputs.project_name }}
-          path: ./dist/apps/${{ steps.parse_tag.outputs.project_name }}
+          name: ${{ steps.parse-tag.outputs.project }}
+          path: ./dist/apps/${{ steps.parse-tag.outputs.project }}
 
   # Deployment job
   deploy-staging:
@@ -102,14 +102,14 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.build.outputs.project_name }}
-          path: ./dist/apps/${{ needs.build.outputs.project_name }}
+          name: ${{ needs.build.outputs.project }}
+          path: ./dist/apps/${{ needs.build.outputs.project }}
 
       - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: dist/apps/${{ needs.build.outputs.project_name }}/
+          source-directory: dist/apps/${{ needs.build.outputs.project }}/
           destination-github-username: 'jasonruesch'
           destination-repository-name: 'jasonruesch.github.io'
           user-email: jason.ruesch@me.com
