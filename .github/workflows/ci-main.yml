@@ -107,7 +107,7 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Update version
         run: npm version ${{ matrix.version }} --no-git-tag-version --prefix ./apps/${{ matrix.project }}/
@@ -133,7 +133,9 @@ jobs:
 
       - name: Push changes
         run: |
-          git pull --rebase
+          git pull --rebase --autostash
+          git add package-lock.json
+          git commit --amend --no-edit -n
           git push
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
