@@ -138,7 +138,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@jasonruesch'
 
-      - name: Download Artifact
+      - name: Download artifact
         id: download
         run: gh run download -n ${{ github.ref_name }} -D ./output
         env:
@@ -165,7 +165,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download Artifact
+      - name: Download artifact
         id: download
         run: gh run download -n ${{ github.ref_name }} -D ./output
         env:
