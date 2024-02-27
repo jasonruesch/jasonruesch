@@ -3,6 +3,9 @@ name: Pull Request CI
 on:
   pull_request:
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 permissions:
   actions: read
   contents: read
@@ -14,9 +17,67 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  pull_request:
-    name: Pull Request
+  # Affected job
+  affected:
+    name: Affected
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.versions.outputs.matrix }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set SHAs for Nx
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Run format check
+        run: npx nx-cloud record -- nx format:check
+
+      - name: Run affected lint and tests
+        run: npx nx affected -t lint test e2e-ci
+
+      - name: Affected projects
+        id: projects
+        run: |
+          PROJECTS=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
+          echo "projects=($PROJECTS)" >> $GITHUB_OUTPUT
+
+      - name: Affected versions
+        id: versions
+        run: |
+          projects=${{ steps.projects.outputs.projects }}
+          items="["
+          for project in "${projects[@]}"; do
+            version=$(npm version prerelease --preid=${{ github.head_ref }} --no-git-tag-version --prefix ./apps/$project/)
+            version=${version##v}
+            items+="{\"project\":\"$project\",\"version\":\"$version\"},"
+          done
+          items=$(echo "$items" | sed 's/,$//g')
+          items+="]"
+          [[ $items = "[]" ]] && matrix="" || matrix="{\"include\":$items}"
+          echo "matrix=$matrix" >> $GITHUB_OUTPUT
+
+  # Build job
+  build:
+    name: Build
+    environment:
+      name: Preview
+    runs-on: ubuntu-latest
+    needs: affected
+    if: ${{ needs.affected.outputs.matrix != '' }}
+    strategy:
+      matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,11 +97,48 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Set SHAs for Nx
-        uses: nrwl/nx-set-shas@v4
+      - name: Update version
+        run: npm version ${{ matrix.version }} --no-git-tag-version --prefix ./apps/${{ matrix.project }}/
 
-      - name: Run format check
-        run: npx nx-cloud record -- nx format:check
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
 
-      - name: Run affected
-        run: npx nx affected -t lint test build e2e-ci
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        run: npx vercel build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.project }}
+          path: ./vercel/output
+
+  # Deployment job
+  deploy:
+    name: Deploy
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    environment:
+      name: Preview
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      - affected
+      - build
+    if: ${{ needs.affected.outputs.matrix != '' }}
+    strategy:
+      matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.project }}
+          path: ./vercel/output
+      - name: Deploy Project Artifacts to Vercel
+        id: deployment
+        run: |
+          output=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | grep "Preview: ")
+          url=$(echo $output | grep -o 'https://[^ ]*')
+          echo "page_url=$url" >> $GITHUB_ENV
