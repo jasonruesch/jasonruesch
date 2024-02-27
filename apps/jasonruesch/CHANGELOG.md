@@ -1,3 +1,12 @@
+## 0.15.0 (2024-02-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add page animations and a hidden background ([2e37760](https://github.com/jasonruesch/jasonruesch/commit/2e37760))
+
+- **jasonruesch:** add header component ([da5f903](https://github.com/jasonruesch/jasonruesch/commit/da5f903))
+
 ## 0.14.0 (2024-02-24)
 
 
