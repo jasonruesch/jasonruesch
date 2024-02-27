@@ -46,7 +46,7 @@ export function Header({ scrolled }: HeaderProps) {
     <header
       ref={scope}
       className={clsx(
-        'px-safe-offset-4 h-20 lg:px-safe-offset-8 fixed inset-x-0 z-20 flex flex-col items-center gap-2 py-2 transition-shadow lg:h-16 lg:flex-row',
+        'px-safe-offset-4 lg:px-safe-offset-8 fixed inset-x-0 z-20 flex h-20 flex-col items-center gap-2 py-2 transition-shadow lg:h-16 lg:flex-row',
         scrolled
           ? 'bg-neutral-50 shadow-sm dark:bg-neutral-900 dark:shadow-black'
           : 'bg-transparent',
