@@ -71,6 +71,9 @@ jobs:
   # Build job
   build:
     name: Build
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     environment:
       name: Preview
     runs-on: ubuntu-latest
@@ -94,28 +97,25 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Update version
-        run: npm version ${{ matrix.version }} --no-git-tag-version --prefix ./apps/${{ matrix.project }}/
-
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: Update version
+        run: npm version ${{ matrix.version }} --no-git-tag-version --prefix ./apps/${{ matrix.project }}/
+
       - name: Build
-        run: npx vercel build
+        run: vercel build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.project }}
-          path: ./vercel/output
+          path: .vercel/output
 
-  # Deployment job
+  # Deploy job
   deploy:
     name: Deploy
     env:
@@ -132,13 +132,35 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Connect your workspace on nx.app and uncomment this to enable task distribution.
+      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
+      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
       - uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.project }}
-          path: ./vercel/output
+          path: .vercel/output
+
       - name: Deploy Project Artifacts to Vercel
         id: deployment
         run: |
-          output=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | grep "Preview: ")
-          url=$(echo $output | grep -o 'https://[^ ]*')
-          echo "page_url=$url" >> $GITHUB_ENV
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > /dev/stdout)
+          echo "$url"
+          echo "page_url=$url" >> $GITHUB_OUTPUT
