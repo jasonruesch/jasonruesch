@@ -4,8 +4,11 @@ export function About() {
   return (
     <Page>
       <div className="flex flex-1 flex-col items-center justify-center gap-4">
-        <h1 className="gradient-heading">
-          <span className="heading-lg">About Me</span>
+        <h1 className="gradient-heading" aria-label="About Me">
+          <div className="flex items-center justify-center">
+            About&nbsp;
+            <span className="heading-lg">Me</span>
+          </div>
         </h1>
         <div className="max-w-lg text-justify sm:max-w-screen-sm lg:max-w-screen-lg">
           <img

@@ -4,7 +4,10 @@ export function Home() {
   return (
     <Page>
       <div className="flex flex-1 flex-col items-center justify-center gap-4">
-        <h1 className="gradient-heading">
+        <h1
+          className="gradient-heading"
+          aria-label="I'm Jason Ruesch, a Senior Frontend Software Engineer"
+        >
           <div className="flex items-center justify-center">
             I'm&nbsp;
             <span className="heading-lg">Jason Ruesch</span>

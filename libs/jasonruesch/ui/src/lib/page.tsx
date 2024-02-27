@@ -35,7 +35,7 @@ export function Page({ children }: PageProps) {
         transition={{ duration: 0 }}
       >
         <motion.main
-          className="px-safe-offset-4 lg:px-safe-offset-8 mt-14 flex flex-1 flex-col py-4 lg:mt-16"
+          className="px-safe-offset-4 lg:px-safe-offset-8 mt-20 flex flex-1 flex-col py-4 lg:mt-16"
           initial="initial"
           animate="animate"
           exit="exit"

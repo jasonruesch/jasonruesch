@@ -10,7 +10,7 @@ export function Contact() {
   return (
     <Page>
       <div className="flex flex-1 flex-col items-center justify-center gap-4">
-        <h1 className="gradient-heading">
+        <h1 className="gradient-heading" aria-label="Connect with Me">
           <div className="flex items-center justify-center">
             <span className="heading-lg">Connect</span>
           </div>
