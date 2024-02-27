@@ -58,14 +58,16 @@ export function Page({ children }: PageProps) {
             &copy; {new Date().getFullYear()} Jason Ruesch. All rights reserved.
           </span>
           <span className="hidden sm:flex">&bull;</span>
-          <span>v{packageVersion}</span>
-          <span className="hidden sm:flex">&bull;</span>
-          <Link
-            to="/privacy"
-            className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
-          >
-            Privacy Policy
-          </Link>
+          <div className="flex items-center gap-1">
+            <span>v{packageVersion}</span>
+            <span>&bull;</span>
+            <Link
+              to="/privacy"
+              className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </motion.footer>
       </motion.div>
     </motion.div>
