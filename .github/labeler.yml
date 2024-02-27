@@ -4,8 +4,8 @@ root:
   - changed-files:
       - any-glob-to-any-file: '*'
 
-# Add 'Documentation' label to any changes within 'docs' folder or any subfolders
-Documentation:
+# Add 'documentation' label to any changes within 'docs' folder or any subfolders
+documentation:
   - changed-files:
       - any-glob-to-any-file: docs/**
       - any-glob-to-any-file: '**/*.md'
@@ -18,11 +18,11 @@ feature:
 release:
   - base-branch: 'main'
 
-Bills:
+jasonruesch:
   - changed-files:
-      - any-glob-to-any-file: '**/bills/**'
+      - any-glob-to-any-file: '**/jasonruesch/**'
 
-Tailwind:
+tailwind:
   - changed-files:
       - any-glob-to-any-file: '**/tailwind/**'
       - any-glob-to-any-file: '**/tailwind.config.{js|ts}'
