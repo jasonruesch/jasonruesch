@@ -64,7 +64,6 @@ jobs:
           projects=${{ steps.projects.outputs.projects }}
           items="["
           for project in "${projects[@]}"; do
-            # TODO: Use npx nx release version --projects $project --specifier=prerelesae --preid=staging --git-commit=false --stage-changes=false
             version=$(npm version prerelease --preid=staging --no-git-tag-version --prefix ./apps/$project/)
             version=${version##v}
             items+="{\"project\":\"$project\",\"version\":\"$version\"},"
