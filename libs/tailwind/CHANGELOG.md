@@ -1,3 +1,23 @@
+# 1.0.0 (2024-02-27)
+
+
+### 🚀 Features
+
+- **tailwind:** remove test color
+
+- ⚠️  **tailwind:** major version bump
+
+- **tailwind:** cleanup
+
+
+#### ⚠️  Breaking Changes
+
+- ⚠️  **tailwind:** major version bump
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 0.13.0 (2024-02-24)
 
 

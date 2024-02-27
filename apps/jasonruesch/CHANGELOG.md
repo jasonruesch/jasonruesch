@@ -1,3 +1,19 @@
+# 1.0.0 (2024-02-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** remove test color ([8ebdcf6](https://github.com/jasonruesch/jasonruesch/commit/8ebdcf6))
+
+- ⚠️  **jasonruesch:** major version bump ([b7e08f8](https://github.com/jasonruesch/jasonruesch/commit/b7e08f8))
+
+- **jasonruesch:** cleanup ([9d7b145](https://github.com/jasonruesch/jasonruesch/commit/9d7b145))
+
+
+#### ⚠️  Breaking Changes
+
+- ⚠️  **jasonruesch:** major version bump ([b7e08f8](https://github.com/jasonruesch/jasonruesch/commit/b7e08f8))
+
 ## 0.15.0 (2024-02-27)
 
 
