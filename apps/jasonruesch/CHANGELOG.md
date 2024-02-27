@@ -1,3 +1,10 @@
+## 1.1.0 (2024-02-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** mobile header and heading improvements ([2f8794c](https://github.com/jasonruesch/jasonruesch/commit/2f8794c))
+
 # 1.0.0 (2024-02-27)
 
 
