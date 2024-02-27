@@ -53,7 +53,7 @@
       }
     }
   },
-  "nxCloudAccessToken": "MWVjNWZhYmMtZDU4MC00ODIyLTg1ZGItYzBjNjMxNzY1YmE5fHJlYWQtd3JpdGU=",
+  "nxCloudAccessToken": "NTEwNmExZTItNTE4MS00Y2JlLThkY2ItY2RkNWI3ZmVkNzhhfHJlYWQtd3JpdGU=",
   "targetDefaults": {
     "@nx/vite:build": {
       "cache": true,
