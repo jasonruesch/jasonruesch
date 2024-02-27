@@ -6,8 +6,6 @@ export function App() {
     <>
       <Layout />
       <ScrollRestoration />
-
-      <div className="text-test hidden">Test color: pink</div>
     </>
   );
 }
