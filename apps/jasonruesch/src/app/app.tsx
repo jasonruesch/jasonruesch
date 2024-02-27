@@ -6,8 +6,6 @@ export function App() {
     <>
       <Layout />
       <ScrollRestoration />
-
-      <div className="hidden">BREAKING CHANGE</div>
     </>
   );
 }
