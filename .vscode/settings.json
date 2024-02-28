@@ -1,0 +1,9 @@
+{
+  "tailwindCSS.experimental.configFile": {
+    "apps/jasonruesch/tailwind.config.ts": [
+      "apps/jasonruesch/index.html",
+      "apps/jasonruesch/src/**",
+      "libs/jasonruesch/ui/src/**"
+    ]
+  }
+}
