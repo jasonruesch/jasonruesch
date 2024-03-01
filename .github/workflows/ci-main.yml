@@ -23,7 +23,6 @@ concurrency:
 jobs:
   # Affected job
   affected:
-    if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
     name: Affected
     runs-on: ubuntu-latest
     outputs:
@@ -101,7 +100,9 @@ jobs:
 
       - name: Version
         id: version
-        run: echo "version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})" >> $GITHUB_OUTPUT
+        run: |
+          version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
+          echo "version=${version//\"/"}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
