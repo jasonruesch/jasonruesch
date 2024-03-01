@@ -29,6 +29,9 @@ jobs:
       url: https://jasonruesch.dev
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download Artifact
         id: download
         run: gh run download -n ${{ github.ref_name }} -D ./output
