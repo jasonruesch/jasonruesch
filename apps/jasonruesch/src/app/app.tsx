@@ -6,6 +6,8 @@ export function App() {
     <>
       <Layout />
       <ScrollRestoration />
+
+      <div className="hidden">Test 1</div>
     </>
   );
 }

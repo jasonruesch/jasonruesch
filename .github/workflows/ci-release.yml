@@ -1,6 +1,6 @@
-# This workflow will build and deploy a site to another repo when a tag is pushed
+# This workflow will download an artifact and deploy a site to another repo when a release is published
 
-name: Deploy Jason Ruesch
+name: Release CI
 
 on:
   release:
