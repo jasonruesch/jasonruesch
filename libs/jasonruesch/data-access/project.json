@@ -1,0 +1,19 @@
+{
+  "name": "jasonruesch-data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/jasonruesch/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/jasonruesch/data-access",
+        "main": "libs/jasonruesch/data-access/src/index.ts",
+        "tsConfig": "libs/jasonruesch/data-access/tsconfig.lib.json",
+        "assets": ["libs/jasonruesch/data-access/*.md"]
+      }
+    }
+  },
+  "tags": ["scope:jasonruesch", "type:data-access"]
+}
