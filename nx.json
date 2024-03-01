@@ -86,7 +86,7 @@
         }
       },
       "libs": {
-        "projects": ["tailwind"],
+        "projects": ["data-access", "tailwind"],
         "projectsRelationship": "independent",
         "changelog": {
           "renderOptions": {
