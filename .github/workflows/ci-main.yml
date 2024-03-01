@@ -127,8 +127,8 @@ jobs:
         run: git push --tags
 
   # Deployment job
-  deploy:
-    name: Deploy
+  deploy-staging:
+    name: Deploy to Staging
     environment:
       name: Staging
       url: ${{ steps.deployment.outputs.page_url }}

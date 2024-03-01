@@ -31,15 +31,15 @@ jobs:
     steps:
       - name: Download Artifact
         id: download
-        run: gh run download -n ${{ github.workflow }}
+        run: gh run download -n ${{ github.ref_name }} -D ./output
 
-      # - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
-      #   env:
-      #     SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-      #   with:
-      #     source-directory: dist/apps/${{ needs.build.outputs.project }}/
-      #     destination-github-username: 'jasonruesch'
-      #     destination-repository-name: 'jasonruesch.github.io'
-      #     user-email: jason.ruesch@me.com
-      #     commit-message: 'chore(release): ${{  github.ref_name }}'
-      #     target-branch: main
+      - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: './output'
+          destination-github-username: 'jasonruesch'
+          destination-repository-name: 'jasonruesch.github.io'
+          user-email: jason.ruesch@me.com
+          commit-message: 'chore(release): ${{  github.ref_name }}'
+          target-branch: main
