@@ -58,6 +58,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "framer-motion": "^11.0.6",
     "husky": "^8.0.0",
+    "immer": "^10.0.3",
     "jsdom": "~22.1.0",
     "lint-staged": "^15.2.2",
     "lodash.debounce": "^4.0.8",
@@ -74,7 +75,8 @@
     "vite": "~5.0.0",
     "vite-plugin-dts": "~2.3.0",
     "vite-plugin-static-copy": "^1.0.1",
-    "vitest": "^1.0.4"
+    "vitest": "^1.0.4",
+    "zustand": "^4.5.1"
   },
   "config": {
     "commitizen": {

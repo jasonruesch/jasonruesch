@@ -10,10 +10,6 @@ documentation:
       - any-glob-to-any-file: docs/**
       - any-glob-to-any-file: '**/*.md'
 
-# Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
-feature:
-  - head-branch: ['^feature', 'feature', 'feat']
-
 # Add 'release' label to any PR that is opened against the `main` branch
 release:
   - base-branch: 'main'
@@ -26,3 +22,7 @@ tailwind:
   - changed-files:
       - any-glob-to-any-file: '**/tailwind/**'
       - any-glob-to-any-file: '**/tailwind.config.{js|ts}'
+
+data-access:
+  - changed-files:
+      - any-glob-to-any-file: '**/data-access/**'

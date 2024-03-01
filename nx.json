@@ -78,7 +78,7 @@
         "projectsRelationship": "independent"
       },
       "libs": {
-        "projects": ["tailwind"],
+        "projects": ["data-access", "tailwind"],
         "projectsRelationship": "independent",
         "changelog": {
           "projectChangelogs": true,
