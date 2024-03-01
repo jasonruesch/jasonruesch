@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@jasonruesch/data-access": ["libs/data-access/src/index.ts"],
+      "@jasonruesch/jasonruesch-data-access": [
+        "libs/jasonruesch/data-access/src/index.ts"
+      ],
       "@jasonruesch/jasonruesch-ui": ["libs/jasonruesch/ui/src/index.ts"],
       "@jasonruesch/tailwind": ["libs/tailwind/src/index.ts"]
     }
