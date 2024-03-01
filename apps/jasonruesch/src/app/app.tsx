@@ -6,8 +6,6 @@ export function App() {
     <>
       <Layout />
       <ScrollRestoration />
-
-      <div className="hidden">Setting up new release workflow</div>
     </>
   );
 }
