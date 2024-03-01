@@ -1,0 +1,16 @@
+{
+  "name": "@jasonruesch/data-access",
+  "version": "0.0.1",
+  "type": "module",
+  "dependencies": {
+    "zustand": "^4.5.1"
+  },
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "typings": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonruesch/jasonruesch.git",
+    "directory": "libs/data-access"
+  }
+}
