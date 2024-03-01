@@ -55,8 +55,9 @@ jobs:
         id: projects
         run: |
           projects=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
+          list=($projects)
           items="["
-          for project in "${projects[@]}"; do
+          for project in "${list[@]}"; do
             items+="{\"project\":\"$project\"},"
           done
           items=$(echo "$items" | sed 's/,$//g')
