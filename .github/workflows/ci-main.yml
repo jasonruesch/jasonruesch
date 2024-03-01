@@ -102,7 +102,7 @@ jobs:
         id: version
         run: |
           version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
-          echo "version=${version//\"/"}" >> $GITHUB_OUTPUT
+          echo "version=${version//\"/}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
