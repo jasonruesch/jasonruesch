@@ -10,7 +10,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -23,11 +23,10 @@ concurrency:
 jobs:
   # Affected job
   affected:
-    if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
     name: Affected
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.versions.outputs.matrix }}
+      matrix: ${{ steps.projects.outputs.matrix }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -55,18 +54,11 @@ jobs:
       - name: Affected projects
         id: projects
         run: |
-          PROJECTS=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
-          echo "projects=($PROJECTS)" >> $GITHUB_OUTPUT
-
-      - name: Affected versions
-        id: versions
-        run: |
-          projects=${{ steps.projects.outputs.projects }}
+          projects=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
+          list=($projects)
           items="["
-          for project in "${projects[@]}"; do
-            version=$(npm version prerelease --preid=staging --no-git-tag-version --prefix ./apps/$project/)
-            version=${version##v}
-            items+="{\"project\":\"$project\",\"version\":\"$version\"},"
+          for project in "${list[@]}"; do
+            items+="{\"project\":\"$project\"},"
           done
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
@@ -81,19 +73,13 @@ jobs:
     if: ${{ needs.affected.outputs.matrix != '' }}
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
-      - name: Generate a token
-        id: generate-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -110,7 +96,13 @@ jobs:
         run: npm install
 
       - name: Update version
-        run: npm version ${{ matrix.version }} --no-git-tag-version --prefix ./apps/${{ matrix.project }}/
+        run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
+
+      - name: Version
+        id: version
+        run: |
+          version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
+          echo "version=${version//\"/}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
@@ -118,31 +110,26 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      # Upload artifact for Staging deployment to GitHub Pages
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages-${{ matrix.project }}
+          name: 'github-pages-${{ matrix.project }}@${{ steps.version.outputs.version }}'
           path: ./dist/apps/${{ matrix.project }}
 
-      - name: Commit version bump
-        run: |
-          git add ./apps/${{ matrix.project }}/package.json
-          git commit -m "chore(release): ${{ matrix.project }}@${{ matrix.version }}" -n
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+      # Upload artifact for Production deployment to another repository
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: '${{ matrix.project }}@${{ steps.version.outputs.version }}'
+          path: ./dist/apps/${{ matrix.project }}
 
-      - name: Push changes
-        run: |
-          git pull --rebase --autostash
-          git add package-lock.json
-          git commit --amend --no-edit -n
-          git push
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+      - name: Push tags
+        run: git push --tags
 
   # Deployment job
-  deploy:
-    name: Deploy
+  deploy-staging:
+    name: Deploy to Staging
     environment:
       name: Staging
       url: ${{ steps.deployment.outputs.page_url }}
@@ -158,4 +145,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: github-pages-${{ matrix.project }}
+          artifact_name: 'github-pages-${{ matrix.project }}@${{ needs.build.outputs.version }}'

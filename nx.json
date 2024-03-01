@@ -64,33 +64,31 @@
   "release": {
     "changelog": {
       "workspaceChangelog": false,
-      "projectChangelogs": true,
       "automaticFromRef": true
     },
     "version": {
       "conventionalCommits": true,
       "generatorOptions": {
-        "fallbackCurrentVersionResolver": "disk",
         "skipLockFileUpdate": true
       }
     },
     "groups": {
       "apps": {
         "projects": ["jasonruesch"],
-        "projectsRelationship": "independent",
-        "changelog": {
-          "createRelease": "github",
-          "renderOptions": {
-            "authors": false
-          }
-        }
+        "projectsRelationship": "independent"
       },
       "libs": {
         "projects": ["tailwind"],
         "projectsRelationship": "independent",
         "changelog": {
+          "projectChangelogs": true,
           "renderOptions": {
             "commitRefefences": false
+          }
+        },
+        "version": {
+          "generatorOptions": {
+            "fallbackCurrentVersionResolver": "disk"
           }
         }
       }
