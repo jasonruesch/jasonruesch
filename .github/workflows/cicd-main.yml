@@ -61,7 +61,8 @@ jobs:
           list=($projects)
           items="["
           for project in "${list[@]}"; do
-            items+="{\"project\":\"$project\"},"
+            path=$(npx nx show project $project | jq -r .root)
+            items+="{\"project\":\"$project\",\"path\":\"$path\"},"
           done
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
@@ -75,7 +76,8 @@ jobs:
           list=($projects)
           items="["
           for project in "${list[@]}"; do
-            items+="{\"project\":\"$project\"},"
+            path=$(npx nx show project $project | jq -r .root)
+            items+="{\"project\":\"$project\",\"path\":\"$path\"},"
           done
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
@@ -120,12 +122,16 @@ jobs:
       - name: Version
         id: version
         run: |
-          version=$(npm pkg get version --prefix=./libs/${{ matrix.project }})
+          version=$(npm pkg get version --prefix=${{ matrix.path }})
+          version="${version//\"/}"
+          echo "$version"
           if [[ $version == *"-development" ]]; then
             version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
             version="${version##*@}"
+            echo "$version"
+            npm pkg set version="$version" --prefix=${{ matrix.path }}
           fi
-          echo "version=${version//\"/}" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
@@ -135,7 +141,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: '${{ matrix.project }}@${{ steps.version.outputs.version }}'
-          path: ./dist/libs/${{ matrix.project }}
+          path: ./dist/${{ matrix.path }}
 
       - name: Push tags
         run: git push --tags
@@ -178,13 +184,14 @@ jobs:
       - name: Version
         id: version
         run: |
-          version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
+          version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
           echo "$version"
           if [[ $version == *"-development" ]]; then
             version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
             version="${version##*@}"
             echo "$version"
+            npm pkg set version="$version" --prefix=${{ matrix.path }}
           fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
@@ -199,14 +206,14 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: 'github-pages-${{ matrix.project }}@${{ steps.version.outputs.version }}'
-          path: ./dist/apps/${{ matrix.project }}
+          path: ./dist/${{ matrix.path }}
 
       # Upload artifact for Production deployment to another repository
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: '${{ matrix.project }}@${{ steps.version.outputs.version }}'
-          path: ./dist/apps/${{ matrix.project }}
+          path: ./dist/${{ matrix.path }}
 
       - name: Push tags
         run: git push --tags

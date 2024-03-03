@@ -55,12 +55,13 @@ jobs:
 
       - name: Download Artifact
         id: download
-        run: gh run download -n ${{ github.ref_name }} -D "./dist/libs/${GITHUB_REF_NAME%%@*}"
+        run: gh run download -n ${{ github.ref_name }} -D ./output
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Publish package
-        run: npx nx release publish -p ${GITHUB_REF_NAME%%@*}
+        working-directory: ./output
+        run: npm publish --registry https://npm.pkg.github.com/ --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
