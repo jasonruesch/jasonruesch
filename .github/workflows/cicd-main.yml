@@ -115,19 +115,17 @@ jobs:
       - name: Update version
         run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
 
+      # Fallback to version from latest tag for this project if update version didn't run
+      # This can happen if the project didn't have any direct changes, but was affected by a changed dependency
       - name: Version
         id: version
         run: |
           version=$(npm pkg get version --prefix=./libs/${{ matrix.project }})
+          if [[ $version == *"-development" ]]; then
+            version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
+            version="${version##*@}"
+          fi
           echo "version=${version//\"/}" >> $GITHUB_OUTPUT
-
-      # Fallback to version from latest tag for this project if update version didn't run
-      # This can happen if the project didn't have any direct changes, but was affected by a changed dependency
-      - name: Falback to version from latest tag
-        if: ${{ endsWith(steps.version.outputs.version, '-development') }}
-        run: |
-          tag=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
-          echo "version=${tag##@}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
@@ -175,21 +173,17 @@ jobs:
       - name: Update version
         run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
 
+      # Fallback to version from latest tag for this project if update version didn't run
+      # This can happen if the project didn't have any direct changes, but was affected by a changed dependency
       - name: Version
         id: version
         run: |
           version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
-          echo "${version//\"/}"
+          if [[ $version == *"-development" ]]; then
+            version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
+            version="${version##*@}"
+          fi
           echo "version=${version//\"/}" >> $GITHUB_OUTPUT
-
-      # Fallback to version from latest tag for this project if update version didn't run
-      # This can happen if the project didn't have any direct changes, but was affected by a changed dependency
-      - name: Falback to version from latest tag
-        if: ${{ endsWith(steps.version.outputs.version, '-development') }}
-        run: |
-          tag=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
-          echo "${tag##@}"
-          echo "version=${tag##@}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
