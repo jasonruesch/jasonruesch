@@ -1,6 +1,6 @@
 # This workflow will build and deploy a site to Vercel as a preview environment
 
-name: Pull Request CI
+name: Pull Request CI/CD
 
 on:
   pull_request:
@@ -24,12 +24,16 @@ jobs:
     name: Affected
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.projects.outputs.matrix }}
+      apps-matrix: ${{ steps.apps.outputs.matrix }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      # Connect your workspace on nx.app and uncomment this to enable task distribution.
+      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
+      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -49,8 +53,11 @@ jobs:
       - name: Run affected lint and tests
         run: npx nx affected -t lint test e2e-ci
 
-      - name: Affected projects
-        id: projects
+      - name: Build affected libs
+        run: npx nx affected -t build --projects tailwind
+
+      - name: Affected apps
+        id: apps
         run: |
           projects=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
           list=($projects)
@@ -64,8 +71,8 @@ jobs:
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
   # Build job
-  build:
-    name: Build
+  build-app:
+    name: Build App
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -73,18 +80,14 @@ jobs:
       name: Preview
     runs-on: ubuntu-latest
     needs: affected
-    if: ${{ needs.affected.outputs.matrix != '' }}
+    if: ${{ needs.affected.outputs.apps-matrix != '' }}
     strategy:
-      matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
-      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -119,19 +122,15 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - affected
-      - build
-    if: ${{ needs.affected.outputs.matrix != '' }}
+      - build-app
+    if: ${{ needs.affected.outputs.apps-matrix != '' }}
     strategy:
-      matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
-      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
 
       - name: Setup Node
         uses: actions/setup-node@v4

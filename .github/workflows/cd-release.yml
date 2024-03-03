@@ -1,0 +1,94 @@
+# This workflow will download an pre-built artifact and deploy a site to another repo when a release is published
+
+name: Release CD
+
+on:
+  release:
+    types: [published]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: 'deploy-${{ github.ref_name }}'
+  cancel-in-progress: true
+
+jobs:
+  # Publish job
+  publish-npm:
+    if: startsWith(github.ref_name, 'tailwind')
+    name: Publish to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          always-auth: true
+          registry-url: https://npm.pkg.github.com
+          scope: '@jasonruesch'
+
+      - name: Install dependencies
+        # Skip post-install scripts here, as a malicious script could steal NODE_AUTH_TOKEN.
+        run: npm ci --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run post-install scripts
+        # `npm rebuild` will run all those post-install scripts for us.
+        run: 'npm rebuild && npm run prepare --if-present'
+
+      - name: Print Environment Info
+        run: npx nx report
+
+      - name: Download Artifact
+        id: download
+        run: gh run download -n ${{ github.ref_name }} -D "./dist/libs/${GITHUB_REF_NAME%%@*}"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Publish package
+        run: npx nx release publish -p ${GITHUB_REF_NAME%%@*}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Deployment job
+  deploy-production:
+    if: startsWith(github.ref_name, 'jasonruesch')
+    name: Deploy to Production
+    environment:
+      name: Production
+      url: https://github.com/jasonruesch/jasonruesch.github.io
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Artifact
+        id: download
+        run: gh run download -n ${{ github.ref_name }} -D ./output
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: './output'
+          destination-github-username: 'jasonruesch'
+          destination-repository-name: 'jasonruesch.github.io'
+          user-email: jason.ruesch@me.com
+          commit-message: 'chore(release): ${{  github.ref_name }}'
+          target-branch: main

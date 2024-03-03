@@ -1,6 +1,6 @@
 # This workflow will build and deploy a site to GitHub Pages
 
-name: Main Branch CI
+name: Main Branch CI/CD
 
 on:
   push:
@@ -28,7 +28,8 @@ jobs:
     name: Affected
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.projects.outputs.matrix }}
+      libs-matrix: ${{ steps.libs.outputs.matrix }}
+      apps-matrix: ${{ steps.apps.outputs.matrix }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,8 +54,22 @@ jobs:
       - name: Run affected lint and tests
         run: npx nx affected -t lint test e2e-ci
 
-      - name: Affected projects
-        id: projects
+      - name: Affected libs
+        id: libs
+        run: |
+          projects=$(npx nx show projects --projects tailwind --affected --with-target build | tr '\n' ' ' | xargs)
+          list=($projects)
+          items="["
+          for project in "${list[@]}"; do
+            items+="{\"project\":\"$project\"},"
+          done
+          items=$(echo "$items" | sed 's/,$//g')
+          items+="]"
+          [[ $items = "[]" ]] && matrix="" || matrix="{\"include\":$items}"
+          echo "matrix=$matrix" >> $GITHUB_OUTPUT
+
+      - name: Affected apps
+        id: apps
         run: |
           projects=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
           list=($projects)
@@ -68,13 +83,13 @@ jobs:
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
   # Build job
-  build:
-    name: Build
+  build-lib:
+    name: Build Library
     runs-on: ubuntu-latest
     needs: affected
-    if: ${{ needs.affected.outputs.matrix != '' }}
+    if: ${{ needs.affected.outputs.libs-matrix != '' }}
     strategy:
-      matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.affected.outputs.libs-matrix) }}
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -95,7 +110,59 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Update version
+        run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
+
+      - name: Version
+        id: version
+        run: |
+          version=$(npm pkg get version --prefix=./libs/${{ matrix.project }})
+          echo "version=${version//\"/}" >> $GITHUB_OUTPUT
+
+      - name: Build
+        run: npx nx build ${{ matrix.project }} --skip-nx-cache
+
+      # Upload artifact for publishing to GitHub Packages
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: '${{ matrix.project }}@${{ steps.version.outputs.version }}'
+          path: ./dist/libs/${{ matrix.project }}
+
+      - name: Push tags
+        run: git push --tags
+
+  # Build job
+  build-app:
+    name: Build App
+    runs-on: ubuntu-latest
+    needs: affected
+    if: ${{ needs.affected.outputs.apps-matrix != '' }}
+    strategy:
+      matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Update version
         run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
@@ -138,13 +205,13 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - affected
-      - build
-    if: ${{ needs.affected.outputs.matrix != '' }}
+      - build-app
+    if: ${{ needs.affected.outputs.apps-matrix != '' }}
     strategy:
-      matrix: ${{ fromJson(needs.affected.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: 'github-pages-${{ matrix.project }}@${{ needs.build.outputs.version }}'
+          artifact_name: 'github-pages-${{ matrix.project }}@${{ needs.build-app.outputs.version }}'
