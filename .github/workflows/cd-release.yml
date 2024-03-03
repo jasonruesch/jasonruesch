@@ -40,19 +40,6 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@jasonruesch'
 
-      - name: Install dependencies
-        # Skip post-install scripts here, as a malicious script could steal NODE_AUTH_TOKEN.
-        run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run post-install scripts
-        # `npm rebuild` will run all those post-install scripts for us.
-        run: 'npm rebuild && npm run prepare --if-present'
-
-      - name: Print Environment Info
-        run: npx nx report
-
       - name: Download Artifact
         id: download
         run: gh run download -n ${{ github.ref_name }} -D ./output
