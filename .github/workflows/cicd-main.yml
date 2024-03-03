@@ -57,7 +57,7 @@ jobs:
       - name: Affected libs
         id: libs
         run: |
-          projects=$(npx nx show projects --projects tailwind --affected --with-target build | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --projects libs/* --affected --with-target nx-release-publish | tr '\n' ' ' | xargs)
           list=($projects)
           items="["
           for project in "${list[@]}"; do
