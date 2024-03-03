@@ -179,11 +179,14 @@ jobs:
         id: version
         run: |
           version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
+          version="${version//\"/}"
+          echo "$version"
           if [[ $version == *"-development" ]]; then
             version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
             version="${version##*@}"
+            echo "$version"
           fi
-          echo "version=${version//\"/}" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Build
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
