@@ -179,6 +179,7 @@ jobs:
         id: version
         run: |
           version=$(npm pkg get version --prefix=./apps/${{ matrix.project }})
+          echo "${version//\"/}"
           echo "version=${version//\"/}" >> $GITHUB_OUTPUT
 
       # Fallback to version from latest tag for this project if update version didn't run
@@ -187,6 +188,7 @@ jobs:
         if: ${{ endsWith(steps.version.outputs.version, '-development') }}
         run: |
           tag=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
+          echo "${tag##@}"
           echo "version=${tag##@}" >> $GITHUB_OUTPUT
 
       - name: Build
