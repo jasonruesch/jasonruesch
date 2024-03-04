@@ -54,7 +54,7 @@ jobs:
         run: npx nx affected -t lint test e2e-ci
 
       - name: Build affected libs
-        run: npx nx affected -t build --projects tailwind
+        run: npx nx affected -t build --exclude apps/*
 
       - name: Affected apps
         id: apps

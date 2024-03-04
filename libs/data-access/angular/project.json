@@ -1,0 +1,26 @@
+{
+  "name": "data-access-angular",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/angular/src",
+  "prefix": "jasonruesch",
+  "tags": ["scope:data-access", "type:data-access"],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/data-access/angular/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/data-access/angular/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/data-access/angular/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}

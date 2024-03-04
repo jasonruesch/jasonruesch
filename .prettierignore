@@ -4,3 +4,5 @@
 /.nx/cache
 vite.config.ts.timestamp-*
 CHANGELOG.md
+
+.angular

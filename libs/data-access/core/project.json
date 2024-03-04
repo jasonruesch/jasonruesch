@@ -1,0 +1,26 @@
+{
+  "name": "data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/core/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/data-access/core",
+        "main": "libs/data-access/core/src/index.ts",
+        "tsConfig": "libs/data-access/core/tsconfig.lib.json",
+        "assets": ["libs/data-access/core/*.md"]
+      }
+    },
+    "nx-release-publish": {
+      "executor": "@nx/js:release-publish",
+      "options": {
+        "packageRoot": "./dist/libs/data-access/core",
+        "registry": "https://npm.pkg.github.com/"
+      }
+    }
+  },
+  "tags": ["scope:data-access", "type:data-access"]
+}

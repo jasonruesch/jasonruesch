@@ -10,16 +10,10 @@
         "storage": "tmp/local-registry/storage"
       }
     },
-    "post-release": {
+    "test": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "git fetch --tags -f",
-          "git pull --rebase",
-          "git push",
-          "git push --tags"
-        ],
-        "parallel": false
+        "command": "echo 'No tests for @jasonruesch/source'"
       }
     }
   }

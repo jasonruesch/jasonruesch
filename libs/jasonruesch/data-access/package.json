@@ -1,8 +1,13 @@
 {
   "name": "@jasonruesch/jasonruesch-data-access",
   "version": "0.0.1",
-  "dependencies": {},
+  "type": "module",
   "main": "./index.js",
-  "module": "./index.mjs",
-  "typings": "./index.d.ts"
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  }
 }

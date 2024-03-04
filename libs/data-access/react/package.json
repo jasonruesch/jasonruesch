@@ -1,0 +1,13 @@
+{
+  "name": "@jasonruesch/data-access-react",
+  "version": "0.0.0-development",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  }
+}

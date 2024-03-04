@@ -1,0 +1,8 @@
+{
+  "name": "data-access-react",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/react/src",
+  "projectType": "library",
+  "tags": ["scope:data-access", "type:data-access"],
+  "targets": {}
+}
