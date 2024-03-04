@@ -1,5 +1,6 @@
 /// <reference types='vitest' />
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import react from '@vitejs/plugin-react';
 import * as path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -9,6 +10,7 @@ export default defineConfig({
   cacheDir: '../../../node_modules/.vite/libs/jasonruesch/data-access',
 
   plugins: [
+    react(),
     nxViteTsPaths(),
     dts({
       entryRoot: 'src',
@@ -42,7 +44,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
     },
   },
 
@@ -51,7 +53,7 @@ export default defineConfig({
     cache: {
       dir: '../../../node_modules/.vitest',
     },
-    environment: 'node',
+    environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 
     reporters: ['default'],

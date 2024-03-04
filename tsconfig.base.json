@@ -15,8 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@jasonruesch/data-access": ["libs/data-access/src/index.ts"],
-      "@jasonruesch/di": ["libs/di/src/index.ts"],
+      "@jasonruesch/data-access": ["libs/data-access/core/src/index.ts"],
+      "@jasonruesch/data-access-angular": [
+        "libs/data-access/angular/src/index.ts"
+      ],
+      "@jasonruesch/data-access-react": ["libs/data-access/react/src/index.ts"],
       "@jasonruesch/jasonruesch-data-access": [
         "libs/jasonruesch/data-access/src/index.ts"
       ],

@@ -1,0 +1,11 @@
+{
+  "name": "@jasonruesch/data-access-angular",
+  "version": "0.0.0-development",
+  "type": "module",
+  "peerDependencies": {
+    "@angular/common": "^17.1.0",
+    "@angular/core": "^17.1.0"
+  },
+  "dependencies": {},
+  "sideEffects": false
+}
