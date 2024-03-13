@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useAnimate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { headerAnimations } from './animations';
+import { headerAnimations } from '../animations';
 import { Logo } from './logo';
 import { Nav } from './nav';
 

@@ -1,4 +1,3 @@
-export * from './animations';
 export * from './background';
 export * from './header';
 export * from './logo';

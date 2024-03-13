@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { fadePageAnimationVariants } from '../components';
+import { usePage } from '../hooks';
 
 const stageAnimations = false; // Used for testing what the page looks like during animations
 
@@ -9,13 +9,15 @@ export interface PageProps {
 }
 
 export function Page({ children }: PageProps) {
-  const packageVersion = import.meta.env.PACKAGE_VERSION;
   const {
+    packageVersion,
+    transparent,
+    slideRight,
     pageContentVariants,
     pageFooterVariants,
     pageScrollVariants,
     pageVariants,
-  } = fadePageAnimationVariants;
+  } = usePage();
 
   return (
     <motion.div
@@ -23,7 +25,7 @@ export function Page({ children }: PageProps) {
       initial="initial"
       animate="animate"
       exit="exit"
-      custom={{ transparent: false, stageAnimations }}
+      custom={{ transparent, slideRight, stageAnimations }}
       variants={pageVariants}
     >
       <motion.div

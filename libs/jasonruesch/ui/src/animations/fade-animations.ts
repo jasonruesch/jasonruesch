@@ -2,7 +2,7 @@ import { PageTransitionVariants, duration } from './animations';
 
 const scale = 0.5;
 
-export const fadePageAnimationVariants = {
+export const fadePageAnimationVariants: PageTransitionVariants = {
   pageVariants: {
     initial: ({ transparent }) => {
       return {
@@ -147,4 +147,4 @@ export const fadePageAnimationVariants = {
       };
     },
   },
-} satisfies PageTransitionVariants;
+};

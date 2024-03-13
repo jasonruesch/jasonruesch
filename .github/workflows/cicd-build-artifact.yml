@@ -18,6 +18,11 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one concurrent run, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: 'build-artifact-${{ github.ref_name }}'
+  cancel-in-progress: true
+
 jobs:
   # Test job
   project-details:
