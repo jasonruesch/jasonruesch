@@ -43,7 +43,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Set SHAs for Nx
         uses: nrwl/nx-set-shas@v4
@@ -57,7 +57,7 @@ jobs:
       - name: Affected libs
         id: libs
         run: |
-          projects=$(npx nx show projects --projects libs/**/* --affected --with-target nx-release-publish --base $NX_BASE --head $NX_HEAD | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --projects libs/**/* --affected --with-target nx-release-publish --base "$NX_BASE" --head "$NX_HEAD" | tr '\n' ' ' | xargs)
           echo "$projects"
           list=($projects)
           items="["
@@ -74,7 +74,7 @@ jobs:
       - name: Affected apps
         id: apps
         run: |
-          projects=$(npx nx show projects --projects apps/**/* --affected --with-target build --base $NX_BASE --head $NX_HEAD | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --projects apps/**/* --affected --with-target build --base "$NX_BASE" --head "$NX_HEAD" | tr '\n' ' ' | xargs)
           echo "$projects"
           list=($projects)
           items="["
@@ -119,7 +119,7 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Update version
         run: npx nx run-many -t version --projects ${{ matrix.project }}
@@ -180,7 +180,7 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Update version
         run: npx nx run-many -t version --projects ${{ matrix.project }}
