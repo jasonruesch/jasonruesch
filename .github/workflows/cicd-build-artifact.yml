@@ -55,6 +55,9 @@ jobs:
           project=${GITHUB_REF_NAME%%@*}
           version=${GITHUB_REF_NAME##*@}
           path=$(npx nx show project $project | jq -r .root)
+          echo "$project"
+          echo "$version"
+          echo "$path"
           echo "project=$project" >> $GITHUB_OUTPUT
           echo "version=$version" >> $GITHUB_OUTPUT
           echo "path=$path" >> $GITHUB_OUTPUT
