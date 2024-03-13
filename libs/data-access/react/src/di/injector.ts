@@ -1,10 +1,10 @@
 /* eslint-disable */
 import {
   DependencyInjector,
-  UndoChanges,
-  Token,
   Provider,
+  Token,
   TypeProvider,
+  UndoChanges,
 } from './injector.interfaces';
 
 /**
@@ -248,3 +248,5 @@ function __doSpread(...params: any[]) {
     for (let a = params[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
   return r;
 }
+
+export const testVariable = 'test';
