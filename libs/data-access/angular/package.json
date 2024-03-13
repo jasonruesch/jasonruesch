@@ -7,5 +7,10 @@
     "@angular/core": "^17.1.0"
   },
   "dependencies": {},
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonruesch/jasonruesch.git",
+    "directory": "libs/data-access/angular"
+  }
 }

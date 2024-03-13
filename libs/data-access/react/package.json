@@ -9,5 +9,10 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonruesch/jasonruesch.git",
+    "directory": "libs/data-access/react"
   }
 }

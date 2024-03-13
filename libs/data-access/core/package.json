@@ -11,6 +11,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jasonruesch/jasonruesch.git",
-    "directory": "libs/data-access"
+    "directory": "libs/data-access/core"
   }
 }
