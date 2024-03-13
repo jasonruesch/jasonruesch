@@ -46,6 +46,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Set SHAs for Nx
+        id: set-shas
         uses: nrwl/nx-set-shas@v4
 
       - name: Run format check
@@ -57,7 +58,7 @@ jobs:
       - name: Affected libs
         id: libs
         run: |
-          projects=$(npx nx show projects --projects libs/**/* --affected --with-target nx-release-publish --base "$NX_BASE" --head "$NX_HEAD" | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --projects libs/**/* --affected --with-target nx-release-publish --base "${{ steps.set-shas.outputs.base }}" --head "${{ steps.set-shas.outputs.head }}" | tr '\n' ' ' | xargs)
           echo "$projects"
           list=($projects)
           items="["
@@ -74,7 +75,7 @@ jobs:
       - name: Affected apps
         id: apps
         run: |
-          projects=$(npx nx show projects --projects apps/**/* --affected --with-target build --base "$NX_BASE" --head "$NX_HEAD" | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --projects apps/**/* --affected --with-target build --base "${{ steps.set-shas.outputs.base }}" --head "${{ steps.set-shas.outputs.head }}" | tr '\n' ' ' | xargs)
           echo "$projects"
           list=($projects)
           items="["
