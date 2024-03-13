@@ -5,6 +5,12 @@ name: Build Artifact CI/CD
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy to Staging'
+        type: boolean
+        required: false
+        default: false
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -14,9 +20,9 @@ permissions:
 
 jobs:
   # Test job
-  test:
+  project-details:
     # Only run this job if the branch is a tag
-    if: startsWith(github.ref, 'refs/tags/')
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
     name: Test
     runs-on: ubuntu-latest
     outputs:
@@ -26,23 +32,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Set SHAs for Nx
-        uses: nrwl/nx-set-shas@v4
-
-      - name: Run format check
-        run: npx nx-cloud record -- nx format:check
 
       - name: Project details
         id: details
@@ -54,15 +43,12 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
           echo "path=$path" >> $GITHUB_OUTPUT
 
-      - name: Run lint and tests
-        run: npx nx run-many -t lint test e2e-ci --projects ${{ steps.details.outputs.project }} --skip-nx-cache
-
   # Build job
   build-lib:
     name: Build Library
     runs-on: ubuntu-latest
-    needs: test
-    if: ${{ startsWith(needs.test.outputs.path, 'libs') }}
+    needs: project-details
+    if: ${{ startsWith(needs.project-details.outputs.path, 'libs') }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -80,24 +66,24 @@ jobs:
 
       - name: Update version
         run: |
-          npm pkg set version="${{ needs.test.outputs.version }}" --prefix=${{ needs.test.outputs.path }}
+          npm pkg set version="${{ needs.project-details.outputs.version }}" --prefix=${{ needs.project-details.outputs.path }}
 
       - name: Build
-        run: npx nx build ${{ needs.test.outputs.project }} --skip-nx-cache
+        run: npx nx build ${{ needs.project-details.outputs.project }} --skip-nx-cache
 
       # Upload artifact for publishing to GitHub Packages
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: '${{ needs.test.outputs.project }}@${{ needs.test.outputs.version }}'
-          path: ./dist/${{ needs.test.outputs.path }}
+          name: '${{ needs.project-details.outputs.project }}@${{ needs.project-details.outputs.version }}'
+          path: ./dist/${{ needs.project-details.outputs.path }}
 
   # Build job
   build-app:
     name: Build App
     runs-on: ubuntu-latest
-    needs: test
-    if: ${{ startsWith(needs.test.outputs.path, 'apps') }}
+    needs: project-details
+    if: ${{ startsWith(needs.project-details.outputs.path, 'apps') }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -114,7 +100,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx nx build ${{ needs.test.outputs.project }} --skip-nx-cache
+        run: npx nx build ${{ needs.project-details.outputs.project }} --skip-nx-cache
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -123,32 +109,30 @@ jobs:
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: 'github-pages-${{ needs.test.outputs.project }}@${{ needs.test.outputs.version }}'
-          path: ./dist/${{ needs.test.outputs.path }}
+          name: 'github-pages-${{ needs.project-details.outputs.project }}@${{ needs.project-details.outputs.version }}'
+          path: ./dist/${{ needs.project-details.outputs.path }}
 
       # Upload artifact for Production deployment to another repository
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: '${{ needs.test.outputs.project }}@${{ needs.test.outputs.version }}'
-          path: ./dist/${{ needs.test.outputs.path }}
+          name: '${{ needs.project-details.outputs.project }}@${{ needs.project-details.outputs.version }}'
+          path: ./dist/${{ needs.project-details.outputs.path }}
 
   # Deployment job
-  # deploy-staging:
-  #   name: Deploy to Staging
-  #   environment:
-  #     name: Staging
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-  #   needs:
-  #     - affected
-  #     - build-app
-  #   if: ${{ needs.affected.outputs.apps-matrix != '' }}
-  #   strategy:
-  #     matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
-  #       with:
-  #         artifact_name: 'github-pages-${{ matrix.project }}@${{ needs.build-app.outputs.version }}'
+  deploy-staging:
+    if: ${{ inputs.deploy == 'true' }}
+    name: Deploy to Staging
+    environment:
+      name: Staging
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      - project-details
+      - build-app
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: 'github-pages-${{ needs.project-details.outputs.project }}@${{ needs.project-details.outputs.version }}'

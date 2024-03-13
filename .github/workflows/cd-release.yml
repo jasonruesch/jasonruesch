@@ -24,7 +24,7 @@ concurrency:
 jobs:
   # Publish job
   publish-npm:
-    if: startsWith(github.ref_name, 'tailwind')
+    if: ${{ startsWith(github.ref_name, 'tailwind') }}
     name: Publish to GitHub Packages
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +55,7 @@ jobs:
 
   # Deployment job
   deploy-production:
-    if: startsWith(github.ref_name, 'jasonruesch')
+    if: ${{ startsWith(github.ref_name, 'jasonruesch') }}
     name: Deploy to Production
     environment:
       name: Production
