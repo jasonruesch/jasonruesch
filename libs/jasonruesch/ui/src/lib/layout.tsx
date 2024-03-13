@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useOutlet } from 'react-router-dom';
 import { Background, Header } from '../components';
 
-export const AnimatedOutlet = ({ context }: { context?: unknown }) => {
+const AnimatedOutlet = ({ context }: { context?: unknown }) => {
   const o = useOutlet(context);
   const [outlet] = useState(o);
 
@@ -33,13 +33,11 @@ export function Layout() {
     <>
       <Background />
 
-      <div className="py-safe">
-        <Header scrolled={scrolled} />
+      <Header scrolled={scrolled} />
 
-        <AnimatePresence initial={false}>
-          <AnimatedOutlet key={pathname} />
-        </AnimatePresence>
-      </div>
+      <AnimatePresence initial={false}>
+        <AnimatedOutlet key={pathname} />
+      </AnimatePresence>
     </>
   );
 }

@@ -19,7 +19,7 @@ export function Page({ children }: PageProps) {
 
   return (
     <motion.div
-      className="z-10 flex min-h-dvh flex-1 flex-col"
+      className="flex min-h-dvh flex-1 flex-col"
       initial="initial"
       animate="animate"
       exit="exit"
@@ -27,7 +27,7 @@ export function Page({ children }: PageProps) {
       variants={pageVariants}
     >
       <motion.div
-        className="z-10 flex flex-1 flex-col bg-neutral-50 dark:bg-neutral-900"
+        className="px-safe-offset-4 lg:px-safe-offset-8 py-safe z-10 flex flex-1 flex-col bg-neutral-50 dark:bg-neutral-900"
         initial={false}
         animate="animate"
         exit="exit"
@@ -35,7 +35,7 @@ export function Page({ children }: PageProps) {
         transition={{ duration: 0 }}
       >
         <motion.main
-          className="px-safe-offset-4 lg:px-safe-offset-8 mt-20 flex flex-1 flex-col py-4 lg:mt-16"
+          className="mt-20 flex flex-1 flex-col py-4 lg:mt-16"
           initial="initial"
           animate="animate"
           exit="exit"
@@ -45,7 +45,7 @@ export function Page({ children }: PageProps) {
         </motion.main>
 
         <motion.footer
-          className="px-safe-offset-4 lg:px-safe-offset-8 flex flex-col items-center justify-center gap-1 py-4 text-sm text-neutral-400 sm:flex-row dark:text-neutral-300"
+          className="flex flex-col items-center justify-center gap-1 py-4 text-sm text-neutral-400 sm:flex-row dark:text-neutral-300"
           initial="initial"
           animate="animate"
           exit="exit"
