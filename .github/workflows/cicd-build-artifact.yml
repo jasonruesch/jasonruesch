@@ -136,7 +136,7 @@ jobs:
 
   # Deployment job
   deploy-staging:
-    if: ${{ inputs.deploy == 'true' }}
+    if: ${{ inputs.deploy == true }}
     name: Deploy to Staging
     environment:
       name: Staging
