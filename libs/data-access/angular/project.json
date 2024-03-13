@@ -21,6 +21,17 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventionalcommits",
+        "tagPrefix": "{projectName}@",
+        "skipRootChangelog": true,
+        "skipProjectChangelog": true,
+        "skipCommit": true,
+        "trackDeps": true
+      }
     }
   }
 }
