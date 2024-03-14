@@ -122,8 +122,8 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Update version
-        # run: npx nx run ${{ matrix.project }}:version
-        run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
+        run: npx nx run ${{ matrix.project }}:version
+        # run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
 
       # Fallback to version from latest tag for this project if update version didn't run
       - name: Version
@@ -151,7 +151,10 @@ jobs:
           path: ./dist/${{ matrix.path }}
 
       - name: Push tags
-        run: git push --tags
+        run: |
+          git tag -d "${{ matrix.project }}@${{ steps.version.outputs.version }}"
+          git tag -a "${{ matrix.project }}@${{ steps.version.outputs.version }}" -m "${{ matrix.project }}@${{ steps.version.outputs.version }}"
+          git push --tags
 
   # Build job
   build-app:
@@ -184,8 +187,8 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Update version
-        # run: npx nx run ${{ matrix.project }}:version
-        run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
+        run: npx nx run ${{ matrix.project }}:version
+        # run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
 
       # Fallback to version from latest tag for this project if update version didn't run
       - name: Version
@@ -223,7 +226,10 @@ jobs:
           path: ./dist/${{ matrix.path }}
 
       - name: Push tags
-        run: git push --tags
+        run: |
+          git tag -d "${{ matrix.project }}@${{ steps.version.outputs.version }}"
+          git tag -a "${{ matrix.project }}@${{ steps.version.outputs.version }}" -m "${{ matrix.project }}@${{ steps.version.outputs.version }}"
+          git push --tags
 
   # Deployment job
   deploy-staging:
