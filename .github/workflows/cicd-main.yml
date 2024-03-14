@@ -247,7 +247,8 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy Jason Ruesch to GitHub Pages
+        if: ${{ matrix.project == 'jasonruesch' }}
         id: deployment
         uses: actions/deploy-pages@v4
         with:
