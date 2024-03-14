@@ -15,8 +15,8 @@ on:
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: write
-  pages: write
   id-token: write
+  pages: write
 
 # Allow only one concurrent run, skipping runs queued between the run in-progress and latest queued.
 concurrency:
