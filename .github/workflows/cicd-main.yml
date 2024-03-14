@@ -122,7 +122,8 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Update version
-        run: npx nx run-many -t version --projects ${{ matrix.project }}
+        # run: npx nx run ${{ matrix.project }}:version
+        run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
 
       # Fallback to version from latest tag for this project if update version didn't run
       - name: Version
@@ -183,7 +184,8 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Update version
-        run: npx nx run-many -t version --projects ${{ matrix.project }}
+        # run: npx nx run ${{ matrix.project }}:version
+        run: npx nx release version --projects ${{ matrix.project }} --git-commit=false --stage-changes=false --git-tag
 
       # Fallback to version from latest tag for this project if update version didn't run
       - name: Version
