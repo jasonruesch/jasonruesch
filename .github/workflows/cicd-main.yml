@@ -1,4 +1,4 @@
-# This workflow will build and deploy a site to GitHub Pages
+# This workflow will test, build, and deploy a site to the Staging environment
 
 name: Main Branch CI/CD
 
@@ -124,18 +124,13 @@ jobs:
       - name: Update version
         run: npx nx run ${{ matrix.project }}:version
 
-      # Fallback to version from latest tag for this project if update version didn't update the package.json file
       - name: Version
         id: version
         run: |
           version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
-          echo "$version"
           if [[ $version == *"-development" ]]; then
-            version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
-            version="${version##*@}"
-            echo "$version"
-            npm pkg set version="$version" --prefix=${{ matrix.path }}
+            exit 0
           fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
@@ -190,18 +185,13 @@ jobs:
       - name: Update version
         run: npx nx run ${{ matrix.project }}:version
 
-      # Fallback to version from latest tag for this project if update version didn't update the package.json file
       - name: Version
         id: version
         run: |
           version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
-          echo "$version"
           if [[ $version == *"-development" ]]; then
-            version=$(git describe --tags --match="${{ matrix.project }}@*" --abbrev=0)
-            version="${version##*@}"
-            echo "$version"
-            npm pkg set version="$version" --prefix=${{ matrix.path }}
+            exit 0
           fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
@@ -233,7 +223,7 @@ jobs:
           git tag -a "${{ matrix.project }}@${{ steps.version.outputs.version }}" -m "${{ matrix.project }}@${{ steps.version.outputs.version }}"
           git push --tags
 
-  # Deployment job
+  # Deploy job
   deploy-staging:
     name: Deploy to Staging
     environment:

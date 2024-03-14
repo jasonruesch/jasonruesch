@@ -1,64 +1,286 @@
-export default {
-  ':not(.btn-link)': {
-    '&.btn-primary, &.btn-neutral, &.btn-info, &.btn-danger': {
-      '@apply inline-flex shrink-0 items-center justify-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 border border-transparent disabled:border disabled:border-dashed':
-        '',
+import { CSSRuleObject, PluginUtils } from 'tailwindcss/types/config';
 
-      '&.btn-small': {
-        '@apply px-2 py-1 text-xs rounded': '',
-      },
+export default (theme: PluginUtils['theme'], darkContext: string) =>
+  ({
+    ':not(.btn-link)': {
+      '&.btn-primary, &.btn-neutral, &.btn-info, &.btn-danger': {
+        display: 'inline-flex',
+        flexShrink: '0',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: theme('spacing.1'),
+        borderRadius: theme('borderRadius.md'),
+        paddingTop: theme('spacing[1.5]'),
+        paddingBottom: theme('spacing[1.5]'),
+        paddingLeft: theme('spacing[2.5]'),
+        paddingRight: theme('spacing[2.5]'),
+        fontSize: theme('fontSize.sm'),
+        lineHeight: theme('lineHeight.5'),
+        fontWeight: theme('fontWeight.semibold'),
+        boxShadow: theme('boxShadow.sm'),
+        borderWidth: theme('borderWidth.DEFAULT'),
+        borderColor: theme('borderColor.transparent'),
 
-      '&.btn-icon': {
-        '@apply px-2 text-base': '',
+        '&:focus-visible': {
+          outlineWidth: theme('outlineWidth.2'),
+        },
+
+        '&:disabled': {
+          borderStyle: 'dashed',
+        },
 
         '&.btn-small': {
-          '@apply px-1': '',
+          paddingTop: theme('spacing.1'),
+          paddingBottom: theme('spacing.1'),
+          paddingLeft: theme('spacing.2'),
+          paddingRight: theme('spacing.2'),
+          fontSize: theme('fontSize.xs'),
+          lineHeight: theme('lineHeight.4'),
+        },
+
+        '&.btn-icon': {
+          paddingLeft: theme('spacing.4'),
+          paddingRight: theme('spacing.4'),
+          fontSize: theme('fontSize.base'),
+          lineHeight: theme('lineHeight.6'),
+
+          '&.btn-small': {
+            paddingLeft: theme('spacing.2'),
+            paddingRight: theme('spacing.2'),
+            fontSize: theme('fontSize.xs'),
+            lineHeight: theme('lineHeight.4'),
+          },
+        },
+      },
+
+      '&.btn-primary': {
+        backgroundColor: theme('colors.primary-600'),
+        color: theme('colors.white'),
+
+        '&:hover:not(:disabled)': {
+          backgroundColor: theme('colors.primary-500'),
+        },
+
+        '&:focus-visible': {
+          outlineColor: theme('colors.primary-600'),
+        },
+
+        '&:disabled': {
+          borderColor: theme('colors.primary-300'),
+          backgroundColor: theme('colors.primary-50'),
+          color: theme('colors.primary-800'),
+        },
+
+        [darkContext]: {
+          backgroundColor: theme('colors.primary-500'),
+
+          '&:hover:not(:disabled)': {
+            backgroundColor: theme('colors.primary-400'),
+          },
+
+          '&:focus-visible': {
+            outlineColor: theme('colors.primary-500'),
+          },
+        },
+      },
+
+      '&.btn-neutral': {
+        backgroundColor: theme('colors.neutral-600'),
+        color: theme('colors.white'),
+
+        '&:hover:not(:disabled)': {
+          backgroundColor: theme('colors.neutral-500'),
+        },
+
+        '&:focus-visible': {
+          outlineColor: theme('colors.neutral-600'),
+        },
+
+        '&:disabled': {
+          borderColor: theme('colors.neutral-300'),
+          backgroundColor: theme('colors.neutral-50'),
+          color: theme('colors.neutral-800'),
+        },
+
+        [darkContext]: {
+          backgroundColor: theme('colors.neutral-500'),
+
+          '&:hover:not(:disabled)': {
+            backgroundColor: theme('colors.neutral-400'),
+          },
+
+          '&:focus-visible': {
+            outlineColor: theme('colors.neutral-500'),
+          },
+        },
+      },
+
+      '&.btn-info': {
+        backgroundColor: theme('colors.info-600'),
+        color: theme('colors.white'),
+
+        '&:hover:not(:disabled)': {
+          backgroundColor: theme('colors.info-500'),
+        },
+
+        '&:focus-visible': {
+          outlineColor: theme('colors.info-600'),
+        },
+
+        '&:disabled': {
+          borderColor: theme('colors.info-300'),
+          backgroundColor: theme('colors.info-50'),
+          color: theme('colors.info-800'),
+        },
+
+        [darkContext]: {
+          backgroundColor: theme('colors.info-500'),
+
+          '&:hover:not(:disabled)': {
+            backgroundColor: theme('colors.info-400'),
+          },
+
+          '&:focus-visible': {
+            outlineColor: theme('colors.info-500'),
+          },
+        },
+      },
+
+      '&.btn-danger': {
+        backgroundColor: theme('colors.danger-600'),
+        color: theme('colors.white'),
+
+        '&:hover:not(:disabled)': {
+          backgroundColor: theme('colors.danger-500'),
+        },
+
+        '&:focus-visible': {
+          outlineColor: theme('colors.danger-600'),
+        },
+
+        '&:disabled': {
+          borderColor: theme('colors.danger-300'),
+          backgroundColor: theme('colors.danger-50'),
+          color: theme('colors.danger-800'),
+        },
+
+        [darkContext]: {
+          backgroundColor: theme('colors.danger-500'),
+
+          '&:hover:not(:disabled)': {
+            backgroundColor: theme('colors.danger-400'),
+          },
+
+          '&:focus-visible': {
+            outlineColor: theme('colors.danger-500'),
+          },
         },
       },
     },
 
-    '&.btn-primary': {
-      '@apply bg-primary-600 dark:bg-primary-500 text-white enabled:hover:bg-primary-500 dark:enabled:hover:bg-primary-400 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-500 disabled:border-primary-300 disabled:bg-primary-50 disabled:text-primary-800':
-        '',
-    },
+    '.btn-link': {
+      '&:focus': {
+        outlineStyle: 'none',
+      },
 
-    '&.btn-neutral': {
-      '@apply bg-neutral-600 dark:bg-neutral-500 text-white enabled:hover:bg-neutral-500 dark:enabled:hover:bg-neutral-400 focus-visible:outline-neutral-600 dark:focus-visible:outline-neutral-500 disabled:border-neutral-300 disabled:bg-neutral-50 disabled:text-neutral-800':
-        '',
-    },
+      '&:disabled': {
+        opacity: theme('opacity.50'),
+      },
 
-    '&.btn-info': {
-      '@apply bg-info-600 dark:bg-info-500 text-white enabled:hover:bg-info-500 dark:enabled:hover:bg-info-400 focus-visible:outline-info-600 dark:focus-visible:outline-info-500 disabled:border-info-300 disabled:bg-info-50 disabled:text-info-800':
-        '',
-    },
+      '&.btn-primary': {
+        color: theme('colors.primary-500'),
 
-    '&.btn-danger': {
-      '@apply bg-danger-600 dark:bg-danger-500 text-white enabled:hover:bg-danger-500 dark:enabled:hover:bg-danger-400 focus-visible:outline-danger-600 dark:focus-visible:outline-danger-500 disabled:border-danger-300 disabled:bg-danger-50 disabled:text-danger-800':
-        '',
-    },
-  },
+        '&:hover:not(:disabled)': {
+          color: theme('colors.primary-400'),
+        },
 
-  '.btn-link': {
-    '@apply focus:outline-none disabled:opacity-50': '',
+        '&:focus': {
+          color: theme('colors.primary-400'),
+        },
 
-    '&.btn-primary': {
-      '@apply text-primary-500 enabled:hover:text-primary-400 dark:text-primary-400 dark:enabled:hover:text-primary-300 focus:text-primary-400 dark:focus:text-primary-300':
-        '',
-    },
+        [darkContext]: {
+          color: theme('colors.primary-400'),
 
-    '&.btn-neutral': {
-      '@apply text-neutral-500 enabled:hover:text-neutral-400 dark:text-neutral-400 dark:enabled:hover:text-neutral-300 focus:text-neutral-400 dark:focus:text-neutral-300':
-        '',
-    },
+          '&:hover:not(:disabled)': {
+            color: theme('colors.primary-300'),
+          },
 
-    '&.btn-info': {
-      '@apply text-info-500 enabled:hover:text-info-400 dark:text-info-400 dark:enabled:hover:text-info-300 focus:text-info-400 dark:focus:text-info-300':
-        '',
-    },
+          '&:focus': {
+            color: theme('colors.primary-300'),
+          },
+        },
+      },
 
-    '&.btn-danger': {
-      '@apply text-danger-500 enabled:hover:text-danger-400 dark:text-danger-400 dark:enabled:hover:text-danger-300 focus:text-danger-400 dark:focus:text-danger-300':
-        '',
+      '&.btn-neutral': {
+        color: theme('colors.neutral-500'),
+
+        '&:hover:not(:disabled)': {
+          color: theme('colors.neutral-400'),
+        },
+
+        '&:focus': {
+          color: theme('colors.neutral-400'),
+        },
+
+        [darkContext]: {
+          color: theme('colors.neutral-400'),
+
+          '&:hover:not(:disabled)': {
+            color: theme('colors.neutral-300'),
+          },
+
+          '&:focus': {
+            color: theme('colors.neutral-300'),
+          },
+        },
+      },
+
+      '&.btn-info': {
+        color: theme('colors.info-500'),
+
+        '&:hover:not(:disabled)': {
+          color: theme('colors.info-400'),
+        },
+
+        '&:focus': {
+          color: theme('colors.info-400'),
+        },
+
+        [darkContext]: {
+          color: theme('colors.info-400'),
+
+          '&:hover:not(:disabled)': {
+            color: theme('colors.info-300'),
+          },
+
+          '&:focus': {
+            color: theme('colors.info-300'),
+          },
+        },
+      },
+
+      '&.btn-danger': {
+        color: theme('colors.danger-500'),
+
+        '&:hover:not(:disabled)': {
+          color: theme('colors.danger-400'),
+        },
+
+        '&:focus': {
+          color: theme('colors.danger-400'),
+        },
+
+        [darkContext]: {
+          color: theme('colors.danger-400'),
+
+          '&:hover:not(:disabled)': {
+            color: theme('colors.danger-300'),
+          },
+
+          '&:focus': {
+            color: theme('colors.danger-300'),
+          },
+        },
+      },
     },
-  },
-};
+  }) satisfies CSSRuleObject;

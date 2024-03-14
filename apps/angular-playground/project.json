@@ -1,0 +1,82 @@
+{
+  "name": "angular-playground",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "jasonruesch",
+  "sourceRoot": "apps/angular-playground/src",
+  "tags": ["scope:angular-playground", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular-playground",
+        "index": "apps/angular-playground/src/index.html",
+        "browser": "apps/angular-playground/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/angular-playground/tsconfig.app.json",
+        "assets": [
+          "apps/angular-playground/src/favicon.ico",
+          "apps/angular-playground/src/assets"
+        ],
+        "styles": ["apps/angular-playground/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4202
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "angular-playground:build:production"
+        },
+        "development": {
+          "buildTarget": "angular-playground:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "angular-playground:build"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventionalcommits",
+        "tagPrefix": "{projectName}@",
+        "skipRootChangelog": true,
+        "skipProjectChangelog": true,
+        "skipCommit": true,
+        "trackDeps": true
+      }
+    }
+  }
+}

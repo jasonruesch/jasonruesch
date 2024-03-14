@@ -1,9 +1,11 @@
-# This workflow will build and deploy a site to Vercel as a preview environment
+# This workflow will test, build, and deploy a site to Vercel's Preview environment
 
 name: Pull Request CI/CD
 
 on:
   pull_request:
+    branches:
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -60,7 +62,8 @@ jobs:
           list=($projects)
           items="["
           for project in "${list[@]}"; do
-            items+="{\"project\":\"$project\"},"
+            path=$(npx nx show project $project | jq -r .root)
+            items+="{\"project\":\"$project\",\"path\":\"$path\"},"
           done
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
@@ -86,8 +89,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
