@@ -66,6 +66,7 @@ jobs:
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
           [[ $items = "[]" ]] && matrix="" || matrix="{\"include\":$items}"
+          echo "$projects"
           echo "projects=$projects" >> $GITHUB_OUTPUT
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 

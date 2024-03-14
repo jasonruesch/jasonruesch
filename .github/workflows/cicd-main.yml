@@ -59,7 +59,6 @@ jobs:
         id: libs
         run: |
           projects=$(npx nx show projects --projects libs/**/* --affected --with-target nx-release-publish --base "${{ steps.set-shas.outputs.base }}" --head "${{ steps.set-shas.outputs.head }}" | tr '\n' ' ' | xargs)
-          echo "$projects"
           list=($projects)
           items="["
           for project in "${list[@]}"; do
@@ -69,6 +68,7 @@ jobs:
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
           [[ $items = "[]" ]] && matrix="" || matrix="{\"include\":$items}"
+          echo "$projects"
           echo "projects=$projects" >> $GITHUB_OUTPUT
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
@@ -76,7 +76,6 @@ jobs:
         id: apps
         run: |
           projects=$(npx nx show projects --projects apps/**/* --affected --with-target build --base "${{ steps.set-shas.outputs.base }}" --head "${{ steps.set-shas.outputs.head }}" | tr '\n' ' ' | xargs)
-          echo "$projects"
           list=($projects)
           items="["
           for project in "${list[@]}"; do
@@ -86,6 +85,7 @@ jobs:
           items=$(echo "$items" | sed 's/,$//g')
           items+="]"
           [[ $items = "[]" ]] && matrix="" || matrix="{\"include\":$items}"
+          echo "$projects"
           echo "projects=$projects" >> $GITHUB_OUTPUT
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
