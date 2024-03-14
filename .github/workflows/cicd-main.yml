@@ -46,7 +46,6 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Set SHAs for Nx
-        id: set-shas
         uses: nrwl/nx-set-shas@v4
 
       - name: Run format check
@@ -58,7 +57,7 @@ jobs:
       - name: Affected libs
         id: libs
         run: |
-          projects=$(npx nx show projects --projects libs/**/* --affected --with-target nx-release-publish --base "${{ steps.set-shas.outputs.base }}" --head "${{ steps.set-shas.outputs.head }}" | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --type lib --affected --with-target nx-release-publish | tr '\n' ' ' | xargs)
           list=($projects)
           items="["
           for project in "${list[@]}"; do
@@ -75,7 +74,7 @@ jobs:
       - name: Affected apps
         id: apps
         run: |
-          projects=$(npx nx show projects --projects apps/**/* --affected --with-target build --base "${{ steps.set-shas.outputs.base }}" --head "${{ steps.set-shas.outputs.head }}" | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --type app --affected --with-target build | tr '\n' ' ' | xargs)
           list=($projects)
           items="["
           for project in "${list[@]}"; do
@@ -90,7 +89,7 @@ jobs:
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
       - name: Build affected non-publishable libs
-        run: npx nx affected -t build --exclude apps/**/* ${{ steps.libs.outputs.projects }}
+        run: npx nx affected -t build --exclude "apps/**" ${{ steps.libs.outputs.projects }}
 
   # Build job
   build-lib:

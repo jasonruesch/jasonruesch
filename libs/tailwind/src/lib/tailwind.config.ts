@@ -19,7 +19,7 @@ export const tailwindPreset = {
       transparent: colors.transparent,
       black: colors.black,
       white: colors.white,
-      test: 'purple',
+      test: 'orange',
     },
     extend: {
       lineHeight: {
