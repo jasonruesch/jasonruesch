@@ -1,9 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
 
+import { Link, Route, Routes } from 'react-router-dom';
 import NxWelcome from './nx-welcome';
-
-import { Route, Routes, Link } from 'react-router-dom';
 
 export function App() {
   return (
@@ -31,8 +29,63 @@ export function App() {
           path="/"
           element={
             <div>
+              <h2 className="tw-gradient-heading">
+                <span className="tw-heading-lg">Gradient</span>
+                <span>Heading</span>
+              </h2>
               This is the generated root route.{' '}
               <Link to="/page-2">Click here for page 2.</Link>
+              <div className="tw-grid-layout">
+                <div className="tw-col-span-full tw-space-x-2">
+                  <button type="button" className="tw-btn-primary">
+                    Primary
+                  </button>
+                  <button type="button" className="tw-btn-primary tw-btn-small">
+                    Primary (small)
+                  </button>
+                  <button type="button" className="tw-btn-primary" disabled>
+                    Primary (disabled)
+                  </button>
+                </div>
+                <div className="tw-col-span-full tw-space-x-2">
+                  <button type="button" className="tw-btn-neutral">
+                    Neutral
+                  </button>
+                  <button type="button" className="tw-btn-info">
+                    Info
+                  </button>
+                  <button type="button" className="tw-btn-danger">
+                    Danger
+                  </button>
+                  <button type="button" className="tw-btn-primary tw-btn-icon">
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    className="tw-btn-primary tw-btn-small tw-btn-icon"
+                  >
+                    $
+                  </button>
+                </div>
+                <div className="tw-col-span-full tw-space-x-2">
+                  <button type="button" className="tw-btn-primary tw-btn-link">
+                    Link Button
+                  </button>
+                  <button
+                    type="button"
+                    className="tw-btn-primary tw-btn-small tw-btn-link"
+                  >
+                    Link Button (small)
+                  </button>
+                  <button
+                    type="button"
+                    className="tw-btn-primary tw-btn-link"
+                    disabled
+                  >
+                    Link Button (disabled)
+                  </button>
+                </div>
+              </div>
             </div>
           }
         />

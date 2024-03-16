@@ -1,9 +1,16 @@
 {
   "tailwindCSS.experimental.configFile": {
+    "apps/angular-playground/tailwind.config.js": [
+      "apps/angular-playground/src/**"
+    ],
     "apps/jasonruesch/tailwind.config.ts": [
       "apps/jasonruesch/index.html",
       "apps/jasonruesch/src/**",
       "libs/jasonruesch/ui/src/**"
+    ],
+    "apps/react-playground/tailwind.config.js": [
+      "apps/react-playground/index.html",
+      "apps/react-playground/src/**"
     ]
   }
 }
