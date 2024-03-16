@@ -4,12 +4,12 @@ import tailwindcssSafeArea from 'tailwindcss-safe-area';
 import plugin from 'tailwindcss/plugin';
 import { PluginUtils } from 'tailwindcss/types/config';
 import { createThemes } from 'tw-colors';
-import colors from '../base/colors';
 import headings from '../base/headings';
 import paragraphs from '../base/paragraphs';
 import buttons from '../components/buttons';
 import gradientHeading from '../components/gradient-heading';
 import grid from '../components/grid';
+import colors from './colors';
 
 export const tailwindPreset = {
   theme: {
@@ -106,13 +106,21 @@ export const tailwindPreset = {
         produceThemeVariant: (themeName) => `theme-${themeName}`,
       },
     ),
-    plugin(({ addBase, addComponents }) => {
-      addBase(headings);
-      addBase(paragraphs);
+    plugin(({ addBase, addComponents, theme, config }) => {
+      const [mode, className = '.dark'] = config('darkMode', 'media');
+      const darkContext =
+        mode === 'media'
+          ? '@media (prefers-color-scheme: dark)'
+          : `&:where(${className}, ${className} *)`;
 
-      addComponents(grid);
-      addComponents(buttons);
-      addComponents(gradientHeading);
+      addBase(headings(theme));
+      addBase(paragraphs(theme, darkContext));
+
+      addComponents(buttons(theme, darkContext));
+      addComponents(gradientHeading(theme, darkContext));
+      addComponents(grid(theme));
     }),
   ],
 } satisfies Omit<Config, 'content'>;
+
+export default tailwindPreset;
