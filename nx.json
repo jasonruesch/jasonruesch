@@ -67,6 +67,12 @@
     },
     "@nx/angular:component": {
       "style": "css"
+    },
+    "@nx/angular:application": {
+      "e2eTestRunner": "playwright",
+      "linter": "eslint",
+      "style": "css",
+      "unitTestRunner": "jest"
     }
   },
   "nxCloudAccessToken": "NTEwNmExZTItNTE4MS00Y2JlLThkY2ItY2RkNWI3ZmVkNzhhfHJlYWQtd3JpdGU=",
@@ -77,6 +83,11 @@
       "inputs": ["production", "^production"]
     },
     "@nx/angular:package": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@angular-devkit/build-angular:application": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
