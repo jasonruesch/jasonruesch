@@ -1,0 +1,8 @@
+{
+  "name": "react-playground",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-playground/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": ["scope:react-playground", "type:app"]
+}
