@@ -132,9 +132,10 @@ jobs:
         run: |
           version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
+          echo "$version"
           if [[ $version == *"-development" ]]; then
             echo "$version is a development version, skipping build"
-            exit 0
+            exit 1
           fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
@@ -194,9 +195,10 @@ jobs:
         run: |
           version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
+          echo "$version"
           if [[ $version == *"-development" ]]; then
             echo "$version is a development version, skipping build"
-            exit 0
+            exit 1
           fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
