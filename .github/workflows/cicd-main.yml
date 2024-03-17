@@ -133,17 +133,15 @@ jobs:
           version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
           echo "$version"
-          if [[ $version == *"-development" ]]; then
-            echo "$version is a development version, skipping build"
-            exit 1
-          fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Build
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
 
       # Upload artifact for publishing to GitHub Packages
       - name: Upload artifact
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         uses: actions/upload-artifact@v4
         with:
           name: '${{ matrix.project }}@${{ steps.version.outputs.version }}'
@@ -152,6 +150,7 @@ jobs:
       # Remove the tag created by @jscutlery/semver (the version command above), since it causes an update workflow error when pushing the tag
       # Create a new annotated tag using the same command that the nx release version command would use
       - name: Push tags
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         run: |
           git tag -d "${{ matrix.project }}@${{ steps.version.outputs.version }}"
           git tag -a "${{ matrix.project }}@${{ steps.version.outputs.version }}" -m "${{ matrix.project }}@${{ steps.version.outputs.version }}"
@@ -196,20 +195,19 @@ jobs:
           version=$(npm pkg get version --prefix=${{ matrix.path }})
           version="${version//\"/}"
           echo "$version"
-          if [[ $version == *"-development" ]]; then
-            echo "$version is a development version, skipping build"
-            exit 1
-          fi
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Build
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         run: npx nx build ${{ matrix.project }} --skip-nx-cache
 
       - name: Setup Pages
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         uses: actions/configure-pages@v4
 
       # Upload artifact for Staging deployment to GitHub Pages
       - name: Upload GitHub Pages artifact
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         uses: actions/upload-pages-artifact@v3
         with:
           name: 'github-pages-${{ matrix.project }}@${{ steps.version.outputs.version }}'
@@ -217,6 +215,7 @@ jobs:
 
       # Upload artifact for Production deployment to another repository
       - name: Upload artifact
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         uses: actions/upload-artifact@v4
         with:
           name: '${{ matrix.project }}@${{ steps.version.outputs.version }}'
@@ -225,6 +224,7 @@ jobs:
       # Remove the tag created by @jscutlery/semver (the version command above), since it causes an update workflow error when pushing the tag
       # Create a new annotated tag using the same command that the nx release version command would use
       - name: Push tags
+        if: ${{ !endsWith(steps.version.outputs.version, '-development') }}
         run: |
           git tag -d "${{ matrix.project }}@${{ steps.version.outputs.version }}"
           git tag -a "${{ matrix.project }}@${{ steps.version.outputs.version }}" -m "${{ matrix.project }}@${{ steps.version.outputs.version }}"
@@ -240,7 +240,7 @@ jobs:
     needs:
       - affected
       - build-app
-    if: ${{ needs.affected.outputs.apps-matrix != '' }}
+    if: ${{ needs.affected.outputs.apps-matrix != '' && !endsWith(needs.build-app.outputs.version, '-development') }}
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:
