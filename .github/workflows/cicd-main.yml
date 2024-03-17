@@ -92,7 +92,8 @@ jobs:
         run: |
           projects=(${{ steps.libs.outputs.projects }})
           projects+=(${{ steps.apps.outputs.projects }})
-          npx nx affected -t build --exclude $projects
+          echo "$projects[@]"
+          npx nx affected -t build --exclude "$projects[@]"
 
   # Build job
   build-lib:
