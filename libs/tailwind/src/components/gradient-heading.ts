@@ -5,9 +5,6 @@ export default (theme: PluginUtils['theme'], darkContext: string) =>
     '@keyframes gradient': theme('keyframes.gradient'),
 
     '.gradient-heading': {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       paddingTop: theme('spacing.1'),
       paddingBottom: theme('spacing.1'),
       paddingLeft: theme('spacing.4'),

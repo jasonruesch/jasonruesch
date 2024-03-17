@@ -29,7 +29,7 @@ export function App() {
           path="/"
           element={
             <div>
-              <h2 className="tw-gradient-heading">
+              <h2 className="tw-gradient-heading tw-flex tw-items-center tw-justify-center">
                 <span className="tw-heading-lg">Gradient</span>
                 <span>Heading</span>
               </h2>
