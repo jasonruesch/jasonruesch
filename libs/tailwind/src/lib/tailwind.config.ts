@@ -106,11 +106,11 @@ export const tailwindPreset = {
       },
     ),
     plugin(({ addBase, addComponents, theme, config }) => {
-      const [mode, className = '.dark'] = config('darkMode', 'media');
+      const mode = config('darkMode', 'media');
       const darkContext =
         mode === 'media'
           ? '@media (prefers-color-scheme: dark)'
-          : `&:where(${className}, ${className} *)`;
+          : `&:where(.dark, .dark *)`;
 
       addBase(headings(theme));
       addBase(paragraphs(theme, darkContext));
