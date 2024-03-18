@@ -61,7 +61,7 @@ jobs:
       - name: Affected apps
         id: apps
         run: |
-          projects=$(npx nx show projects --projects jasonruesch --affected --with-target build | tr '\n' ' ' | xargs)
+          projects=$(npx nx show projects --type app --affected --with-target version | tr '\n' ' ' | xargs)
           list=($projects)
           items="["
           for project in "${list[@]}"; do
@@ -75,8 +75,11 @@ jobs:
           echo "projects=$projects" >> $GITHUB_OUTPUT
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
-      - name: Build affected libs and apps (excluding jasonruesch)
-        run: npx nx affected -t build --exclude "jasonruesch"
+      - name: Build affected non-deployable apps and all affected libs
+        run: |
+          projects+=(${{ steps.apps.outputs.projects }})
+          echo "$projects[@]"
+          npx nx affected -t build --exclude "$projects[@]"
 
   # Build job
   build-app:
@@ -89,6 +92,8 @@ jobs:
     if: ${{ needs.affected.outputs.apps-matrix != '' }}
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
+    outputs:
+      project: ${{ matrix.project }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -115,8 +120,8 @@ jobs:
           path: .vercel/output
 
   # Deploy job
-  deploy-preview:
-    name: Deploy to Preview
+  deploy-preview-jasonruesch:
+    name: Deploy Jason Ruesch to Preview
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -127,7 +132,7 @@ jobs:
     needs:
       - affected
       - build-app
-    if: ${{ needs.affected.outputs.apps-matrix != '' }}
+    if: ${{ needs.affected.outputs.apps-matrix != '' && needs.build-app.outputs.project == 'jasonruesch'}}
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:

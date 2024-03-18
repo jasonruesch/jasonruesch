@@ -93,8 +93,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Deploy job
-  deploy-production:
-    name: Deploy to Production
+  deploy-production-jasonruesch:
+    name: Deploy Jason Ruesch to Production
     environment:
       name: Production
       url: https://github.com/jasonruesch/jasonruesch.github.io

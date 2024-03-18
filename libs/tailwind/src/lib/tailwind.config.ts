@@ -121,5 +121,3 @@ export const tailwindPreset = {
     }),
   ],
 } satisfies Omit<Config, 'content'>;
-
-export default tailwindPreset;

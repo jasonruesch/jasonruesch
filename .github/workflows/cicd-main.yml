@@ -169,6 +169,7 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     outputs:
+      project: ${{ matrix.project }}
       version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout repository
@@ -235,8 +236,8 @@ jobs:
           git push --tags
 
   # Deploy job
-  deploy-staging:
-    name: Deploy to Staging
+  deploy-staging-jasonruesch:
+    name: Deploy Jason Ruesch to Staging
     environment:
       name: Staging
       url: ${{ steps.deployment.outputs.page_url }}
@@ -244,12 +245,11 @@ jobs:
     needs:
       - affected
       - build-app
-    if: ${{ needs.affected.outputs.apps-matrix != '' && !endsWith(needs.build-app.outputs.version, '-development') }}
+    if: ${{ needs.affected.outputs.apps-matrix != '' && needs.build-app.outputs.project == 'jasonruesch' && !endsWith(needs.build-app.outputs.version, '-development') }}
     strategy:
       matrix: ${{ fromJson(needs.affected.outputs.apps-matrix) }}
     steps:
-      - name: Deploy Jason Ruesch to GitHub Pages
-        if: ${{ matrix.project == 'jasonruesch' }}
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
