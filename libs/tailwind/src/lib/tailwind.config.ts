@@ -9,6 +9,7 @@ import paragraphs from '../base/paragraphs';
 import buttons from '../components/buttons';
 import gradientHeading from '../components/gradient-heading';
 import grid from '../components/grid';
+import reset from '../components/reset';
 import colors from './colors';
 
 export const tailwindPreset = {
@@ -115,6 +116,7 @@ export const tailwindPreset = {
       addBase(headings(theme));
       addBase(paragraphs(theme, darkContext));
 
+      addComponents(reset(theme));
       addComponents(buttons(theme, darkContext));
       addComponents(gradientHeading(theme, darkContext));
       addComponents(grid(theme));
