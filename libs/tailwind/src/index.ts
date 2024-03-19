@@ -1,4 +1,4 @@
-export {
-  tailwindPreset as default,
-  tailwindPreset,
-} from './lib/tailwind.config';
+import { tailwindPreset } from './lib/tailwind.config';
+
+export { tailwindPreset };
+export default tailwindPreset;
