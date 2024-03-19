@@ -57,7 +57,7 @@ jobs:
       - name: Run affected lint and tests
         run: npx nx affected -t lint test e2e-ci
 
-      - name: Affected libs
+      - name: Affected publishable libs
         id: libs
         run: |
           projects=$(npx nx show projects --type lib --affected --with-target version | tr '\n' ' ' | xargs)
@@ -74,7 +74,7 @@ jobs:
           echo "projects=$projects" >> $GITHUB_OUTPUT
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
-      - name: Affected apps
+      - name: Affected deployable apps
         id: apps
         run: |
           projects=$(npx nx show projects --type app --affected --with-target version | tr '\n' ' ' | xargs)

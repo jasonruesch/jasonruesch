@@ -58,7 +58,7 @@ jobs:
       - name: Run affected lint and tests
         run: npx nx affected -t lint test e2e-ci
 
-      - name: Affected apps
+      - name: Affected deployable apps
         id: apps
         run: |
           projects=$(npx nx show projects --type app --affected --with-target version | tr '\n' ' ' | xargs)
