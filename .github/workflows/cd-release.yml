@@ -48,13 +48,11 @@ jobs:
       #   run: npm ci --ignore-scripts
 
       - run: |
+          echo "current=$GITHUB_REF_NAME"
           project=${GITHUB_REF_NAME%%@*}
-          echo "$project"
           tags=$(gh release list --exclude-drafts --exclude-pre-releases --jq '.[].tagName ' --json tagName)
-          projectTags=$(echo "$tags" | grep "^$project@" | tr '\n' ' ' | xargs)
-          echo "$projectTags"
-          items=($projectTags)
-          echo "${items[@]}"
+          previous=$(echo "$tags" | grep "^$project@" | head -2 | tail -1)
+          echo "previous=$previous"
         env:
           GH_TOKEN: ${{ github.token }}
 

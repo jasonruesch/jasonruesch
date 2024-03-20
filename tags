@@ -31,7 +31,7 @@ jasonruesch@1.6.1
 tailwind@1.6.1
 tailwind@1.6.0"
 
-echo "$tags" | grep "^$project@" | tr '\n' ' ' | xargs
+echo "$tags" | grep "^$project@" | head -2 | tail -1
 # echo $tags | tr '\n' ' ' | xargs
 # projectTags=$(echo $tags | grep "$project")
 # echo "$projectTags"
