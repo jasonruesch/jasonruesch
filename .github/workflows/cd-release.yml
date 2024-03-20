@@ -48,7 +48,7 @@ jobs:
       #   run: npm ci --ignore-scripts
 
       - run: |
-          release=$(gh release view ${{ github.ref_name }} --json apiUrl,author,id,name,tagName,targetCommitish,uploadUrl,url)
+          release=$(gh release --exclude-drafts --exclude-pre-releases --limit 2)
           echo "$release"
         env:
           GH_TOKEN: ${{ github.token }}
