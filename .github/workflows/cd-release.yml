@@ -50,6 +50,8 @@ jobs:
       - run: |
           release=$(gh release view ${{ github.ref_name }})
           echo "$release"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       # - name: Project details
       #   id: details
