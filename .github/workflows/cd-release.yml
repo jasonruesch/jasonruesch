@@ -48,8 +48,10 @@ jobs:
       #   run: npm ci --ignore-scripts
 
       - run: |
-          release=$(gh release list --exclude-drafts --exclude-pre-releases --jq '.[].tagName ' --json tagName | tr '\n' ' ' | xargs)
-          echo "$release"
+          project=${GITHUB_REF_NAME%%@*}
+          tags=$(gh release list --exclude-drafts --exclude-pre-releases --jq '.[].tagName ' --json tagName | tr '\n' ' ' | xargs | grep '$project')
+          items=($tags)
+          echo "$items[@]"
         env:
           GH_TOKEN: ${{ github.token }}
 
