@@ -1,0 +1,37 @@
+#!/bin/bash
+
+project="jasonruesch"
+tags="jasonruesch@1.8.0-alpha.12
+jasonruesch@1.8.0-alpha.11
+jasonruesch@1.8.0-alpha.10
+jasonruesch@1.8.0-alpha.9
+jasonruesch@1.8.0-alpha.8
+jasonruesch@1.8.0-alpha.7
+jasonruesch@1.8.0-alpha.6
+jasonruesch@1.8.0-alpha.5
+jasonruesch@1.8.0-alpha.4
+jasonruesch@1.8.0-alpha.3
+jasonruesch@1.8.0-alpha.2
+jasonruesch@1.8.0-alpha.1
+jasonruesch@1.7.1
+tailwind@1.9.1
+tailwind@1.9.0
+jasonruesch@1.6.9
+tailwind@1.7.3
+jasonruesch@1.6.8
+tailwind@1.7.2
+tailwind@1.7.1
+tailwind@1.7.0
+jasonruesch@1.6.3
+tailwind@1.6.9
+data-access-react@0.1.1
+data-access-react@0.1.0
+data-access@0.0.1
+jasonruesch@1.6.1
+tailwind@1.6.1
+tailwind@1.6.0"
+
+echo "$tags" | grep "^$project@" | tr '\n' ' ' | xargs
+# echo $tags | tr '\n' ' ' | xargs
+# projectTags=$(echo $tags | grep "$project")
+# echo "$projectTags"

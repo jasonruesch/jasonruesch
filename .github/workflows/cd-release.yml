@@ -51,8 +51,7 @@ jobs:
           project=${GITHUB_REF_NAME%%@*}
           echo "$project"
           tags=$(gh release list --exclude-drafts --exclude-pre-releases --jq '.[].tagName ' --json tagName)
-          echo "$tags"
-          projectTags=$(echo $tags | grep "$project" | tr '\n' ' ' | xargs)
+          projectTags=$(echo "$tags" | grep "^$project@" | tr '\n' ' ' | xargs)
           echo "$projectTags"
           items=($projectTags)
           echo "${items[@]}"
