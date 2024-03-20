@@ -52,7 +52,7 @@ jobs:
           tags=$(gh release list --exclude-drafts --exclude-pre-releases --jq '.[].tagName ' --json tagName)
           tags=$(echo $tags | grep '$project@' | tr '\n' ' ' | xargs)
           items=($tags)
-          echo "$items[@]"
+          echo "${items[@]}"
         env:
           GH_TOKEN: ${{ github.token }}
 
