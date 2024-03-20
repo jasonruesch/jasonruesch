@@ -48,10 +48,8 @@ jobs:
       #   run: npm ci --ignore-scripts
 
       - run: |
-          release=$(gh release list --exclude-drafts --exclude-pre-releases --limit 2)
+          release=$(gh release list --exclude-drafts --exclude-pre-releases --jq '.[].tagName ' --json tagName | tr '\n' ' ' | xargs)
           echo "$release"
-
-          gh release list --exclude-drafts --exclude-pre-releases --limit 2 --json
         env:
           GH_TOKEN: ${{ github.token }}
 
