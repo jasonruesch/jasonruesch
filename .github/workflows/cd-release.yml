@@ -20,7 +20,7 @@ permissions:
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
-  group: 'deploy-${{ github.ref_name }}'
+  group: 'release-${{ github.ref_name }}'
   cancel-in-progress: true
 
 jobs:
@@ -28,10 +28,10 @@ jobs:
   project-details:
     name: Project Details
     runs-on: ubuntu-latest
-    # outputs:
-    #   project: ${{ steps.details.outputs.project }}
-    #   version: ${{ steps.details.outputs.version }}
-    #   path: ${{ steps.details.outputs.path }}
+    outputs:
+      project: ${{ steps.details.outputs.project }}
+      version: ${{ steps.details.outputs.version }}
+      path: ${{ steps.details.outputs.path }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -60,12 +60,32 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
           echo "path=$path" >> $GITHUB_OUTPUT
 
+  # GitHub Release job
+  github-release:
+    name: GitHub Release
+    runs-on: ubuntu-latest
+    needs: project-details
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
       - name: Releases
         id: releases
         run: |
           current=${{ github.ref_name }}
           notes=$(gh release view $tag --json body | jq -r .body)
-          tags=$(gh release list --exclude-drafts --exclude-pre-releases --json tagName | jq -r 'map(select(.tagName | contains("${{ steps.details.outputs.project }}"))) | .[].tagName')
+          tags=$(gh release list --exclude-drafts --exclude-pre-releases --json tagName | jq -r 'map(select(.tagName | contains("${{ needs.project-details.outputs.project }}"))) | .[].tagName')
           previous=$(echo "$tags" | head -2 | tail -1)
           echo "$notes"
           echo "$current"
@@ -77,15 +97,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Generate changelog
-        run: npx nx release changelog ${{ steps.details.outputs.version }} --projects ${{ steps.details.outputs.project }} --from ${{ steps.releases.outputs.previous }} --to ${{ steps.releases.outputs.current }} --git-commit=false --git-tag=false
+        run: npx nx release changelog ${{ needs.project-details.outputs.version }} --projects ${{ needs.project-details.outputs.project }} --from ${{ steps.releases.outputs.previous }} --to ${{ steps.releases.outputs.current }} --git-commit=false --git-tag=false
 
       # Append the changelog to the release notes
       - name: Update release
-        working-directory: ${{ steps.details.outputs.path }}
+        working-directory: ${{ needs.project-details.outputs.path }}
         run: |
           gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
-          # Prepend notes to changelog, separated by a new line
           notes="${{ steps.releases.outputs.notes }}"
+          # If notes are not empty, add two newlines before appending the changelog
           [[ -n "$notes" ]] && notes+="
 
           "
@@ -94,65 +114,69 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-  # # Publish job
-  # publish-npm:
-  #   name: Publish to GitHub Packages
-  #   runs-on: ubuntu-latest
-  #   needs: project-details
-  #   if: ${{ startsWith(needs.project-details.outputs.path, 'libs') }}
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
+  # Publish job
+  publish-npm:
+    name: Publish to GitHub Packages
+    runs-on: ubuntu-latest
+    needs:
+      - project-details
+      - github-release
+    if: ${{ startsWith(needs.project-details.outputs.path, 'libs') }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #         always-auth: true
-  #         registry-url: https://npm.pkg.github.com
-  #         scope: '@jasonruesch'
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          always-auth: true
+          registry-url: https://npm.pkg.github.com
+          scope: '@jasonruesch'
 
-  #     - name: Download Artifact
-  #       id: download
-  #       run: gh run download -n ${{ github.ref_name }} -D ./output
-  #       env:
-  #         GH_TOKEN: ${{ github.token }}
+      - name: Download Artifact
+        id: download
+        run: gh run download -n ${{ github.ref_name }} -D ./output
+        env:
+          GH_TOKEN: ${{ github.token }}
 
-  #     - name: Publish package
-  #       working-directory: ./output
-  #       run: npm publish --registry https://npm.pkg.github.com/ --tag latest
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish package
+        working-directory: ./output
+        run: npm publish --registry https://npm.pkg.github.com/ --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # # Deploy job
-  # deploy-production-jasonruesch:
-  #   name: Deploy Jason Ruesch to Production
-  #   environment:
-  #     name: Production
-  #     url: https://github.com/jasonruesch/jasonruesch.github.io
-  #   runs-on: ubuntu-latest
-  #   needs: project-details
-  #   if: ${{ startsWith(needs.project-details.outputs.project, 'jasonruesch') }}
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
+  # Deploy job
+  deploy-production-jasonruesch:
+    name: Deploy Jason Ruesch to Production
+    environment:
+      name: Production
+      url: https://github.com/jasonruesch/jasonruesch.github.io
+    runs-on: ubuntu-latest
+    needs:
+      - project-details
+      - github-release
+    if: ${{ startsWith(needs.project-details.outputs.project, 'jasonruesch') }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  #     - name: Download Artifact
-  #       id: download
-  #       run: gh run download -n ${{ github.ref_name }} -D ./output
-  #       env:
-  #         GH_TOKEN: ${{ github.token }}
+      - name: Download Artifact
+        id: download
+        run: gh run download -n ${{ github.ref_name }} -D ./output
+        env:
+          GH_TOKEN: ${{ github.token }}
 
-  #     - name: Deploy Jason Ruesch to external GitHub Pages
-  #       uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
-  #       env:
-  #         SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-  #       with:
-  #         source-directory: './output'
-  #         destination-github-username: 'jasonruesch'
-  #         destination-repository-name: 'jasonruesch.github.io'
-  #         user-email: jason.ruesch@me.com
-  #         commit-message: 'chore(release): ${{  github.ref_name }}'
-  #         target-branch: main
+      - name: Deploy Jason Ruesch to external GitHub Pages
+        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: './output'
+          destination-github-username: 'jasonruesch'
+          destination-repository-name: 'jasonruesch.github.io'
+          user-email: jason.ruesch@me.com
+          commit-message: 'chore(release): ${{  github.ref_name }}'
+          target-branch: main
