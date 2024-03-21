@@ -84,7 +84,7 @@ jobs:
         id: releases
         run: |
           current=${{ github.ref_name }}
-          notes=$(gh release view $tag --json body | jq -r .body)
+          notes=$(gh release view $current --json body | jq -r .body)
           tags=$(gh release list --exclude-drafts --exclude-pre-releases --json tagName | jq -r 'map(select(.tagName | contains("${{ needs.project-details.outputs.project }}"))) | .[].tagName')
           previous=$(echo "$tags" | head -2 | tail -1)
           echo "$notes"
