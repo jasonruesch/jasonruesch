@@ -91,9 +91,6 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
-    },
-    "version": {
-      "dependsOn": ["^version"]
     }
   },
   "release": {
