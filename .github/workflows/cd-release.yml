@@ -78,10 +78,13 @@ jobs:
       - name: Generate changelog
         run: npx nx release changelog ${{ steps.details.outputs.version }} --projects ${{ steps.details.outputs.project }} --from ${{ steps.releases.outputs.previous }} --to ${{ steps.releases.outputs.current }} --git-commit=false --git-tag=false
 
+      # Append the changelog to the release notes
       - name: Update release
         working-directory: ${{ steps.details.outputs.path }}
         run: |
           gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
+          echo "\n${{ steps.releases.outputs.notes }}" >> CHANGELOG.md
+          # gh release edit ${{ steps.releases.outputs.current }} --notes-file=CHANGELOG.md
         env:
           GH_TOKEN: ${{ github.token }}
 
