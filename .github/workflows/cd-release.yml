@@ -70,6 +70,7 @@ jobs:
           echo "$notes"
           echo "$current"
           echo "$previous"
+          echo "notes=$notes" >> $GITHUB_OUTPUT
           echo "current=$current" >> $GITHUB_OUTPUT
           echo "previous=$previous" >> $GITHUB_OUTPUT
         env:
@@ -83,8 +84,11 @@ jobs:
         working-directory: ${{ steps.details.outputs.path }}
         run: |
           gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
-          echo "\n${{ steps.releases.outputs.notes }}" >> CHANGELOG.md
-          gh release edit ${{ steps.releases.outputs.current }} --notes-file=CHANGELOG.md
+          # Prepend notes to changelog, separated by a new line
+          notes="${{ steps.releases.outputs.notes }}"
+          [[ -n "$notes" ]] && notes+="\n\n"
+          notes+=$(cat CHANGELOG.md)
+          gh release edit ${{ steps.releases.outputs.current }} --notes="$notes"
         env:
           GH_TOKEN: ${{ github.token }}
 
