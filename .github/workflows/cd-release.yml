@@ -84,11 +84,11 @@ jobs:
         run: |
           gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
           echo "\n${{ steps.releases.outputs.notes }}" >> CHANGELOG.md
-          # gh release edit ${{ steps.releases.outputs.current }} --notes-file=CHANGELOG.md
+          gh release edit ${{ steps.releases.outputs.current }} --notes-file=CHANGELOG.md
         env:
           GH_TOKEN: ${{ github.token }}
 
-  # Publish job
+  # # Publish job
   # publish-npm:
   #   name: Publish to GitHub Packages
   #   runs-on: ubuntu-latest
