@@ -86,7 +86,7 @@ jobs:
           gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
           # Prepend notes to changelog, separated by a new line
           notes="${{ steps.releases.outputs.notes }}"
-          [[ -n "$notes" ]] && notes+="  \r  \r"
+          [[ -n "$notes" ]] && notes+="<br /><br />"
           notes+=$(cat CHANGELOG.md)
           gh release edit ${{ steps.releases.outputs.current }} --notes="$notes"
         env:
