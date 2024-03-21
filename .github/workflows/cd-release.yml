@@ -99,18 +99,20 @@ jobs:
       - name: Generate changelog
         run: npx nx release changelog ${{ needs.project-details.outputs.version }} --projects ${{ needs.project-details.outputs.project }} --from ${{ steps.releases.outputs.previous }} --to ${{ steps.releases.outputs.current }} --git-commit=false --git-tag=false
 
-      # Append the changelog to the release notes
+      # Upload changelog as an release asset and append the changelog to the release notes
       - name: Update release
         working-directory: ${{ needs.project-details.outputs.path }}
         run: |
-          gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
-          notes="${{ steps.releases.outputs.notes }}"
-          # If notes are not empty, add two newlines before appending the changelog
-          [[ -n "$notes" ]] && notes+="
+          if [ -f CHANGELOG.md ]; then
+            gh release upload ${{ steps.releases.outputs.current }} CHANGELOG.md
+            notes="${{ steps.releases.outputs.notes }}"
+            # If notes are not empty, add two newlines before appending the changelog
+            [[ -n "$notes" ]] && notes+="
 
-          "
-          notes+=$(cat CHANGELOG.md)
-          gh release edit ${{ steps.releases.outputs.current }} --notes="$notes"
+            "
+            notes+=$(cat CHANGELOG.md)
+            gh release edit ${{ steps.releases.outputs.current }} --notes="$notes"
+          fi
         env:
           GH_TOKEN: ${{ github.token }}
 
