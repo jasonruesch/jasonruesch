@@ -12,5 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/jasonruesch/jasonruesch.git",
     "directory": "libs/data-access/angular"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
