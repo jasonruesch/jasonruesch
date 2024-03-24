@@ -110,7 +110,12 @@
         "projectsRelationship": "independent"
       },
       "libs": {
-        "projects": ["data-access", "tailwind"],
+        "projects": [
+          "data-access",
+          "data-access-angular",
+          "data-access-react",
+          "tailwind"
+        ],
         "projectsRelationship": "independent",
         "changelog": {
           "projectChangelogs": true,
