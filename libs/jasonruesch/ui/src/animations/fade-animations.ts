@@ -40,7 +40,6 @@ export const fadePageAnimationVariants: PageTransitionVariants = {
         scale: 1,
         width: '100%',
         height: '100%',
-        inset: 'auto',
         position: 'static',
         overflow: 'visible',
         boxShadow: '0 0 0 0 rgb(0 0 0 / 0), 0 0 0 0 rgb(0 0 0 / 0)',
