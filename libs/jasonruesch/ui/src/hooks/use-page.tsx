@@ -1,8 +1,11 @@
 import { fadePageAnimationVariants } from '../animations';
 
-export const usePage = () => {
+interface PageProps {
+  transparent?: boolean;
+}
+
+export const usePage = ({ transparent }: PageProps) => {
   const packageVersion = import.meta.env.PACKAGE_VERSION;
-  const transparent = false;
   const slideRight = false;
   const {
     pageContentVariants,
