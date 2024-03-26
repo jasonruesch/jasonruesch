@@ -6,6 +6,15 @@
     "firsttris.vscode-jest-runner",
     "kingwl.vscode-vitest-runner",
     "meganrogge.template-string-converter",
-    "usernamehw.errorlens"
+    "usernamehw.errorlens",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "eliostruyf.vscode-typescript-exportallmodules",
+    "steoates.autoimport",
+    "tobermory.es6-string-html",
+    "alefragnani.project-manager",
+    "ms-vsliveshare.vsliveshare",
+    "ms-vscode.powershell",
+    "vscode-icons-team.vscode-icons"
   ]
 }
