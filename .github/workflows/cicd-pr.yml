@@ -4,7 +4,6 @@ name: Pull Request CI/CD
 
 on:
   pull_request:
-    types: [review_requested, ready_for_review]
     branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -23,6 +22,7 @@ concurrency:
 jobs:
   # Affected job
   affected:
+    if: github.event.pull_request.draft == false
     name: Affected
     runs-on: ubuntu-latest
     outputs:
