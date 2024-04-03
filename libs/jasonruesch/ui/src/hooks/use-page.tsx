@@ -1,4 +1,4 @@
-import { fadePageAnimationVariants } from '../animations';
+import { slidePageAnimationVariants } from '../animations';
 
 interface PageProps {
   transparent?: boolean;
@@ -12,8 +12,8 @@ export const usePage = ({ transparent }: PageProps) => {
     pageFooterVariants,
     pageScrollVariants,
     pageVariants,
-    // } = slidePageAnimationVariants;
-  } = fadePageAnimationVariants;
+  } = slidePageAnimationVariants;
+  // } = fadePageAnimationVariants;
 
   return {
     packageVersion,

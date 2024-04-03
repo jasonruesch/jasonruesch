@@ -80,8 +80,8 @@ export function Privacy() {
   return (
     <Page>
       <div className="flex flex-1 flex-col gap-4">
-        <h1 className="gradient-heading mx-auto" aria-label="Privacy Policy">
-          <div className="flex items-center justify-center">
+        <h1 className="gradient-heading" aria-label="Privacy Policy">
+          <div className="flex items-center">
             <span className="heading-lg">Privacy&nbsp;</span>
             Policy
           </div>

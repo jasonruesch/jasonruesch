@@ -7,8 +7,8 @@ export default (theme: PluginUtils['theme'], darkContext: string) =>
     '.gradient-heading': {
       paddingTop: theme('spacing.1'),
       paddingBottom: theme('spacing.1'),
-      paddingLeft: theme('spacing.4'),
-      paddingRight: theme('spacing.4'),
+      // paddingLeft: theme('spacing.4'),
+      // paddingRight: theme('spacing.4'),
       textAlign: 'center',
       fontSize: theme('fontSize.xl'),
       lineHeight: theme('lineHeight.cap'),
@@ -21,9 +21,9 @@ export default (theme: PluginUtils['theme'], darkContext: string) =>
       color: theme('colors.transparent'),
       transform: 'scale(1.1)',
 
-      '& > :not([hidden]) ~ :not([hidden])': {
-        marginLeft: theme('spacing.4'),
-      },
+      // '& > :not([hidden]) ~ :not([hidden])': {
+      //   marginLeft: theme('spacing.4'),
+      // },
 
       '@media screen(sm)': {
         fontSize: theme('fontSize.5xl'),

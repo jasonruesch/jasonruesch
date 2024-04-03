@@ -5,6 +5,7 @@ import Contact from './contact/contact';
 import Home from './home/home';
 import Privacy from './privacy/privacy';
 import Projects from './projects/projects';
+import { ResumeTailwindLabs } from './resumes/resume-tailwind-labs';
 import Transparent from './transparent/transparent';
 
 export const routes = (
@@ -13,6 +14,10 @@ export const routes = (
     <Route path="about" element={<About />} />
     <Route path="projects" element={<Projects />} />
     <Route path="contact" element={<Contact />} />
+    <Route path="resumes">
+      <Route index element={<Navigate to="/" />} />
+      <Route path="tailwind-labs" element={<ResumeTailwindLabs />} />
+    </Route>
     <Route path="privacy" element={<Privacy />} />
     <Route path="blank" element={<Blank />} />
     <Route path="transparent" element={<Transparent />} />

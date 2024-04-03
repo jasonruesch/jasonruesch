@@ -1,4 +1,4 @@
-# This workflow will download an pre-built artifact and do one of the following when a release is published:
+# This workflow will download a pre-built artifact and do one of the following when a release is published:
 # - Publish a package to GitHub Packages
 # - Deploy a site to the Production environment
 
@@ -90,7 +90,7 @@ jobs:
           echo "$notes"
           echo "$current"
           echo "$previous"
-          echo "notes=$notes" >> $GITHUB_OUTPUT
+          echo "notes=\"$notes\"" >> $GITHUB_OUTPUT
           echo "current=$current" >> $GITHUB_OUTPUT
           echo "previous=$previous" >> $GITHUB_OUTPUT
         env:
