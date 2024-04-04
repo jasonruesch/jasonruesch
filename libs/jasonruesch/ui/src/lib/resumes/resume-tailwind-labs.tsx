@@ -77,6 +77,8 @@ export const ResumeTailwindLabs = () => {
         <p>
           My name is{' '}
           <a
+            target="_blank"
+            rel="noreferrer noopener"
             href="https://www.linkedin.com/in/jasonruesch/"
             className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
           >
@@ -85,11 +87,11 @@ export const ResumeTailwindLabs = () => {
           . I am a developer living in Raleigh, North Carolina.
         </p>
         <p>
-          I have been working with enterprise organizations for quite some time
-          now, particularly in the e-learning sector. Though I am currently
-          employed, when I saw that you were hiring, I immediately thought that
-          I needed to apply! I am looking for a change in my career to
-          contribute to tools and software that developers like myself use and
+          First, thank you for this opportunity to apply for a dream job like
+          this! I have been working with enterprise organizations for quite some
+          time now, particularly in the e-learning sector. Though I have had
+          some great experiences, I am looking to make a change and work with a
+          small company such as Tailwind Labs on tools that developers use and
           benefit from each and every day! And...why not apply for the best out
           there?{' '}
           <span role="img" aria-label="wink">
@@ -97,42 +99,76 @@ export const ResumeTailwindLabs = () => {
           </span>
         </p>
         <p>
-          Throughout my career in development, I have come to truly value the
-          impact of cutting-edge tools such as Tailwind CSS. Recognizing its
-          potential from the start, I have been a strong advocate for
+          Throughout my software development career, I have come to truly value
+          the impact of cutting-edge tools such as Tailwind CSS. Recognizing how
+          awesome it is from the start, I have been a strong advocate for
           incorporating and educating others within my team about its
           capabilities. Seeing firsthand the significant improvement it brings
           to web development practices has only further solidified my admiration
-          for Tailwind CSS. I am impressed by the dedication and quality behind
-          this tool, and I eagerly look forward to playing a role in its ongoing
-          success.
+          for Tailwind CSS, and the other Tailwind Lab products. I am impressed
+          by the dedication and quality behind your company, and I look forward
+          to playing a role in its ongoing success.
         </p>
         <p>
-          Recently, I lead the development of a new design system for my current
-          company, collaborating closely with our design team. Leveraging tools
-          like Figma and Tailwind CSS, I created a custom Tailwind CSS
+          Recently, I have been working closely with my company's design team to
+          lead the development of a new <b>design system</b>. We make heavy use
+          of the Tailwind UI recipes to base our components off of. Leveraging
+          tools like Figma and Tailwind CSS, I created a custom Tailwind CSS
           configuration library that encapsulates our brand identity and design
           principles. Additionally, I led the creation of two component
           libraries for Angular and React, the latter utilizing Headless UI and
           Vite. This project not only showcases my technical proficiency, but
           also my ability to collaborate effectively across teams to deliver
-          impactful solutions.
+          impactful solutions. Every frontend developer on our team now uses
+          this design system, which has significantly improved our development
+          experience, velocity and consistency.
         </p>
 
         <h3>Why Me?</h3>
+        <p>
+          What sets me apart is my passion for learning and innovation, and
+          DRIVE to get things done! As the in-house expert on Tailwind CSS,
+          React, and Reactive State Management at my current role, I am
+          continuously staying abreast of emerging technologies and refining my
+          skills. I take pride in mentoring fellow developers, fostering a
+          culture of growth and collaboration within the organization. Moreover,
+          I greatly improved our deployment processes by enhancing our DevOps
+          practices for frontend applications and npm packages in a monorepo.
+          This includes implementing independent automated versioning, release
+          note and changelog generation, and deployment using GitHub Actions,
+          resulting in improved efficiency and reliability.
+        </p>
+
+        <h3>Community contributions</h3>
+        <p>
+          I am a strong advocate for open-source software. Living in Raleigh,
+          NC, I attend the local{' '}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://allthingsopen.org/"
+            className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+          >
+            All Things Open
+          </a>{' '}
+          conference each year! I hope to further contribute to the community by
+          presenting on topics such as Tailwind CSS, React, and other frontend
+          technologies this year.
+        </p>
 
         <p>
-          What sets me apart is my relentless pursuit of learning and
-          innovation. As the in-house expert on Tailwind CSS, React, and
-          Reactive State Management at my current role, I am constantly staying
-          abreast of emerging technologies and refining my skills. I take pride
-          in mentoring fellow developers, fostering a culture of growth and
-          collaboration within the organization. Moreover, I have demonstrated
-          my commitment to streamlining development processes by enhancing our
-          DevOps practices for frontend applications and npm packages. This
-          includes implementing automated versioning, release note generation,
-          and deployment using GitHub Actions, resulting in improved efficiency
-          and reliability.
+          I have created a few libraries and tools. One example is the{' '}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://github.com/jasonruesch/xlifftranslate"
+            className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+          >
+            xlifftranslate
+          </a>{' '}
+          library, which is a CLI tool that helps developers manage and
+          translate their XLIFF formatted translations using the Google Cloud
+          Translation API.
         </p>
 
         <h3>Code Samples</h3>
@@ -144,7 +180,60 @@ export const ResumeTailwindLabs = () => {
             style={theme}
             showLineNumbers
           >
-            {`export default {
+            {`# grid.ts
+import { CSSRuleObject, PluginUtils } from 'tailwindcss/types/config';
+
+export default (theme: PluginUtils['theme']) =>
+  ({
+    '.grid-layout': {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+      gap: theme('spacing.4'),
+      paddingLeft: theme('spacing.4'),
+      paddingRight: theme('spacing.4'),
+
+      '@media screen(sm)': {
+        gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
+      },
+
+      '@media screen(md)': {
+        paddingLeft: theme('spacing.10'),
+        paddingRight: theme('spacing.10'),
+      },
+
+      '@media screen(lg)': {
+        gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
+      },
+
+      '@media screen(xl)': {
+        gap: theme('spacing.6'),
+      },
+
+      '@media screen(2xl)': {
+        width: '100%',
+        maxWidth: theme('screens.2xl'),
+        paddingLeft: theme('spacing.12'),
+        paddingRight: theme('spacing.12'),
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+
+      '&.has-sidebar': {
+        '@media screen(lg)': {
+          paddingLeft: theme('spacing.6'),
+          paddingRight: theme('spacing.6'),
+        },
+
+        '@media screen(2xl)': {
+          paddingLeft: theme('spacing.8'),
+          paddingRight: theme('spacing.8'),
+        },
+      },
+    },
+  }) satisfies CSSRuleObject;
+
+# tailwind-preset.config.ts
+export default {
   theme: {
     ...
     extend: {
@@ -301,17 +390,17 @@ export function trackStatusWith<T extends StoreState>(
           </SyntaxHighlighter>
         </div>
 
+        <h3>Wrap Up</h3>
         <p>
           I am genuinely excited about the opportunity to join Tailwind Labs and
           contribute to its mission of delivering exceptional developer tools
           and software. I am confident that my blend of technical expertise,
-          collaborative spirit, and passion for innovation make me a valuable
+          synergetic spirit, and passion for innovation makes me a valuable
           asset to your team.
         </p>
         <p>
-          Thank you for considering my application. I look forward to the
-          possibility of discussing how my skills and experiences align with the
-          needs of your team.
+          Thank you for considering my application. I look forward to discussing
+          how my skills and experiences align with the needs of your team.
         </p>
       </div>
     </Page>
