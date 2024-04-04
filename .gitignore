@@ -44,3 +44,4 @@ vite.config.ts.timestamp-*
 .vercel
 
 .angular
+omlet-cli.log

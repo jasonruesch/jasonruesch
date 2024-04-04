@@ -53,6 +53,7 @@
     "@nx/vite": "18.0.4",
     "@nx/web": "18.0.4",
     "@nx/workspace": "18.0.4",
+    "@omlet/cli": "^1.4.2",
     "@playwright/test": "^1.36.0",
     "@schematics/angular": "~17.1.0",
     "@swc-node/register": "~1.8.0",
