@@ -1,0 +1,9 @@
+{
+  "name": "jasonruesch",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/jasonruesch/src",
+  "projectType": "application",
+  "tags": ["scope:jasonruesch", "type:app"],
+  "// targets": "to see all targets run: nx show project jasonruesch --web",
+  "targets": {}
+}
