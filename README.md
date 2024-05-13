@@ -165,6 +165,12 @@ fi
 
 ### [Google Analytics](https://analytics.google.com/)
 
+```bash
+npm install react-ga4
+```
+
+> Note: See [react-ga4](https://github.com/codler/react-ga4) for setup instructions and configuration.
+
 ### Other Tools
 
 - [Vite](https://vitejs.dev/)
