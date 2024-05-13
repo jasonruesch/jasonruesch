@@ -5,7 +5,7 @@ import { Home } from './home/home';
 
 export function App() {
   const isProduction = import.meta.env.MODE === 'production';
-  if (!isProduction) {
+  if (isProduction) {
     const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
     ReactGA.initialize(measurementId);
   }
