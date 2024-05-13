@@ -171,6 +171,53 @@ npm install react-ga4
 
 > Note: See [react-ga4](https://github.com/codler/react-ga4) for setup instructions and configuration.
 
+### [Docker](https://www.docker.com/)
+
+```bash
+npx nx add @nx/node
+npx nx g setup-docker
+```
+
+Update `Dockerfile` with the following:
+
+```dockerfile
+# Run the container with `docker run -p 4200:4200 -t jasonruesch`.
+FROM docker.io/node:lts-alpine
+
+WORKDIR /app
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 4200
+
+CMD ["npx", "nx", "serve", "jasonruesch", "--host", "0.0.0.0"]
+```
+
+Create `docker-compose.yml` with the following:
+
+```yaml
+version: '3'
+
+services:
+  jasonruesch:
+    image: jasonruesch:latest
+    container_name: jasonruesch
+    build:
+      context: .
+      dockerfile: ./apps/jasonruesch/Dockerfile
+    ports:
+      - '4200:4200'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true # To fix an issue with HMR on Windows machines
+```
+
 ### Other Tools
 
 - [Vite](https://vitejs.dev/)

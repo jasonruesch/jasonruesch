@@ -4,6 +4,10 @@
   "sourceRoot": "apps/jasonruesch/src",
   "projectType": "application",
   "tags": ["scope:jasonruesch", "type:app"],
-  "// targets": "to see all targets run: nx show project jasonruesch --web",
-  "targets": {}
+  "targets": {
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch"
+    }
+  }
 }
