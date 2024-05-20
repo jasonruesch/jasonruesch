@@ -1,1 +1,34 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --animate-header: header linear both;
+  --animate-header-dark: header-dark linear both;
+  --animate-reveal: reveal linear both;
+
+  @keyframes header {
+    from {
+      @apply border-transparent bg-transparent;
+    }
+    to {
+      @apply border-neutral-200 bg-neutral-100;
+    }
+  }
+
+  @keyframes header-dark {
+    from {
+      @apply border-transparent bg-transparent;
+    }
+    to {
+      @apply border-black bg-neutral-900;
+    }
+  }
+
+  @keyframes reveal {
+    from {
+      @apply opacity-0;
+    }
+    to {
+      @apply opacity-100;
+    }
+  }
+}
