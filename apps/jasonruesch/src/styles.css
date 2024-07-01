@@ -10,7 +10,7 @@
       @apply border-transparent bg-transparent;
     }
     to {
-      @apply border-neutral-200 bg-neutral-100;
+      @apply border-neutral-200 bg-neutral-50;
     }
   }
 
@@ -19,7 +19,7 @@
       @apply border-transparent bg-transparent;
     }
     to {
-      @apply border-black bg-neutral-900;
+      @apply border-black bg-neutral-950;
     }
   }
 

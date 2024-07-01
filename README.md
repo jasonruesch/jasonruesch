@@ -66,8 +66,8 @@ Create `.lintstagedrc.js` with the following:
 
 ```javascript
 export default {
-  '{apps,libs}/**/*.{ts,tsx,js,jsx,html,json,scss,css,md}': ['nx affected:lint --uncommitted --fix true'],
-  '*.{ts,tsx,js,jsx,html,json,scss,css,md,yaml,yml}': ['nx format:write --base=main --head=HEAD'],
+  '*.{ts,tsx,js,jsx}': ['nx affected -t lint --uncommitted --fix'],
+  '*': ['nx format:write --base=main --head=HEAD'],
 };
 ```
 

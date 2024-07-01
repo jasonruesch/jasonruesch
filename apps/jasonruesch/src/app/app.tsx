@@ -1,7 +1,9 @@
 import ReactGA from 'react-ga4';
-import { Route, Routes } from 'react-router-dom';
-import { Header } from '../components';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import { Layout } from '../components';
 import { About } from './about/about';
+import { Contact } from './contact/contact';
 import { Home } from './home/home';
 
 export function App() {
@@ -12,16 +14,14 @@ export function App() {
   }
 
   return (
-    <>
-      <Header />
-
-      <main className="min-h-dvh flex flex-col px-4 py-16">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </main>
-    </>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Layout>
   );
 }
 

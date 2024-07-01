@@ -1,5 +1,11 @@
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
+];
 
 export const Header = () => {
   return (
@@ -11,18 +17,21 @@ export const Header = () => {
       )}
     >
       <nav className="flex items-center space-x-4">
-        <Link
-          to="/"
-          className="text-blue-600 hover:text-blue-500 dark:text-blue-500 dark:hover:text-blue-400"
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          className="text-blue-600 hover:text-blue-500 dark:text-blue-500 dark:hover:text-blue-400"
-        >
-          About
-        </Link>
+        {navigation.map((item) => (
+          <NavLink
+            key={item.name}
+            to={item.href}
+            className={({ isActive }) =>
+              clsx(
+                isActive
+                  ? 'text-fuchsia-600 dark:text-teal-500'
+                  : 'text-cyan-600 hover:text-cyan-500 dark:text-violet-500 dark:hover:text-violet-400',
+              )
+            }
+          >
+            {item.name}
+          </NavLink>
+        ))}
       </nav>
     </header>
   );
