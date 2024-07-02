@@ -1,17 +1,20 @@
-import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 import styles from './background.module.css';
 
 interface BackgroundProps {
   fixed?: boolean;
+  className?: string;
 }
 
-export const Background = ({ fixed }: BackgroundProps) => {
+export const Background = ({ fixed, className }: BackgroundProps) => {
   return (
     <div
-      className={clsx(
+      className={twMerge(
         styles.background,
         fixed ? 'fixed' : 'absolute',
         'inset-0 h-dvh w-dvw',
+        className,
       )}
     >
       <svg

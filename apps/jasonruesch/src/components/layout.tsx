@@ -3,12 +3,13 @@ import { Header } from './header';
 
 interface LayoutProps {
   children: React.ReactNode;
+  fixedBackground?: boolean;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children, fixedBackground }: LayoutProps) => {
   return (
     <>
-      <Background fixed={false} />
+      <Background fixed={fixedBackground} />
 
       <Header />
 

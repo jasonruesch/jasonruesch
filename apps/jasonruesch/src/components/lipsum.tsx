@@ -1,6 +1,12 @@
-export const Lipsum = () => {
+import { twMerge } from 'tailwind-merge';
+
+interface LipsumProps {
+  className?: string;
+}
+
+export const Lipsum = ({ className }: LipsumProps) => {
   return (
-    <div id="lipsum" className="space-y-4">
+    <div id="lipsum" className={twMerge('space-y-4', className)}>
       <p className="animate-reveal [animation-timeline:view(block)] [animation-range:cover_0_contain_var(--spacing-16)]">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
         vestibulum ipsum eu ligula venenatis mollis. Pellentesque habitant morbi
