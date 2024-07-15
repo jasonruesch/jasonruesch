@@ -279,7 +279,7 @@ services:
 - [GitHub Actions](https://github.com/features/actions)
 - [Figma](https://www.figma.com/)
 - [Semantic Versioning](https://semver.org/)
-- [Scroll-Driven Animation](https://scroll-driven-animations.style/)
+- [Scroll-Driven Animations](https://scroll-driven-animations.style/)
 - [ResizeObserver Polyfill](https://github.com/que-etc/resize-observer-polyfill)
 - [Framer Motion](https://www.framer.com/)
 - [React Syntax Highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/)
