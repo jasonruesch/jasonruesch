@@ -52,18 +52,18 @@ jobs:
       - name: Run format check
         run: npx nx format:check
 
-      - name: Run affected lint, tests, and build
-        run: npx nx affected -t lint test build
-        env:
-          VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID }}
-          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+      - name: Run affected lint and test
+        run: npx nx affected -t lint test
 
-      - name: Build Jason Ruesch for releases
-        if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'chore(release):')
-        run: npx nx build jasonruesch
-        env:
-          VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID }}
-          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+      - name: Run affected build (exclude jasonruesch)
+        run: npx nx affected -t build --exclude jasonruesch
+
+      - name: Affected build for Jason Ruesch
+        if: github.event_name != 'workflow_dispatch'
+        id: affected_build_jasonruesch
+        run: |
+          projects=$(npx nx show projects --projects jasonruesch --affected | tr '\n' ' ' | xargs)
+          echo "projects=$projects" >> $GITHUB_OUTPUT
 
       - name: Affected e2e
         id: affected_e2e
@@ -79,25 +79,26 @@ jobs:
         if: steps.affected_e2e.outputs.projects != ''
         run: npx nx run-many -t e2e-ci --projects ${{ steps.affected_e2e.outputs.projects }}
 
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v3
-        with:
-          files: 'dist/apps/jasonruesch'
+      - name: Build Jason Ruesch
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        run: npx nx build jasonruesch
+        env:
+          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+          VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID }}
 
       - name: Setup Pages
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         uses: actions/configure-pages@v4
 
       - name: Upload GitHub Pages artifact
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         uses: actions/upload-pages-artifact@v3
         with:
           name: 'github-pages-jasonruesch'
           path: ./dist/apps/jasonruesch
 
       - name: Deploy Jason Ruesch to GitHub Pages
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         id: deployment
         uses: actions/deploy-pages@v4
         with:
