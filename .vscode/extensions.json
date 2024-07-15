@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "nrwl.angular-console",
+    "esbenp.prettier-vscode",
+    "ms-playwright.playwright",
+    "deque-systems.vscode-axe-linter",
+    "vivaxy.vscode-conventional-commits",
+    "ms-azuretools.vscode-docker",
+    "usernamehw.errorlens",
+    "tobermory.es6-string-html",
+    "github.vscode-github-actions",
+    "bradlc.vscode-tailwindcss",
+    "meganrogge.template-string-converter",
+    "eliostruyf.vscode-typescript-exportallmodules",
+    "kingwl.vscode-vitest-runner",
+    "eamodio.gitlens"
+  ]
+}

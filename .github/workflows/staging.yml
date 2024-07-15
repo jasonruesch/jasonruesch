@@ -1,0 +1,97 @@
+# This workflow will test, build, and deploy a site to the Staging environment
+
+name: Staging
+
+on:
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these deployments to complete.
+concurrency:
+  group: 'staging'
+  cancel-in-progress: false
+
+jobs:
+  staging:
+    name: Staging
+    environment:
+      name: Staging
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Set SHAs for Nx
+        uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: main
+
+      - name: Run format check
+        run: npx nx format:check
+
+      - name: Run affected lint, tests, and build
+        run: npx nx affected -t lint test build
+        env:
+          VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID }}
+          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+
+      - name: Affected e2e
+        id: affected_e2e
+        run: |
+          projects=$(npx nx show projects --type e2e --affected | tr '\n' ' ' | xargs)
+          echo "projects=$projects" >> $GITHUB_OUTPUT
+
+      - name: Install Playwright
+        if: steps.affected_e2e.outputs.projects != ''
+        run: npx playwright install --with-deps
+
+      - name: Run affected e2e
+        if: steps.affected_e2e.outputs.projects != ''
+        run: npx nx run-many -t e2e-ci --projects ${{ steps.affected_e2e.outputs.projects }}
+
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v3
+        with:
+          files: 'dist/apps/jasonruesch'
+
+      - name: Setup Pages
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: actions/configure-pages@v4
+
+      - name: Upload GitHub Pages artifact
+        if: steps.check_files.outputs.files_exists == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: 'github-pages-jasonruesch'
+          path: ./dist/apps/jasonruesch
+
+      - name: Deploy Jason Ruesch to GitHub Pages
+        if: steps.check_files.outputs.files_exists == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: 'github-pages-jasonruesch'

@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@import './lib/styles';
+
+@layer utilities {
+  .px-safe-offset-4 {
+    padding-left: calc(var(--spacing-4) + env(safe-area-inset-left));
+    padding-right: calc(var(--spacing-4) + env(safe-area-inset-right));
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "jasonruesch",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/jasonruesch/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch"
+    }
+  }
+}

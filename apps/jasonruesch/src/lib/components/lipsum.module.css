@@ -1,0 +1,17 @@
+@supports (animation-timeline: view()) {
+  .reveal,
+  .reveal > p {
+    animation: reveal linear forwards;
+    animation-timeline: view(block);
+    animation-range: cover 0 contain var(--spacing-16);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

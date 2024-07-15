@@ -1,0 +1,111 @@
+/* Links */
+:any-link {
+  color: var(--color-cyan-700);
+}
+:any-link:hover,
+:any-link:focus-visible {
+  color: var(--color-cyan-800);
+}
+:any-link:focus-visible {
+  outline: none;
+  text-decoration: underline;
+}
+@media (prefers-color-scheme: dark) {
+  :any-link {
+    color: var(--color-violet-400);
+  }
+  :any-link:hover,
+  :any-link:focus-visible {
+    color: var(--color-violet-300);
+  }
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+h1 {
+  font-size: var(--font-size-4xl);
+  line-height: var(--font-size-4xl--line-height);
+}
+h2 {
+  font-size: var(--font-size-3xl);
+  line-height: var(--font-size-3xl--line-height);
+}
+h3 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--font-size-2xl--line-height);
+}
+h4 {
+  font-size: var(--font-size-xl);
+  line-height: var(--font-size-xl--line-height);
+}
+h5 {
+  font-size: var(--font-size-lg);
+  line-height: var(--font-size-lg--line-height);
+}
+h1:has(+ *),
+h2:has(+ *),
+h3:has(+ *),
+h4:has(+ *),
+h5:has(+ *),
+h6:has(+ *) {
+  /* Only add margin if there is a sibling following the heading */
+  margin-bottom: var(--spacing-2);
+}
+
+/* Paragraphs */
+p {
+  color: var(--color-neutral-600);
+}
+p:has(+ *) {
+  /* Only add margin if there is a sibling following the paragraph */
+  margin-bottom: var(--spacing-4);
+}
+@media (prefers-color-scheme: dark) {
+  p {
+    color: var(--color-neutral-400);
+  }
+}
+@media screen and (min-width: 40rem) {
+  p {
+    /* --breakpoint-sm */
+    font-size: var(--font-size-xl);
+    line-height: var(--font-size-xl--line-height);
+  }
+}
+@media screen and (min-width: 64rem) {
+  p {
+    /* --breakpoint-lg */
+    font-size: var(--font-size-2xl);
+    line-height: var(--font-size-2xl--line-height);
+  }
+}
+
+/* Lists */
+ul:has(+ *),
+ol:has(+ *) {
+  /* Only add margin if there is a sibling following the paragraph */
+  margin-bottom: var(--spacing-4);
+}
+@media screen and (min-width: 40rem) {
+  ul,
+  ol {
+    /* --breakpoint-sm */
+    font-size: var(--font-size-xl);
+    line-height: var(--font-size-xl--line-height);
+  }
+}
+@media screen and (min-width: 64rem) {
+  ul,
+  ol {
+    /* --breakpoint-lg */
+    font-size: var(--font-size-2xl);
+    line-height: var(--font-size-2xl--line-height);
+  }
+}
