@@ -58,6 +58,12 @@ jobs:
         env:
           VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
 
+      - name: Build Jason Ruesch for workflow dispatch
+        if: github.event_name == 'workflow_dispatch'
+        run: npx nx build jasonruesch
+        env:
+          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+
       - name: Affected e2e
         id: affected_e2e
         run: |
