@@ -53,16 +53,18 @@ jobs:
       - name: Run format check
         run: npx nx format:check
 
-      - name: Run affected lint, tests, and build
-        run: npx nx affected -t lint test build
-        env:
-          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+      - name: Run affected lint and test
+        run: npx nx affected -t lint test
 
-      - name: Build Jason Ruesch for workflow dispatch
-        if: github.event_name == 'workflow_dispatch'
-        run: npx nx build jasonruesch
-        env:
-          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+      - name: Run affected build (exclude jasonruesch)
+        run: npx nx affected -t build --exclude jasonruesch
+
+      - name: Affected build for Jason Ruesch
+        if: github.event_name != 'workflow_dispatch'
+        id: affected_build_jasonruesch
+        run: |
+          projects=$(npx nx show projects --projects jasonruesch --affected | tr '\n' ' ' | xargs)
+          echo "projects=$projects" >> $GITHUB_OUTPUT
 
       - name: Affected e2e
         id: affected_e2e
@@ -78,28 +80,22 @@ jobs:
         if: steps.affected_e2e.outputs.projects != ''
         run: npx nx run-many -t e2e-ci --projects ${{ steps.affected_e2e.outputs.projects }}
 
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v3
-        with:
-          files: 'dist/apps/jasonruesch'
-
       - name: Install Vercel CLI
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build
-        if: steps.check_files.outputs.files_exists == 'true'
+      - name: Build Jason Ruesch
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         run: vercel build
         env:
           VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
 
       - name: Deploy Jason Ruesch to Vercel
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         id: deployment
         run: |
           url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > /dev/stdout)
