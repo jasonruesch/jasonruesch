@@ -7,11 +7,12 @@
 
 name: Labeler
 
-on: [pull_request_target]
+on:
+  - pull_request_target
 
 jobs:
-  label:
-    name: Label
+  labeler:
+    name: Labeler
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,4 +20,4 @@ jobs:
     steps:
       - uses: actions/labeler@v5
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          sync-labels: true
