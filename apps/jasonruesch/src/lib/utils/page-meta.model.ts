@@ -2,48 +2,42 @@ import { easterEggId } from './utils';
 
 export interface PageMeta {
   name: string;
-  index: number;
-  type?: 'primary' | 'secondary';
+  href: string;
+  type?: 'primary';
 }
 
-export const redirectPage: PageMeta = { name: 'Redirect', index: -2 };
-export const easterEggPage: PageMeta = { name: 'Easter Egg', index: -1 };
+export const easterEggPage: PageMeta = {
+  name: 'Easter Egg',
+  href: `/easter-egg/${easterEggId}`,
+};
 export const homePage: PageMeta = {
   name: 'Home',
-  index: 0,
+  href: '/',
   type: 'primary',
 };
-export const aboutPage: PageMeta = { name: 'About', index: 1, type: 'primary' };
+export const aboutPage: PageMeta = {
+  name: 'About',
+  href: '/about',
+  type: 'primary',
+};
 export const contactPage: PageMeta = {
   name: 'Contact',
-  index: 2,
+  href: '/contact',
   type: 'primary',
 };
 export const privacyPage: PageMeta = {
   name: 'Privacy Policy',
-  index: 3,
-  type: 'secondary',
+  href: '/privacy',
 };
 
-export const pages = new Map<string, PageMeta>([
-  ['/redirect', redirectPage],
-  ['/easter-egg', easterEggPage],
-  ['/', homePage],
-  ['/about', aboutPage],
-  ['/contact', contactPage],
-  ['/privacy', privacyPage],
-]);
+export const pages: PageMeta[] = [
+  easterEggPage,
+  homePage,
+  aboutPage,
+  contactPage,
+  privacyPage,
+];
 
-export const isEasterEggPage = (path: string) =>
-  path === `/easter-egg/${easterEggId}`;
-
-export function getPage(path: string): PageMeta | undefined {
-  return isEasterEggPage(path) ? easterEggPage : pages.get(path);
-}
-
-export function isCurrentPath(path: string, pathname: string): boolean {
-  return (
-    (path === '/' && pathname === '/') ||
-    (path !== '/' && pathname.startsWith(path))
-  );
+export function getPageIndex(href: string): number {
+  return pages.findIndex((p) => p.href === href);
 }

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { NavLink, NavLinkProps, useLocation } from 'react-router-dom';
 
-import { getPage, navigateEventChannel } from '../utils';
+import { getPageIndex, navigateEventChannel } from '../utils';
 
 interface CustomNavLinkProps {
   to: string;
@@ -20,7 +20,7 @@ export const PageNavLink = ({
   ...props
 }: PageNavLinkProps) => {
   const { pathname } = useLocation();
-  const page = getPage(to);
+  const pageIndex = getPageIndex(to);
 
   const handleMouseOver = useCallback(
     (
@@ -35,11 +35,11 @@ export const PageNavLink = ({
       }
 
       navigateEventChannel.emit('onWillNavigate', {
-        page,
-        pathname: pathname,
+        pageIndex,
+        pathname,
       });
     },
-    [page, pathname, onMouseOver, onTouchStart],
+    [pageIndex, pathname, onMouseOver, onTouchStart],
   );
 
   return (

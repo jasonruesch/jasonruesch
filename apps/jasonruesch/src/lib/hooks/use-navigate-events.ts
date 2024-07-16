@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
-import { getPage, navigateEventChannel } from '../utils';
+import { getPageIndex, navigateEventChannel } from '../utils';
 
 export interface WillNavigateValue {
   slideRight: boolean;
@@ -20,13 +20,10 @@ export const useNavigateEvents = () => {
   useEffect(() => {
     const unsubscribeOnWillNavigate = navigateEventChannel.on(
       'onWillNavigate',
-      ({ page, pathname }) => {
-        if (page) {
-          const currentPage = getPage(pathname);
-          const currentPageIndex = currentPage?.index as number;
-          const slideRight = currentPageIndex > page.index;
-          setWillNavigateValue({ slideRight });
-        }
+      ({ pageIndex, pathname }) => {
+        const currentPageIndex = getPageIndex(pathname);
+        const slideRight = currentPageIndex > pageIndex;
+        setWillNavigateValue({ slideRight });
       },
     );
 

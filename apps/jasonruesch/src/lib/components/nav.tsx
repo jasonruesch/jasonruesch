@@ -3,7 +3,7 @@ import { twJoin, twMerge } from 'tailwind-merge';
 import { pages } from '../utils';
 import { PageNavLink } from './page-nav-link';
 
-const navigation = [...pages].filter(([, page]) => page.type === 'primary');
+const navigation = pages.filter((page) => page.type === 'primary');
 
 interface NavProps {
   className?: string;
@@ -12,10 +12,10 @@ interface NavProps {
 export const Nav = ({ className }: NavProps) => {
   return (
     <nav className={twMerge('flex items-center space-x-4', className)}>
-      {navigation.map(([path, page]) => (
+      {navigation.map((page) => (
         <PageNavLink
-          key={path}
-          to={path}
+          key={page.href}
+          to={page.href}
           className={({ isActive }) =>
             twJoin(
               isActive

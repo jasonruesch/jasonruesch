@@ -1,8 +1,7 @@
 import { eventbus } from './event-bus';
-import { PageMeta } from './page-meta.model';
 
 type NavigateBus = {
-  onWillNavigate: (payload: { page?: PageMeta; pathname: string }) => void;
+  onWillNavigate: (payload: { pageIndex: number; pathname: string }) => void;
 
   onNavigateStart: () => void;
   onNavigateEnd: () => void;
