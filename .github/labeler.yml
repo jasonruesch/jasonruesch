@@ -1,27 +1,31 @@
 # Single quotes are required for leading asterisks
 
+# Changes to files in the root folder
 root:
   - changed-files:
       - any-glob-to-any-file: '*'
 
+# Changes to files in the .github/workflows folder
 ci:
   - changed-files:
       - any-glob-to-any-file: .github/workflows/**
 
-# Add 'documentation' label to any changes within 'docs' folder or any subfolders
+# Changes within 'docs' folder and subfolders, or markdown files
 documentation:
   - changed-files:
       - any-glob-to-any-file: docs/**
       - any-glob-to-any-file: '**/*.md'
 
+# Changes to files in the apps folder
 apps:
   - changed-files:
       - any-glob-to-any-file: apps/**
 
-# Add 'release' label to any PR that is opened against the `main` branch
+# PR is opened against the main branch
 release:
   - base-branch: 'main'
 
+# Changes to files in any jasonruesch folder
 jasonruesch:
   - changed-files:
       - any-glob-to-any-file: '**/jasonruesch/**'
