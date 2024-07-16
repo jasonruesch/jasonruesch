@@ -1,4 +1,4 @@
-import { Page } from '../../lib/components';
+import { Page } from '@jasonruesch/jasonruesch-ui';
 
 export function Home() {
   return (

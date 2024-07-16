@@ -1,7 +1,6 @@
 import { Navigate, useParams } from 'react-router';
 
-import { Page } from '../../lib/components';
-import { easterEggId, easterEggImage } from '../../lib/utils';
+import { easterEggId, easterEggImage, Page } from '@jasonruesch/jasonruesch-ui';
 
 export function EasterEgg() {
   const { uid } = useParams<{ uid: string }>();

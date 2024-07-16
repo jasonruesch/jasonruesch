@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { Page } from '../../lib/components';
+
+import { Page } from '@jasonruesch/jasonruesch-ui';
 
 export function Contact() {
   const emailRecipient = import.meta.env.VITE_EMAIL_RECIPIENT;
