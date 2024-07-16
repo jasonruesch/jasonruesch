@@ -3,6 +3,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 import packageJson from './package.json';
 
@@ -20,7 +21,19 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths(), tailwindcss()],
+  plugins: [
+    react(),
+    nxViteTsPaths(),
+    tailwindcss(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'README.md',
+          dest: '',
+        },
+      ],
+    }),
+  ],
 
   // Uncomment this if you are using workers.
   // worker: {

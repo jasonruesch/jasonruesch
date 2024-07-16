@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
-import { Layout, Page, useNavigateEvents, WillNavigateContext } from '../lib';
+import {
+  Layout,
+  Page,
+  useNavigateEvents,
+  WillNavigateContext,
+} from '@jasonruesch/jasonruesch-ui';
 import { About } from './about/about';
 import { Contact } from './contact/contact';
 import { EasterEgg } from './easter-egg/easter-egg';

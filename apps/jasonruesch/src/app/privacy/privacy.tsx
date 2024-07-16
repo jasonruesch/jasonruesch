@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-import { Page } from '../../lib/components';
+import { Page } from '@jasonruesch/jasonruesch-ui';
 
 const navItems = [
   {

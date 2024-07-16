@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
-@import './lib/styles';
+/* TODO: Fix reference to UI library */
+@import '../../../libs/jasonruesch/ui';
 
 @layer utilities {
   .px-safe-offset-4 {
