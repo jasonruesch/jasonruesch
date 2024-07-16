@@ -34,6 +34,9 @@ export const pages: PageMeta[] = [
   easterEggPage,
   homePage,
   aboutPage,
+  // articlesPage,
+  // projectsPage,
+  // usesPage,
   contactPage,
   privacyPage,
 ];

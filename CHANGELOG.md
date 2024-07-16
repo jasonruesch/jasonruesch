@@ -1,3 +1,14 @@
+## 1.1.0 (2024-07-16)
+
+
+### 🚀 Features
+
+- **jasonruesch-ui:** split out code to new ui library ([bec3a77](https://github.com/jasonruesch/jasonruesch/commit/bec3a77))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 # 1.0.0 (2024-07-15)
 
 This was the first release.

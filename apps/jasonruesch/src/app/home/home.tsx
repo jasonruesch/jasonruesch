@@ -30,6 +30,8 @@ export function Home() {
         experiences through web development. Whether you're here for code or
         just to connect, I'm thrilled to have you.
       </p>
+
+      {/* TODO: Include recent articles, contact info and resume w/ download link */}
     </Page>
   );
 }

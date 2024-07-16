@@ -53,7 +53,7 @@
     }
   },
   "release": {
-    "projects": ["*", "!jasonruesch-e2e"],
+    "projects": ["jasonruesch"],
     "version": {
       "conventionalCommits": true
     },
