@@ -1,0 +1,42 @@
+# Default color paletter of GitHub labels:
+# https://gist.github.com/borekb/d61cdc45f0c92606a92b15388cf80185
+# b60205
+# d93f0b
+# fbca04
+# 0e8a16
+# 006b75
+# 1d76db
+# 0052cc
+# 5319e7
+# e99695
+# f9d0c4
+# fef2c0
+# c2e0c6
+# bfdadc
+# c5def5
+# bfd4f2
+# d4c5f9
+
+- name: root
+  color: 'b60205'
+  description: 'Changes to files in the root folder'
+
+- name: ci
+  color: 'd93f0b'
+  description: 'Changes to files in the .github/workflows folder'
+
+- name: documentation
+  color: 'fbca04'
+  description: 'Changes within 'docs' folder and subfolders, or markdown files'
+
+- name: apps
+  color: '0e8a16'
+  description: 'Changes to files in the apps folder'
+
+- name: release
+  color: '006b75'
+  description: 'PR is opened against the main branch'
+
+- name: jasonruesch
+  color: '1d76db'
+  description: 'Changes to files in any jasonruesch folder'
