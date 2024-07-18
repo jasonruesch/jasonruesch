@@ -1,11 +1,2 @@
-@import 'tailwindcss';
-
 /* TODO: Fix reference to UI library */
 @import '../../../libs/jasonruesch/ui';
-
-@layer utilities {
-  .px-safe-offset-4 {
-    padding-left: calc(var(--spacing-4) + env(safe-area-inset-left));
-    padding-right: calc(var(--spacing-4) + env(safe-area-inset-right));
-  }
-}

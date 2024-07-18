@@ -1,4 +1,4 @@
-import { Page } from '@jasonruesch/jasonruesch-ui';
+import { Page } from '../../components';
 
 export function Transparent() {
   return <Page transparent />;

@@ -44,7 +44,7 @@ export const Page = ({
         exit="exit"
         variants={pageScrollVariants}
       >
-        <div className={twMerge('grow pt-24 lg:pt-16', contentClassName)}>
+        <div className={twMerge('grow pt-16', contentClassName)}>
           {children}
         </div>
 

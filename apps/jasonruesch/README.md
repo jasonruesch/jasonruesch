@@ -283,3 +283,5 @@ services:
 - [ResizeObserver Polyfill](https://github.com/que-etc/resize-observer-polyfill)
 - [Framer Motion](https://www.framer.com/)
 - [React Syntax Highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/)
+- [Heroicons](https://heroicons.com/)
+- [HeadlessUI](https://headlessui.com/)

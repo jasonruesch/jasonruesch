@@ -1,6 +1,6 @@
 import { twJoin, twMerge } from 'tailwind-merge';
 
-import { pages } from '../utils';
+import { pages } from '../data';
 import { PageNavLink } from './page-nav-link';
 
 const navigation = pages.filter((page) => page.type === 'primary');
