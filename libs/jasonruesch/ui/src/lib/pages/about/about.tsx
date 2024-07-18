@@ -13,12 +13,12 @@ export function About() {
         <img
           src="/images/jasonruesch-light-512.png"
           alt="Jason Ruesch"
-          className="float-right mt-4 mb-2 ml-4 h-48 w-48 rounded-full shadow-lg sm:h-64 sm:w-64 lg:h-96 lg:w-96 dark:hidden dark:shadow-black [&]:[shape-outside:circle()]"
+          className="float-right mt-4 mb-2 ml-4 h-48 w-48 rounded-full ring-2 ring-cyan-500 sm:h-64 sm:w-64 lg:h-96 lg:w-96 dark:hidden [&]:[shape-outside:circle()]"
         />
         <img
           src="/images/jasonruesch-dark-512.png"
           alt="Jason Ruesch"
-          className="float-right mt-4 mb-2 ml-4 hidden h-48 w-48 rounded-full shadow-lg sm:h-64 sm:w-64 lg:h-96 lg:w-96 dark:block dark:shadow-black [&]:[shape-outside:circle()]"
+          className="float-right mt-4 mb-2 ml-4 hidden h-48 w-48 rounded-full ring-2 sm:h-64 sm:w-64 lg:h-96 lg:w-96 dark:block dark:ring-violet-400 [&]:[shape-outside:circle()]"
         />
         <p>
           I hold a Bachelor of Science in Computer Science and have dedicated my
