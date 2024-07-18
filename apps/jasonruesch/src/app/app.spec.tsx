@@ -1,8 +1,8 @@
+import { Home } from '@jasonruesch/jasonruesch-ui';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import { renderWithRouter } from '../../tests';
 import App from './app';
-import { Home } from './home/home';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
