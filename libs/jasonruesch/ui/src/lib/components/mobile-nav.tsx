@@ -23,7 +23,7 @@ export const MobileNav = ({ className, onItemSelect }: MobileNavProps) => {
                 ? 'bg-cyan-300 dark:bg-violet-700'
                 : 'hover:bg-neutral-300 dark:hover:bg-neutral-700',
               'focus-visible:bg-neutral-300 focus-visible:outline-none dark:focus-visible:bg-neutral-700',
-              '-mx-2 block rounded-lg py-2 px-2 font-semibold leading-7 text-neutral-900 dark:text-neutral-50',
+              '-mx-4 block py-2 px-4 font-semibold leading-7 text-neutral-900 dark:text-neutral-50',
             )
           }
           onClick={onItemSelect}
