@@ -10,6 +10,7 @@
   outline: none;
   text-decoration: underline;
 }
+
 @media (prefers-color-scheme: dark) {
   :any-link {
     color: var(--color-violet-400);
@@ -29,26 +30,51 @@ h5,
 h6 {
   font-weight: bold;
 }
+
 h1 {
-  font-size: var(--font-size-4xl);
-  line-height: var(--font-size-4xl--line-height);
-}
-h2 {
   font-size: var(--font-size-3xl);
   line-height: var(--font-size-3xl--line-height);
 }
-h3 {
+h2 {
   font-size: var(--font-size-2xl);
   line-height: var(--font-size-2xl--line-height);
 }
-h4 {
+h3 {
   font-size: var(--font-size-xl);
   line-height: var(--font-size-xl--line-height);
 }
-h5 {
+h4 {
   font-size: var(--font-size-lg);
   line-height: var(--font-size-lg--line-height);
 }
+h5 {
+  font-size: var(--font-size-base);
+  line-height: var(--font-size-base--line-height);
+}
+
+@media screen and (min-width: 40rem) {
+  h1 {
+    font-size: var(--font-size-5xl);
+    line-height: var(--font-size-5xl--line-height);
+  }
+  h2 {
+    font-size: var(--font-size-4xl);
+    line-height: var(--font-size-4xl--line-height);
+  }
+  h3 {
+    font-size: var(--font-size-3xl);
+    line-height: var(--font-size-3xl--line-height);
+  }
+  h4 {
+    font-size: var(--font-size-2xl);
+    line-height: var(--font-size-2xl--line-height);
+  }
+  h5 {
+    font-size: var(--font-size-xl);
+    line-height: var(--font-size-xl--line-height);
+  }
+}
+
 h1:has(+ *),
 h2:has(+ *),
 h3:has(+ *),
@@ -67,11 +93,13 @@ p:has(+ *) {
   /* Only add margin if there is a sibling following the paragraph */
   margin-bottom: var(--spacing-4);
 }
+
 @media (prefers-color-scheme: dark) {
   p {
     color: var(--color-neutral-400);
   }
 }
+
 @media screen and (min-width: 40rem) {
   p {
     /* --breakpoint-sm */
@@ -79,6 +107,7 @@ p:has(+ *) {
     line-height: var(--font-size-xl--line-height);
   }
 }
+
 @media screen and (min-width: 64rem) {
   p {
     /* --breakpoint-lg */
@@ -93,6 +122,7 @@ ol:has(+ *) {
   /* Only add margin if there is a sibling following the paragraph */
   margin-bottom: var(--spacing-4);
 }
+
 @media screen and (min-width: 40rem) {
   ul,
   ol {
@@ -101,6 +131,7 @@ ol:has(+ *) {
     line-height: var(--font-size-xl--line-height);
   }
 }
+
 @media screen and (min-width: 64rem) {
   ul,
   ol {
