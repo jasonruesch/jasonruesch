@@ -5,13 +5,16 @@ import { useLocation } from 'react-router-dom';
 
 import {
   AppRoutes,
+  FlagsContext,
   Layout,
+  useFlags,
   useNavigateEvents,
   WillNavigateContext,
 } from '@jasonruesch/jasonruesch-ui';
 
 export function App() {
   const willNavigateValue = useNavigateEvents();
+  const [flags, setFlags] = useFlags();
   const location = useLocation();
   const fixedBackground = location.pathname === '/blank';
 
@@ -22,14 +25,16 @@ export function App() {
 
   return (
     <WillNavigateContext value={willNavigateValue}>
-      <Layout fixedBackground={fixedBackground}>
-        <AnimatePresence
-          initial={false}
-          onExitComplete={() => window.scrollTo({ top: 0 })}
-        >
-          <AppRoutes location={location} key={location.pathname} />
-        </AnimatePresence>
-      </Layout>
+      <FlagsContext value={[flags, setFlags]}>
+        <Layout fixedBackground={fixedBackground}>
+          <AnimatePresence
+            initial={false}
+            onExitComplete={() => window.scrollTo({ top: 0 })}
+          >
+            <AppRoutes location={location} key={location.pathname} />
+          </AnimatePresence>
+        </Layout>
+      </FlagsContext>
     </WillNavigateContext>
   );
 }

@@ -1,9 +1,9 @@
+import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
-import { pages } from '../data';
+import { pages, primaryNavPages } from '../data';
+import { FlagsContext } from '../hooks';
 import { PageNavLink } from './page-nav-link';
-
-const navigation = pages.filter((page) => page.type === 'primary');
 
 interface MobileNavProps {
   className?: string;
@@ -11,6 +11,11 @@ interface MobileNavProps {
 }
 
 export const MobileNav = ({ className, onItemSelect }: MobileNavProps) => {
+  const [flags] = use(FlagsContext);
+  const navigation = flags.showAllNavigation
+    ? pages
+    : primaryNavPages(flags.showHiddenNavigation);
+
   return (
     <nav className={twMerge('space-y-2', className)}>
       {navigation.map((page) => (
