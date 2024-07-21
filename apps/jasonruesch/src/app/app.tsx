@@ -16,7 +16,6 @@ export function App() {
   const willNavigateValue = useNavigateEvents();
   const [flags, setFlags] = useFlags();
   const location = useLocation();
-  const fixedBackground = location.pathname === '/blank';
 
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
   useEffect(() => {
@@ -26,7 +25,7 @@ export function App() {
   return (
     <WillNavigateContext value={willNavigateValue}>
       <FlagsContext value={[flags, setFlags]}>
-        <Layout fixedBackground={fixedBackground}>
+        <Layout>
           <AnimatePresence
             initial={false}
             onExitComplete={() => window.scrollTo({ top: 0 })}

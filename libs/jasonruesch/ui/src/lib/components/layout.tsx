@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { useActionKey } from '../hooks';
-import { Background } from './background';
 import { EasterEggLink } from './easter-egg-link';
 import FlagsManager from './flags-manager';
 import { FlagsManagerButton } from './flags-manager-button';
@@ -9,10 +8,9 @@ import { Header } from './header';
 
 interface LayoutProps {
   children: React.ReactNode;
-  fixedBackground?: boolean;
 }
 
-export const Layout = ({ children, fixedBackground }: LayoutProps) => {
+export const Layout = ({ children }: LayoutProps) => {
   const [managerOpen, setManagerOpen] = useState(false);
   const { ctrlKey, metaKey } = useActionKey();
 
@@ -35,7 +33,7 @@ export const Layout = ({ children, fixedBackground }: LayoutProps) => {
 
   return (
     <>
-      <Background fixed={fixedBackground} />
+      <div id="background"></div>
 
       <Header />
 

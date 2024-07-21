@@ -42,6 +42,16 @@ const privacyPage: PageMeta = {
   name: 'Privacy Policy',
   href: '/privacy',
 };
+const blankPage: PageMeta = {
+  name: 'Blank',
+  href: '/blank',
+  hidden: true,
+};
+const transparentPage: PageMeta = {
+  name: 'Transparent',
+  href: '/transparent',
+  hidden: true,
+};
 
 export const pages: PageMeta[] = [
   easterEggPage,
@@ -52,6 +62,8 @@ export const pages: PageMeta[] = [
   usesPage,
   contactPage,
   privacyPage,
+  blankPage,
+  transparentPage,
 ];
 
 export const primaryNavPages = (includeHidden?: boolean) =>
