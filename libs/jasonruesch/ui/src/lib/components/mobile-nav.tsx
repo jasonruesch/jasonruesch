@@ -2,7 +2,7 @@ import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
 import { pages, primaryNavPages } from '../data';
-import { FlagsContext } from '../hooks';
+import { FeatureFlagsContext } from '../hooks';
 import { PageNavLink } from './page-nav-link';
 
 interface MobileNavProps {
@@ -11,7 +11,7 @@ interface MobileNavProps {
 }
 
 export const MobileNav = ({ className, onItemSelect }: MobileNavProps) => {
-  const [flags] = use(FlagsContext);
+  const [flags] = use(FeatureFlagsContext);
   const navigation = flags.showAllNavigation
     ? pages
     : primaryNavPages(flags.showHiddenNavigation);

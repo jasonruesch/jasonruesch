@@ -2,12 +2,12 @@ import { createContext, useCallback, useEffect, useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
-export interface Flags {
+export interface FeatureFlags {
   showHiddenNavigation: boolean;
   showAllNavigation: boolean;
 }
 
-const defaultFlags: Flags = {
+const defaultFlags: FeatureFlags = {
   showHiddenNavigation: false,
   showAllNavigation: false,
 };
@@ -15,30 +15,32 @@ const defaultFlags: Flags = {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
-export const FlagsContext = createContext<
-  [Flags, (partial: Partial<Flags>) => void]
+export const FeatureFlagsContext = createContext<
+  [FeatureFlags, (partial: Partial<FeatureFlags>) => void]
 >([defaultFlags, noop]);
 
-export const useFlags = () => {
+export const useFeatureFlags = () => {
   const storage = window.localStorage ?? window.sessionStorage;
-  const storedFlags = JSON.parse(storage.getItem('flags') ?? '{}') as Flags;
+  const storedFlags = JSON.parse(
+    storage.getItem('flags') ?? '{}',
+  ) as FeatureFlags;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const searchFlags = Array.from(searchParams.entries())
     .filter(([key]) => key in defaultFlags)
     .reduce(
       (flags, [key, value]) => ({ ...flags, [key]: value === 'true' }),
-      {} as Flags,
+      {} as FeatureFlags,
     );
 
-  const [flags, setFlags] = useState<Flags>({
+  const [flags, setFlags] = useState<FeatureFlags>({
     ...defaultFlags,
     ...storedFlags,
     ...searchFlags,
   });
 
   const updateFlags = useCallback(
-    (partial: Partial<Flags>) => {
+    (partial: Partial<FeatureFlags>) => {
       setFlags((flags) => {
         const updated = { ...flags, ...partial };
         storage.setItem('flags', JSON.stringify(updated));
@@ -50,12 +52,14 @@ export const useFlags = () => {
   );
 
   useEffect(() => {
-    const storedFlags = JSON.parse(storage.getItem('flags') ?? '{}') as Flags;
+    const storedFlags = JSON.parse(
+      storage.getItem('flags') ?? '{}',
+    ) as FeatureFlags;
     const searchFlags = Array.from(searchParams.entries())
       .filter(([key]) => key in defaultFlags)
       .reduce(
         (flags, [key, value]) => ({ ...flags, [key]: value === 'true' }),
-        {} as Flags,
+        {} as FeatureFlags,
       );
 
     const updated = { ...defaultFlags, ...storedFlags, ...searchFlags };

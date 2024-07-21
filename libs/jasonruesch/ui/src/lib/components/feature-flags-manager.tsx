@@ -10,15 +10,18 @@ import {
 import { FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { use } from 'react';
 
-import { FlagsContext } from '../hooks';
+import { FeatureFlagsContext } from '../hooks';
 
-export interface FlagsManagerProps {
+export interface FeatureFlagsManagerProps {
   open: boolean;
   onClose: (open: boolean) => void;
 }
 
-export default function FlagsManager({ open, onClose }: FlagsManagerProps) {
-  const [flags, setFlags] = use(FlagsContext);
+export default function FeatureFlagsManager({
+  open,
+  onClose,
+}: FeatureFlagsManagerProps) {
+  const [flags, setFlags] = use(FeatureFlagsContext);
 
   return (
     <Dialog open={open} onClose={onClose} className="relative z-10">
@@ -55,7 +58,7 @@ export default function FlagsManager({ open, onClose }: FlagsManagerProps) {
                   as="h3"
                   className="text-center text-neutral-900 sm:text-left dark:text-white"
                 >
-                  Activate or deactivate flags
+                  Feature Flags
                 </DialogTitle>
                 <div className="mt-2 space-y-2">
                   <Field className="flex items-center justify-between">

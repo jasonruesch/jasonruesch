@@ -1,8 +1,10 @@
-export interface FlagsManagerButtonProps {
+export interface FeatureFlagsManagerButtonProps {
   onClick: () => void;
 }
 
-export const FlagsManagerButton = ({ onClick }: FlagsManagerButtonProps) => {
+export const FeatureFlagsManagerButton = ({
+  onClick,
+}: FeatureFlagsManagerButtonProps) => {
   return (
     <div className="ml-safe mb-safe fixed bottom-0 left-0 z-20 h-12 w-12 rounded-full">
       <button

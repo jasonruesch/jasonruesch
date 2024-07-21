@@ -2,7 +2,7 @@ import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
 import { pages, primaryNavPages } from '../data';
-import { FlagsContext } from '../hooks';
+import { FeatureFlagsContext } from '../hooks';
 import { PageNavLink } from './page-nav-link';
 
 interface NavProps {
@@ -10,7 +10,7 @@ interface NavProps {
 }
 
 export const Nav = ({ className }: NavProps) => {
-  const [flags] = use(FlagsContext);
+  const [flags] = use(FeatureFlagsContext);
   const navigation = flags.showAllNavigation
     ? pages
     : primaryNavPages(flags.showHiddenNavigation);

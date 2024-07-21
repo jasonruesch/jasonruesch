@@ -5,16 +5,16 @@ import { useLocation } from 'react-router-dom';
 
 import {
   AppRoutes,
-  FlagsContext,
+  FeatureFlagsContext,
   Layout,
-  useFlags,
+  useFeatureFlags,
   useNavigateEvents,
   WillNavigateContext,
 } from '@jasonruesch/jasonruesch-ui';
 
 export function App() {
   const willNavigateValue = useNavigateEvents();
-  const [flags, setFlags] = useFlags();
+  const [flags, setFlags] = useFeatureFlags();
   const location = useLocation();
 
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
@@ -24,7 +24,7 @@ export function App() {
 
   return (
     <WillNavigateContext value={willNavigateValue}>
-      <FlagsContext value={[flags, setFlags]}>
+      <FeatureFlagsContext value={[flags, setFlags]}>
         <Layout>
           <AnimatePresence
             initial={false}
@@ -33,7 +33,7 @@ export function App() {
             <AppRoutes location={location} key={location.pathname} />
           </AnimatePresence>
         </Layout>
-      </FlagsContext>
+      </FeatureFlagsContext>
     </WillNavigateContext>
   );
 }

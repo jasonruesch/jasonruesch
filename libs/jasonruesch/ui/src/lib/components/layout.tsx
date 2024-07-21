@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { useActionKey } from '../hooks';
 import { EasterEggLink } from './easter-egg-link';
-import FlagsManager from './flags-manager';
-import { FlagsManagerButton } from './flags-manager-button';
+import FeatureFlagsManager from './feature-flags-manager';
+import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
 import { Header } from './header';
 
 interface LayoutProps {
@@ -42,8 +42,8 @@ export const Layout = ({ children }: LayoutProps) => {
 
       <EasterEggLink />
 
-      <FlagsManagerButton onClick={() => setManagerOpen(true)} />
-      <FlagsManager
+      <FeatureFlagsManagerButton onClick={() => setManagerOpen(true)} />
+      <FeatureFlagsManager
         open={managerOpen}
         onClose={(open) => setManagerOpen(open)}
       />
