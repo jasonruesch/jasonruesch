@@ -8,32 +8,35 @@ const easterEggPage: PageMeta = {
 const homePage: PageMeta = {
   name: 'Home',
   href: '/',
-  type: 'primary',
+  navType: 'primary',
 };
 const aboutPage: PageMeta = {
   name: 'About',
   href: '/about',
-  type: 'primary',
+  navType: 'primary',
 };
 const articlesPage: PageMeta = {
   name: 'Articles',
   href: '/articles',
-  type: 'primary',
+  navType: 'primary',
+  hidden: true,
 };
 const projectsPage: PageMeta = {
   name: 'Projects',
   href: '/projects',
-  type: 'primary',
+  navType: 'primary',
+  hidden: true,
 };
 const usesPage: PageMeta = {
   name: 'Uses',
   href: '/uses',
-  type: 'primary',
+  navType: 'primary',
+  hidden: true,
 };
 const contactPage: PageMeta = {
   name: 'Contact',
   href: '/contact',
-  type: 'primary',
+  navType: 'primary',
 };
 const privacyPage: PageMeta = {
   name: 'Privacy Policy',
@@ -50,3 +53,8 @@ export const pages: PageMeta[] = [
   contactPage,
   privacyPage,
 ];
+
+export const primaryNavPages = (includeHidden?: boolean) =>
+  pages.filter(
+    (page) => page.navType === 'primary' && (!page.hidden || includeHidden),
+  );

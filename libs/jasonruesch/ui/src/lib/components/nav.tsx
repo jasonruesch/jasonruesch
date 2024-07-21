@@ -1,15 +1,20 @@
+import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
-import { pages } from '../data';
+import { pages, primaryNavPages } from '../data';
+import { FlagsContext } from '../hooks';
 import { PageNavLink } from './page-nav-link';
-
-const navigation = pages.filter((page) => page.type === 'primary');
 
 interface NavProps {
   className?: string;
 }
 
 export const Nav = ({ className }: NavProps) => {
+  const [flags] = use(FlagsContext);
+  const navigation = flags.showAllNavigation
+    ? pages
+    : primaryNavPages(flags.showHiddenNavigation);
+
   return (
     <nav className={twMerge('flex items-center space-x-4', className)}>
       {navigation.map((page) => (
