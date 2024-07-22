@@ -83,8 +83,9 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         run: npx nx build jasonruesch
         env:
-          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+          VITE_FLAGSMITH_ENVIRONMENT_ID: ${{ secrets.VITE_FLAGSMITH_ENVIRONMENT_ID }}
           VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID }}
+          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
 
       - name: Setup Pages
         if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''

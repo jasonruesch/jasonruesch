@@ -1,3 +1,4 @@
+import { useFlags } from 'flagsmith/react';
 import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
@@ -11,10 +12,14 @@ interface MobileNavProps {
 }
 
 export const MobileNav = ({ className, onItemSelect }: MobileNavProps) => {
-  const [flags] = use(FeatureFlagsContext);
-  const navigation = flags.showAllNavigation
-    ? pages
-    : primaryNavPages(flags.showHiddenNavigation);
+  const flags = useFlags(['all_navigation', 'hidden_navigation']);
+  const [featureFlags] = use(FeatureFlagsContext);
+  const navigation =
+    flags.all_navigation.enabled || featureFlags.showAllNavigation
+      ? pages
+      : primaryNavPages(
+          flags.hidden_navigation.enabled || featureFlags.showHiddenNavigation,
+        );
 
   return (
     <nav className={twMerge('space-y-2', className)}>

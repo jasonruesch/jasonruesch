@@ -1,3 +1,5 @@
+import flagsmith from 'flagsmith';
+import { FlagsmithProvider } from 'flagsmith/react';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
@@ -16,6 +18,7 @@ export function App() {
   const willNavigateValue = useNavigateEvents();
   const [flags, setFlags] = useFeatureFlags();
   const location = useLocation();
+  const flagsmithEnvironmentId = import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID;
 
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
   useEffect(() => {
@@ -23,18 +26,25 @@ export function App() {
   }, [measurementId]);
 
   return (
-    <WillNavigateContext value={willNavigateValue}>
+    <FlagsmithProvider
+      {...(flagsmithEnvironmentId
+        ? { options: { environmentID: flagsmithEnvironmentId } }
+        : {})}
+      flagsmith={flagsmith}
+    >
       <FeatureFlagsContext value={[flags, setFlags]}>
-        <Layout>
-          <AnimatePresence
-            initial={false}
-            onExitComplete={() => window.scrollTo({ top: 0 })}
-          >
-            <AppRoutes location={location} key={location.pathname} />
-          </AnimatePresence>
-        </Layout>
+        <WillNavigateContext value={willNavigateValue}>
+          <Layout>
+            <AnimatePresence
+              initial={false}
+              onExitComplete={() => window.scrollTo({ top: 0 })}
+            >
+              <AppRoutes location={location} key={location.pathname} />
+            </AnimatePresence>
+          </Layout>
+        </WillNavigateContext>
       </FeatureFlagsContext>
-    </WillNavigateContext>
+    </FlagsmithProvider>
   );
 }
 
