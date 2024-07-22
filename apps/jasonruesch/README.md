@@ -277,6 +277,7 @@ services:
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [GitHub Actions](https://github.com/features/actions)
+- [Vercel](https://vercel.com/)
 - [Figma](https://www.figma.com/)
 - [Semantic Versioning](https://semver.org/)
 - [Scroll-Driven Animations](https://scroll-driven-animations.style/)
@@ -285,3 +286,4 @@ services:
 - [React Syntax Highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/)
 - [Heroicons](https://heroicons.com/)
 - [HeadlessUI](https://headlessui.com/)
+- [Flagsmith](https://www.flagsmith.com/)
