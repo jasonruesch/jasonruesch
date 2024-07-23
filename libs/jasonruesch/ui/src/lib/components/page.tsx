@@ -57,7 +57,7 @@ export const Page = ({
           </div>
 
           {!transparent ? (
-            <footer className="flex flex-col items-center justify-center pt-3 pb-3 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-5 sm:pb-5 sm:text-base dark:text-neutral-400">
+            <footer className="flex flex-col items-center justify-center pt-2 pb-4 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-5 sm:pb-5 sm:text-base dark:text-neutral-400">
               <span>
                 &copy; {new Date().getFullYear()} Jason Ruesch. All rights
                 reserved.

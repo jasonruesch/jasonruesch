@@ -287,3 +287,4 @@ services:
 - [Heroicons](https://heroicons.com/)
 - [HeadlessUI](https://headlessui.com/)
 - [Flagsmith](https://www.flagsmith.com/)
+- [vite-plugin-static-copy](https://github.com/sapphi-red/vite-plugin-static-copy)

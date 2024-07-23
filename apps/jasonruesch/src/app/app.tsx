@@ -18,9 +18,10 @@ export function App() {
   const willNavigateValue = useNavigateEvents();
   const [flags, setFlags] = useFeatureFlags();
   const location = useLocation();
-  const flagsmithEnvironmentId = import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID;
 
+  const flagsmithEnvironmentId = import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID;
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
+
   useEffect(() => {
     if (measurementId) ReactGA.initialize(measurementId);
   }, [measurementId]);
