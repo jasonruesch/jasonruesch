@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { useActionKey } from '../hooks';
 import { EasterEggLink } from './easter-egg-link';
-import FeatureFlagsManager from './feature-flags-manager';
 import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
+import FeatureFlagsManager from './feature-flags-manager.modal';
 import { Header } from './header';
 
 interface LayoutProps {

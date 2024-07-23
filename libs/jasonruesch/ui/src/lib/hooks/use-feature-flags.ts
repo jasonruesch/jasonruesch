@@ -1,49 +1,48 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-
 import { useSearchParams } from 'react-router-dom';
 
-export interface FeatureFlags {
-  showHiddenNavigation: boolean;
-  showAllNavigation: boolean;
-}
-
-const defaultFlags: FeatureFlags = {
-  showHiddenNavigation: false,
-  showAllNavigation: false,
-};
+import { FeatureFlag, featureFlags } from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 export const FeatureFlagsContext = createContext<
-  [FeatureFlags, (partial: Partial<FeatureFlags>) => void]
->([defaultFlags, noop]);
+  [FeatureFlag[], (flag: FeatureFlag) => void]
+>([featureFlags, noop]);
 
 export const useFeatureFlags = () => {
   const storage = window.localStorage ?? window.sessionStorage;
   const storedFlags = JSON.parse(
-    storage.getItem('flags') ?? '{}',
-  ) as FeatureFlags;
+    storage.getItem('featureFlags') ?? '[]',
+  ) as FeatureFlag[];
 
   const [searchParams, setSearchParams] = useSearchParams();
   const searchFlags = Array.from(searchParams.entries())
-    .filter(([key]) => key in defaultFlags)
-    .reduce(
-      (flags, [key, value]) => ({ ...flags, [key]: value === 'true' }),
-      {} as FeatureFlags,
-    );
+    .map(([key, value]) => {
+      const flag = featureFlags.find((f) => f.key === key);
+      return flag
+        ? ({ ...flag, enabled: value === 'true' } as FeatureFlag)
+        : null;
+    })
+    .filter((flag) => flag !== null);
 
-  const [flags, setFlags] = useState<FeatureFlags>({
-    ...defaultFlags,
-    ...storedFlags,
-    ...searchFlags,
-  });
+  const uniqueFlags = [
+    ...new Map(
+      featureFlags
+        .concat(storedFlags)
+        .concat(searchFlags)
+        .map((item) => [item['key'], item]),
+    ).values(),
+  ];
+  const [flags, setFlags] = useState<FeatureFlag[]>(uniqueFlags);
 
   const updateFlags = useCallback(
-    (partial: Partial<FeatureFlags>) => {
+    (flag: FeatureFlag) => {
       setFlags((flags) => {
-        const updated = { ...flags, ...partial };
-        storage.setItem('flags', JSON.stringify(updated));
+        const updated = flags.map((f) =>
+          f.key === flag.key ? { ...f, enabled: flag.enabled } : f,
+        );
+        storage.setItem('featureFlags', JSON.stringify(updated));
 
         return updated;
       });
@@ -53,25 +52,34 @@ export const useFeatureFlags = () => {
 
   useEffect(() => {
     const storedFlags = JSON.parse(
-      storage.getItem('flags') ?? '{}',
-    ) as FeatureFlags;
+      storage.getItem('featureFlags') ?? '[]',
+    ) as FeatureFlag[];
     const searchFlags = Array.from(searchParams.entries())
-      .filter(([key]) => key in defaultFlags)
-      .reduce(
-        (flags, [key, value]) => ({ ...flags, [key]: value === 'true' }),
-        {} as FeatureFlags,
-      );
+      .map(([key, value]) => {
+        const flag = featureFlags.find((f) => f.key === key);
+        return flag
+          ? ({ ...flag, enabled: value === 'true' } as FeatureFlag)
+          : null;
+      })
+      .filter((flag) => flag !== null);
 
-    const updated = { ...defaultFlags, ...storedFlags, ...searchFlags };
-    storage.setItem('flags', JSON.stringify(updated));
+    const updated = [
+      ...new Map(
+        featureFlags
+          .concat(storedFlags)
+          .concat(searchFlags)
+          .map((item) => [item['key'], item]),
+      ).values(),
+    ];
+    storage.setItem('featureFlags', JSON.stringify(updated));
     setFlags(updated);
   }, [storage, searchParams]);
 
   useEffect(() => {
-    Object.entries(flags)
-      .filter(([key]) => searchParams.has(key))
-      .forEach(([key, value]) => {
-        if (value) searchParams.set(key, 'true');
+    flags
+      .filter(({ key }) => searchParams.has(key))
+      .forEach(({ key, enabled }) => {
+        if (enabled) searchParams.set(key, 'true');
         else searchParams.delete(key);
       });
     setSearchParams(searchParams);
@@ -79,3 +87,6 @@ export const useFeatureFlags = () => {
 
   return [flags, updateFlags] as const;
 };
+
+export const findFeatureFlag = (flags: FeatureFlag[], key: string) =>
+  flags.find((f) => f.key === key);
