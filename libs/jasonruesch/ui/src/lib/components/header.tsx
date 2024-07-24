@@ -58,7 +58,7 @@ export const Header = ({ className }: HeaderProps) => {
     <motion.header
       ref={scope}
       className={twMerge(
-        'px-safe-offset-4 fixed z-10 flex h-14 w-full items-center gap-x-4 py-2',
+        'px-safe-offset-4 fixed z-10 flex h-14 w-full items-center gap-x-4',
         className,
       )}
       style={{
@@ -97,7 +97,7 @@ export const Header = ({ className }: HeaderProps) => {
       >
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="px-safe-offset-4 fixed inset-y-0 z-10 w-full overflow-y-auto bg-white dark:bg-neutral-950">
-          <div className="flex h-14 items-center gap-x-4 py-2">
+          <div className="flex h-14 items-center gap-x-4">
             <div className="flex grow">
               <button
                 type="button"

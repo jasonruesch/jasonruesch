@@ -59,7 +59,7 @@ export const Page = ({
           </div>
 
           {!transparent ? (
-            <footer className="px-safe-offset-4 pb-safe-offset-4 sm:pb-safe-offset-4 flex flex-col items-center justify-center pt-2 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-6 sm:text-base dark:text-neutral-400">
+            <footer className="px-safe-offset-4 pb-safe-offset-3 sm:pb-safe-offset-4 flex flex-col items-center justify-center pt-3 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-6 sm:text-base dark:text-neutral-400">
               <span>
                 &copy; {new Date().getFullYear()} Jason Ruesch. All rights
                 reserved.
