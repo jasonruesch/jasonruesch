@@ -1,9 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import { useActionKey } from '../hooks';
 import { EasterEggLink } from './easter-egg-link';
-import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
-import FeatureFlagsManager from './feature-flags-manager.modal';
 import { Header } from './header';
 
 interface LayoutProps {
@@ -11,26 +6,6 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const [managerOpen, setManagerOpen] = useState(false);
-  const { ctrlKey, metaKey } = useActionKey();
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      // Ctrl|Command + Shift + F
-      if (
-        ((ctrlKey && event.ctrlKey) || (metaKey && event.metaKey)) &&
-        event.key === 'k'
-      ) {
-        event.preventDefault();
-
-        setManagerOpen((open) => !open);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [ctrlKey, metaKey]);
-
   return (
     <>
       <div id="background"></div>
@@ -42,11 +17,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
       <EasterEggLink />
 
-      <FeatureFlagsManagerButton onClick={() => setManagerOpen(true)} />
-      <FeatureFlagsManager
-        open={managerOpen}
-        onClose={(open) => setManagerOpen(open)}
-      />
+      {/* <FeatureFlagsManager /> */}
     </>
   );
 };
