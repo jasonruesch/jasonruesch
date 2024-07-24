@@ -1,9 +1,7 @@
 import { useFlags } from 'flagsmith/react';
-import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
 import { pages, primaryNavPages } from '../data';
-import { FeatureFlagsContext, findFeatureFlag } from '../hooks';
 import { PageNavLink } from './page-nav-link';
 
 interface NavProps {
@@ -12,15 +10,14 @@ interface NavProps {
 
 export const Nav = ({ className }: NavProps) => {
   const flags = useFlags(['all_navigation', 'hidden_navigation']);
-  const [featureFlags] = use(FeatureFlagsContext);
-  const navigation =
-    flags.all_navigation.enabled ||
-    findFeatureFlag(featureFlags, 'all_navigation')?.enabled
-      ? pages
-      : primaryNavPages(
-          flags.hidden_navigation.enabled ||
-            findFeatureFlag(featureFlags, 'hidden_navigation')?.enabled,
-        );
+  // const [featureFlags] = use(FeatureFlagsContext);
+  const navigation = flags.all_navigation.enabled
+    ? // || findFeatureFlag(featureFlags, 'all_navigation')?.enabled
+      pages
+    : primaryNavPages(
+        flags.hidden_navigation.enabled,
+        // || findFeatureFlag(featureFlags, 'hidden_navigation')?.enabled,
+      );
 
   return (
     <nav className={twMerge('flex items-center space-x-4', className)}>
