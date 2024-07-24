@@ -46,18 +46,20 @@ export const Page = ({
         variants={pageVariants}
       >
         <motion.div
-          className="px-safe-offset-4 flex min-h-dvh flex-col"
+          className="flex min-h-dvh flex-col"
           initial={false}
           animate="animate"
           exit="exit"
           variants={pageScrollVariants}
         >
-          <div className={twMerge('grow pt-16', contentClassName)}>
+          <div
+            className={twMerge('px-safe-offset-4 grow pt-16', contentClassName)}
+          >
             {children}
           </div>
 
           {!transparent ? (
-            <footer className="flex flex-col items-center justify-center pt-2 pb-4 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-5 sm:pb-5 sm:text-base dark:text-neutral-400">
+            <footer className="px-safe-offset-4 pb-safe-offset-4 sm:pb-safe-offset-4 flex flex-col items-center justify-center pt-2 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-6 sm:text-base dark:text-neutral-400">
               <span>
                 &copy; {new Date().getFullYear()} Jason Ruesch. All rights
                 reserved.

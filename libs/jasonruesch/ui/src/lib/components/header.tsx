@@ -37,6 +37,23 @@ export const Header = ({ className }: HeaderProps) => {
   const scope = useAnimateHeader();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const handleMobileMenuOpen = (open: boolean) => {
+    setMobileMenuOpen(open);
+
+    // document
+    //   .querySelector(
+    //     'meta[name="theme-color"][media="(prefers-color-scheme: light)"]',
+    //   )
+    //   ?.setAttribute('content', open ? '#ffffff' : '#fafafa');
+    // document
+    //   .querySelector(
+    //     'meta[name="theme-color"][media="(prefers-color-scheme: dark)"]',
+    //   )
+    //   ?.setAttribute('content', open ? '#0a0a0a' : '#171717');
+
+    // document.body.style.overflow = open ? 'hidden' : '';
+  };
+
   return (
     <motion.header
       ref={scope}
@@ -52,7 +69,7 @@ export const Header = ({ className }: HeaderProps) => {
       <div className="flex grow lg:hidden">
         <button
           type="button"
-          onClick={() => setMobileMenuOpen(true)}
+          onClick={() => handleMobileMenuOpen(true)}
           className="-m-2.5 rounded-md p-2.5 text-neutral-700 dark:text-neutral-200"
         >
           <span className="sr-only">Open main menu</span>
@@ -74,7 +91,7 @@ export const Header = ({ className }: HeaderProps) => {
 
       <Dialog
         open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
+        onClose={handleMobileMenuOpen}
         className="lg:hidden"
         aria-label="Main menu"
       >
@@ -84,7 +101,7 @@ export const Header = ({ className }: HeaderProps) => {
             <div className="flex grow">
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => handleMobileMenuOpen(false)}
                 className="-m-2.5 rounded-md p-2.5 text-neutral-700 dark:text-neutral-200"
               >
                 <span className="sr-only">Close menu</span>
@@ -108,7 +125,7 @@ export const Header = ({ className }: HeaderProps) => {
           </div>
 
           <div className="mt-4">
-            <MobileNav onItemSelect={() => setMobileMenuOpen(false)} />
+            <MobileNav onItemSelect={() => handleMobileMenuOpen(false)} />
           </div>
         </DialogPanel>
       </Dialog>

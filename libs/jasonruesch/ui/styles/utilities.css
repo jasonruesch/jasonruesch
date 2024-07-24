@@ -1,3 +1,7 @@
+.pb-safe-offset-4 {
+  padding-bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom));
+}
+
 .px-safe-offset-4 {
   padding-left: calc(var(--spacing-4) + env(safe-area-inset-left));
   padding-right: calc(var(--spacing-4) + env(safe-area-inset-right));
