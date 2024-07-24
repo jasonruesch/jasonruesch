@@ -52,7 +52,32 @@ h5 {
   line-height: var(--font-size-base--line-height);
 }
 
+/* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
+  h1 {
+    font-size: var(--font-size-4xl);
+    line-height: var(--font-size-4xl--line-height);
+  }
+  h2 {
+    font-size: var(--font-size-3xl);
+    line-height: var(--font-size-3xl--line-height);
+  }
+  h3 {
+    font-size: var(--font-size-2xl);
+    line-height: var(--font-size-2xl--line-height);
+  }
+  h4 {
+    font-size: var(--font-size-xl);
+    line-height: var(--font-size-xl--line-height);
+  }
+  h5 {
+    font-size: var(--font-size-lg);
+    line-height: var(--font-size-lg--line-height);
+  }
+}
+
+/* --breakpoint-lg */
+@media screen and (min-width: 64rem) {
   h1 {
     font-size: var(--font-size-5xl);
     line-height: var(--font-size-5xl--line-height);
@@ -100,17 +125,17 @@ p:has(+ *) {
   }
 }
 
+/* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   p {
-    /* --breakpoint-sm */
     font-size: var(--font-size-xl);
     line-height: var(--font-size-xl--line-height);
   }
 }
 
+/* --breakpoint-lg */
 @media screen and (min-width: 64rem) {
   p {
-    /* --breakpoint-lg */
     font-size: var(--font-size-2xl);
     line-height: var(--font-size-2xl--line-height);
   }
@@ -123,19 +148,19 @@ ol:has(+ *) {
   margin-bottom: var(--spacing-4);
 }
 
+/* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   ul,
   ol {
-    /* --breakpoint-sm */
     font-size: var(--font-size-xl);
     line-height: var(--font-size-xl--line-height);
   }
 }
 
+/* --breakpoint-lg */
 @media screen and (min-width: 64rem) {
   ul,
   ol {
-    /* --breakpoint-lg */
     font-size: var(--font-size-2xl);
     line-height: var(--font-size-2xl--line-height);
   }

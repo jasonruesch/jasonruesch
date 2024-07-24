@@ -17,7 +17,7 @@
     var(--color-teal-400) 51%,
     var(--color-violet-400) 55%
   );
-  --gradient-sm: linear-gradient(
+  --gradient-lg: linear-gradient(
     145deg,
     var(--color-cyan-500) 45%,
     var(--color-fuchsia-500),
@@ -25,7 +25,7 @@
     var(--color-fuchsia-500),
     var(--color-cyan-500) 55%
   );
-  --gradient-sm-dark: linear-gradient(
+  --gradient-lg-dark: linear-gradient(
     145deg,
     var(--color-violet-400) 45%,
     var(--color-teal-400),
@@ -34,6 +34,7 @@
     var(--color-violet-400) 55%
   );
 }
+
 @keyframes gradient {
   0% {
     background-position: 85% 85%;
@@ -45,6 +46,7 @@
     background-position: 15% 15%;
   }
 }
+
 .gradient-heading {
   padding-top: var(--spacing-1);
   padding-bottom: var(--spacing-1);
@@ -61,40 +63,61 @@
   transform: scale(1.1);
   margin-left: var(--spacing-2);
 }
+
 /* .gradient-heading > :not([hidden]) ~ :not([hidden]) {
   margin-left: var(--spacing-4);
 } */
+
+/* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
-  /* --breakpoint-sm */
   .gradient-heading {
-    font-size: var(--font-size-5xl);
-    background-image: var(--gradient-sm);
+    font-size: var(--font-size-3xl);
+    background-image: var(--gradient-lg);
     transform: scale(1);
     margin-left: 0;
   }
 }
+
+/* --breakpoint-lg */
+@media screen and (min-width: 64rem) {
+  .gradient-heading {
+    font-size: var(--font-size-5xl);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .gradient-heading {
     background-image: var(--gradient-dark);
   }
 }
+
+/* --breakpoint-sm */
 @media screen and (min-width: 40rem) and (prefers-color-scheme: dark) {
   .gradient-heading {
-    /* --breakpoint-sm */
-    background-image: var(--gradient-sm-dark);
+    background-image: var(--gradient-lg-dark);
   }
 }
+
 @media (prefers-reduced-motion) {
   .gradient-heading {
     animation: none;
   }
 }
+
 .heading-lg {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-3xl);
   line-height: var(--line-height-cap);
 }
+
+/* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
-  /* --breakpoint-sm */
+  .heading-lg {
+    font-size: var(--font-size-5xl);
+  }
+}
+
+/* --breakpoint-lg */
+@media screen and (min-width: 64rem) {
   .heading-lg {
     font-size: var(--font-size-7xl);
   }
