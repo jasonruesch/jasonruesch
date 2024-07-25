@@ -26,14 +26,14 @@ export const Header = ({ className }: HeaderProps) => {
         darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
       } r g b / 1) 0%, rgb(from ${
         darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 0.5) 25%, rgb(from ${
+      } r g b / 0.5) 20%, rgb(from ${
         darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 0) 100%`,
+      } r g b / 0) 80%`,
       `linear-gradient(180deg, rgb(from ${
         darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
       } r g b / 1) 0%, rgb(from ${
         darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 1) 25%, rgb(from ${
+      } r g b / 1) 20%, rgb(from ${
         darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
       } r g b / 1) 100%`,
     ],
