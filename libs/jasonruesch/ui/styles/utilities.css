@@ -2,8 +2,10 @@
   padding-bottom: calc(var(--spacing-3) + env(safe-area-inset-bottom));
 }
 
-.pb-safe-offset-4 {
-  padding-bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom));
+@media screen and (min-width: 40rem) {
+  .sm\:pb-safe-offset-5 {
+    padding-bottom: calc(var(--spacing-5) + env(safe-area-inset-bottom));
+  }
 }
 
 .px-safe-offset-4 {

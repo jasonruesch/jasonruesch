@@ -3,6 +3,7 @@ export * from './blank-page';
 export * from './easter-egg-link';
 export * from './feature-flags-manager-button';
 export * from './feature-flags-manager.modal';
+export * from './footer';
 export * from './header';
 export * from './layout';
 export * from './lipsum';

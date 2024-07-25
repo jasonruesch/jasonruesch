@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 import { pageScrollVariants, pageVariants } from '../animations';
 import { WillNavigateContext } from '../hooks';
 import { Background } from './background';
-import { PageNavLink } from './page-nav-link';
+import { Footer } from './footer';
 
 interface PageProps {
   children?: React.ReactNode;
@@ -25,7 +25,6 @@ export const Page = ({
   const [searchParams] = useSearchParams();
   const stageAnimations = searchParams.get('stage') === 'true';
   const { slideRight } = use(WillNavigateContext);
-  const packageVersion = import.meta.env.PACKAGE_VERSION;
   const backgroundSlot = document.getElementById('background');
 
   return (
@@ -58,20 +57,7 @@ export const Page = ({
             {children}
           </div>
 
-          {!transparent ? (
-            <footer className="px-safe-offset-4 pb-safe-offset-3 sm:pb-safe-offset-4 flex flex-col items-center justify-center pt-3 text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:pt-6 sm:text-base dark:text-neutral-400">
-              <span>
-                &copy; {new Date().getFullYear()} Jason Ruesch. All rights
-                reserved.
-              </span>
-              <span className="hidden sm:flex">&bull;</span>
-              <div className="flex items-center gap-x-1">
-                <span>v{packageVersion}</span>
-                <span>&bull;</span>
-                <PageNavLink to="/privacy">Privacy Policy</PageNavLink>
-              </div>
-            </footer>
-          ) : null}
+          {!transparent ? <Footer /> : null}
         </motion.div>
       </motion.div>
     </>
