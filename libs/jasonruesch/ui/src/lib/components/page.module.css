@@ -1,23 +1,23 @@
 .background-top {
-  background: var(--color-neutral-50) url('backgrounds/top-light.svg') repeat-x
+  background: var(--color-neutral-50) url('/backgrounds/top-light.svg') repeat-x
     top left;
 }
 
 @media (prefers-color-scheme: dark) {
   .background-top {
-    background: var(--color-neutral-900) url('backgrounds/top-dark.svg')
+    background: var(--color-neutral-900) url('/backgrounds/top-dark.svg')
       repeat-x top left;
   }
 }
 
 .background-bottom {
-  background: transparent url('backgrounds/bottom-light.svg') repeat-x bottom
+  background: transparent url('/backgrounds/bottom-light.svg') repeat-x bottom
     left;
 }
 
 @media (prefers-color-scheme: dark) {
   .background-bottom {
-    background: transparent url('backgrounds/bottom-dark.svg') repeat-x bottom
+    background: transparent url('/backgrounds/bottom-dark.svg') repeat-x bottom
       left;
   }
 }
