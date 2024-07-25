@@ -1,3 +1,36 @@
+## 1.2.0 (2024-07-25)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add mobile menu ([88866b9](https://github.com/jasonruesch/jasonruesch/commit/88866b9))
+- **jasonruesch:** update mobile nav styles ([a74f43c](https://github.com/jasonruesch/jasonruesch/commit/a74f43c))
+- **jasonruesch:** update mobile nav styles to work with safe area ([2bde835](https://github.com/jasonruesch/jasonruesch/commit/2bde835))
+- **jasonruesch:** replace shadow with ring around about image ([d782f68](https://github.com/jasonruesch/jasonruesch/commit/d782f68))
+- **jasonruesch:** add flags and manager ([1944969](https://github.com/jasonruesch/jasonruesch/commit/1944969))
+- **jasonruesch:** update typography styles ([511fac2](https://github.com/jasonruesch/jasonruesch/commit/511fac2))
+- **jasonruesch:** update footer size and spacing ([e877da4](https://github.com/jasonruesch/jasonruesch/commit/e877da4))
+- **jasonruesch:** move background to page to use transparent value ([e38bfb8](https://github.com/jasonruesch/jasonruesch/commit/e38bfb8))
+- **jasonruesch:** update feature flag manager title ([5cfcd85](https://github.com/jasonruesch/jasonruesch/commit/5cfcd85))
+- **jasonruesch:** add flagsmith for feature flags ([05635f8](https://github.com/jasonruesch/jasonruesch/commit/05635f8))
+- **jasonruesch:** misc updates ([03d2e94](https://github.com/jasonruesch/jasonruesch/commit/03d2e94))
+- **jasonruesch:** disable flag manager modal ([b280040](https://github.com/jasonruesch/jasonruesch/commit/b280040))
+- **jasonruesch:** update heading sizes ([5f9a592](https://github.com/jasonruesch/jasonruesch/commit/5f9a592))
+- **jasonruesch:** update footer padding ([4c4ba20](https://github.com/jasonruesch/jasonruesch/commit/4c4ba20))
+- **jasonruesch:** misc updates ([1cc4682](https://github.com/jasonruesch/jasonruesch/commit/1cc4682))
+- **jasonruesch:** update footer spacing ([5f98e13](https://github.com/jasonruesch/jasonruesch/commit/5f98e13))
+- **jasonruesch:** update header scroll color ([59cafcd](https://github.com/jasonruesch/jasonruesch/commit/59cafcd))
+- **jasonruesch:** update header gradient ([9143162](https://github.com/jasonruesch/jasonruesch/commit/9143162))
+- **jasonruesch:** add top and bottom page backgrounds ([4452e4c](https://github.com/jasonruesch/jasonruesch/commit/4452e4c))
+
+### 🩹 Fixes
+
+- **jasonruesch:** remove invalid reference ([b80e9e6](https://github.com/jasonruesch/jasonruesch/commit/b80e9e6))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.1.0 (2024-07-16)
 
 
