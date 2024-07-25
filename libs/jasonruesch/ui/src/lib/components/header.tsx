@@ -18,24 +18,12 @@ interface HeaderProps {
 export const Header = ({ className }: HeaderProps) => {
   const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const { scrollY } = useScroll();
-  const background = useTransform(
+  const backgroundColor = useTransform(
     scrollY,
     [0, 56],
     [
-      `linear-gradient(180deg, rgb(from ${
-        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 1) 0%, rgb(from ${
-        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 0.5) 20%, rgb(from ${
-        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 0) 80%`,
-      `linear-gradient(180deg, rgb(from ${
-        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 1) 0%, rgb(from ${
-        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 1) 20%, rgb(from ${
-        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
-      } r g b / 1) 100%`,
+      `rgb(from ${darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'} r g b / 0)`,
+      `rgb(from ${darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'} r g b / 1)`,
     ],
   );
   const boxShadow = useTransform(
@@ -61,7 +49,7 @@ export const Header = ({ className }: HeaderProps) => {
         className,
       )}
       style={{
-        background,
+        backgroundColor,
         boxShadow,
       }}
     >

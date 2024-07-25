@@ -12,4 +12,5 @@ export * from './logo-neutral';
 export * from './mobile-nav';
 export * from './nav';
 export * from './page';
+export * from './page-background';
 export * from './page-nav-link';

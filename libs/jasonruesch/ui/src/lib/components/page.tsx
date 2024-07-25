@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { use } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge';
 
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
@@ -8,6 +8,8 @@ import { pageScrollVariants, pageVariants } from '../animations';
 import { WillNavigateContext } from '../hooks';
 import { Background } from './background';
 import { Footer } from './footer';
+
+import styles from './page.module.css';
 
 interface PageProps {
   children?: React.ReactNode;
@@ -35,7 +37,7 @@ export const Page = ({
 
       <motion.div
         className={twMerge(
-          transparent ? '' : 'bg-neutral-50 dark:bg-neutral-900',
+          transparent ? '' : styles['background-top'],
           className,
         )}
         initial="initial"
@@ -45,7 +47,10 @@ export const Page = ({
         variants={pageVariants}
       >
         <motion.div
-          className="flex min-h-dvh flex-col"
+          className={twJoin(
+            'flex min-h-dvh flex-col',
+            transparent ? '' : styles['background-bottom'],
+          )}
           initial={false}
           animate="animate"
           exit="exit"
