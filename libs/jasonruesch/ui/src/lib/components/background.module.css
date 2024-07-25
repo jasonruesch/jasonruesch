@@ -1,10 +1,10 @@
 .background {
   background-image: linear-gradient(
     to bottom,
-    var(--color-neutral-50),
+    var(--color-white),
     var(--color-cyan-600),
     var(--color-fuchsia-600),
-    var(--color-neutral-50)
+    var(--color-white)
   );
 }
 
@@ -12,10 +12,10 @@
   .background {
     background-image: linear-gradient(
       to bottom,
-      var(--color-neutral-900),
+      var(--color-neutral-950),
       var(--color-violet-500),
       var(--color-teal-500),
-      var(--color-neutral-900)
+      var(--color-neutral-950)
     );
   }
 }

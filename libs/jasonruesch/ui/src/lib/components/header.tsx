@@ -18,12 +18,24 @@ interface HeaderProps {
 export const Header = ({ className }: HeaderProps) => {
   const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const { scrollY } = useScroll();
-  const backgroundColor = useTransform(
+  const background = useTransform(
     scrollY,
     [0, 56],
     [
-      `rgb(from ${darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'} r g b / 0)`,
-      `rgb(from ${darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'} r g b / 1)`,
+      `linear-gradient(180deg, rgb(from ${
+        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
+      } r g b / 1) 0%, rgb(from ${
+        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
+      } r g b / 0.5) 25%, rgb(from ${
+        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
+      } r g b / 0) 100%`,
+      `linear-gradient(180deg, rgb(from ${
+        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
+      } r g b / 1) 0%, rgb(from ${
+        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
+      } r g b / 1) 25%, rgb(from ${
+        darkMode ? 'var(--color-neutral-950)' : 'var(--color-white)'
+      } r g b / 1) 100%`,
     ],
   );
   const boxShadow = useTransform(
@@ -39,19 +51,6 @@ export const Header = ({ className }: HeaderProps) => {
 
   const handleMobileMenuOpen = (open: boolean) => {
     setMobileMenuOpen(open);
-
-    // document
-    //   .querySelector(
-    //     'meta[name="theme-color"][media="(prefers-color-scheme: light)"]',
-    //   )
-    //   ?.setAttribute('content', open ? '#ffffff' : '#fafafa');
-    // document
-    //   .querySelector(
-    //     'meta[name="theme-color"][media="(prefers-color-scheme: dark)"]',
-    //   )
-    //   ?.setAttribute('content', open ? '#0a0a0a' : '#171717');
-
-    // document.body.style.overflow = open ? 'hidden' : '';
   };
 
   return (
@@ -62,7 +61,7 @@ export const Header = ({ className }: HeaderProps) => {
         className,
       )}
       style={{
-        backgroundColor,
+        background,
         boxShadow,
       }}
     >
