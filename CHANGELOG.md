@@ -1,3 +1,14 @@
+## 1.2.1 (2024-07-25)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** update background image urls ([8fc4771](https://github.com/jasonruesch/jasonruesch/commit/8fc4771))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.2.0 (2024-07-25)
 
 
