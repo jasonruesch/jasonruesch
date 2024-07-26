@@ -3,10 +3,10 @@
 1. [Nx](#nx)
 2. [React 19 Beta](#react-19-beta)
 3. [React Router 6](#react-router-6)
-4. [Tailwind CSS 4 Alpha and tailwind-merge](#tailwind-css-4-alpha)
+4. [Tailwind CSS 4 Alpha and tailwind-merge](#tailwind-css-4-alpha-and-tailwind-merge)
 5. [Husky](#husky)
 6. [Lint-Staged](#lint-staged)
-7. [Conventional Commits and Commitlint](#conventional-commits)
+7. [Conventional Commits and Commitlint](#conventional-commits-and-commitlint)
 8. [Commitizen](#commitizen)
 9. [Google Analytics](#google-analytics)
 10. [Docker](#docker)
@@ -79,7 +79,7 @@ Update `package.json` with the following:
 npm install react-router-dom
 ```
 
-<div id="tailwind-css-4-alpha"></div>
+<div id="tailwind-css-4-alpha-and-tailwind-merge"></div>
 
 ## [Tailwind CSS 4 Alpha](https://tailwindcss.com/) and [tailwind-merge](https://github.com/dcastil/tailwind-merge)
 
@@ -153,7 +153,7 @@ Update `.husky/pre-commit` with the following:
 npx lint-staged
 ```
 
-<div id="conventional-commits"></div>
+<div id="conventional-commits-and-commitlint"></div>
 
 ## [Conventional Commits](https://www.conventionalcommits.org/) and [Commitlint](https://commitlint.js.org/)
 
