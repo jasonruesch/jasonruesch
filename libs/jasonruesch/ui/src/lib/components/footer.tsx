@@ -1,10 +1,21 @@
+import { twMerge } from 'tailwind-merge';
+
 import { PageNavLink } from './page-nav-link';
 
-export const Footer = () => {
+export interface FooterProps {
+  className?: string;
+}
+
+export const Footer = ({ className }: FooterProps) => {
   const packageVersion = import.meta.env.PACKAGE_VERSION;
 
   return (
-    <footer className="px-safe-offset-4 mb-safe flex h-14 flex-col items-center justify-center text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:text-base dark:text-neutral-400">
+    <footer
+      className={twMerge(
+        'px-safe-offset-4 mb-safe flex h-14 flex-col items-center justify-center text-sm text-neutral-600 sm:flex-row sm:gap-x-1 sm:text-base dark:text-neutral-400',
+        className,
+      )}
+    >
       <span>
         &copy; {new Date().getFullYear()} Jason Ruesch. All rights reserved.
       </span>

@@ -22,30 +22,9 @@
   }
 }
 
-.dragon {
-  position: fixed;
-  left: 16px;
-  top: 16px;
-  width: calc(100% - 32px);
-  height: calc(100% - 32px);
-  mask-image: url('/backgrounds/dragon.svg');
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center center;
-  background-color: var(--color-white);
-}
-
-@media (prefers-color-scheme: dark) {
-  .dragon {
-    background-color: var(--color-neutral-950);
-  }
-}
-
 @media screen and (min-width: 40rem) {
-  .dragon {
-    left: 64px;
-    top: 64px;
-    width: calc(100% - 128px);
-    height: calc(100% - 128px);
+  .background-top,
+  .background-bottom {
+    background-size: 96px;
   }
 }

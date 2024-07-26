@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
 import { use, useRef } from 'react';
-import { twJoin, twMerge } from 'tailwind-merge';
-
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
+import { twJoin, twMerge } from 'tailwind-merge';
+
 import { pageScrollVariants, pageVariants } from '../animations';
 import { WillNavigateContext } from '../hooks';
 import { Background } from './background';
 import { Footer } from './footer';
+import { PageBackground } from './page-background';
 
 import styles from './page.module.css';
 
@@ -26,9 +27,18 @@ export const Page = ({
 }: PageProps) => {
   const pageRef = useRef<HTMLDivElement>(null);
   const [searchParams] = useSearchParams();
-  const stageAnimations = searchParams.get('stage') === 'true';
   const { slideRight } = use(WillNavigateContext);
+
+  const stageAnimations = searchParams.get('stage') === 'true';
   const backgroundSlot = document.getElementById('background');
+
+  const handleAnimationComplete = (definition: string) => {
+    if (definition === 'animate') {
+      setTimeout(() => {
+        if (pageRef.current) pageRef.current.style.transform = 'none';
+      }, 100);
+    }
+  };
 
   return (
     <>
@@ -39,6 +49,7 @@ export const Page = ({
       <motion.div
         ref={pageRef}
         className={twMerge(
+          'relative',
           transparent ? '' : styles['background-top'],
           className,
         )}
@@ -47,15 +58,7 @@ export const Page = ({
         exit="exit"
         custom={{ transparent, slideRight, stageAnimations }}
         variants={pageVariants}
-        onAnimationComplete={(definition) => {
-          if (definition === 'animate') {
-            setTimeout(() => {
-              if (pageRef.current) {
-                pageRef.current.style.transform = 'none';
-              }
-            }, 100);
-          }
-        }}
+        onAnimationComplete={handleAnimationComplete}
       >
         <motion.div
           className={twJoin(
@@ -67,18 +70,20 @@ export const Page = ({
           exit="exit"
           variants={pageScrollVariants}
         >
-          {transparent ? null : <div className={styles.dragon} />}
+          {transparent ? null : (
+            <PageBackground className="text-neutral-50 dark:text-neutral-950" />
+          )}
 
           <div
             className={twMerge(
-              'px-safe-offset-4 z-10 grow pt-16 pb-2',
+              'px-safe-offset-4 relative z-10 grow pt-16 pb-2',
               contentClassName,
             )}
           >
             {children}
           </div>
 
-          {!transparent ? <Footer /> : null}
+          {!transparent ? <Footer className="z-10" /> : null}
         </motion.div>
       </motion.div>
     </>
