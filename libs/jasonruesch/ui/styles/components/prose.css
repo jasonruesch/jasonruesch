@@ -232,7 +232,7 @@
   margin-bottom: 1.6em;
   padding-left: 1em;
 }
-.prose
+/* .prose
   :where(blockquote p:first-of-type):not(
     :where([class~='not-prose'], [class~='not-prose'] *)
   )::before {
@@ -243,7 +243,7 @@
     :where([class~='not-prose'], [class~='not-prose'] *)
   )::after {
   content: close-quote;
-}
+} */
 .prose :where(h1):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   color: var(--tw-prose-headings);
   font-weight: 800;

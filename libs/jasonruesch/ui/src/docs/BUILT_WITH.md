@@ -1,4 +1,18 @@
-# Built With
+# Table of Contents
+
+1. [Nx](/built-with#nx)
+2. [React 19 Beta](/built-with#react-19-beta)
+3. [React Router 6](/built-with#react-router-6)
+4. [Tailwind CSS 4 Alpha and tailwind-merge](/built-with#tailwind-css-4-alpha)
+5. [Husky](/built-with#husky)
+6. [Lint-Staged](/built-with#lint-staged)
+7. [Conventional Commits and Commitlint](/built-with#conventional-commits)
+8. [Commitizen](/built-with#commitizen)
+9. [Google Analytics](/built-with#google-analytics)
+10. [Docker](/built-with#docker)
+11. [Other Tools](/built-with#other-tools)
+
+<div id="nx"></div>
 
 ## [Nx](https://nx.dev/)
 
@@ -36,6 +50,8 @@ Update `apps/jasonruesch-e2e/tsconfig.json` with the following:
 }
 ```
 
+<div id="react-19-beta"></div>
+
 ## [React 19 Beta](https://reactjs.org/)
 
 ```bash
@@ -55,11 +71,15 @@ Update `package.json` with the following:
 }
 ```
 
+<div id="react-router-6"></div>
+
 ## [React Router 6](https://reactrouter.com/)
 
 ```bash
 npm install react-router-dom
 ```
+
+<div id="tailwind-css-4-alpha"></div>
 
 ## [Tailwind CSS 4 Alpha](https://tailwindcss.com/) and [tailwind-merge](https://github.com/dcastil/tailwind-merge)
 
@@ -97,6 +117,8 @@ Update `apps/jasonruesch/tsconfig.json` with the following:
 }
 ```
 
+<div id="husky"></div>
+
 ## [Husky](https://typicode.github.io/husky/)
 
 ```bash
@@ -104,6 +126,8 @@ npx husky-init && npm install
 npx husky add .husky/commit-msg ''
 npx husky add .husky/prepare-commit-msg ''
 ```
+
+<div id="lint-staged"></div>
 
 ## [Lint-Staged](https://github.com/lint-staged/lint-staged)
 
@@ -128,6 +152,8 @@ Update `.husky/pre-commit` with the following:
 
 npx lint-staged
 ```
+
+<div id="conventional-commits"></div>
 
 ## [Conventional Commits](https://www.conventionalcommits.org/) and [Commitlint](https://commitlint.js.org/)
 
@@ -158,6 +184,8 @@ Update `.husky/commit-msg` with the following:
 
 npx --no-install commitlint -V --edit "$1"
 ```
+
+<div id="commitizen"></div>
 
 ## [Commitizen](https://commitizen-tools.github.io/commitizen/)
 
@@ -212,6 +240,8 @@ fi
 (exec < /dev/tty && node_modules/.bin/cz --hook) || true < /dev/null
 ```
 
+<div id="google-analytics"></div>
+
 ## [Google Analytics](https://analytics.google.com/)
 
 ```bash
@@ -219,6 +249,8 @@ npm install react-ga4
 ```
 
 > Note: See [react-ga4](https://github.com/codler/react-ga4) for setup instructions and configuration.
+
+<div id="docker"></div>
 
 ## [Docker](https://www.docker.com/)
 
@@ -266,6 +298,8 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true # To fix an issue with HMR on Windows machines
 ```
+
+<div id="other-tools"></div>
 
 ## Other Tools
 

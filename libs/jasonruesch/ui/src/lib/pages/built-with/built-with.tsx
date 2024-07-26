@@ -1,6 +1,7 @@
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import rehypeRaw from 'rehype-raw';
 
 import markdown from '../../../docs/BUILT_WITH.md';
 import { Page } from '../../components';
@@ -31,6 +32,7 @@ export function BuiltWith() {
               );
             },
           }}
+          rehypePlugins={[rehypeRaw]}
         >
           {markdown}
         </Markdown>
