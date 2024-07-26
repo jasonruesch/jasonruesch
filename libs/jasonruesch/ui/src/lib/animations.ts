@@ -54,7 +54,7 @@ export const pageVariants: Variants = {
       scale: 1,
       width: '100%',
       height: '100%',
-      position: 'static',
+      position: 'relative',
       overflow: 'visible',
       borderRadius: '0rem',
       // Using a timeline for boxShadow to avoid an issue with initial bleeding into view

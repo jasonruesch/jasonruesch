@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { use } from 'react';
+import { use, useRef } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
 import { createPortal } from 'react-dom';
@@ -24,6 +24,7 @@ export const Page = ({
   className,
   contentClassName,
 }: PageProps) => {
+  const pageRef = useRef<HTMLDivElement>(null);
   const [searchParams] = useSearchParams();
   const stageAnimations = searchParams.get('stage') === 'true';
   const { slideRight } = use(WillNavigateContext);
@@ -36,6 +37,7 @@ export const Page = ({
         : null}
 
       <motion.div
+        ref={pageRef}
         className={twMerge(
           transparent ? '' : styles['background-top'],
           className,
@@ -45,10 +47,19 @@ export const Page = ({
         exit="exit"
         custom={{ transparent, slideRight, stageAnimations }}
         variants={pageVariants}
+        onAnimationComplete={(definition) => {
+          if (definition === 'animate') {
+            setTimeout(() => {
+              if (pageRef.current) {
+                pageRef.current.style.transform = 'none';
+              }
+            }, 100);
+          }
+        }}
       >
         <motion.div
           className={twJoin(
-            'flex min-h-dvh flex-col',
+            'relative flex min-h-dvh flex-col',
             transparent ? '' : styles['background-bottom'],
           )}
           initial={false}
@@ -56,9 +67,11 @@ export const Page = ({
           exit="exit"
           variants={pageScrollVariants}
         >
+          {transparent ? null : <div className={styles.dragon} />}
+
           <div
             className={twMerge(
-              'px-safe-offset-4 grow pt-16 pb-2',
+              'px-safe-offset-4 z-10 grow pt-16 pb-2',
               contentClassName,
             )}
           >
