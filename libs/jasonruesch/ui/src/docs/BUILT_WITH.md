@@ -1,16 +1,16 @@
 # Table of Contents
 
-1. [Nx](/built-with#nx)
-2. [React 19 Beta](/built-with#react-19-beta)
-3. [React Router 6](/built-with#react-router-6)
-4. [Tailwind CSS 4 Alpha and tailwind-merge](/built-with#tailwind-css-4-alpha)
-5. [Husky](/built-with#husky)
-6. [Lint-Staged](/built-with#lint-staged)
-7. [Conventional Commits and Commitlint](/built-with#conventional-commits)
-8. [Commitizen](/built-with#commitizen)
-9. [Google Analytics](/built-with#google-analytics)
-10. [Docker](/built-with#docker)
-11. [Other Tools](/built-with#other-tools)
+1. [Nx](#nx)
+2. [React 19 Beta](#react-19-beta)
+3. [React Router 6](#react-router-6)
+4. [Tailwind CSS 4 Alpha and tailwind-merge](#tailwind-css-4-alpha)
+5. [Husky](#husky)
+6. [Lint-Staged](#lint-staged)
+7. [Conventional Commits and Commitlint](#conventional-commits)
+8. [Commitizen](#commitizen)
+9. [Google Analytics](#google-analytics)
+10. [Docker](#docker)
+11. [Other Tools](#other-tools)
 
 <div id="nx"></div>
 

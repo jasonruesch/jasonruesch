@@ -3,10 +3,13 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 
+import { useLocation } from 'react-router-dom';
 import markdown from '../../../docs/BUILT_WITH.md';
 import { Page } from '../../components';
 
 export function BuiltWith() {
+  const { pathname } = useLocation();
+
   return (
     <Page contentClassName="flex flex-col items-start">
       <h1 className="gradient-heading" aria-label="Built With">
@@ -33,6 +36,13 @@ export function BuiltWith() {
             },
           }}
           rehypePlugins={[rehypeRaw]}
+          urlTransform={(value: string) => {
+            if (value.startsWith('#')) {
+              return `${pathname}${value}`;
+            }
+
+            return value;
+          }}
         >
           {markdown}
         </Markdown>
