@@ -1,10 +1,12 @@
 /* Links */
 :any-link {
   color: var(--color-cyan-700);
+  --tw-prose-links: var(--color-cyan-700);
 }
 :any-link:hover,
 :any-link:focus-visible {
   color: var(--color-cyan-800);
+  --tw-prose-links: var(--color-cyan-800);
 }
 :any-link:focus-visible {
   outline: none;
@@ -14,10 +16,12 @@
 @media (prefers-color-scheme: dark) {
   :any-link {
     color: var(--color-violet-400);
+    --tw-prose-links: var(--color-violet-400);
   }
   :any-link:hover,
   :any-link:focus-visible {
     color: var(--color-violet-300);
+    --tw-prose-links: var(--color-violet-300);
   }
 }
 
@@ -113,6 +117,7 @@ h6:has(+ *) {
 /* Paragraphs */
 p {
   color: var(--color-neutral-600);
+  --tw-prose-body: var(--color-neutral-600);
 }
 p:has(+ *) {
   /* Only add margin if there is a sibling following the paragraph */
@@ -122,6 +127,7 @@ p:has(+ *) {
 @media (prefers-color-scheme: dark) {
   p {
     color: var(--color-neutral-400);
+    --tw-prose-body: var(--color-neutral-400);
   }
 }
 

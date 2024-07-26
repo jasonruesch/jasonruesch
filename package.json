@@ -19,6 +19,7 @@
     "react": "^19.0.0-beta-26f2496093-20240514",
     "react-dom": "^19.0.0-beta-26f2496093-20240514",
     "react-ga4": "^2.1.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.24.1",
     "react-syntax-highlighter": "^15.5.0",
     "tslib": "^2.3.0"

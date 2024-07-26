@@ -12,12 +12,14 @@ export const Layout = ({ children }: LayoutProps) => {
 
       <Header />
 
-      {/* The relative position is needed to work with the background component's fixed or absolute position */}
-      <main className="relative">{children}</main>
+      <main>
+        {/* The relative position is needed to work with the background component's fixed or absolute position */}
+        <div className="relative">{children}</div>
 
-      <EasterEggLink />
+        <EasterEggLink />
 
-      {/* <FeatureFlagsManager /> */}
+        {/* <FeatureFlagsManager /> */}
+      </main>
     </>
   );
 };

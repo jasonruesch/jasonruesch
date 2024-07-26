@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { use, useRef } from 'react';
+import { use } from 'react';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
 import { twJoin, twMerge } from 'tailwind-merge';
@@ -25,20 +25,20 @@ export const Page = ({
   className,
   contentClassName,
 }: PageProps) => {
-  const pageRef = useRef<HTMLDivElement>(null);
+  // const pageRef = useRef<HTMLDivElement>(null);
   const [searchParams] = useSearchParams();
   const { slideRight } = use(WillNavigateContext);
 
   const stageAnimations = searchParams.get('stage') === 'true';
   const backgroundSlot = document.getElementById('background');
 
-  const handleAnimationComplete = (definition: string) => {
-    if (definition === 'animate') {
-      setTimeout(() => {
-        if (pageRef.current) pageRef.current.style.transform = 'none';
-      }, 100);
-    }
-  };
+  // const handleAnimationComplete = (definition: string) => {
+  //   if (definition === 'animate') {
+  //     setTimeout(() => {
+  //       if (pageRef.current) pageRef.current.style.transform = 'none';
+  //     }, 100);
+  //   }
+  // };
 
   return (
     <>
@@ -47,7 +47,7 @@ export const Page = ({
         : null}
 
       <motion.div
-        ref={pageRef}
+        // ref={pageRef}
         className={twMerge(
           'relative',
           transparent ? '' : styles['background-top'],
@@ -58,7 +58,7 @@ export const Page = ({
         exit="exit"
         custom={{ transparent, slideRight, stageAnimations }}
         variants={pageVariants}
-        onAnimationComplete={handleAnimationComplete}
+        // onAnimationComplete={handleAnimationComplete}
       >
         <motion.div
           className={twJoin(

@@ -4,6 +4,7 @@ import { Page } from './components';
 import {
   About,
   Articles,
+  BuiltWith,
   Contact,
   EasterEgg,
   Home,
@@ -21,6 +22,7 @@ export const AppRoutes = ({ location }: RoutesProps) => {
       <Route path="/articles" element={<Articles />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/uses" element={<Uses />} />
+      <Route path="/built-with" element={<BuiltWith />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/blank" element={<Page />} />
       <Route path="/transparent" element={<Transparent />} />
