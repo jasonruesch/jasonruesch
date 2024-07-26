@@ -1,3 +1,19 @@
+## 1.3.0 (2024-07-26)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add dragon background image ([e0bc7d7](https://github.com/jasonruesch/jasonruesch/commit/e0bc7d7))
+- **jasonruesch:** update dragon background ([b06f353](https://github.com/jasonruesch/jasonruesch/commit/b06f353))
+- **jasonruesch:** add built-with page ([7bf0760](https://github.com/jasonruesch/jasonruesch/commit/7bf0760))
+- **jasonruesch:** add skip navigation link ([880b539](https://github.com/jasonruesch/jasonruesch/commit/880b539))
+- **jasonruesch:** add toc to built-with doc ([3b451e2](https://github.com/jasonruesch/jasonruesch/commit/3b451e2))
+- **jasonruesch:** transform hash urls in markdown ([a3f2be5](https://github.com/jasonruesch/jasonruesch/commit/a3f2be5))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.2.1 (2024-07-25)
 
 
