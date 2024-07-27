@@ -1,3 +1,14 @@
+## 1.4.0 (2024-07-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** improve feature flags manager ([2a6da29](https://github.com/jasonruesch/jasonruesch/commit/2a6da29))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.3.0 (2024-07-26)
 
 
