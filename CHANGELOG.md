@@ -1,3 +1,14 @@
+## 1.6.1 (2024-07-27)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** update background gradients ([99c3785](https://github.com/jasonruesch/jasonruesch/commit/99c3785))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.6.0 (2024-07-27)
 
 
