@@ -18,35 +18,37 @@ export function BuiltWith() {
           <span className="heading-lg">With</span>
         </div>
       </h1>
-      <article className="prose">
-        <Markdown
-          components={{
-            code: ({ className, children, ...props }) => {
-              const match = /language-(\w+)/.exec(className || '');
+      <div className="w-full">
+        <article className="prose">
+          <Markdown
+            components={{
+              code: ({ className, children, ...props }) => {
+                const match = /language-(\w+)/.exec(className || '');
 
-              return match ? (
-                <SyntaxHighlighter language={match[1]} style={tomorrow}>
-                  {String(children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            },
-          }}
-          rehypePlugins={[rehypeRaw]}
-          urlTransform={(value: string) => {
-            if (value.startsWith('#')) {
-              return `${pathname}${value}`;
-            }
+                return match ? (
+                  <SyntaxHighlighter language={match[1]} style={tomorrow}>
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+            rehypePlugins={[rehypeRaw]}
+            urlTransform={(value: string) => {
+              if (value.startsWith('#')) {
+                return `${pathname}${value}`;
+              }
 
-            return value;
-          }}
-        >
-          {markdown}
-        </Markdown>
-      </article>
+              return value;
+            }}
+          >
+            {markdown}
+          </Markdown>
+        </article>
+      </div>
     </Page>
   );
 }

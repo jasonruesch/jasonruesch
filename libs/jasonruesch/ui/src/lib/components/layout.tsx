@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
 import { EasterEggLink } from './easter-egg-link';
+import FeatureFlagsManager from './feature-flags-manager.modal';
 import { Header } from './header';
 
 import styles from './layout.module.css';
@@ -30,7 +31,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
         <EasterEggLink />
 
-        {/* <FeatureFlagsManager /> */}
+        <FeatureFlagsManager />
       </main>
     </>
   );

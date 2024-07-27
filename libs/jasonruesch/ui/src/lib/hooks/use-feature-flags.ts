@@ -1,21 +1,35 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { useFlags } from 'flagsmith/react';
 import { FeatureFlag, featureFlags } from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 export const FeatureFlagsContext = createContext<
-  [FeatureFlag[], (flag: FeatureFlag) => void]
->([featureFlags, noop]);
+  // flags, setFlags, resetFlags
+  [FeatureFlag[], (flag: FeatureFlag) => void, () => void]
+>([featureFlags, noop, noop]);
 
 export const useFeatureFlags = () => {
+  // Flagsmith flags
+  const flagsmithFlags = useFlags(featureFlags.map((flag) => flag.key));
+  const flagsmithFeatureFlags = Object.entries(flagsmithFlags).reduce(
+    (acc, [key, { enabled }]) => {
+      const flag = featureFlags.find((f) => f.key === key);
+      return flag ? acc.concat({ ...flag, enabled }) : acc;
+    },
+    [] as FeatureFlag[],
+  );
+
+  // Local storage flags
   const storage = window.localStorage ?? window.sessionStorage;
   const storedFlags = JSON.parse(
     storage.getItem('featureFlags') ?? '[]',
   ) as FeatureFlag[];
 
+  // Search flags from URL
   const [searchParams, setSearchParams] = useSearchParams();
   const searchFlags = Array.from(searchParams.entries())
     .map(([key, value]) => {
@@ -26,14 +40,21 @@ export const useFeatureFlags = () => {
     })
     .filter((flag) => flag !== null);
 
-  const uniqueFlags = [
+  const getUniqueFlags = () => [
     ...new Map(
       featureFlags
+        .concat(flagsmithFeatureFlags)
         .concat(storedFlags)
         .concat(searchFlags)
         .map((item) => [item['key'], item]),
     ).values(),
   ];
+  const uniqueFlags = getUniqueFlags();
+
+  if (storedFlags.length === 0) {
+    storage.setItem('featureFlags', JSON.stringify(uniqueFlags));
+  }
+
   const [flags, setFlags] = useState<FeatureFlag[]>(uniqueFlags);
 
   const updateFlags = useCallback(
@@ -42,6 +63,7 @@ export const useFeatureFlags = () => {
         const updated = flags.map((f) =>
           f.key === flag.key ? { ...f, enabled: flag.enabled } : f,
         );
+
         storage.setItem('featureFlags', JSON.stringify(updated));
 
         return updated;
@@ -50,30 +72,14 @@ export const useFeatureFlags = () => {
     [storage],
   );
 
-  useEffect(() => {
-    const storedFlags = JSON.parse(
-      storage.getItem('featureFlags') ?? '[]',
-    ) as FeatureFlag[];
-    const searchFlags = Array.from(searchParams.entries())
-      .map(([key, value]) => {
-        const flag = featureFlags.find((f) => f.key === key);
-        return flag
-          ? ({ ...flag, enabled: value === 'true' } as FeatureFlag)
-          : null;
-      })
-      .filter((flag) => flag !== null);
-
-    const updated = [
-      ...new Map(
-        featureFlags
-          .concat(storedFlags)
-          .concat(searchFlags)
-          .map((item) => [item['key'], item]),
-      ).values(),
-    ];
-    storage.setItem('featureFlags', JSON.stringify(updated));
-    setFlags(updated);
-  }, [storage, searchParams]);
+  const resetFlags = () => {
+    console.log('reset flags');
+    const flags = flagsmithFeatureFlags.length
+      ? flagsmithFeatureFlags
+      : featureFlags;
+    storage.setItem('featureFlags', JSON.stringify(flags));
+    setFlags(flags);
+  };
 
   useEffect(() => {
     flags
@@ -85,7 +91,7 @@ export const useFeatureFlags = () => {
     setSearchParams(searchParams);
   }, [flags, searchParams, setSearchParams]);
 
-  return [flags, updateFlags] as const;
+  return [flags, updateFlags, resetFlags] as const;
 };
 
 export const findFeatureFlag = (flags: FeatureFlag[], key: string) =>

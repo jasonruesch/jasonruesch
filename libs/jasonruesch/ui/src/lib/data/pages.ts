@@ -33,6 +33,12 @@ const usesPage: PageMeta = {
   navType: 'primary',
   hidden: true,
 };
+const builtWithPage: PageMeta = {
+  name: 'Built With',
+  href: '/built-with',
+  navType: 'primary',
+  hidden: true,
+};
 const contactPage: PageMeta = {
   name: 'Contact',
   href: '/contact',
@@ -60,6 +66,7 @@ export const pages: PageMeta[] = [
   articlesPage,
   projectsPage,
   usesPage,
+  builtWithPage,
   contactPage,
   privacyPage,
   blankPage,

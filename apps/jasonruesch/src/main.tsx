@@ -1,3 +1,5 @@
+import flagsmith from 'flagsmith';
+import { FlagsmithProvider } from 'flagsmith/react';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import {
@@ -9,6 +11,8 @@ import {
 
 import App from './app/app';
 
+const flagsmithEnvironmentId = import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID;
+
 const router = createBrowserRouter(
   createRoutesFromElements(<Route path="/*" element={<App />} />),
 );
@@ -18,6 +22,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <FlagsmithProvider
+      {...(flagsmithEnvironmentId
+        ? { options: { environmentID: flagsmithEnvironmentId } }
+        : {})}
+      flagsmith={flagsmith}
+    >
+      <RouterProvider router={router} />
+    </FlagsmithProvider>
   </StrictMode>,
 );

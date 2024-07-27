@@ -14,7 +14,7 @@ import { FeatureFlagsContext, useActionKey } from '../hooks';
 import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
 
 export default function FeatureFlagsManager() {
-  const [flags, setFlags] = use(FeatureFlagsContext);
+  const [flags, setFlags, resetFlags] = use(FeatureFlagsContext);
   const [open, setOpen] = useState(false);
   const { ctrlKey, metaKey } = useActionKey();
 
@@ -37,7 +37,7 @@ export default function FeatureFlagsManager() {
 
   return (
     <>
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
+      <Dialog open={open} onClose={setOpen} className="relative z-40">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-neutral-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-700/75"
@@ -107,6 +107,17 @@ export default function FeatureFlagsManager() {
                   </Switch>
                 </Field>
               ))}
+
+              {/* Reset button */}
+              <div className="mt-4">
+                <button
+                  type="button"
+                  className="btn-neutral w-full sm:w-auto"
+                  onClick={resetFlags}
+                >
+                  Reset flags
+                </button>
+              </div>
             </div>
           </DialogPanel>
         </div>

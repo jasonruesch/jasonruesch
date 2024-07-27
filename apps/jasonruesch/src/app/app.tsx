@@ -1,5 +1,3 @@
-import flagsmith from 'flagsmith';
-import { FlagsmithProvider } from 'flagsmith/react';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
@@ -7,7 +5,9 @@ import { useLocation } from 'react-router-dom';
 
 import {
   AppRoutes,
+  FeatureFlagsContext,
   Layout,
+  useFeatureFlags,
   useNavigateEvents,
   WillNavigateContext,
 } from '@jasonruesch/jasonruesch-ui';
@@ -15,9 +15,8 @@ import {
 export function App() {
   const willNavigateValue = useNavigateEvents();
   const location = useLocation();
-  // const [flags, setFlags] = useFeatureFlags();
+  const featureFlags = useFeatureFlags();
 
-  const flagsmithEnvironmentId = import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID;
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
 
   useEffect(() => {
@@ -25,13 +24,7 @@ export function App() {
   }, [measurementId]);
 
   return (
-    <FlagsmithProvider
-      {...(flagsmithEnvironmentId
-        ? { options: { environmentID: flagsmithEnvironmentId } }
-        : {})}
-      flagsmith={flagsmith}
-    >
-      {/* <FeatureFlagsContext value={[flags, setFlags]}> */}
+    <FeatureFlagsContext value={[...featureFlags]}>
       <WillNavigateContext value={willNavigateValue}>
         <Layout>
           <AnimatePresence
@@ -42,8 +35,7 @@ export function App() {
           </AnimatePresence>
         </Layout>
       </WillNavigateContext>
-      {/* </FeatureFlagsContext> */}
-    </FlagsmithProvider>
+    </FeatureFlagsContext>
   );
 }
 
