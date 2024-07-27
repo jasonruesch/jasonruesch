@@ -49,7 +49,7 @@ export default function FeatureFlagsManager() {
           )}
         />
 
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto pt-20 px-4 pb-4 sm:px-6 sm:pb-6 md:pt-28 md:px-20 md:pb-20">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto pt-20 px-4 pb-4 sm:px-6 sm:pb-6 md:pt-32 md:px-20 md:pb-20">
           <DialogPanel
             transition
             className="relative mx-auto w-full max-w-lg transform overflow-hidden rounded-lg bg-white pt-5 pb-4 text-left shadow-xl transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-950"
