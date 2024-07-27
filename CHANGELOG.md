@@ -1,3 +1,14 @@
+## 1.5.1 (2024-07-27)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** lighten dragon for mobile light mode ([2a4bf87](https://github.com/jasonruesch/jasonruesch/commit/2a4bf87))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.5.0 (2024-07-27)
 
 
