@@ -1,3 +1,14 @@
+## 1.7.0 (2024-07-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** improve mobile nav and background ([c1e1acd](https://github.com/jasonruesch/jasonruesch/commit/c1e1acd))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.6.1 (2024-07-27)
 
 
