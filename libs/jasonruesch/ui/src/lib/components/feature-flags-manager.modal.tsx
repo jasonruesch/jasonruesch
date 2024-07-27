@@ -13,6 +13,9 @@ import { use, useEffect, useState } from 'react';
 import { FeatureFlagsContext, useActionKey } from '../hooks';
 import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
 
+import { twJoin } from 'tailwind-merge';
+import styles from './background-gradients.module.css';
+
 export default function FeatureFlagsManager() {
   const [flags, setFlags, resetFlags] = use(FeatureFlagsContext);
   const [open, setOpen] = useState(false);
@@ -40,10 +43,13 @@ export default function FeatureFlagsManager() {
       <Dialog open={open} onClose={setOpen} className="relative z-40">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-neutral-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-700/75"
+          className={twJoin(
+            'fixed inset-0 bg-neutral-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-700/75',
+            styles['background-top-transparent'],
+          )}
         />
 
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto pt-20 px-4 pb-4 sm:px-6 sm:pb-6 md:pt-28 md:px-20 md:pb-20">
           <DialogPanel
             transition
             className="relative mx-auto w-full max-w-lg transform overflow-hidden rounded-lg bg-white pt-5 pb-4 text-left shadow-xl transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-950"

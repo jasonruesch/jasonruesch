@@ -1,6 +1,9 @@
 .pb-safe-offset-3 {
   padding-bottom: calc(var(--spacing-3) + env(safe-area-inset-bottom));
 }
+.pb-safe-offset-4 {
+  padding-bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom));
+}
 
 @media screen and (min-width: 40rem) {
   .sm\:pb-safe-offset-5 {
@@ -29,4 +32,17 @@
 }
 .ml-safe {
   margin-left: env(safe-area-inset-left);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.pr-safe {
+  padding-right: env(safe-area-inset-right);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pl-safe {
+  padding-left: env(safe-area-inset-left);
 }

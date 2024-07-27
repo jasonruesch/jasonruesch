@@ -1,0 +1,43 @@
+.background-top {
+  background-image: url('/backgrounds/top-light.svg');
+  background-repeat: repeat-x;
+  background-position: top left;
+}
+
+@media (prefers-color-scheme: dark) {
+  .background-top {
+    background-image: url('/backgrounds/top-dark.svg');
+  }
+}
+
+.background-bottom {
+  background-image: url('/backgrounds/bottom-light.svg');
+  background-repeat: repeat-x;
+  background-position: bottom left;
+}
+
+@media (prefers-color-scheme: dark) {
+  .background-bottom {
+    background-image: url('/backgrounds/bottom-dark.svg');
+  }
+}
+
+.background-top-transparent {
+  background-image: url('/backgrounds/top-light-transparent.svg');
+  background-repeat: repeat-x;
+  background-position: top left;
+}
+
+@media (prefers-color-scheme: dark) {
+  .background-top-transparent {
+    background-image: url('/backgrounds/top-dark-transparent.svg');
+  }
+}
+
+@media screen and (min-width: 40rem) {
+  .background-top,
+  .background-bottom,
+  .background-top-transparent {
+    background-size: 96px;
+  }
+}

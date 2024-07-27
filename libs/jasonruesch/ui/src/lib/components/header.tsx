@@ -83,7 +83,7 @@ export const Header = ({ className }: HeaderProps) => {
         aria-label="Main menu"
       >
         <div className="fixed inset-0 z-20" />
-        <DialogPanel className="px-safe-offset-4 fixed inset-y-0 z-20 w-full overflow-y-auto bg-white dark:bg-neutral-950">
+        <DialogPanel className="px-safe-offset-4 pb-safe-offset-4 fixed inset-y-0 z-20 w-full overflow-y-auto bg-white dark:bg-neutral-950">
           <div className="flex h-14 items-center gap-x-4">
             <div className="flex grow">
               <button

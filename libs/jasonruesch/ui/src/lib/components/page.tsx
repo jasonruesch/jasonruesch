@@ -10,7 +10,7 @@ import { Background } from './background';
 import { Footer } from './footer';
 import { PageBackground } from './page-background';
 
-import styles from './page.module.css';
+import styles from './background-gradients.module.css';
 
 interface PageProps {
   children?: React.ReactNode;
@@ -50,6 +50,7 @@ export const Page = ({
         // ref={pageRef}
         className={twMerge(
           'relative',
+          transparent ? '' : 'bg-neutral-50 dark:bg-neutral-900',
           transparent ? '' : styles['background-top'],
           className,
         )}
