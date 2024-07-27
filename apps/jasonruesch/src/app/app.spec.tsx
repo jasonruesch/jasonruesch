@@ -17,6 +17,16 @@ Object.defineProperty(window, 'matchMedia', {
 });
 global.ResizeObserver = ResizeObserver;
 
+vi.mock('flagsmith', () => ({
+  init: vi.fn(),
+  identify: vi.fn(),
+  hasFeature: vi.fn(),
+}));
+vi.mock('flagsmith/react', () => ({
+  FlagsmithProvider: vi.fn(),
+  useFlags: vi.fn().mockReturnValue({}),
+}));
+
 describe('App', () => {
   it('should render successfully', () => {
     const { baseElement } = renderWithRouter(
