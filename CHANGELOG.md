@@ -1,3 +1,14 @@
+## 1.6.0 (2024-07-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** improve layout and backgrounds ([0b5ed0e](https://github.com/jasonruesch/jasonruesch/commit/0b5ed0e))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.5.1 (2024-07-27)
 
 
