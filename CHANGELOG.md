@@ -1,3 +1,18 @@
+## 1.5.0 (2024-07-27)
+
+
+### 🚀 Features
+
+- **jasonruesch:** use darker dragon for light mode ([f4adf34](https://github.com/jasonruesch/jasonruesch/commit/f4adf34))
+
+### 🩹 Fixes
+
+- **jasonruesch:** increase z-index for mobile menu ([9fa9bda](https://github.com/jasonruesch/jasonruesch/commit/9fa9bda))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.4.0 (2024-07-27)
 
 
