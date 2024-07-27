@@ -71,7 +71,7 @@ export const Page = ({
           variants={pageScrollVariants}
         >
           {transparent ? null : (
-            <PageBackground className="text-neutral-50 dark:text-neutral-950" />
+            <PageBackground className="text-neutral-200 dark:text-neutral-950" />
           )}
 
           <div
