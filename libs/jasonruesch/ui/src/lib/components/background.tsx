@@ -12,8 +12,8 @@ export const Background = ({ fixed, className }: BackgroundProps) => {
     <div
       className={twMerge(
         styles.background,
+        'inset-0 h-dvh w-dvw overflow-hidden',
         fixed ? 'fixed' : 'absolute',
-        'inset-0 h-dvh w-dvw',
         className,
       )}
     >
@@ -21,7 +21,7 @@ export const Background = ({ fixed, className }: BackgroundProps) => {
         version="1.2"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 900 600"
-        className="h-full w-full"
+        className="h-full w-full scale-150 sm:scale-100"
       >
         <g id="vertical">
           <g

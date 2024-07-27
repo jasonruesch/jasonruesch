@@ -83,8 +83,8 @@ export const Header = ({ className }: HeaderProps) => {
         aria-label="Main menu"
       >
         <div className="fixed inset-0 z-20" />
-        <DialogPanel className="px-safe-offset-4 pb-safe-offset-4 fixed inset-y-0 z-20 w-full overflow-y-auto bg-white dark:bg-neutral-950">
-          <div className="flex h-14 items-center gap-x-4">
+        <DialogPanel className="fixed inset-y-0 z-20 w-full overflow-y-auto bg-white dark:bg-neutral-950">
+          <div className="px-safe-offset-4 fixed inset-x-0 flex h-14 items-center gap-x-4 bg-white shadow-sm dark:bg-neutral-950 dark:shadow-black">
             <div className="flex grow">
               <button
                 type="button"
@@ -111,7 +111,7 @@ export const Header = ({ className }: HeaderProps) => {
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="px-safe-offset-4 pb-safe-offset-4 mt-16">
             <MobileNav onItemSelect={() => handleMobileMenuOpen(false)} />
           </div>
         </DialogPanel>
