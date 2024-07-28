@@ -26,15 +26,17 @@ export const Page = ({
   contentClassName,
 }: PageProps) => {
   const [searchParams] = useSearchParams();
-  const { slideRight } = use(WillNavigateContext);
-
   const stageAnimations = searchParams.get('stage') === 'true';
+  const { slideRight } = use(WillNavigateContext);
   const backgroundSlot = document.getElementById('background');
 
   return (
     <>
       {backgroundSlot
-        ? createPortal(<Background fixed={transparent} />, backgroundSlot)
+        ? createPortal(
+            <Background fixed={transparent || stageAnimations} />,
+            backgroundSlot,
+          )
         : null}
 
       <motion.div
