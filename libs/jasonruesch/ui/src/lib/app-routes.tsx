@@ -5,6 +5,7 @@ import {
   About,
   Articles,
   BuiltWith,
+  Changelog,
   Contact,
   EasterEgg,
   Home,
@@ -24,6 +25,7 @@ export const AppRoutes = ({ location }: RoutesProps) => {
       <Route path="/uses" element={<Uses />} />
       <Route path="/built-with" element={<BuiltWith />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/changelog" element={<Changelog />} />
       <Route path="/blank" element={<Page />} />
       <Route path="/transparent" element={<Transparent />} />
       <Route path="easter-egg/:uid" element={<EasterEgg />} />

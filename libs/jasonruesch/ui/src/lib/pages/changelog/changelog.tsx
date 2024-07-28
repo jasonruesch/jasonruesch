@@ -4,18 +4,17 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 
-import markdown from '../../../../../../../docs/BUILT_WITH.md';
+import markdown from '../../../../../../../CHANGELOG.md';
 import { Page } from '../../components';
 
-export function BuiltWith() {
+export function Changelog() {
   const { pathname } = useLocation();
 
   return (
     <Page contentClassName="flex flex-col items-start">
-      <h1 className="gradient-heading" aria-label="Built With">
+      <h1 className="gradient-heading" aria-label="Changelog">
         <div className="flex items-center justify-center">
-          Built&nbsp;
-          <span className="heading-lg">With</span>
+          <span className="heading-lg">Changelog</span>
         </div>
       </h1>
       <div className="w-full">

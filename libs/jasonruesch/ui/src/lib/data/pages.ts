@@ -44,6 +44,12 @@ const contactPage: PageMeta = {
   href: '/contact',
   navType: 'primary',
 };
+const changelogPage: PageMeta = {
+  name: 'Changelog',
+  href: '/changelog',
+  navType: 'primary',
+  hidden: true,
+};
 const privacyPage: PageMeta = {
   name: 'Privacy Policy',
   href: '/privacy',
@@ -68,6 +74,7 @@ export const pages: PageMeta[] = [
   usesPage,
   builtWithPage,
   contactPage,
+  changelogPage,
   privacyPage,
   blankPage,
   transparentPage,

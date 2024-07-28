@@ -8,7 +8,17 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {}
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "allow": [
+              "../../../../../../../docs/BUILT_WITH.md",
+              "../../../../../../../CHANGELOG.md"
+            ]
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
