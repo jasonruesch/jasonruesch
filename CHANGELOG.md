@@ -1,3 +1,14 @@
+## 1.8.0 (2024-07-28)
+
+
+### 🚀 Features
+
+- **jasonruesch:** improve modal ([9202d00](https://github.com/jasonruesch/jasonruesch/commit/9202d00))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.7.0 (2024-07-27)
 
 
