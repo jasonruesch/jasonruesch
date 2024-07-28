@@ -67,7 +67,7 @@ export const Header = ({ className }: HeaderProps) => {
       <PageNavLink
         to="/"
         className="-m-1.5 block rounded-md p-1.5"
-        aria-label="Jason Ruesch"
+        aria-hidden="true"
       >
         <Logo className="size-8" />
       </PageNavLink>
@@ -103,7 +103,7 @@ export const Header = ({ className }: HeaderProps) => {
             <PageNavLink
               to="/"
               className="-m-1.5 block rounded-md p-1.5"
-              aria-label="Jason Ruesch"
+              aria-hidden="true"
             >
               <Logo className="size-8" />
             </PageNavLink>
