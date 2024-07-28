@@ -1,3 +1,15 @@
+## 1.9.0 (2024-07-28)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add changelog page ([e055fa3](https://github.com/jasonruesch/jasonruesch/commit/e055fa3))
+- **jasonruesch:** updates for a11y ([0422831](https://github.com/jasonruesch/jasonruesch/commit/0422831))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.8.0 (2024-07-28)
 
 
