@@ -25,20 +25,11 @@ export const Page = ({
   className,
   contentClassName,
 }: PageProps) => {
-  // const pageRef = useRef<HTMLDivElement>(null);
   const [searchParams] = useSearchParams();
   const { slideRight } = use(WillNavigateContext);
 
   const stageAnimations = searchParams.get('stage') === 'true';
   const backgroundSlot = document.getElementById('background');
-
-  // const handleAnimationComplete = (definition: string) => {
-  //   if (definition === 'animate') {
-  //     setTimeout(() => {
-  //       if (pageRef.current) pageRef.current.style.transform = 'none';
-  //     }, 100);
-  //   }
-  // };
 
   return (
     <>
@@ -47,7 +38,6 @@ export const Page = ({
         : null}
 
       <motion.div
-        // ref={pageRef}
         className={twMerge(
           'relative',
           transparent ? '' : 'bg-neutral-50 dark:bg-neutral-900',
@@ -59,7 +49,6 @@ export const Page = ({
         exit="exit"
         custom={{ transparent, slideRight, stageAnimations }}
         variants={pageVariants}
-        // onAnimationComplete={handleAnimationComplete}
       >
         <motion.div
           className={twJoin(

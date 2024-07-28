@@ -1,5 +1,4 @@
 export * from './background';
-export * from './blank-page';
 export * from './easter-egg-link';
 export * from './feature-flags-manager-button';
 export * from './feature-flags-manager.modal';

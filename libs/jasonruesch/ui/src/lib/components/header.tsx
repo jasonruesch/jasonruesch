@@ -45,7 +45,7 @@ export const Header = ({ className }: HeaderProps) => {
     <motion.header
       ref={scope}
       className={twMerge(
-        'px-safe-offset-4 fixed z-20 flex h-14 w-full items-center gap-x-4',
+        'px-safe-offset-4 fixed z-20 flex h-14 w-full items-center gap-x-3',
         className,
       )}
       style={{
@@ -64,7 +64,11 @@ export const Header = ({ className }: HeaderProps) => {
         </button>
       </div>
 
-      <PageNavLink to="/" className="inline-block" aria-label="Jason Ruesch">
+      <PageNavLink
+        to="/"
+        className="-m-1.5 block rounded-md p-1.5"
+        aria-label="Jason Ruesch"
+      >
         <Logo className="size-8" />
       </PageNavLink>
 
@@ -98,7 +102,7 @@ export const Header = ({ className }: HeaderProps) => {
 
             <PageNavLink
               to="/"
-              className="inline-block"
+              className="-m-1.5 block rounded-md p-1.5"
               aria-label="Jason Ruesch"
             >
               <Logo className="size-8" />

@@ -6,10 +6,10 @@ export const FeatureFlagsManagerButton = ({
   onClick,
 }: FeatureFlagsManagerButtonProps) => {
   return (
-    <div className="ml-safe mb-safe fixed bottom-0 left-0 z-20 h-12 w-12 rounded-full">
+    <div className="ml-safe mb-safe fixed bottom-1 left-1 z-20 h-12 w-12 rounded-full">
       <button
         type="button"
-        className="flex h-full w-full cursor-pointer items-center justify-center focus-visible:outline-none"
+        className="size-full cursor-pointer rounded-full"
         onClick={onClick}
       >
         <span className="sr-only">Open flags manager</span>

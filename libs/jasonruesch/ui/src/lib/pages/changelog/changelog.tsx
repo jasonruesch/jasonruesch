@@ -13,7 +13,7 @@ export function Changelog() {
   return (
     <Page contentClassName="flex flex-col items-start">
       <h1 className="gradient-heading" aria-label="Changelog">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" aria-hidden="true">
           <span className="heading-lg">Changelog</span>
         </div>
       </h1>

@@ -3,14 +3,9 @@
   color: var(--color-cyan-700);
   --tw-prose-links: var(--color-cyan-700);
 }
-:any-link:hover,
-:any-link:focus-visible {
+:any-link:hover {
   color: var(--color-cyan-800);
   --tw-prose-links: var(--color-cyan-800);
-}
-:any-link:focus-visible {
-  outline: none;
-  text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,8 +13,7 @@
     color: var(--color-violet-400);
     --tw-prose-links: var(--color-violet-400);
   }
-  :any-link:hover,
-  :any-link:focus-visible {
+  :any-link:hover {
     color: var(--color-violet-300);
     --tw-prose-links: var(--color-violet-300);
   }

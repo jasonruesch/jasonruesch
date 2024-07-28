@@ -4,7 +4,7 @@ export function About() {
   return (
     <Page contentClassName="flex flex-col items-center justify-center lg:max-w-[var(--breakpoint-lg)] mx-auto">
       <h1 className="gradient-heading" aria-label="About Me">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" aria-hidden="true">
           About&nbsp;
           <span className="heading-lg">Me</span>
         </div>

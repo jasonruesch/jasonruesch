@@ -13,7 +13,7 @@ export function BuiltWith() {
   return (
     <Page contentClassName="flex flex-col items-start">
       <h1 className="gradient-heading" aria-label="Built With">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" aria-hidden="true">
           Built&nbsp;
           <span className="heading-lg">With</span>
         </div>

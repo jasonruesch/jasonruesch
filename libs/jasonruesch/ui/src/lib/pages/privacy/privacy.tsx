@@ -91,7 +91,7 @@ export function Privacy() {
   return (
     <Page contentClassName="flex flex-col items-start">
       <h1 className="gradient-heading" aria-label="Privacy Policy">
-        <div className="flex items-center">
+        <div className="flex items-center justify-center" aria-hidden="true">
           <span className="heading-lg">Privacy&nbsp;</span>
           Policy
         </div>

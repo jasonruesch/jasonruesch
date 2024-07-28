@@ -22,6 +22,7 @@ export const Background = ({ fixed, className }: BackgroundProps) => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 900 600"
         className="h-full w-full scale-150 sm:scale-100"
+        aria-hidden="true"
       >
         <g id="vertical">
           <g

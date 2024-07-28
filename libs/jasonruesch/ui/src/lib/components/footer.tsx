@@ -16,13 +16,21 @@ export const Footer = ({ className }: FooterProps) => {
         className,
       )}
     >
-      <span>
-        &copy; {new Date().getFullYear()} Jason Ruesch. All rights reserved.
+      <span
+        aria-label={`Copyright ${new Date().getFullYear()} Jason Ruesch. All rights reserved.`}
+      >
+        <span aria-hidden="true">
+          &copy; {new Date().getFullYear()} Jason Ruesch. All rights reserved.
+        </span>
       </span>
-      <span className="hidden sm:flex">&bull;</span>
+      <span className="hidden sm:flex" aria-hidden="true">
+        &bull;
+      </span>
       <div className="flex items-center gap-x-1">
-        <span>v{packageVersion}</span>
-        <span>&bull;</span>
+        <span aria-label={`Version ${packageVersion}`}>
+          <span aria-hidden="true">v{packageVersion}</span>
+        </span>
+        <span aria-hidden="true">&bull;</span>
         <PageNavLink to="/privacy">Privacy Policy</PageNavLink>
       </div>
     </footer>

@@ -11,10 +11,10 @@ export function Contact() {
   return (
     <Page contentClassName="flex flex-col items-center justify-center max-w-lg text-center sm:max-w-[var(--breakpoint-sm)] mx-auto">
       <h1 className="gradient-heading" aria-label="Connect with Me">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" aria-hidden="true">
           <span className="heading-lg">Connect</span>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" aria-hidden="true">
           with&nbsp;
           <span className="heading-lg">Me</span>
         </div>

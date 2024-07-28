@@ -172,3 +172,12 @@ export const headerAnimations = {
     } as DynamicAnimationOptions,
   },
 };
+
+export const handleAnimationComplete =
+  (element: HTMLElement | null) => (definition: string) => {
+    if (definition === 'animate') {
+      setTimeout(() => {
+        if (element) element.style.transform = 'none';
+      }, 100);
+    }
+  };

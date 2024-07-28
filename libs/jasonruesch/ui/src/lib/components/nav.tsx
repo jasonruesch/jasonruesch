@@ -18,17 +18,19 @@ export const Nav = ({ className }: NavProps) => {
     : primaryNavPages(hiddenNavigation?.enabled);
 
   return (
-    <nav className={twMerge('flex items-center space-x-4', className)}>
+    <nav className={twMerge('flex items-center space-x-2', className)}>
       {navigation.map((page) => (
         <PageNavLink
           key={page.href}
           to={page.href}
           className={({ isActive }) =>
             twJoin(
+              'py-2.5 px-1',
               isActive
                 ? 'text-cyan-700 dark:text-violet-400'
-                : 'text-neutral-600 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300',
-              'focus-visible:text-neutral-700 focus-visible:outline-none dark:focus-visible:text-neutral-300',
+                : 'text-neutral-600 dark:text-neutral-400',
+              'hover:text-neutral-700 dark:hover:text-neutral-300',
+              'focus-visible:text-neutral-700 dark:focus-visible:text-neutral-300',
             )
           }
         >
