@@ -1,3 +1,16 @@
+## 1.10.0 (2024-07-29)
+
+
+### 🚀 Features
+
+- **jasonruesch:** improve staged animations ([3e49f4c](https://github.com/jasonruesch/jasonruesch/commit/3e49f4c))
+- **jasonruesch:** set logos to aria-hidden ([01533f8](https://github.com/jasonruesch/jasonruesch/commit/01533f8))
+- **jasonruesch:** move hidden links to footer ([b3c702b](https://github.com/jasonruesch/jasonruesch/commit/b3c702b))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.9.0 (2024-07-28)
 
 
