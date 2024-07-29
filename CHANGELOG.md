@@ -1,3 +1,14 @@
+## 1.10.1 (2024-07-29)
+
+
+### 🩹 Fixes
+
+- **jasonruesch:** move hidden links outside of footer ([5b14ca3](https://github.com/jasonruesch/jasonruesch/commit/5b14ca3))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.10.0 (2024-07-29)
 
 
