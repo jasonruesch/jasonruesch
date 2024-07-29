@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { Header } from './header';
 
 import { twJoin } from 'tailwind-merge';
+import { EasterEggLink } from './easter-egg-link';
+import FeatureFlagsManager from './feature-flags-manager.modal';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,9 +33,12 @@ export const Layout = ({ children }: LayoutProps) => {
 
       <Header />
 
-      {/* The relative position is needed to work with the background component's fixed or absolute position */}
-      <main id="content" className="relative">
-        {children}
+      <main id="content">
+        {/* The relative position is needed to work with the background component's fixed or absolute position */}
+        <div className="relative">{children}</div>
+
+        <FeatureFlagsManager />
+        <EasterEggLink />
       </main>
     </>
   );
