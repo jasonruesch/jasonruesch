@@ -1,3 +1,17 @@
+## 1.12.0 (2024-07-30)
+
+
+### 🚀 Features
+
+- **jasonruesch:** store credentials in environment ([d948ab4](https://github.com/jasonruesch/jasonruesch/commit/d948ab4))
+- **jasonruesch:** update login and logout flow ([6d0e950](https://github.com/jasonruesch/jasonruesch/commit/6d0e950))
+- **jasonruesch:** add admin page ([8f6224a](https://github.com/jasonruesch/jasonruesch/commit/8f6224a))
+- **jasonruesch:** pre-populate login form for development ([450c582](https://github.com/jasonruesch/jasonruesch/commit/450c582))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.11.0 (2024-07-30)
 
 
