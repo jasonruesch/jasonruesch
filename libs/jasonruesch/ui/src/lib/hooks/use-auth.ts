@@ -16,7 +16,10 @@ export const useAuth = () => {
 
   const login = (email: string, password: string) => {
     // Verify email and password
-    if (email !== 'jason.ruesch@me.com' || password !== 'password') {
+    if (
+      email !== import.meta.env.VITE_AUTH_EMAIL ||
+      password !== import.meta.env.VITE_AUTH_PASSWORD
+    ) {
       throw new Error('Invalid email or password');
     }
 
