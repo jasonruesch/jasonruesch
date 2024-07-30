@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   staging:
-    name: Staging
+    name: Deploy
     environment:
       name: Staging
       url: ${{ steps.deployment.outputs.page_url }}

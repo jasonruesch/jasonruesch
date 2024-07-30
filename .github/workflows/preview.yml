@@ -22,7 +22,7 @@ concurrency:
 jobs:
   preview:
     if: github.event.pull_request.draft == false
-    name: Preview
+    name: Deploy
     environment:
       name: Preview
       url: ${{ steps.deployment.outputs.page_url }}
