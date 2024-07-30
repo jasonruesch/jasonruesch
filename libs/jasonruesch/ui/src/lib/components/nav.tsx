@@ -1,7 +1,7 @@
 import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
-import { loginPage, logoutPage, pages, primaryNavPages } from '../data';
+import { pages, primaryNavPages } from '../data';
 import { AuthContext, FeatureFlagsContext, findFeatureFlag } from '../hooks';
 import { PageNavLink } from './page-nav-link';
 
@@ -13,10 +13,10 @@ export const Nav = ({ className }: NavProps) => {
   const [flags] = use(FeatureFlagsContext);
   const allNavigation = findFeatureFlag(flags, 'all_navigation');
   const hiddenNavigation = findFeatureFlag(flags, 'hidden_navigation');
-  const { authenticated } = use(AuthContext);
+  const { authenticated, logout } = use(AuthContext);
   const navigation = allNavigation?.enabled
-    ? pages.concat(authenticated ? [logoutPage] : [loginPage])
-    : primaryNavPages(hiddenNavigation?.enabled, authenticated);
+    ? pages
+    : primaryNavPages(hiddenNavigation?.enabled);
 
   return (
     <nav className={twMerge('flex items-center space-x-2', className)}>
@@ -38,6 +38,15 @@ export const Nav = ({ className }: NavProps) => {
           {page.name}
         </PageNavLink>
       ))}
+      {authenticated ? (
+        <button
+          type="button"
+          className="py-2.5 px-1 text-neutral-600 hover:text-neutral-700 focus-visible:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus-visible:text-neutral-300"
+          onClick={logout}
+        >
+          Sign Out
+        </button>
+      ) : null}
     </nav>
   );
 };

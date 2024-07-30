@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
 import { Dialog, DialogPanel } from '@headlessui/react';
-import { useState } from 'react';
-import { useMediaQuery } from '../hooks';
+import { use, useState } from 'react';
+import { useMediaQuery, WillNavigateContext } from '../hooks';
 import { useAnimateHeader } from '../hooks/use-animate-header';
 import { Logo } from './logo';
 import { MobileNav } from './mobile-nav';
@@ -34,7 +34,9 @@ export const Header = ({ className }: HeaderProps) => {
       `0 1px 2px 0 rgb(0 0 0 / ${darkMode ? 1 : 0.05})`,
     ],
   );
-  const scope = useAnimateHeader();
+
+  const { skipAnimations } = use(WillNavigateContext);
+  const scope = useAnimateHeader(skipAnimations);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleMobileMenuOpen = (open: boolean) => {

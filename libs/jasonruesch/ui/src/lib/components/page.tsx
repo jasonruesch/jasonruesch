@@ -27,7 +27,7 @@ export const Page = ({
 }: PageProps) => {
   const [searchParams] = useSearchParams();
   const stageAnimations = searchParams.get('stage') === 'true';
-  const { slideRight } = use(WillNavigateContext);
+  const { slideRight, skipAnimations } = use(WillNavigateContext);
   const backgroundSlot = document.getElementById('background');
 
   return (
@@ -49,7 +49,7 @@ export const Page = ({
         initial="initial"
         animate="animate"
         exit="exit"
-        custom={{ transparent, slideRight, stageAnimations }}
+        custom={{ transparent, slideRight, stageAnimations, skipAnimations }}
         variants={pageVariants}
       >
         <motion.div
