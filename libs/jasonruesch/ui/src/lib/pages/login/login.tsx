@@ -6,8 +6,13 @@ import { AuthContext } from '../../hooks';
 
 export function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const development = import.meta.env.MODE === 'development';
+  const [email, setEmail] = useState(
+    development ? import.meta.env.VITE_AUTH_EMAIL : '',
+  );
+  const [password, setPassword] = useState(
+    development ? import.meta.env.VITE_AUTH_PASSWORD : '',
+  );
   const [error, setError] = useState<string | null>(null);
   const { login } = use(AuthContext);
   const navigate = useNavigate();

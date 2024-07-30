@@ -11,8 +11,10 @@ export const AuthContext = createContext<{
 }>({ email: null, authenticated: false, login: noop, logout: noop });
 
 export const useAuth = () => {
-  const [email, setEmail] = useState<string | null>(null);
-  const authenticated = email !== null;
+  const storage = window.localStorage ?? window.sessionStorage;
+  const storedEmail = storage.getItem('email');
+  const [email, setEmail] = useState<string | null>(storedEmail);
+  const authenticated = email === import.meta.env.VITE_AUTH_EMAIL;
 
   const login = (email: string, password: string) => {
     // Verify email and password
@@ -24,10 +26,12 @@ export const useAuth = () => {
     }
 
     setEmail(email);
+    storage.setItem('email', email);
   };
 
   const logout = () => {
     setEmail(null);
+    storage.removeItem('email');
   };
 
   return { email, authenticated, login, logout };

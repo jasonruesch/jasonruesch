@@ -77,7 +77,6 @@ const adminPage: PageMeta = {
   name: 'Admin',
   href: '/admin',
   navType: 'primary',
-  hidden: true,
   authenticated: true,
 };
 
