@@ -16,7 +16,7 @@ export const Nav = ({ className }: NavProps) => {
   const { authenticated, logout } = use(AuthContext);
   const navigation = allNavigation?.enabled
     ? pages
-    : primaryNavPages(hiddenNavigation?.enabled);
+    : primaryNavPages(hiddenNavigation?.enabled, authenticated);
 
   return (
     <nav className={twMerge('flex items-center space-x-2', className)}>

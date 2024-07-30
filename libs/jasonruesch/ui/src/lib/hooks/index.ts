@@ -4,4 +4,5 @@ export * from './use-auth';
 export * from './use-feature-flags';
 export * from './use-media-query';
 export * from './use-navigate-events';
+export * from './use-page';
 export * from './use-scrollable';

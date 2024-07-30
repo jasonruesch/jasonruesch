@@ -7,10 +7,18 @@ export interface WillNavigateValue {
   skipAnimations?: boolean;
 }
 
-export const WillNavigateContext = createContext<WillNavigateValue>({
-  slideRight: false,
-  skipAnimations: false,
-});
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
+export const WillNavigateContext = createContext<
+  readonly [WillNavigateValue, (partial: Partial<WillNavigateValue>) => void]
+>([
+  {
+    slideRight: false,
+    skipAnimations: false,
+  },
+  noop,
+]);
 
 export const useNavigateEvents = () => {
   const [willNavigateValue, setWillNavigateValue] = useState<WillNavigateValue>(
@@ -19,6 +27,13 @@ export const useNavigateEvents = () => {
       skipAnimations: false,
     },
   );
+
+  const updateWillNavigateValue = (partial: Partial<WillNavigateValue>) => {
+    setWillNavigateValue((prev) => ({
+      ...prev,
+      ...partial,
+    }));
+  };
 
   useEffect(() => {
     const unsubscribeOnWillNavigate = navigateEventChannel.on(
@@ -38,5 +53,5 @@ export const useNavigateEvents = () => {
     };
   }, []);
 
-  return willNavigateValue;
+  return [willNavigateValue, updateWillNavigateValue] as const;
 };

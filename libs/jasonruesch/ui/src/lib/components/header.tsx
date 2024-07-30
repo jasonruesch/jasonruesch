@@ -1,9 +1,10 @@
+import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { use, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-import { Dialog, DialogPanel } from '@headlessui/react';
-import { use, useState } from 'react';
 import { useMediaQuery, WillNavigateContext } from '../hooks';
 import { useAnimateHeader } from '../hooks/use-animate-header';
 import { Logo } from './logo';
@@ -35,7 +36,11 @@ export const Header = ({ className }: HeaderProps) => {
     ],
   );
 
-  const { skipAnimations } = use(WillNavigateContext);
+  const [searchParams] = useSearchParams();
+  const [{ skipAnimations: skipAnimationsFromContext }] =
+    use(WillNavigateContext);
+  const skipAnimations =
+    searchParams.get('skip') === 'true' || skipAnimationsFromContext;
   const scope = useAnimateHeader(skipAnimations);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

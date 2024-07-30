@@ -15,9 +15,7 @@ import {
 } from '@jasonruesch/jasonruesch-ui';
 
 export function App() {
-  const willNavigateValue = useNavigateEvents();
   const location = useLocation();
-
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
 
   useEffect(() => {
@@ -27,7 +25,7 @@ export function App() {
   return (
     <AuthContext value={useAuth()}>
       <FeatureFlagsContext value={useFeatureFlags()}>
-        <WillNavigateContext value={willNavigateValue}>
+        <WillNavigateContext value={useNavigateEvents()}>
           <Layout>
             <AnimatePresence
               initial={false}

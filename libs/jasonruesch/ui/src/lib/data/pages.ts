@@ -63,15 +63,22 @@ const transparentPage: PageMeta = {
   name: 'Transparent',
   href: '/transparent',
 };
-
-export const loginPage: PageMeta = {
+const loginPage: PageMeta = {
   name: 'Sign In',
   href: '/login',
 };
-export const logoutPage: PageMeta = {
+const logoutPage: PageMeta = {
   name: 'Sign Out',
   href: '/logout',
   skipAnimations: true,
+  authenticated: true,
+};
+const adminPage: PageMeta = {
+  name: 'Admin',
+  href: '/admin',
+  navType: 'primary',
+  hidden: true,
+  authenticated: true,
 };
 
 export const pages: PageMeta[] = [
@@ -89,9 +96,13 @@ export const pages: PageMeta[] = [
   transparentPage,
   loginPage,
   logoutPage,
+  adminPage,
 ];
 
-export const primaryNavPages = (includeHidden?: boolean) =>
+export const primaryNavPages = (includeHidden = false, authenticated = false) =>
   pages.filter(
-    (page) => page.navType === 'primary' && (!page.hidden || includeHidden),
+    (page) =>
+      page.navType === 'primary' &&
+      (!page.hidden || includeHidden) &&
+      (!page.authenticated || authenticated),
   );

@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion';
-import { use } from 'react';
 import { createPortal } from 'react-dom';
-import { useSearchParams } from 'react-router-dom';
 import { twJoin, twMerge } from 'tailwind-merge';
 
 import { pageScrollVariants, pageVariants } from '../animations';
-import { WillNavigateContext } from '../hooks';
+import { usePage } from '../hooks';
 import { Background } from './background';
 import { Footer } from './footer';
 import { PageBackground } from './page-background';
@@ -25,12 +23,16 @@ export const Page = ({
   className,
   contentClassName,
 }: PageProps) => {
-  const [searchParams] = useSearchParams();
-  const stageAnimations = searchParams.get('stage') === 'true';
-  const { slideRight, skipAnimations } = use(WillNavigateContext);
-  const backgroundSlot = document.getElementById('background');
+  const {
+    page,
+    stageAnimations,
+    slideRight,
+    skipAnimations,
+    backgroundSlot,
+    authenticated,
+  } = usePage();
 
-  return (
+  return page?.authenticated && !authenticated ? null : (
     <>
       {backgroundSlot
         ? createPortal(

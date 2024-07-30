@@ -1,4 +1,5 @@
 export * from './about/about';
+export * from './admin/admin';
 export * from './articles/articles';
 export * from './built-with/built-with';
 export * from './changelog/changelog';

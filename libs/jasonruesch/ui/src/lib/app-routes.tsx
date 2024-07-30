@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, RoutesProps } from 'react-router-dom';
 import { Page } from './components';
 import {
   About,
+  Admin,
   Articles,
   BuiltWith,
   Changelog,
@@ -34,6 +35,7 @@ export const AppRoutes = ({ location }: RoutesProps) => {
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
+      <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
