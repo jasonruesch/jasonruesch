@@ -1,3 +1,19 @@
+## 1.11.0 (2024-07-30)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add login page ([df1a5f4](https://github.com/jasonruesch/jasonruesch/commit/df1a5f4))
+- **jasonruesch:** add auth pages ([f696f1d](https://github.com/jasonruesch/jasonruesch/commit/f696f1d))
+
+### 🩹 Fixes
+
+- **jasonruesch:** update email field focus ([c1f503b](https://github.com/jasonruesch/jasonruesch/commit/c1f503b))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.10.1 (2024-07-29)
 
 
