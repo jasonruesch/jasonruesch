@@ -12,7 +12,7 @@ on:
 
 jobs:
   labeler:
-    name: Labeler
+    name: Assign Labels
     runs-on: ubuntu-latest
     permissions:
       contents: read

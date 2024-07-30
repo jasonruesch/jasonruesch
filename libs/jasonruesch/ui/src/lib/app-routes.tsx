@@ -9,6 +9,7 @@ import {
   Contact,
   EasterEgg,
   Home,
+  Login,
   Privacy,
   Projects,
   Transparent,
@@ -30,6 +31,7 @@ export const AppRoutes = ({ location }: RoutesProps) => {
       <Route path="/transparent" element={<Transparent />} />
       <Route path="easter-egg/:uid" element={<EasterEgg />} />
       <Route path="/privacy" element={<Privacy />} />
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
