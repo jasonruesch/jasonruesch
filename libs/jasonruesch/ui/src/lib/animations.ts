@@ -8,12 +8,15 @@ interface CustomVariantData {
   transparent?: boolean;
   slideRight?: boolean;
   stageAnimations?: boolean;
+  skipAnimations?: boolean;
 }
 
 export const duration = 3; // Duration in seconds
 
 export const pageVariants: Variants = {
-  initial: ({ transparent, slideRight }: CustomVariantData) => {
+  initial: ({ transparent, slideRight, skipAnimations }: CustomVariantData) => {
+    if (skipAnimations) return { opacity: 1 };
+
     return {
       opacity: 0,
       ...(transparent ? { y: '-100%' } : { x: slideRight ? '-100%' : '100%' }),
@@ -28,7 +31,13 @@ export const pageVariants: Variants = {
       pointerEvents: 'none',
     };
   },
-  animate: ({ transparent, stageAnimations }: CustomVariantData) => {
+  animate: ({
+    transparent,
+    stageAnimations,
+    skipAnimations,
+  }: CustomVariantData) => {
+    if (skipAnimations) return { opacity: 1 };
+
     if (stageAnimations) {
       return {
         opacity: 1,
@@ -97,7 +106,9 @@ export const pageVariants: Variants = {
       },
     };
   },
-  exit: ({ transparent, slideRight }: CustomVariantData) => {
+  exit: ({ transparent, slideRight, skipAnimations }: CustomVariantData) => {
+    if (skipAnimations) return { opacity: 1 };
+
     return {
       opacity: 0,
       ...(transparent ? { y: '-100%' } : { x: slideRight ? '100%' : '-100%' }),

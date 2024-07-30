@@ -4,7 +4,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { headerAnimations } from '../animations';
 
-export const useAnimateHeader = () => {
+export const useAnimateHeader = (skipAnimations = false) => {
   const [searchParams] = useSearchParams();
   const stageAnimations = searchParams.get('stage') === 'true';
   const { pathname } = useLocation();
@@ -33,10 +33,10 @@ export const useAnimateHeader = () => {
       );
     };
 
-    if (previousPathname !== pathname) {
+    if (!skipAnimations && previousPathname !== pathname) {
       startAnimation();
     }
-  }, [previousPathname, pathname, scope, animate]);
+  }, [previousPathname, pathname, scope, skipAnimations, animate]);
 
   useEffect(() => {
     if (stageAnimations) {

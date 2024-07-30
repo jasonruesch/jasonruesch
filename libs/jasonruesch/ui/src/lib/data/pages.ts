@@ -71,6 +71,7 @@ export const loginPage: PageMeta = {
 export const logoutPage: PageMeta = {
   name: 'Sign Out',
   href: '/logout',
+  skipAnimations: true,
 };
 
 export const pages: PageMeta[] = [
@@ -86,21 +87,11 @@ export const pages: PageMeta[] = [
   privacyPage,
   blankPage,
   transparentPage,
+  loginPage,
+  logoutPage,
 ];
 
-export const primaryNavPages = (
-  includeHidden?: boolean,
-  authenticated = false,
-) =>
-  pages
-    .filter(
-      (page) => page.navType === 'primary' && (!page.hidden || includeHidden),
-    )
-    .concat(
-      authenticated
-        ? [logoutPage]
-        : // prettier-ignore
-          [
-            // loginPage
-          ],
-    );
+export const primaryNavPages = (includeHidden?: boolean) =>
+  pages.filter(
+    (page) => page.navType === 'primary' && (!page.hidden || includeHidden),
+  );

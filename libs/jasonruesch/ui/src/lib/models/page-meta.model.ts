@@ -3,4 +3,5 @@ export interface PageMeta {
   href: string;
   navType?: 'primary';
   hidden?: boolean;
+  skipAnimations?: boolean;
 }
