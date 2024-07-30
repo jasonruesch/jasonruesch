@@ -57,7 +57,7 @@ export function Login() {
               type="email"
               required
               autoComplete="email"
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-neutral-900 ring-1 shadow-sm ring-neutral-300 ring-inset placeholder:text-neutral-400 focus:ring-2 focus:ring-cyan-600 focus:ring-inset sm:text-sm sm:leading-6 dark:text-white dark:focus:ring-violet-500"
+              className="block w-full rounded-md border-0 py-1.5 px-2 text-neutral-900 ring-1 shadow-sm ring-neutral-300 ring-inset placeholder:text-neutral-400 focus:ring-2 focus:ring-cyan-600 focus:ring-inset focus-visible:outline-none sm:text-sm sm:leading-6 dark:text-white dark:focus:ring-violet-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -80,7 +80,7 @@ export function Login() {
               type="password"
               required
               autoComplete="current-password"
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-neutral-900 ring-1 shadow-sm ring-neutral-300 ring-inset placeholder:text-neutral-400 focus:ring-2 focus:ring-cyan-600 focus:ring-inset sm:text-sm sm:leading-6 dark:text-white dark:focus:ring-violet-600"
+              className="block w-full rounded-md border-0 py-1.5 px-2 text-neutral-900 ring-1 shadow-sm ring-neutral-300 ring-inset placeholder:text-neutral-400 focus:ring-2 focus:ring-cyan-600 focus:ring-inset focus-visible:outline-none sm:text-sm sm:leading-6 dark:text-white dark:focus:ring-violet-600"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
