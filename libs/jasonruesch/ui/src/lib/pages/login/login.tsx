@@ -1,13 +1,15 @@
-import { use, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Page } from '../../components';
 import { AuthContext } from '../../hooks';
 
 export function Login() {
+  const emailRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+
   const { login } = use(AuthContext);
   const navigate = useNavigate();
 
@@ -23,6 +25,12 @@ export function Login() {
       setError(message);
     }
   };
+
+  useEffect(() => {
+    const supportsTouch =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (!supportsTouch) emailRef.current?.focus();
+  }, []);
 
   return (
     <Page contentClassName="flex flex-col items-center justify-center sm:max-w-[var(--breakpoint-sm)] mx-auto w-full">
@@ -43,12 +51,12 @@ export function Login() {
           </label>
           <div className="mt-2">
             <input
+              ref={emailRef}
               id="email"
               name="email"
               type="email"
               required
               autoComplete="email"
-              autoFocus
               className="block w-full rounded-md border-0 py-1.5 px-2 text-neutral-900 ring-1 shadow-sm ring-neutral-300 ring-inset placeholder:text-neutral-400 focus:ring-2 focus:ring-cyan-600 focus:ring-inset sm:text-sm sm:leading-6 dark:text-white dark:focus:ring-violet-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
