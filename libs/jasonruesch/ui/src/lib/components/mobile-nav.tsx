@@ -1,8 +1,8 @@
 import { use } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
 
-import { pages, primaryNavPages } from '../data';
-import { FeatureFlagsContext, findFeatureFlag } from '../hooks';
+import { loginPage, logoutPage, pages, primaryNavPages } from '../data';
+import { AuthContext, FeatureFlagsContext, findFeatureFlag } from '../hooks';
 import { PageNavLink } from './page-nav-link';
 
 interface MobileNavProps {
@@ -14,9 +14,10 @@ export const MobileNav = ({ className, onItemSelect }: MobileNavProps) => {
   const [flags] = use(FeatureFlagsContext);
   const allNavigation = findFeatureFlag(flags, 'all_navigation');
   const hiddenNavigation = findFeatureFlag(flags, 'hidden_navigation');
+  const { authenticated } = use(AuthContext);
   const navigation = allNavigation?.enabled
-    ? pages
-    : primaryNavPages(hiddenNavigation?.enabled);
+    ? pages.concat(authenticated ? [logoutPage] : [loginPage])
+    : primaryNavPages(hiddenNavigation?.enabled, authenticated);
 
   return (
     <nav className={twMerge('space-y-2', className)}>

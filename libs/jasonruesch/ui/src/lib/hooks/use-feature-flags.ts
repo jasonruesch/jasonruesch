@@ -9,7 +9,7 @@ const noop = () => {};
 
 export const FeatureFlagsContext = createContext<
   // flags, setFlags, resetFlags
-  [FeatureFlag[], (flag: FeatureFlag) => void, () => void]
+  readonly [FeatureFlag[], (flag: FeatureFlag) => void, () => void]
 >([featureFlags, noop, noop]);
 
 export const useFeatureFlags = () => {

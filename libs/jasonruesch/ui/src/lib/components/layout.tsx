@@ -1,10 +1,12 @@
+import { use } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { Header } from './header';
-
 import { twJoin } from 'tailwind-merge';
+
+import { AuthContext } from '../hooks';
 import { EasterEggLink } from './easter-egg-link';
 import FeatureFlagsManager from './feature-flags-manager.modal';
+import { Header } from './header';
+import { LoginLink } from './login-link';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,6 +14,7 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useLocation();
+  const { authenticated } = use(AuthContext);
 
   return (
     <>
@@ -37,7 +40,7 @@ export const Layout = ({ children }: LayoutProps) => {
         {/* The relative position is needed to work with the background component's fixed or absolute position */}
         <div className="relative">{children}</div>
 
-        <FeatureFlagsManager />
+        {authenticated ? <FeatureFlagsManager /> : <LoginLink />}
         <EasterEggLink />
       </main>
     </>

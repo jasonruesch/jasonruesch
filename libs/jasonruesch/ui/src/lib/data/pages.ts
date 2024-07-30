@@ -54,15 +54,23 @@ const privacyPage: PageMeta = {
   name: 'Privacy Policy',
   href: '/privacy',
 };
+
 const blankPage: PageMeta = {
   name: 'Blank',
   href: '/blank',
-  hidden: true,
 };
 const transparentPage: PageMeta = {
   name: 'Transparent',
   href: '/transparent',
-  hidden: true,
+};
+
+export const loginPage: PageMeta = {
+  name: 'Sign In',
+  href: '/login',
+};
+export const logoutPage: PageMeta = {
+  name: 'Sign Out',
+  href: '/logout',
 };
 
 export const pages: PageMeta[] = [
@@ -80,7 +88,19 @@ export const pages: PageMeta[] = [
   transparentPage,
 ];
 
-export const primaryNavPages = (includeHidden?: boolean) =>
-  pages.filter(
-    (page) => page.navType === 'primary' && (!page.hidden || includeHidden),
-  );
+export const primaryNavPages = (
+  includeHidden?: boolean,
+  authenticated = false,
+) =>
+  pages
+    .filter(
+      (page) => page.navType === 'primary' && (!page.hidden || includeHidden),
+    )
+    .concat(
+      authenticated
+        ? [logoutPage]
+        : // prettier-ignore
+          [
+            // loginPage
+          ],
+    );
