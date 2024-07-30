@@ -6,6 +6,7 @@ export * from './footer';
 export * from './header';
 export * from './layout';
 export * from './lipsum';
+export * from './login-link';
 export * from './logo';
 export * from './logo-neutral';
 export * from './mobile-nav';

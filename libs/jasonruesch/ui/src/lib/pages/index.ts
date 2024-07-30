@@ -6,6 +6,7 @@ export * from './contact/contact';
 export * from './easter-egg/easter-egg';
 export * from './home/home';
 export * from './login/login';
+export * from './logout/logout';
 export * from './privacy/privacy';
 export * from './projects/projects';
 export * from './transparent/transparent';

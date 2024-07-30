@@ -5,8 +5,10 @@ import { useLocation } from 'react-router-dom';
 
 import {
   AppRoutes,
+  AuthContext,
   FeatureFlagsContext,
   Layout,
+  useAuth,
   useFeatureFlags,
   useNavigateEvents,
   WillNavigateContext,
@@ -15,7 +17,6 @@ import {
 export function App() {
   const willNavigateValue = useNavigateEvents();
   const location = useLocation();
-  const featureFlags = useFeatureFlags();
 
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
 
@@ -24,18 +25,20 @@ export function App() {
   }, [measurementId]);
 
   return (
-    <FeatureFlagsContext value={[...featureFlags]}>
-      <WillNavigateContext value={willNavigateValue}>
-        <Layout>
-          <AnimatePresence
-            initial={false}
-            onExitComplete={() => window.scrollTo({ top: 0 })}
-          >
-            <AppRoutes location={location} key={location.pathname} />
-          </AnimatePresence>
-        </Layout>
-      </WillNavigateContext>
-    </FeatureFlagsContext>
+    <AuthContext value={useAuth()}>
+      <FeatureFlagsContext value={useFeatureFlags()}>
+        <WillNavigateContext value={willNavigateValue}>
+          <Layout>
+            <AnimatePresence
+              initial={false}
+              onExitComplete={() => window.scrollTo({ top: 0 })}
+            >
+              <AppRoutes location={location} key={location.pathname} />
+            </AnimatePresence>
+          </Layout>
+        </WillNavigateContext>
+      </FeatureFlagsContext>
+    </AuthContext>
   );
 }
 

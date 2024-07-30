@@ -1,15 +1,27 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Page } from '../../components';
+import { AuthContext } from '../../hooks';
 
 export function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const { login } = use(AuthContext);
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(username, password);
+    try {
+      login(email, password);
+      navigate('/');
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'An error occurred';
+      setError(message);
+    }
   };
 
   return (
@@ -38,8 +50,8 @@ export function Login() {
               autoComplete="email"
               autoFocus
               className="block w-full rounded-md border-0 py-1.5 px-2 text-neutral-900 ring-1 shadow-sm ring-neutral-300 ring-inset placeholder:text-neutral-400 focus:ring-2 focus:ring-cyan-600 focus:ring-inset sm:text-sm sm:leading-6 dark:text-white dark:focus:ring-violet-500"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -73,6 +85,12 @@ export function Login() {
           </button>
         </div>
       </form>
+
+      {error ? (
+        <div className="mt-6 rounded-md bg-red-100 p-4 text-center text-sm text-red-500">
+          {error}
+        </div>
+      ) : null}
     </Page>
   );
 }
