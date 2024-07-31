@@ -1,3 +1,15 @@
+## 1.13.0 (2024-07-31)
+
+
+### 🚀 Features
+
+- **jasonruesch:** improve feature flag logic ([88c41f8](https://github.com/jasonruesch/jasonruesch/commit/88c41f8))
+- **jasonruesch:** update profile image and backdrops ([cbc1f94](https://github.com/jasonruesch/jasonruesch/commit/cbc1f94))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.12.0 (2024-07-30)
 
 
