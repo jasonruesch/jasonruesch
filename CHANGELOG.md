@@ -1,3 +1,14 @@
+## 1.16.0 (2024-07-31)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add splashscreen for iPhone 15 pro ([8cbeea6](https://github.com/jasonruesch/jasonruesch/commit/8cbeea6))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.15.0 (2024-07-31)
 
 
