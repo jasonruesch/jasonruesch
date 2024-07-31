@@ -1,3 +1,15 @@
+## 1.15.0 (2024-07-31)
+
+
+### 🚀 Features
+
+- **jasonruesch:** update about page profile image ([0bf9254](https://github.com/jasonruesch/jasonruesch/commit/0bf9254))
+- **jasonruesch:** update buttons and links ([3316ce1](https://github.com/jasonruesch/jasonruesch/commit/3316ce1))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.14.0 (2024-07-31)
 
 
