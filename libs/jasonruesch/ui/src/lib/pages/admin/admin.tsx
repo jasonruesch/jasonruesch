@@ -10,9 +10,8 @@ export function Admin() {
           <span className="heading-lg">Admin</span>
         </div>
       </h1>
-      <p>[admin functionality goes here]</p>
 
-      <div className="w-full rounded-lg bg-white/50 p-4 ring-1 ring-neutral-200 dark:bg-neutral-950/75 dark:ring-black">
+      <div className="mt-4 w-full rounded-lg bg-white/50 p-4 ring-1 ring-neutral-200 backdrop-blur-sm dark:bg-neutral-950/50 dark:ring-black">
         <div className="px-4 sm:flex sm:items-start">
           <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-cyan-100 sm:mx-0 sm:size-10 dark:bg-violet-600">
             <FlagIcon
