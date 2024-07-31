@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "Jason Ruesch",
   "short_name": "Jason Ruesch",
   "icons": [
