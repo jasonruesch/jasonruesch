@@ -43,7 +43,7 @@ export const useNavigateEvents = () => {
         const slideRight = currentPageIndex > pageIndex;
         setWillNavigateValue({
           slideRight,
-          skipAnimations: page?.skipAnimations,
+          ...(page ? { skipAnimations: page.skipAnimations } : {}),
         });
       },
     );

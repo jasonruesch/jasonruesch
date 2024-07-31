@@ -41,7 +41,7 @@ export const MobileNav = ({ className, onItemSelect }: MobileNavProps) => {
       {authenticated ? (
         <button
           type="button"
-          className="-mx-safe-offset-4 px-safe-offset-4 block py-2 font-semibold leading-7 text-neutral-900 hover:bg-neutral-300 focus-visible:bg-neutral-300 dark:text-neutral-50 dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700"
+          className="-mx-safe-offset-4 px-safe-offset-4 block cursor-pointer py-2 font-semibold leading-7 text-neutral-900 hover:bg-neutral-300 focus-visible:bg-neutral-300 dark:text-neutral-50 dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700"
           onClick={logout}
         >
           Sign Out

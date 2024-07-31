@@ -46,7 +46,7 @@ export const Nav = ({ className }: NavProps) => {
       {authenticated ? (
         <button
           type="button"
-          className="py-2.5 px-1 text-neutral-600 hover:text-neutral-700 focus-visible:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus-visible:text-neutral-300"
+          className="cursor-pointer py-2.5 px-1 text-neutral-600 hover:text-neutral-700 focus-visible:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus-visible:text-neutral-300"
           onClick={logout}
         >
           Sign Out

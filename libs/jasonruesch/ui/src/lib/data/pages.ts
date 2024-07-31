@@ -67,12 +67,6 @@ const loginPage: PageMeta = {
   name: 'Sign In',
   href: '/login',
 };
-const logoutPage: PageMeta = {
-  name: 'Sign Out',
-  href: '/logout',
-  skipAnimations: true,
-  authenticated: true,
-};
 const adminPage: PageMeta = {
   name: 'Admin',
   href: '/admin',
@@ -94,7 +88,6 @@ export const pages: PageMeta[] = [
   blankPage,
   transparentPage,
   loginPage,
-  logoutPage,
   adminPage,
 ];
 

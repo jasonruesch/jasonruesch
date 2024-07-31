@@ -6,7 +6,7 @@ import { AuthContext } from '../hooks';
 import { EasterEggLink } from './easter-egg-link';
 import { FeatureFlagsManagerModal } from './feature-flags-manager-modal';
 import { Header } from './header';
-import { LoginLink } from './login-link';
+import { LoginModal } from './login-modal';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -40,7 +40,7 @@ export const Layout = ({ children }: LayoutProps) => {
         {/* The relative position is needed to work with the background component's fixed or absolute position */}
         <div className="relative">{children}</div>
 
-        {authenticated ? <FeatureFlagsManagerModal /> : <LoginLink />}
+        {authenticated ? <FeatureFlagsManagerModal /> : <LoginModal />}
         <EasterEggLink />
       </main>
     </>
