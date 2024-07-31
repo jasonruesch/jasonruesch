@@ -1,8 +1,8 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useFlags } from 'flagsmith/react';
-import { FeatureFlag, featureFlags } from '../models';
+import { FeatureFlag, defaultFeatureFlags } from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
@@ -10,15 +10,20 @@ const noop = () => {};
 export const FeatureFlagsContext = createContext<
   // flags, setFlags, resetFlags
   readonly [FeatureFlag[], (flag: FeatureFlag) => void, () => void]
->([featureFlags, noop, noop]);
+>([defaultFeatureFlags, noop, noop]);
 
 export const useFeatureFlags = () => {
   // Flagsmith flags
-  const flagsmithFlags = useFlags(featureFlags.map((flag) => flag.key));
-  const flagsmithFeatureFlags = Object.entries(flagsmithFlags).reduce(
+  const flagsmithFeatureFlags = useFlags(
+    defaultFeatureFlags.map((flag) => flag.key),
+  );
+  const featureFlags = Object.entries(flagsmithFeatureFlags).reduce(
     (acc, [key, { enabled }]) => {
-      const flag = featureFlags.find((f) => f.key === key);
-      return flag ? acc.concat({ ...flag, enabled }) : acc;
+      const flag = defaultFeatureFlags.find((f) => f.key === key);
+      return flag
+        ? // Prioritize Flagsmith flags
+          [...acc, { ...flag, enabled: enabled || flag.enabled }]
+        : acc;
     },
     [] as FeatureFlag[],
   );
@@ -33,63 +38,52 @@ export const useFeatureFlags = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchFlags = Array.from(searchParams.entries())
     .map(([key, value]) => {
-      const flag = featureFlags.find((f) => f.key === key);
+      const flag = defaultFeatureFlags.find((f) => f.key === key);
       return flag
         ? ({ ...flag, enabled: value === 'true' } as FeatureFlag)
         : null;
     })
     .filter((flag) => flag !== null);
 
-  const getUniqueFlags = () => [
+  const uniqueFlags = [
     ...new Map(
+      // Ordered by prioritization, last one wins
       featureFlags
-        .concat(flagsmithFeatureFlags)
         .concat(storedFlags)
         .concat(searchFlags)
         .map((item) => [item['key'], item]),
     ).values(),
   ];
-  const uniqueFlags = getUniqueFlags();
-
-  if (storedFlags.length === 0) {
-    storage.setItem('featureFlags', JSON.stringify(uniqueFlags));
-  }
 
   const [flags, setFlags] = useState<FeatureFlag[]>(uniqueFlags);
 
-  const updateFlags = useCallback(
-    (flag: FeatureFlag) => {
-      setFlags((flags) => {
-        const updated = flags.map((f) =>
-          f.key === flag.key ? { ...f, enabled: flag.enabled } : f,
-        );
+  const updateFlags = (flag: FeatureFlag) => {
+    setFlags((flags) => {
+      const updated = flags.map((f) =>
+        f.key === flag.key ? { ...f, enabled: flag.enabled } : f,
+      );
 
-        storage.setItem('featureFlags', JSON.stringify(updated));
-
-        return updated;
-      });
-    },
-    [storage],
-  );
+      return updated;
+    });
+  };
 
   const resetFlags = () => {
-    console.log('reset flags');
-    const flags = flagsmithFeatureFlags.length
-      ? flagsmithFeatureFlags
-      : featureFlags;
-    storage.setItem('featureFlags', JSON.stringify(flags));
-    setFlags(flags);
+    setFlags(featureFlags);
   };
 
   useEffect(() => {
-    flags
-      .filter(({ key }) => searchParams.has(key))
-      .forEach(({ key, enabled }) => {
-        if (enabled) searchParams.set(key, 'true');
-        else searchParams.delete(key);
-      });
-    setSearchParams(searchParams);
-  }, [flags, searchParams, setSearchParams]);
+    // Update storage
+    const storedFlagsFromFlags = JSON.stringify(flags);
+    storage.setItem('featureFlags', storedFlagsFromFlags);
+
+    // Update search params
+    const searchFlagsFromFlags = flags.reduce((acc, { key, enabled }) => {
+      if (enabled) acc.set(key, 'true');
+      else acc.delete(key);
+      return acc;
+    }, searchParams);
+    setSearchParams(searchFlagsFromFlags);
+  }, [flags, storage, searchParams, setSearchParams]);
 
   return [flags, updateFlags, resetFlags] as const;
 };

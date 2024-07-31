@@ -26,10 +26,11 @@ const easterEggImages = [
 
 // Generate random easter egg ID for each user
 export const getEasterEggId = () => {
-  let easterEggId = localStorage.getItem('easterEggId');
+  const storage = window.localStorage ?? window.sessionStorage;
+  let easterEggId = storage.getItem('easterEggId');
   if (!easterEggId) {
     easterEggId = Math.random().toString(36).slice(2);
-    localStorage.setItem('easterEggId', easterEggId);
+    storage.setItem('easterEggId', easterEggId);
   }
 
   return easterEggId;

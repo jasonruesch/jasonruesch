@@ -5,7 +5,7 @@ export interface FeatureFlag {
   enabled: boolean;
 }
 
-export const featureFlags: FeatureFlag[] = [
+export const defaultFeatureFlags: FeatureFlag[] = [
   {
     key: 'all_navigation',
     name: 'Show All Navigation',

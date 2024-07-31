@@ -705,5 +705,3 @@ export function Privacy() {
     </Page>
   );
 }
-
-export default Privacy;

@@ -19,7 +19,12 @@ export const Nav = ({ className }: NavProps) => {
     : primaryNavPages(hiddenNavigation?.enabled, authenticated);
 
   return (
-    <nav className={twMerge('flex items-center space-x-2', className)}>
+    <nav
+      className={twMerge(
+        'flex items-center space-x-2 overflow-x-auto whitespace-nowrap',
+        className,
+      )}
+    >
       {navigation.map((page) => (
         <PageNavLink
           key={page.href}
