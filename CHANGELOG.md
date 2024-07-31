@@ -1,3 +1,15 @@
+## 1.14.0 (2024-07-31)
+
+
+### 🚀 Features
+
+- **jasonruesch:** add login modal ([6ba0574](https://github.com/jasonruesch/jasonruesch/commit/6ba0574))
+- **jasonruesch:** update admin page ([c7ff750](https://github.com/jasonruesch/jasonruesch/commit/c7ff750))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.13.0 (2024-07-31)
 
 
