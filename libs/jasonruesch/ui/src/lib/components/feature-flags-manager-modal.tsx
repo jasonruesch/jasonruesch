@@ -41,7 +41,7 @@ export function FeatureFlagsManagerModal() {
         <DialogBackdrop
           transition
           className={twJoin(
-            'fixed inset-0 bg-neutral-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-700/75',
+            'fixed inset-0 bg-neutral-200/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-700/75',
             styles['background-top-transparent'],
           )}
         />

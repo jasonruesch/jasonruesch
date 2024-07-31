@@ -11,7 +11,7 @@ export function Admin() {
       </h1>
       <p>[admin functionality goes here]</p>
 
-      <div className="w-full space-y-2 rounded-lg bg-neutral-950/75 p-4">
+      <div className="w-full space-y-2 rounded-lg bg-white/50 p-4 ring-1 ring-neutral-200 dark:bg-neutral-950/75 dark:ring-black">
         <h3>Feature Flags</h3>
         <FeatureFlagsManager />
       </div>

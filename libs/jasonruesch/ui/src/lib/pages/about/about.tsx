@@ -1,3 +1,4 @@
+import { twJoin } from 'tailwind-merge';
 import { Page } from '../../components';
 
 export function About() {
@@ -11,15 +12,30 @@ export function About() {
       </h1>
       <div className="text-justify">
         <img
+          src="/images/jasonruesch-512.png"
+          alt="Jason Ruesch"
+          className={twJoin(
+            'float-right mt-4 mb-2 ml-4 h-48 w-48 rounded-full ring-2 sm:h-64 sm:w-64 lg:h-96 lg:w-96 [&]:[shape-outside:circle()]',
+            'ring-fuchsia-500 dark:ring-teal-400',
+            'backdrop-blur-sm',
+          )}
+        />
+        {/* <img
           src="/images/jasonruesch-light-512.png"
           alt="Jason Ruesch"
-          className="float-right mt-4 mb-2 ml-4 h-48 w-48 rounded-full ring-2 ring-cyan-500 sm:h-64 sm:w-64 lg:h-96 lg:w-96 dark:hidden [&]:[shape-outside:circle()]"
+          className={twJoin(
+            'float-right mt-4 mb-2 ml-4 h-48 w-48 rounded-full ring-2 sm:h-64 sm:w-64 lg:h-96 lg:w-96 [&]:[shape-outside:circle()]',
+            'ring-cyan-500 dark:hidden',
+          )}
         />
         <img
           src="/images/jasonruesch-dark-512.png"
           alt="Jason Ruesch"
-          className="float-right mt-4 mb-2 ml-4 hidden h-48 w-48 rounded-full ring-2 sm:h-64 sm:w-64 lg:h-96 lg:w-96 dark:block dark:ring-violet-400 [&]:[shape-outside:circle()]"
-        />
+          className={twJoin(
+            'float-right mt-4 mb-2 ml-4 h-48 w-48 rounded-full ring-2 sm:h-64 sm:w-64 lg:h-96 lg:w-96 [&]:[shape-outside:circle()]',
+            'hidden dark:block dark:ring-violet-400',
+          )}
+        /> */}
         <p>
           I hold a Bachelor of Science in Computer Science and have dedicated my
           career to the dynamic world of web development. My focus is on
