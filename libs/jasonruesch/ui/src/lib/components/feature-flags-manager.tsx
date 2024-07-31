@@ -1,6 +1,7 @@
-import { Description, Field, Label, Switch } from '@headlessui/react';
+import { Button, Description, Field, Label, Switch } from '@headlessui/react';
 import { use } from 'react';
 
+import { twJoin } from 'tailwind-merge';
 import { FeatureFlagsContext } from '../hooks';
 
 export function FeatureFlagsManager() {
@@ -34,7 +35,7 @@ export function FeatureFlagsManager() {
           >
             <span
               aria-hidden="true"
-              className="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white ring-0 shadow transition duration-200 ease-in-out group-data-[checked]:translate-x-5 dark:bg-neutral-950"
+              className="pointer-events-none inline-block size-5 transform rounded-full bg-white ring-0 shadow transition duration-200 ease-in-out group-data-[checked]:translate-x-5 dark:bg-neutral-950"
             />
           </Switch>
         </Field>
@@ -42,13 +43,20 @@ export function FeatureFlagsManager() {
 
       {/* Reset button */}
       <div className="mt-4">
-        <button
-          type="button"
-          className="btn-neutral w-full sm:w-auto"
+        <Button
+          className={twJoin(
+            'w-full sm:w-auto',
+            'inline-flex items-center justify-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold shadow-inner shadow-white/10',
+            'bg-neutral-700 text-white',
+            'data-[hover]:bg-neutral-600',
+            'data-[active]:bg-neutral-700',
+            'focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white',
+            'data-[disabled]:cursor-not-allowed data-[disabled]:bg-neutral-300 data-[disabled]:text-neutral-400 data-[disabled]:shadow-none',
+          )}
           onClick={resetFlags}
         >
           Reset flags
-        </button>
+        </Button>
       </div>
     </>
   );

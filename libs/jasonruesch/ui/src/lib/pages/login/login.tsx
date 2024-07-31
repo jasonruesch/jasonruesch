@@ -1,6 +1,8 @@
 import { use, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Button } from '@headlessui/react';
+import { twJoin } from 'tailwind-merge';
 import { Page } from '../../components';
 import { AuthContext } from '../../hooks';
 
@@ -91,18 +93,24 @@ export function Login() {
           </div>
         </div>
 
-        <div className="flex items-center justify-end">
-          <button type="submit" className="btn-primary w-full sm:w-auto">
+        <div className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:justify-between">
+          <Button
+            type="submit"
+            className={twJoin(
+              'w-full sm:w-auto',
+              'inline-flex items-center justify-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold shadow-inner shadow-white/10',
+              'bg-cyan-700 text-white dark:bg-violet-600',
+              'text-white data-[hover]:bg-cyan-600 dark:data-[hover]:bg-violet-500',
+              'data-[active]:bg-cyan-700 dark:data-[active]:bg-violet-600',
+              'focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white',
+              'data-[disabled]:cursor-not-allowed data-[disabled]:bg-neutral-300 data-[disabled]:text-neutral-400 data-[disabled]:shadow-none',
+            )}
+          >
             Sign in
-          </button>
+          </Button>
+          <span className="text-red-500 sm:order-first">{error}</span>
         </div>
       </form>
-
-      {error ? (
-        <div className="mt-6 rounded-md bg-red-100 p-4 text-center text-sm text-red-500">
-          {error}
-        </div>
-      ) : null}
     </Page>
   );
 }

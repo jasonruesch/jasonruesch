@@ -122,7 +122,7 @@ export const Header = ({ className }: HeaderProps) => {
             </div>
           </div>
 
-          <div className="px-safe-offset-4 pb-safe-offset-4 mt-16">
+          <div className="pb-safe-offset-4 mt-16">
             <MobileNav onItemSelect={() => handleMobileMenuOpen(false)} />
           </div>
         </DialogPanel>

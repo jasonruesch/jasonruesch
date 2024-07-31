@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 
+import { Button } from '@headlessui/react';
+import { twJoin } from 'tailwind-merge';
 import { Page } from '../../components';
 
 export function Contact() {
@@ -26,20 +28,27 @@ export function Contact() {
       </p>
       {emailRecipient ? (
         <div className="mb-4 flex w-full items-center justify-center gap-4">
-          <button
-            type="button"
-            className="btn-primary w-full sm:w-auto"
+          <Button
+            className={twJoin(
+              'w-full sm:w-auto',
+              'inline-flex items-center justify-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold shadow-inner shadow-white/10',
+              'bg-cyan-700 text-white dark:bg-violet-600',
+              'text-white data-[hover]:bg-cyan-600 dark:data-[hover]:bg-violet-500',
+              'data-[active]:bg-cyan-700 dark:data-[active]:bg-violet-600',
+              'focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white',
+              'data-[disabled]:cursor-not-allowed data-[disabled]:bg-neutral-300 data-[disabled]:text-neutral-400 data-[disabled]:shadow-none',
+            )}
             onClick={sendEmail}
           >
-            Send me an email
-          </button>
+            Send me an Email
+          </Button>
         </div>
       ) : null}
       <div className="flex items-center justify-center gap-4">
         <a
           target="_blank"
           rel="noreferrer noopener"
-          className="btn-primary btn-link"
+          className="inline-flex items-center gap-1"
           href="https://github.com/jasonruesch"
         >
           <svg
@@ -56,7 +65,7 @@ export function Contact() {
         <a
           target="_blank"
           rel="noreferrer noopener"
-          className="btn-primary btn-link"
+          className="inline-flex items-center gap-1"
           href="https://www.linkedin.com/in/jasonruesch/"
         >
           <svg

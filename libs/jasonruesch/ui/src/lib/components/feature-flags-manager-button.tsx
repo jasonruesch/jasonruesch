@@ -6,7 +6,7 @@ export const FeatureFlagsManagerButton = ({
   onClick,
 }: FeatureFlagsManagerButtonProps) => {
   return (
-    <div className="mb-safe fixed bottom-1 left-1 z-20 h-12 w-12 rounded-full">
+    <div className="mb-safe fixed bottom-1 left-1 z-20 size-12 rounded-full">
       <button
         type="button"
         className="size-full cursor-pointer rounded-full"

@@ -21,7 +21,7 @@ export const Nav = ({ className }: NavProps) => {
   return (
     <nav
       className={twMerge(
-        'flex items-center space-x-2 overflow-x-auto whitespace-nowrap',
+        'flex items-center space-x-2 whitespace-nowrap',
         className,
       )}
     >
@@ -31,7 +31,7 @@ export const Nav = ({ className }: NavProps) => {
           to={page.href}
           className={({ isActive }) =>
             twJoin(
-              'py-2.5 px-1',
+              'rounded-md py-2.5 px-1',
               isActive
                 ? 'text-cyan-700 dark:text-violet-400'
                 : 'text-neutral-600 dark:text-neutral-400',
@@ -46,7 +46,7 @@ export const Nav = ({ className }: NavProps) => {
       {authenticated ? (
         <button
           type="button"
-          className="cursor-pointer py-2.5 px-1 text-neutral-600 hover:text-neutral-700 focus-visible:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus-visible:text-neutral-300"
+          className="cursor-pointer rounded-md py-2.5 px-1 text-neutral-600 hover:text-neutral-700 focus-visible:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus-visible:text-neutral-300"
           onClick={logout}
         >
           Sign Out

@@ -17,6 +17,7 @@ export const Footer = ({ className }: FooterProps) => {
       )}
     >
       <span
+        role="complementary"
         aria-label={`Copyright ${new Date().getFullYear()} Jason Ruesch. All rights reserved.`}
       >
         <span aria-hidden="true">
@@ -27,7 +28,7 @@ export const Footer = ({ className }: FooterProps) => {
         &bull;
       </span>
       <div className="flex items-center gap-x-1">
-        <span aria-label={`Version ${packageVersion}`}>
+        <span role="complementary" aria-label={`Version ${packageVersion}`}>
           <span aria-hidden="true">v{packageVersion}</span>
         </span>
         <span aria-hidden="true">&bull;</span>
