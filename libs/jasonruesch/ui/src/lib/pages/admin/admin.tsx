@@ -28,7 +28,7 @@ export function Admin() {
             </div>
           </div>
 
-          <div className="mt-2 max-h-40 space-y-2 py-3 px-4 sm:ml-14">
+          <div className="mt-2 space-y-2 py-3 px-4 sm:ml-14">
             <FeatureFlagsManager />
           </div>
         </div>
