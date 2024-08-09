@@ -1,12 +1,14 @@
 import { useAnimate } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { headerAnimations } from '../animations';
+import { NavigationContext } from './use-navigation';
 
-export const useAnimateHeader = (skipAnimations = false) => {
+export const useAnimateHeader = () => {
   const [searchParams] = useSearchParams();
   const stageAnimations = searchParams.get('stage') === 'true';
+  const { skipAnimations } = use(NavigationContext);
   const { pathname } = useLocation();
   const [scope, animate] = useAnimate();
   const [previousPathname, setPreviousPathname] = useState(pathname);
@@ -33,7 +35,7 @@ export const useAnimateHeader = (skipAnimations = false) => {
       );
     };
 
-    if (!skipAnimations && previousPathname !== pathname) {
+    if (!skipAnimations?.current && previousPathname !== pathname) {
       startAnimation();
     }
   }, [previousPathname, pathname, scope, skipAnimations, animate]);

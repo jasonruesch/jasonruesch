@@ -1,20 +1,14 @@
-import { use, useEffect, useState } from 'react';
+import { use, useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { getPage } from '../utils';
+import { getPage, navigateEventChannel } from '../utils';
 import { AuthContext } from './use-auth';
-import { WillNavigateContext } from './use-navigate-events';
+import { NavigationContext } from './use-navigation';
 
 export const usePage = () => {
   const [searchParams] = useSearchParams();
   const stageAnimations = searchParams.get('stage') === 'true';
-  const [
-    { slideRight, skipAnimations: skipAnimationsFromContext },
-    setWillNavigateValue,
-  ] = use(WillNavigateContext);
-  const [skipAnimations, setSkipAnimations] = useState(
-    searchParams.get('skip') === 'true' || skipAnimationsFromContext,
-  );
+  const { slideRight, skipAnimations } = use(NavigationContext);
   const { authenticated } = use(AuthContext);
   const navigate = useNavigate();
   const backgroundSlot = document.getElementById('background');
@@ -23,23 +17,22 @@ export const usePage = () => {
 
   useEffect(() => {
     if (page?.authenticated && !authenticated) {
-      setWillNavigateValue({ skipAnimations: true });
+      navigateEventChannel.emit('onWillNavigate', { skipAnimations: true });
       navigate('/');
     }
-  }, [page, authenticated, setWillNavigateValue, navigate]);
+  }, [page, authenticated, navigate]);
 
   useEffect(() => {
-    if (skipAnimations) {
-      setWillNavigateValue({ skipAnimations: false });
-      setSkipAnimations(false);
+    if (skipAnimations?.current) {
+      navigateEventChannel.emit('onWillNavigate', { skipAnimations: false });
     }
-  }, [skipAnimations, setWillNavigateValue]);
+  }, [skipAnimations]);
 
   return {
     page,
     stageAnimations,
-    slideRight,
-    skipAnimations,
+    slideRight: slideRight?.current ?? false,
+    skipAnimations: skipAnimations?.current ?? false,
     backgroundSlot,
     authenticated,
   };

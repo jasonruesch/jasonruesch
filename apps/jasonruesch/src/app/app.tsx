@@ -8,10 +8,10 @@ import {
   AuthContext,
   FeatureFlagsContext,
   Layout,
+  NavigationContext,
   useAuth,
   useFeatureFlags,
-  useNavigateEvents,
-  WillNavigateContext,
+  useNavigation,
 } from '@jasonruesch/jasonruesch-ui';
 
 export function App() {
@@ -25,7 +25,7 @@ export function App() {
   return (
     <AuthContext value={useAuth()}>
       <FeatureFlagsContext value={useFeatureFlags()}>
-        <WillNavigateContext value={useNavigateEvents()}>
+        <NavigationContext value={useNavigation()}>
           <Layout>
             <AnimatePresence
               initial={false}
@@ -34,7 +34,7 @@ export function App() {
               <AppRoutes location={location} key={location.pathname} />
             </AnimatePresence>
           </Layout>
-        </WillNavigateContext>
+        </NavigationContext>
       </FeatureFlagsContext>
     </AuthContext>
   );

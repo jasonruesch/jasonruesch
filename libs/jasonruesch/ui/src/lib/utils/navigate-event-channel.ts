@@ -1,11 +1,10 @@
-import { PageMeta } from '../models';
 import { eventbus } from './event-bus';
 
 type NavigateBus = {
   onWillNavigate: (payload: {
-    page?: PageMeta;
-    pageIndex: number;
-    pathname: string;
+    pageIndex?: number;
+    pathname?: string;
+    skipAnimations?: boolean;
   }) => void;
 
   onNavigateStart: () => void;
