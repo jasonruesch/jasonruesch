@@ -16,8 +16,8 @@
     "@heroicons/react": "^2.1.5",
     "flagsmith": "^4.0.3",
     "framer-motion": "^12.0.0-alpha.0",
-    "react": "^19.0.0-beta-26f2496093-20240514",
-    "react-dom": "^19.0.0-beta-26f2496093-20240514",
+    "react": "19.0.0-rc-e210d081-20240909",
+    "react-dom": "19.0.0-rc-e210d081-20240909",
     "react-ga4": "^2.1.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.24.1",
@@ -50,8 +50,8 @@
     "@tailwindcss/vite": "^4.0.0-alpha.16",
     "@testing-library/react": "15.0.6",
     "@types/node": "18.16.9",
-    "@types/react": "npm:types-react@^19.0.0-beta.2",
-    "@types/react-dom": "npm:types-react-dom@^19.0.0-beta.2",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/eslint-plugin": "^7.3.0",
     "@typescript-eslint/parser": "^7.3.0",
@@ -85,10 +85,10 @@
   },
   "overrides": {
     "nx": "19.4.0",
-    "react": "^19.0.0-beta-26f2496093-20240514",
-    "react-dom": "^19.0.0-beta-26f2496093-20240514",
-    "@types/react": "npm:types-react@^19.0.0-beta.2",
-    "@types/react-dom": "npm:types-react-dom@^19.0.0-beta.2"
+    "react": "19.0.0-rc-e210d081-20240909",
+    "react-dom": "19.0.0-rc-e210d081-20240909",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   },
   "config": {
     "commitizen": {
