@@ -1,3 +1,15 @@
+## 1.17.0 (2024-09-10)
+
+
+### 🚀 Features
+
+- **jasonruesch:** update login page and modal ([faafb3c](https://github.com/jasonruesch/jasonruesch/commit/faafb3c))
+- **jasonruesch:** update react to 19 rc and fix router references ([dc3159b](https://github.com/jasonruesch/jasonruesch/commit/dc3159b))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.16.0 (2024-07-31)
 
 
