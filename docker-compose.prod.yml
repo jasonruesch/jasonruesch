@@ -1,0 +1,9 @@
+services:
+  jasonruesch:
+    image: jasonruesch:latest
+    container_name: jasonruesch
+    build:
+      context: .
+      dockerfile: ./apps/jasonruesch/Dockerfile.prod
+    ports:
+      - '8080:80'
