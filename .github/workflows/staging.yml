@@ -77,7 +77,7 @@ jobs:
 
       - name: Run affected e2e
         if: steps.affected_e2e.outputs.projects != ''
-        run: npx nx run-many -t e2e-ci --projects ${{ steps.affected_e2e.outputs.projects }}
+        run: npx nx run-many -t e2e --projects ${{ steps.affected_e2e.outputs.projects }}
 
       - name: Build Jason Ruesch
         if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
