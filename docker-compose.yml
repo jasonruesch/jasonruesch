@@ -1,7 +1,7 @@
 services:
   jasonruesch:
-    image: jasonruesch:latest
-    container_name: jasonruesch
+    image: jasonruesch:dev
+    container_name: jasonruesch-dev
     build:
       context: .
       dockerfile: ./apps/jasonruesch/Dockerfile

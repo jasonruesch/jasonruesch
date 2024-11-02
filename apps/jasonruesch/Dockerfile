@@ -1,4 +1,4 @@
-# Run the container with `docker run -p 4200:4200 -t jasonruesch`.
+# Run the container with `docker run -p 4200:4200 -t jasonruesch-dev`.
 FROM docker.io/node:lts-alpine
 
 WORKDIR /app
