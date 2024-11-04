@@ -84,10 +84,12 @@ npm install react-router-dom
 ## [Tailwind CSS 4 Alpha](https://tailwindcss.com/) and [tailwind-merge](https://github.com/dcastil/tailwind-merge)
 
 ```bash
-npm install -D vite@latest tailwindcss@next @tailwindcss/vite@next
+npm install -D vite@latest tailwindcss@^4.0.0-alpha.16 @tailwindcss/vite@next
 npm install -D prettier@latest prettier-plugin-tailwindcss
 npm install -D tailwind-merge
 ```
+
+> Note: The latest `tailwindcss` next version breaks --font-size-5xl for the `.gradient-header` class.
 
 Update `apps/jasonruesch/src/styles.css` with the following:
 
