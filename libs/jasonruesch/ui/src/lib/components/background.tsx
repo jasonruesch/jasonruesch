@@ -1,7 +1,5 @@
 import { twMerge } from 'tailwind-merge';
 
-import styles from './background.module.css';
-
 interface BackgroundProps {
   fixed?: boolean;
   className?: string;
@@ -11,7 +9,8 @@ export const Background = ({ fixed, className }: BackgroundProps) => {
   return (
     <div
       className={twMerge(
-        styles.background,
+        '[&]:[background-image:linear-gradient(to_bottom,var(--color-white),var(--color-cyan-600),var(--color-fuchsia-600),var(--color-white))]',
+        'dark:[&]:[background-image:linear-gradient(to_bottom,var(--color-neutral-950),var(--color-violet-500),var(--color-teal-500),var(--color-neutral-950))]',
         'inset-0 h-dvh w-dvw overflow-hidden',
         fixed ? 'fixed' : 'absolute',
         className,

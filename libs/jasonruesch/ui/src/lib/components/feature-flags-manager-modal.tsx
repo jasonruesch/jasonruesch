@@ -12,8 +12,6 @@ import { useActionKey } from '../hooks';
 import { FeatureFlagsManager } from './feature-flags-manager';
 import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
 
-import styles from './background-gradients.module.css';
-
 export function FeatureFlagsManagerModal() {
   const [open, setOpen] = useState(false);
   const { ctrlKey, metaKey } = useActionKey();
@@ -41,21 +39,24 @@ export function FeatureFlagsManagerModal() {
         <DialogBackdrop
           transition
           className={twJoin(
-            'fixed inset-0 bg-neutral-200/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-700/75',
-            styles['background-top-transparent'],
+            'fixed inset-0 bg-neutral-200/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in dark:bg-neutral-700/75',
+            '[&]:[background-image:url("/backgrounds/top-light-transparent.svg")] [&]:[background-position:top_left] [&]:[background-repeat:repeat-x]',
+            'dark:[&]:[background-image:url("/backgrounds/top-dark-transparent.svg")]',
+            'sm:[&]:[background-image:url("/backgrounds/top-light-transparent-256.svg")] sm:[&]:[background-size:64px_256px]',
+            'dark:sm:[&]:[background-image:url("/backgrounds/top-dark-transparent-256.svg")]',
           )}
         />
 
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto pt-20 px-4 pb-4 lg:pt-32 lg:px-20 lg:pb-20">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto px-4 pb-4 pt-20 lg:px-20 lg:pb-20 lg:pt-32">
           <DialogPanel
             transition
-            className="relative mx-auto w-full max-w-lg transform overflow-hidden rounded-lg bg-white pt-5 pb-4 text-left shadow-xl transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-neutral-950"
+            className="relative mx-auto w-full max-w-lg transform overflow-hidden rounded-lg bg-white pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in dark:bg-neutral-950"
           >
-            <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+            <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-md bg-white text-neutral-400 hover:text-neutral-500 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:outline-none dark:bg-neutral-950 dark:text-neutral-300 dark:hover:text-neutral-400 dark:focus:ring-violet-400 dark:focus:ring-offset-neutral-950"
+                className="rounded-md bg-white text-neutral-400 hover:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:bg-neutral-950 dark:text-neutral-300 dark:hover:text-neutral-400 dark:focus:ring-violet-400 dark:focus:ring-offset-neutral-950"
               >
                 <span className="sr-only">Close</span>
                 <XMarkIcon aria-hidden="true" className="size-6" />
@@ -68,7 +69,7 @@ export function FeatureFlagsManagerModal() {
                   className="size-6 text-cyan-600 dark:text-violet-100"
                 />
               </div>
-              <div className="mt-3 w-full sm:mt-0 sm:ml-4">
+              <div className="mt-3 w-full sm:ml-4 sm:mt-0">
                 <DialogTitle
                   as="h3"
                   className="text-center text-neutral-900 sm:text-left dark:text-white"
@@ -78,7 +79,7 @@ export function FeatureFlagsManagerModal() {
               </div>
             </div>
 
-            <div className="mt-2 max-h-40 transform-gpu scroll-py-3 space-y-2 overflow-y-auto py-3 px-4 sm:ml-14 lg:max-h-96">
+            <div className="mt-2 max-h-40 transform-gpu scroll-py-3 space-y-2 overflow-y-auto px-4 py-3 sm:ml-14 lg:max-h-96">
               <FeatureFlagsManager />
             </div>
           </DialogPanel>
