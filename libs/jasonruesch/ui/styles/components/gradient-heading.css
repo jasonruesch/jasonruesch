@@ -48,10 +48,10 @@
 }
 
 .gradient-heading {
-  padding-top: var(--spacing-1);
-  padding-bottom: var(--spacing-1);
+  padding-top: var(--spacing);
+  padding-bottom: var(--spacing);
   text-align: center;
-  font-size: var(--font-size-xl);
+  font-size: var(--text-xl);
   line-height: var(--line-height-cap);
   font-weight: normal;
   text-transform: uppercase;
@@ -61,17 +61,17 @@
   background-clip: text;
   color: transparent;
   transform: scale(1.1);
-  margin-left: var(--spacing-2);
+  margin-left: calc(var(--spacing) * 2);
 }
 
 /* .gradient-heading > :not([hidden]) ~ :not([hidden]) {
-  margin-left: var(--spacing-4);
+  margin-left: calc(var(--spacing) * 4);
 } */
 
 /* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   .gradient-heading {
-    font-size: var(--font-size-3xl);
+    font-size: var(--text-3xl);
     background-image: var(--gradient-lg);
     transform: scale(1);
     margin-left: 0;
@@ -81,7 +81,7 @@
 /* --breakpoint-lg */
 @media screen and (min-width: 64rem) {
   .gradient-heading {
-    font-size: var(--font-size-5xl);
+    font-size: var(--text-5xl);
   }
 }
 
@@ -105,20 +105,20 @@
 }
 
 .heading-lg {
-  font-size: var(--font-size-3xl);
+  font-size: var(--text-3xl);
   line-height: var(--line-height-cap);
 }
 
 /* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   .heading-lg {
-    font-size: var(--font-size-5xl);
+    font-size: var(--text-5xl);
   }
 }
 
 /* --breakpoint-lg */
 @media screen and (min-width: 64rem) {
   .heading-lg {
-    font-size: var(--font-size-7xl);
+    font-size: var(--text-7xl);
   }
 }

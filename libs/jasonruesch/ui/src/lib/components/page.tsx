@@ -8,8 +8,6 @@ import { Background } from './background';
 import { Footer } from './footer';
 import { PageBackground } from './page-background';
 
-import styles from './background-gradients.module.css';
-
 interface PageProps {
   children?: React.ReactNode;
   transparent?: boolean;
@@ -45,7 +43,13 @@ export const Page = ({
         className={twMerge(
           'relative',
           transparent ? '' : 'bg-neutral-50 dark:bg-neutral-900',
-          transparent ? '' : styles['background-top'],
+          transparent
+            ? ''
+            : '[&]:[background-image:url("/backgrounds/top-light.svg")] [&]:[background-position:top_left] [&]:[background-repeat:repeat-x] [&]:[background-size:64px]',
+          transparent
+            ? ''
+            : 'dark:[&]:[background-image:url("/backgrounds/top-dark.svg")]',
+          transparent ? '' : 'sm:[&]:[background-size:96px]',
           className,
         )}
         initial="initial"
@@ -57,7 +61,13 @@ export const Page = ({
         <motion.div
           className={twJoin(
             'relative flex min-h-dvh flex-col',
-            transparent ? '' : styles['background-bottom'],
+            transparent
+              ? ''
+              : '[&]:[background-image:url("/backgrounds/bottom-light.svg")] [&]:[background-position:bottom_left] [&]:[background-repeat:repeat-x] [&]:[background-size:64px]',
+            transparent
+              ? ''
+              : 'dark:[&]:[background-image:url("/backgrounds/bottom-dark.svg")]',
+            transparent ? '' : 'sm:[&]:[background-size:96px]',
           )}
           initial={false}
           animate="animate"
@@ -70,7 +80,7 @@ export const Page = ({
 
           <div
             className={twMerge(
-              'px-safe-offset-4 relative z-10 grow pt-16 pb-2',
+              'px-safe-offset-4 relative z-10 grow pb-2 pt-16',
               contentClassName,
             )}
           >

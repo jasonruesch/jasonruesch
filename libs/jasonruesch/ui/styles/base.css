@@ -30,71 +30,71 @@ h6 {
 }
 
 h1 {
-  font-size: var(--font-size-3xl);
-  line-height: var(--font-size-3xl--line-height);
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl--line-height);
 }
 h2 {
-  font-size: var(--font-size-2xl);
-  line-height: var(--font-size-2xl--line-height);
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
 }
 h3 {
-  font-size: var(--font-size-xl);
-  line-height: var(--font-size-xl--line-height);
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
 }
 h4 {
-  font-size: var(--font-size-lg);
-  line-height: var(--font-size-lg--line-height);
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
 }
 h5 {
-  font-size: var(--font-size-base);
-  line-height: var(--font-size-base--line-height);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
 }
 
 /* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   h1 {
-    font-size: var(--font-size-4xl);
-    line-height: var(--font-size-4xl--line-height);
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
   }
   h2 {
-    font-size: var(--font-size-3xl);
-    line-height: var(--font-size-3xl--line-height);
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
   }
   h3 {
-    font-size: var(--font-size-2xl);
-    line-height: var(--font-size-2xl--line-height);
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
   }
   h4 {
-    font-size: var(--font-size-xl);
-    line-height: var(--font-size-xl--line-height);
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
   }
   h5 {
-    font-size: var(--font-size-lg);
-    line-height: var(--font-size-lg--line-height);
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
   }
 }
 
 /* --breakpoint-lg */
 @media screen and (min-width: 64rem) {
   h1 {
-    font-size: var(--font-size-5xl);
-    line-height: var(--font-size-5xl--line-height);
+    font-size: var(--text-5xl);
+    line-height: var(--text-5xl--line-height);
   }
   h2 {
-    font-size: var(--font-size-4xl);
-    line-height: var(--font-size-4xl--line-height);
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
   }
   h3 {
-    font-size: var(--font-size-3xl);
-    line-height: var(--font-size-3xl--line-height);
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
   }
   h4 {
-    font-size: var(--font-size-2xl);
-    line-height: var(--font-size-2xl--line-height);
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
   }
   h5 {
-    font-size: var(--font-size-xl);
-    line-height: var(--font-size-xl--line-height);
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
   }
 }
 
@@ -105,7 +105,7 @@ h4:has(+ *),
 h5:has(+ *),
 h6:has(+ *) {
   /* Only add margin if there is a sibling following the heading */
-  margin-bottom: var(--spacing-2);
+  margin-bottom: calc(var(--spacing) * 2);
 }
 
 /* Paragraphs */
@@ -115,7 +115,7 @@ p {
 }
 p:has(+ *) {
   /* Only add margin if there is a sibling following the paragraph */
-  margin-bottom: var(--spacing-4);
+  margin-bottom: calc(var(--spacing) * 4);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -128,16 +128,16 @@ p:has(+ *) {
 /* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   p {
-    font-size: var(--font-size-xl);
-    line-height: var(--font-size-xl--line-height);
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
   }
 }
 
 /* --breakpoint-lg */
 @media screen and (min-width: 64rem) {
   p {
-    font-size: var(--font-size-2xl);
-    line-height: var(--font-size-2xl--line-height);
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
   }
 }
 
@@ -145,15 +145,15 @@ p:has(+ *) {
 ul:has(+ *),
 ol:has(+ *) {
   /* Only add margin if there is a sibling following the paragraph */
-  margin-bottom: var(--spacing-4);
+  margin-bottom: calc(var(--spacing) * 4);
 }
 
 /* --breakpoint-sm */
 @media screen and (min-width: 40rem) {
   ul,
   ol {
-    font-size: var(--font-size-xl);
-    line-height: var(--font-size-xl--line-height);
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
   }
 }
 
@@ -161,7 +161,7 @@ ol:has(+ *) {
 @media screen and (min-width: 64rem) {
   ul,
   ol {
-    font-size: var(--font-size-2xl);
-    line-height: var(--font-size-2xl--line-height);
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
   }
 }

@@ -23,3 +23,5 @@
 - Deploy to Production
 
 > Note: To kick off a release to Production, run `npm run release`
+> This will bump the version, generate a changelog, create a tag, and push the tag to trigger the release workflow
+> It will also create a release in GitHub with the changelog as the release notes
