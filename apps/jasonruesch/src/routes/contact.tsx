@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 
 import { Button } from '@headlessui/react';
 import { twJoin } from 'tailwind-merge';
-import { Page } from '../../components';
+import { Page } from '../../../../libs/jasonruesch/ui/src/lib/components';
 
-export function Contact() {
+export default function Contact() {
   const emailRecipient = import.meta.env.VITE_EMAIL_RECIPIENT;
   const sendEmail = useCallback(() => {
     if (emailRecipient) window.location.href = `mailto:${emailRecipient}`;
@@ -31,7 +31,7 @@ export function Contact() {
           <Button
             className={twJoin(
               'w-full sm:w-auto',
-              'inline-flex items-center justify-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold shadow-inner shadow-white/10',
+              'inline-flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold shadow-inner shadow-white/10',
               'bg-cyan-700 text-white dark:bg-violet-600',
               'text-white data-[hover]:bg-cyan-600 dark:data-[hover]:bg-violet-500',
               'data-[active]:bg-cyan-700 dark:data-[active]:bg-violet-600',

@@ -1,7 +1,7 @@
 /// <reference types='vitest' />
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { reactRouter } from '@react-router/dev/vite';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
@@ -22,7 +22,7 @@ export default defineConfig({
   },
 
   plugins: [
-    react(),
+    reactRouter(),
     {
       name: 'markdown-loader',
       transform(code, id) {

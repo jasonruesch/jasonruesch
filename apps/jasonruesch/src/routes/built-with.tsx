@@ -4,17 +4,19 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 
-import markdown from '../../../../../../../CHANGELOG.md';
-import { Page } from '../../components';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import markdown from '../../../../../../docs/BUILT_WITH.md';
+import { Page } from '../../../../libs/jasonruesch/ui/src/lib/components';
 
-export function Changelog() {
+export default function BuiltWith() {
   const { pathname } = useLocation();
 
   return (
     <Page contentClassName="flex flex-col items-start">
-      <h1 className="gradient-heading" aria-label="Changelog">
+      <h1 className="gradient-heading" aria-label="Built With">
         <div className="flex items-center justify-center" aria-hidden="true">
-          <span className="heading-lg">Changelog</span>
+          Built&nbsp;
+          <span className="heading-lg">With</span>
         </div>
       </h1>
       <div className="w-full">

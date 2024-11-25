@@ -13,6 +13,7 @@
   "dependencies": {
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
+    "@react-router/node": "^7.0.1",
     "flagsmith": "^4.0.3",
     "framer-motion": "^12.0.0-alpha.0",
     "react": "19.0.0-rc-e210d081-20240909",
@@ -42,6 +43,7 @@
     "@nx/web": "20.0.6",
     "@nx/workspace": "20.0.6",
     "@playwright/test": "^1.36.0",
+    "@react-router/dev": "^7.0.1",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.3.12",
     "@swc/core": "~1.5.7",

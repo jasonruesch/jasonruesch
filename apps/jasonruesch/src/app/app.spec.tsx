@@ -1,5 +1,5 @@
-import { Home } from '@jasonruesch/jasonruesch-ui';
 import ResizeObserver from 'resize-observer-polyfill';
+import { default as Home } from '../routes/home';
 
 import { renderWithRouter } from '../../tests';
 import App from './app';

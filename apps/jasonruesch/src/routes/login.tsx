@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 
-import { LoginForm, Page } from '../../components';
+import {
+  LoginForm,
+  Page,
+} from '../../../../libs/jasonruesch/ui/src/lib/components';
 
-export function Login() {
+export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
