@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 
 import { useFlags } from 'flagsmith/react';
 import { FeatureFlag, defaultFeatureFlags } from '../models';

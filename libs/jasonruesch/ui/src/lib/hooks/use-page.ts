@@ -1,5 +1,5 @@
 import { use, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { getPage } from '../utils';
 import { AuthContext } from './use-auth';

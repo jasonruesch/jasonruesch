@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { twJoin } from 'tailwind-merge';
 
 import { AuthContext } from '../hooks';
@@ -24,10 +24,10 @@ export const Layout = ({ children }: LayoutProps) => {
         <a
           href={`${pathname}#content`}
           className={twJoin(
-            'absolute z-30 block py-1 px-2',
-            'top-[-999px] left-[-999px]',
+            'absolute z-30 block px-2 py-1',
+            'left-[-999px] top-[-999px]',
             'border-2 border-red-500 bg-yellow-200 text-black',
-            'focus:top-0 focus:left-0 focus-visible:outline-none',
+            'focus:left-0 focus:top-0 focus-visible:outline-none',
           )}
         >
           Skip Content

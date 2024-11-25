@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { LoginForm, Page } from '../../components';
 
@@ -27,7 +27,7 @@ export function Login() {
       </h1>
 
       <div className="mt-4 w-full rounded-lg bg-white/50 p-4 ring-1 ring-neutral-200 backdrop-blur-sm dark:bg-neutral-950/50 dark:ring-black">
-        <div className="mt-2 space-y-2 py-3 px-4">
+        <div className="mt-2 space-y-2 px-4 py-3">
           <LoginForm emailRef={emailRef} onSubmit={handleSubmit} />
         </div>
       </div>
