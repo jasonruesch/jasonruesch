@@ -6,8 +6,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
-} from 'react-router-dom';
+} from 'react-router';
+import { RouterProvider } from 'react-router/dom';
 
 import App from './app/app';
 
@@ -21,15 +21,6 @@ const router = createBrowserRouter(
       hydrateFallbackElement={<div>Hydrating...</div>}
     />,
   ),
-  {
-    future: {
-      v7_relativeSplatPath: true,
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-      v7_partialHydration: true,
-      v7_skipActionErrorRevalidation: true,
-    },
-  },
 );
 
 const root = ReactDOM.createRoot(
@@ -43,12 +34,7 @@ root.render(
         : {})}
       flagsmith={flagsmith}
     >
-      <RouterProvider
-        router={router}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
+      <RouterProvider router={router} />
     </FlagsmithProvider>
   </StrictMode>,
 );

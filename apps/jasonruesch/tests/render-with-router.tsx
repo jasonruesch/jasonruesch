@@ -1,10 +1,6 @@
 import { render } from '@testing-library/react';
 import React, { isValidElement } from 'react';
-import {
-  RouteObject,
-  RouterProvider,
-  createMemoryRouter,
-} from 'react-router-dom';
+import { RouteObject, RouterProvider, createMemoryRouter } from 'react-router';
 
 export function renderWithRouter(
   children: React.ReactElement | RouteObject,

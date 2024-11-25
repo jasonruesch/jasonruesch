@@ -1,6 +1,6 @@
 import { useAnimate } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router';
 
 import { headerAnimations } from '../animations';
 

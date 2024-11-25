@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { NavLink, NavLinkProps, useLocation } from 'react-router-dom';
+import { NavLink, NavLinkProps, useLocation } from 'react-router';
 
 import { getPage, getPageIndex, navigateEventChannel } from '../utils';
 

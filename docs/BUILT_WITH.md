@@ -2,8 +2,8 @@
 
 1. [Nx](#nx)
 2. [React 19 Beta](#react-19-beta)
-3. [React Router 6](#react-router-6)
-4. [Tailwind CSS 4 Alpha and tailwind-merge](#tailwind-css-4-alpha-and-tailwind-merge)
+3. [React Router 7](#react-router-7)
+4. [Tailwind CSS 4 Beta and tailwind-merge](#tailwind-css-4-beta-and-tailwind-merge)
 5. [Husky](#husky)
 6. [Lint-Staged](#lint-staged)
 7. [Conventional Commits and Commitlint](#conventional-commits-and-commitlint)
@@ -71,20 +71,20 @@ Update `package.json` with the following:
 }
 ```
 
-<div id="react-router-6"></div>
+<div id="react-router-7"></div>
 
-## [React Router 6](https://reactrouter.com/)
+## [React Router 7](https://reactrouter.com/)
 
 ```bash
-npm install react-router-dom
+npm install react-router
 ```
 
-<div id="tailwind-css-4-alpha-and-tailwind-merge"></div>
+<div id="tailwind-css-4-beta-and-tailwind-merge"></div>
 
-## [Tailwind CSS 4 Alpha](https://tailwindcss.com/) and [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+## [Tailwind CSS 4 Beta](https://tailwindcss.com/) and [tailwind-merge](https://github.com/dcastil/tailwind-merge)
 
 ```bash
-npm install -D vite@latest tailwindcss@^4.0.0-alpha.16 @tailwindcss/vite@next
+npm install -D vite@latest tailwindcss@next @tailwindcss/vite@next
 npm install -D prettier@latest prettier-plugin-tailwindcss
 npm install -D tailwind-merge
 ```

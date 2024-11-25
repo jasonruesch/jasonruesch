@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';

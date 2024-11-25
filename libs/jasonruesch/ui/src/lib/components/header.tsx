@@ -2,7 +2,7 @@ import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { use, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 
 import { useMediaQuery, WillNavigateContext } from '../hooks';

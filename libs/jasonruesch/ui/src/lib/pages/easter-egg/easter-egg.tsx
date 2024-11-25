@@ -1,4 +1,4 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router';
 
 import { Page } from '../../components';
 import { easterEggId, easterEggImage } from '../../utils';
