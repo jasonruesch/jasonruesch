@@ -1,3 +1,15 @@
+## 1.18.0 (2024-11-25)
+
+### 🚀 Features
+
+- **jasonruesch:** update tailwind css to latest beta ([49281e1](https://github.com/jasonruesch/jasonruesch/commit/49281e1))
+- **jasonruesch:** turn on react router v7 future flags ([6c9375a](https://github.com/jasonruesch/jasonruesch/commit/6c9375a))
+- **jasonruesch:** upgrade to react router v7 ([d38df80](https://github.com/jasonruesch/jasonruesch/commit/d38df80))
+
+### ❤️  Thank You
+
+- Jason Ruesch
+
 ## 1.17.0 (2024-09-10)
 
 
