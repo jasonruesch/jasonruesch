@@ -1,9 +1,12 @@
 import { Navigate, useParams } from 'react-router';
 
-import { Page } from '../../components';
-import { easterEggId, easterEggImage } from '../../utils';
+import { Page } from '../../../../libs/jasonruesch/ui/src/lib/components';
+import {
+  easterEggId,
+  easterEggImage,
+} from '../../../../libs/jasonruesch/ui/src/lib/utils';
 
-export function EasterEgg() {
+export default function EasterEgg() {
   const { uid } = useParams<{ uid: string }>();
   if (uid !== easterEggId) {
     return <Navigate to="/" replace />;

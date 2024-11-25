@@ -1,0 +1,15 @@
+export { default as About } from './about';
+export { default as Admin } from './admin';
+export { default as Articles } from './articles';
+export { default as Blank } from './blank';
+export { default as BuiltWith } from './built-with';
+export { default as Changelog } from './changelog';
+export { default as Contact } from './contact';
+export { default as EasterEgg } from './easter-egg';
+export { default as Home } from './home';
+export { default as Login } from './login';
+export { default as Logout } from './logout';
+export { default as Privacy } from './privacy';
+export { default as Projects } from './projects';
+export { default as Transparent } from './transparent';
+export { default as Uses } from './uses';

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-import { Page } from '../../components';
+import { Page } from '../../../../libs/jasonruesch/ui/src/lib/components';
 
 const navItems = [
   {
@@ -54,7 +54,7 @@ const navItems = [
   },
 ];
 
-export function Privacy() {
+export default function Privacy() {
   const { hash } = useLocation();
   const navigate = useNavigate();
   const targetRefs = useRef<Map<string, HTMLElement>>(new Map());

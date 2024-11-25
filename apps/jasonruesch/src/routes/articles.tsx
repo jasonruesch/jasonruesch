@@ -1,6 +1,6 @@
-import { Page } from '../../components';
+import { Page } from '../../../../libs/jasonruesch/ui/src/lib/components';
 
-export function Articles() {
+export default function Articles() {
   return (
     <Page contentClassName="flex flex-col items-start">
       <h1 className="gradient-heading" aria-label="Articles">

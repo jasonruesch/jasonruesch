@@ -1,8 +1,10 @@
 import { FlagIcon } from '@heroicons/react/24/outline';
-import { Page } from '../../components';
-import { FeatureFlagsManager } from '../../components/feature-flags-manager';
+import {
+  FeatureFlagsManager,
+  Page,
+} from '../../../../libs/jasonruesch/ui/src/lib/components';
 
-export function Admin() {
+export default function Admin() {
   return (
     <Page contentClassName="flex flex-col items-center justify-center lg:max-w-[var(--breakpoint-sm)] mx-auto w-full">
       <h1 className="gradient-heading" aria-label="Admin">
@@ -21,14 +23,14 @@ export function Admin() {
                 className="size-6 text-cyan-600 dark:text-violet-100"
               />
             </div>
-            <div className="mt-3 w-full sm:mt-0 sm:ml-4">
+            <div className="mt-3 w-full sm:ml-4 sm:mt-0">
               <h3 className="text-center text-neutral-900 sm:text-left dark:text-white">
                 Feature Flags
               </h3>
             </div>
           </div>
 
-          <div className="mt-2 space-y-2 py-3 px-4 sm:ml-14">
+          <div className="mt-2 space-y-2 px-4 py-3 sm:ml-14">
             <FeatureFlagsManager />
           </div>
         </div>

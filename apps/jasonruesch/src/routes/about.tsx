@@ -1,7 +1,7 @@
 import { twJoin } from 'tailwind-merge';
-import { Page } from '../../components';
+import { Page } from '../../../../libs/jasonruesch/ui/src/lib/components';
 
-export function About() {
+export default function About() {
   return (
     <Page contentClassName="flex flex-col items-center justify-center lg:max-w-[var(--breakpoint-lg)] mx-auto">
       <h1 className="gradient-heading" aria-label="About Me">
