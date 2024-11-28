@@ -89,8 +89,6 @@ npm install -D prettier@latest prettier-plugin-tailwindcss
 npm install -D tailwind-merge
 ```
 
-> Note: The latest `tailwindcss` next version breaks --text-5xl for the `.gradient-header` class.
-
 Update `apps/jasonruesch/src/styles.css` with the following:
 
 ```css
