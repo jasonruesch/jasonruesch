@@ -1,10 +1,9 @@
 import { AnimatePresence } from 'framer-motion';
-import { useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { useLocation } from 'react-router';
+import { useLocation, useOutlet } from 'react-router';
 
 import {
-  AppRoutes,
   AuthContext,
   FeatureFlagsContext,
   Layout,
@@ -14,8 +13,15 @@ import {
   WillNavigateContext,
 } from '@jasonruesch/jasonruesch-ui';
 
+export const AnimatedOutlet = ({ context }: { context?: unknown }) => {
+  const o = useOutlet(context);
+  const [outlet] = useState(o);
+
+  return outlet;
+};
+
 export function App() {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
 
   useEffect(() => {
@@ -31,7 +37,9 @@ export function App() {
               initial={false}
               onExitComplete={() => window.scrollTo({ top: 0 })}
             >
-              <AppRoutes location={location} key={location.pathname} />
+              <Fragment key={pathname}>
+                <AnimatedOutlet />
+              </Fragment>
             </AnimatePresence>
           </Layout>
         </WillNavigateContext>
