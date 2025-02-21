@@ -7,3 +7,4 @@ export * from "./Section";
 export * from "./SimpleLayout";
 export * from "./SocialIcons";
 export * from "./SplashScreen";
+export * from "./ThemeProvider";
