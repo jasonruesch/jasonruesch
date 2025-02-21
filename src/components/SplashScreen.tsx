@@ -1,13 +1,11 @@
 import splashDark from "../assets/logo-dark.svg";
 import splashLight from "../assets/logo-light.svg";
 
-export type StandaloneSplashScreenProps = {
+export type SplashScreenProps = {
   ref?: React.RefObject<HTMLDivElement>;
 };
 
-export const StandaloneSplashScreen = ({
-  ref,
-}: StandaloneSplashScreenProps) => {
+export const SplashScreen = ({ ref }: SplashScreenProps) => {
   const isDarkScheme = window.matchMedia(
     "(prefers-color-scheme: dark)",
   ).matches;
@@ -15,7 +13,7 @@ export const StandaloneSplashScreen = ({
   return (
     <div
       ref={ref}
-      className="fixed inset-0 grid place-items-center bg-neutral-100 p-10 transition ease-out data-[leave]:opacity-0 data-[leave]:duration-700 dark:bg-neutral-900"
+      className="fixed inset-0 grid place-items-center bg-neutral-50 p-10 transition ease-out data-[leave]:opacity-0 data-[leave]:duration-700 dark:bg-neutral-950"
     >
       <img
         src={isDarkScheme ? splashDark : splashLight}
