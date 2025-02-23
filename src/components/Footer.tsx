@@ -35,7 +35,7 @@ export function Footer() {
                   </Link>
                 ))}
               </div>
-              <p className="text-sm text-zinc-400 dark:text-zinc-500">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 &copy; {new Date().getFullYear()} Jason Ruesch. All rights
                 reserved.
               </p>

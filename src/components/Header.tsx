@@ -65,7 +65,7 @@ function MobileNavItem({
         className={({ isActive }) =>
           clsx(
             "block py-2",
-            isActive ? "text-cyan-500 dark:text-violet-400" : "",
+            isActive ? "text-cyan-700 dark:text-violet-400" : "",
           )
         }
         onClick={onClick}
@@ -129,8 +129,8 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
           clsx(
             "relative block px-3 py-2 transition",
             isActive
-              ? "text-cyan-500 dark:text-violet-400"
-              : "hover:text-cyan-500 dark:hover:text-violet-400",
+              ? "text-cyan-700 dark:text-violet-400"
+              : "hover:text-cyan-700 dark:hover:text-violet-400",
           )
         }
       >
@@ -138,7 +138,7 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
           <>
             {children}
             {isActive && (
-              <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-cyan-500/0 via-cyan-500/40 to-cyan-500/0 dark:from-violet-400/0 dark:via-violet-400/40 dark:to-violet-400/0" />
+              <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-cyan-700/0 via-cyan-700/40 to-cyan-700/0 dark:from-violet-400/0 dark:via-violet-400/40 dark:to-violet-400/0" />
             )}
           </>
         )}
