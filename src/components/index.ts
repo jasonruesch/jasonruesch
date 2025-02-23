@@ -3,6 +3,7 @@ export * from './Card';
 export * from './Container';
 export * from './Footer';
 export * from './Header';
+export * from './Icons';
 export * from './Section';
 export * from './SimpleLayout';
 export * from './SocialIcons';

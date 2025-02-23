@@ -1,18 +1,7 @@
 import clsx from 'clsx';
 import { Link } from 'react-router';
-
-function ChevronRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M6.75 5.75 9.25 8l-2.5 2.25"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+import { isExternalString } from '../lib';
+import { ChevronRightIcon } from './Icons';
 
 export function Card<T extends React.ElementType = 'div'>({
   as,
@@ -35,17 +24,24 @@ export function Card<T extends React.ElementType = 'div'>({
 
 Card.Link = function CardLink({
   children,
-  external,
+  external = false,
   ...props
-}: React.ComponentPropsWithoutRef<typeof Link> & { external?: boolean }) {
+}: React.ComponentPropsWithoutRef<typeof Link> & {
+  external?: boolean | string;
+}) {
   const { to, ...rest } = props;
   const href = to.toString();
+  const target = isExternalString(external)
+    ? external
+    : external
+      ? '_blank'
+      : '';
 
   return (
     <>
       <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50" />
       {external ? (
-        <a href={href} target="_blank" {...rest}>
+        <a href={href} target={target} {...rest}>
           <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
           <span className="relative z-10">{children}</span>
         </a>
@@ -62,12 +58,12 @@ Card.Link = function CardLink({
 Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
   as,
   to,
-  external,
+  external = false,
   children,
 }: Omit<React.ComponentPropsWithoutRef<T>, 'as' | 'to'> & {
   as?: T;
   to?: string;
-  external?: boolean;
+  external?: boolean | string;
 }) {
   const Component = as ?? 'h2';
 

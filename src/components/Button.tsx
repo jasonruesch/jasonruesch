@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router';
+import { isExternalString } from '../lib';
 
 const variantStyles = {
   primary:
@@ -10,6 +11,8 @@ const variantStyles = {
 
 type ButtonProps = {
   variant?: keyof typeof variantStyles;
+  external?: boolean | string;
+  download?: string;
 } & (
   | (React.ComponentPropsWithoutRef<'button'> & { to?: undefined })
   | React.ComponentPropsWithoutRef<typeof Link>
@@ -17,6 +20,8 @@ type ButtonProps = {
 
 export function Button({
   variant = 'primary',
+  external = false,
+  download,
   className,
   ...props
 }: ButtonProps) {
@@ -25,9 +30,25 @@ export function Button({
     variantStyles[variant],
     className,
   );
+  const href = props.to?.toString();
+  const target = isExternalString(external)
+    ? external
+    : external
+      ? '_blank'
+      : '';
 
   return typeof props.to === 'undefined' ? (
     <button className={className} {...props} />
+  ) : external ? (
+    <a
+      href={href}
+      target={target}
+      download={download}
+      className={className}
+      {...props}
+    >
+      {props.children}
+    </a>
   ) : (
     <Link className={className} {...props} />
   );

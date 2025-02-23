@@ -1,4 +1,5 @@
 import { Transition } from '@headlessui/react';
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import splashDark from '../assets/logo-dark.svg';
 import splashLight from '../assets/logo-light.svg';
@@ -33,7 +34,10 @@ export const SplashScreen = ({ ref }: SplashScreenProps) => {
     <Transition show={isSplashVisible}>
       <div
         ref={ref}
-        className="fixed inset-0 z-[100] grid h-dvh place-items-center bg-zinc-50 p-10 transition ease-out data-[leave]:opacity-0 data-[leave]:duration-700 dark:bg-zinc-950"
+        className={clsx(
+          'fixed inset-0 z-[100] grid h-dvh place-items-center bg-zinc-50 p-10',
+          'transition ease-out data-[leave]:opacity-0 data-[leave]:duration-700 dark:bg-zinc-950',
+        )}
       >
         <img
           src={isDarkScheme ? splashDark : splashLight}
