@@ -1,11 +1,11 @@
-import { useSearchParams } from "react-router";
-import { SimpleLayout } from "../components";
+import { useSearchParams } from 'react-router';
+import { SimpleLayout } from '../components';
 
 export default function ThankYou() {
   const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
-  const newsletter = type === "newsletter";
-  const contact = type === "contact";
+  const type = searchParams.get('type');
+  const newsletter = type === 'newsletter';
+  const contact = type === 'contact';
 
   return newsletter ? (
     <SimpleLayout

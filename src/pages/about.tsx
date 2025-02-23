@@ -1,7 +1,7 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import portraitImage from "../assets/images/portrait.jpg";
-import { Button, Container, GitHubIcon, LinkedInIcon } from "../components";
+import portraitImage from '../assets/images/portrait.jpg';
+import { Button, Container, GitHubIcon, LinkedInIcon } from '../components';
 
 function SocialLink({
   className,
@@ -15,7 +15,7 @@ function SocialLink({
   children: React.ReactNode;
 }) {
   return (
-    <li className={clsx(className, "flex")}>
+    <li className={clsx(className, 'flex')}>
       <a
         href={href}
         target="_blank"
@@ -29,7 +29,7 @@ function SocialLink({
   );
 }
 
-function MailIcon(props: React.ComponentPropsWithoutRef<"svg">) {
+function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -53,10 +53,10 @@ function MailIcon(props: React.ComponentPropsWithoutRef<"svg">) {
 }
 
 function Contact() {
-  const recipient = "jason.ruesch@me.com";
+  const recipient = 'jason.ruesch@me.com';
 
   const handleSubmit = () => {
-    window.open(`mailto:${recipient}`, "_blank");
+    window.open(`mailto:${recipient}`, '_blank');
   };
 
   return (

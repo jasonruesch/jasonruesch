@@ -1,13 +1,13 @@
-import { NavLink } from "react-router";
-import { ContainerInner, ContainerOuter } from "./Container";
+import { NavLink } from 'react-router';
+import { ContainerInner, ContainerOuter } from './Container';
 
 const navigation = [
-  { name: "Home", to: "/" },
-  { name: "About", to: "/about" },
+  { name: 'Home', to: '/' },
+  { name: 'About', to: '/about' },
   // { name: "Articles", to: "/articles" },
   // { name: "Projects", to: "/projects" },
   // { name: "Speaking", to: "/speaking" },
-  { name: "Uses", to: "/uses" },
+  { name: 'Uses', to: '/uses' },
 ];
 
 function Link({ to, children }: { to: string; children: React.ReactNode }) {

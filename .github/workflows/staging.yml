@@ -19,7 +19,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these deployments to complete.
 concurrency:
-  group: "staging"
+  group: 'staging'
   cancel-in-progress: false
 
 jobs:
@@ -53,11 +53,11 @@ jobs:
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: "github-pages-jasonruesch"
+          name: 'github-pages-jasonruesch'
           path: ./dist
 
       - name: Deploy Jason Ruesch to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: "github-pages-jasonruesch"
+          artifact_name: 'github-pages-jasonruesch'

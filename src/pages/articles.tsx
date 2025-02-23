@@ -1,5 +1,5 @@
-import { Card, SimpleLayout } from "../components";
-import { type ArticleWithSlug, formatDate } from "../lib";
+import { Card, SimpleLayout } from '../components';
+import { type ArticleWithSlug, formatDate } from '../lib';
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
@@ -33,20 +33,20 @@ function Article({ article }: { article: ArticleWithSlug }) {
 export default function ArticlesIndex() {
   const articles: ArticleWithSlug[] = [
     {
-      slug: "#1",
-      author: "Jason Ruesch",
-      title: "How to build a successful business",
-      date: "2021-10-01",
+      slug: '#1',
+      author: 'Jason Ruesch',
+      title: 'How to build a successful business',
+      date: '2021-10-01',
       description:
-        "Learn how to build a successful business from scratch with these 10 steps.",
+        'Learn how to build a successful business from scratch with these 10 steps.',
     },
     {
-      slug: "#2",
-      author: "Jason Ruesch",
-      title: "The future of software design",
-      date: "2021-09-01",
+      slug: '#2',
+      author: 'Jason Ruesch',
+      title: 'The future of software design',
+      date: '2021-09-01',
       description:
-        "Discover the future of software design and how it will impact your business.",
+        'Discover the future of software design and how it will impact your business.',
     },
   ]; // await getAllArticles();
 

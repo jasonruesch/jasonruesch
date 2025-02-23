@@ -1,21 +1,21 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import logoDegreed from "../assets/images/logos/degreed.svg";
-import logoRedRover from "../assets/images/logos/redrover.svg";
-import logoRelias from "../assets/images/logos/relias.png";
-import image1 from "../assets/images/photos/image-1.jpg";
-import image2 from "../assets/images/photos/image-2.jpg";
-import image3 from "../assets/images/photos/image-3.jpg";
-import image4 from "../assets/images/photos/image-4.jpg";
-import image5 from "../assets/images/photos/image-5.jpg";
+import logoDegreed from '../assets/images/logos/degreed.svg';
+import logoRedRover from '../assets/images/logos/redrover.svg';
+import logoRelias from '../assets/images/logos/relias.png';
+import image1 from '../assets/images/photos/image-1.jpg';
+import image2 from '../assets/images/photos/image-2.jpg';
+import image3 from '../assets/images/photos/image-3.jpg';
+import image4 from '../assets/images/photos/image-4.jpg';
+import image5 from '../assets/images/photos/image-5.jpg';
 import {
   Button,
   Card,
   Container,
   GitHubIcon,
   LinkedInIcon,
-} from "../components";
-import { type ArticleWithSlug, formatDate } from "../lib";
+} from '../components';
+import { type ArticleWithSlug, formatDate } from '../lib';
 
 // function MailIcon(props: React.ComponentPropsWithoutRef<"svg">) {
 //   return (
@@ -40,7 +40,7 @@ import { type ArticleWithSlug, formatDate } from "../lib";
 //   );
 // }
 
-function BriefcaseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
+function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ function BriefcaseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   );
 }
 
-function ArrowDownIcon(props: React.ComponentPropsWithoutRef<"svg">) {
+function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
       <path
@@ -92,7 +92,7 @@ function Article({ article }: { article: ArticleWithSlug }) {
 function SocialLink({
   icon: Icon,
   ...props
-}: React.ComponentPropsWithoutRef<"a"> & {
+}: React.ComponentPropsWithoutRef<'a'> & {
   icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
@@ -147,12 +147,12 @@ interface Role {
 
 function Role({ role }: { role: Role }) {
   const startLabel =
-    typeof role.start === "string" ? role.start : role.start.label;
+    typeof role.start === 'string' ? role.start : role.start.label;
   const startDate =
-    typeof role.start === "string" ? role.start : role.start.dateTime;
+    typeof role.start === 'string' ? role.start : role.start.dateTime;
 
-  const endLabel = typeof role.end === "string" ? role.end : role.end.label;
-  const endDate = typeof role.end === "string" ? role.end : role.end.dateTime;
+  const endLabel = typeof role.end === 'string' ? role.end : role.end.label;
+  const endDate = typeof role.end === 'string' ? role.end : role.end.dateTime;
 
   return (
     <li className="flex gap-4">
@@ -173,8 +173,8 @@ function Role({ role }: { role: Role }) {
           className="ml-auto text-xs text-zinc-500 dark:text-zinc-400"
           aria-label={`${startLabel} until ${endLabel}`}
         >
-          <time dateTime={startDate}>{startLabel}</time>{" "}
-          <span aria-hidden="true">—</span>{" "}
+          <time dateTime={startDate}>{startLabel}</time>{' '}
+          <span aria-hidden="true">—</span>{' '}
           <time dateTime={endDate}>{endLabel}</time>
         </dd>
       </dl>
@@ -185,28 +185,28 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   const resume: Array<Role> = [
     {
-      company: "Red Rover",
-      title: "Senior Software Engineer",
+      company: 'Red Rover',
+      title: 'Senior Software Engineer',
       logo: logoRedRover,
-      start: "2025",
+      start: '2025',
       end: {
-        label: "Present",
+        label: 'Present',
         dateTime: new Date().getFullYear().toString(),
       },
     },
     {
-      company: "Degreed",
-      title: "Senior Engineer II",
+      company: 'Degreed',
+      title: 'Senior Engineer II',
       logo: logoDegreed,
-      start: "2020",
-      end: "2025",
+      start: '2020',
+      end: '2025',
     },
     {
-      company: "Relias",
-      title: "Senior Software Engineer",
+      company: 'Relias',
+      title: 'Senior Software Engineer',
       logo: logoRelias,
-      start: "2008",
-      end: "2020",
+      start: '2008',
+      end: '2020',
     },
   ];
 
@@ -231,11 +231,11 @@ function Resume() {
 
 function Photos() {
   const rotations = [
-    "rotate-2",
-    "-rotate-2",
-    "rotate-2",
-    "rotate-2",
-    "-rotate-2",
+    'rotate-2',
+    '-rotate-2',
+    'rotate-2',
+    'rotate-2',
+    '-rotate-2',
   ];
 
   return (
@@ -245,7 +245,7 @@ function Photos() {
           <div
             key={image}
             className={clsx(
-              "relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800",
+              'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
               rotations[imageIndex % rotations.length],
             )}
           >
@@ -264,22 +264,22 @@ function Photos() {
 
 export default function Home() {
   const articles: ArticleWithSlug[] = [
-    {
-      slug: "#1",
-      author: "Jason Ruesch",
-      title: "How to build a successful business",
-      date: "2021-10-01",
-      description:
-        "Learn how to build a successful business from scratch with these 10 steps.",
-    },
-    {
-      slug: "#2",
-      author: "Jason Ruesch",
-      title: "The future of software design",
-      date: "2021-09-01",
-      description:
-        "Discover the future of software design and how it will impact your business.",
-    },
+    // {
+    //   slug: "#1",
+    //   author: "Jason Ruesch",
+    //   title: "How to build a successful business",
+    //   date: "2021-10-01",
+    //   description:
+    //     "Learn how to build a successful business from scratch with these 10 steps.",
+    // },
+    // {
+    //   slug: "#2",
+    //   author: "Jason Ruesch",
+    //   title: "The future of software design",
+    //   date: "2021-09-01",
+    //   description:
+    //     "Discover the future of software design and how it will impact your business.",
+    // },
   ]; // (await getAllArticles()).slice(0, 2); // 4 if showing the newsletter sign-up
 
   return (
@@ -312,9 +312,18 @@ export default function Home() {
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
+            {articles.length ? (
+              articles.map((article) => (
+                <Article key={article.slug} article={article} />
+              ))
+            ) : (
+              <Card as="article">
+                <Card.Title>Coming soon</Card.Title>
+                <Card.Description>
+                  I'm working on some new articles. Check back soon!
+                </Card.Description>
+              </Card>
+            )}
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             {/* <Newsletter /> */}

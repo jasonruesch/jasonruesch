@@ -1,4 +1,4 @@
-import { Card, Section, SimpleLayout } from "../components";
+import { Card, Section, SimpleLayout } from '../components';
 
 function SpeakingSection({
   children,

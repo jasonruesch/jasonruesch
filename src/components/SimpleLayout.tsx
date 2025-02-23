@@ -1,4 +1,4 @@
-import { Container } from "../components";
+import { Container } from '../components';
 
 export function SimpleLayout({
   title,

@@ -1,8 +1,8 @@
-import { Transition } from "@headlessui/react";
-import { useEffect } from "react";
-import splashDark from "../assets/logo-dark.svg";
-import splashLight from "../assets/logo-light.svg";
-import { useSessionStorage } from "../lib";
+import { Transition } from '@headlessui/react';
+import { useEffect } from 'react';
+import splashDark from '../assets/logo-dark.svg';
+import splashLight from '../assets/logo-light.svg';
+import { useSessionStorage } from '../lib';
 
 export type SplashScreenProps = {
   ref?: React.RefObject<HTMLDivElement>;
@@ -10,11 +10,11 @@ export type SplashScreenProps = {
 
 export const SplashScreen = ({ ref }: SplashScreenProps) => {
   const isDarkScheme = window.matchMedia(
-    "(prefers-color-scheme: dark)",
+    '(prefers-color-scheme: dark)',
   ).matches;
-  const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
   const [isSplashVisible, setIsSplashVisible] = useSessionStorage(
-    "splash-viewed",
+    'splash-viewed',
     isStandalone,
   );
 

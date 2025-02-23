@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useSessionStorage = (key: string, initialValue: boolean) => {
   const [value, setValue] = useState(() => {
