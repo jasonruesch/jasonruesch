@@ -4,7 +4,7 @@ Welcome to my GitHub profile! I'm Jason Ruesch, a Senior Frontend Software Engin
 
 ## About Me
 
-I hold a Bachelor of Science in Computer Science and have dedicated my career to the dynamic world of web development. My focus is on crafting intuitive and visually stunning interfaces that elevate user experiences.
+I have dedicated my career to the dynamic world of web development. My focus is on crafting intuitive and visually stunning interfaces that elevate user experiences.
 
 When I'm not immersed in code, you'll likely find me exploring virtual realms in video games or catching up on the latest movies and TV shows. My love for technology extends beyond my profession—I'm always excited to dive into the latest software development technologies, staying at the forefront of this ever-evolving field.
 
