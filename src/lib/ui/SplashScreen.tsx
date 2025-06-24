@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { useEffect } from 'react';
-import splashDark from '../assets/logo-dark.svg';
-import splashLight from '../assets/logo-light.svg';
-import { useSessionStorage } from '../lib';
+import { useSessionStorage } from '../hooks';
+import splashDark from './assets/logo-dark.svg';
+import splashLight from './assets/logo-light.svg';
 
 export type SplashScreenProps = {
   ref?: React.RefObject<HTMLDivElement>;

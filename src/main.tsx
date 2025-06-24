@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 
 import App from './app.tsx';
 import './index.css';
-import { isScanEnabled } from './utils.ts';
+import { isScanEnabled } from './lib';
 
 scan({ enabled: isScanEnabled() });
 

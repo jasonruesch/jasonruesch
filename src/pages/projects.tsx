@@ -1,4 +1,4 @@
-import { Card, LinkIcon, SimpleLayout } from '../components';
+import { Card, LinkIcon, SimpleLayout } from '../lib';
 
 interface Project {
   name: string;

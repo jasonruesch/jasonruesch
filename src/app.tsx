@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { lazy } from 'react';
 import { Route, Routes, ScrollRestoration } from 'react-router';
 
-import { Footer, Header, SplashScreen } from './components';
+import { Footer, Header, SplashScreen } from './lib';
 
 const Home = lazy(() => import('./pages/home'));
 const About = lazy(() => import('./pages/about'));

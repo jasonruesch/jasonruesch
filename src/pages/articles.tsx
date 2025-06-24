@@ -1,5 +1,4 @@
-import { Card, SimpleLayout } from '../components';
-import { type ArticleWithSlug, formatDate } from '../lib';
+import { type ArticleWithSlug, Card, formatDate, SimpleLayout } from '../lib';
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (

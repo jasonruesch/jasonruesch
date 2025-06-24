@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router';
-import { isExternalString } from '../lib';
+import { isExternalString } from '../utils';
 
 const variantStyles = {
   primary:

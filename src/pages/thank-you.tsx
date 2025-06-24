@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router';
-import { SimpleLayout } from '../components';
+import { SimpleLayout } from '../lib';
 
 export default function ThankYou() {
   const [searchParams] = useSearchParams();

@@ -8,8 +8,8 @@ import clsx from 'clsx';
 import { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
 
-import avatarImage from '../assets/images/avatar.png';
-import { navigation } from '../lib';
+import { navigation } from '../data';
+import avatarImage from './assets/avatar.png';
 import { Container } from './Container';
 import { ChevronDownIcon, CloseIcon } from './Icons';
 

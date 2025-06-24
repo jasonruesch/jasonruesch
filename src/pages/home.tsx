@@ -9,13 +9,14 @@ import image3 from '../assets/images/photos/image-3.jpg';
 import image4 from '../assets/images/photos/image-4.jpg';
 import image5 from '../assets/images/photos/image-5.jpg';
 import {
+  type ArticleWithSlug,
   BriefcaseIcon,
   Card,
   Container,
+  formatDate,
   GitHubIcon,
   LinkedInIcon,
-} from '../components';
-import { type ArticleWithSlug, formatDate } from '../lib';
+} from '../lib';
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
