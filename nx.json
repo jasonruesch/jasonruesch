@@ -87,5 +87,16 @@
         "linter": "eslint"
       }
     }
+  },
+  "release": {
+    "projects": ["jasonruesch"],
+    "version": {
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
   }
 }

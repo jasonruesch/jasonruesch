@@ -1,0 +1,107 @@
+# This workflow will test, build, and deploy a site to the Preview environment
+
+name: Preview
+
+on:
+  pull_request:
+    branches:
+      - new-dev
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# Cancel in-progress runs.
+concurrency:
+  group: 'preview-${{ github.head_ref }}'
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    if: github.event.pull_request.draft == false
+    name: Deploy
+    environment:
+      name: Preview
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps --ignore-scripts
+
+      - name: Set SHAs for Nx
+        uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: new-dev
+
+      - name: Run format check
+        run: npx nx format:check
+
+      - name: Run affected lint and test
+        run: npx nx affected -t lint test
+
+      - name: Run affected build (exclude jasonruesch)
+        run: npx nx affected -t build --exclude jasonruesch
+
+      - name: Affected build for Jason Ruesch
+        if: github.event_name != 'workflow_dispatch'
+        id: affected_build_jasonruesch
+        run: |
+          projects=$(npx nx show projects --projects jasonruesch --affected | tr '\n' ' ' | xargs)
+          echo "projects=$projects" >> $GITHUB_OUTPUT
+
+      - name: Affected e2e
+        id: affected_e2e
+        run: |
+          projects=$(npx nx show projects --type e2e --affected | tr '\n' ' ' | xargs)
+          echo "projects=$projects" >> $GITHUB_OUTPUT
+
+      - name: Install Playwright
+        if: steps.affected_e2e.outputs.projects != ''
+        run: npx playwright install --with-deps
+
+      - name: Run affected e2e
+        if: steps.affected_e2e.outputs.projects != ''
+        run: npx nx run-many -t e2e --projects ${{ steps.affected_e2e.outputs.projects }}
+
+      - name: Install Vercel CLI
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Jason Ruesch
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        run: vercel build
+        env:
+          VITE_FLAGSMITH_ENVIRONMENT_ID: ${{ secrets.VITE_FLAGSMITH_ENVIRONMENT_ID }}
+          VITE_EMAIL_RECIPIENT: ${{ secrets.VITE_EMAIL_RECIPIENT }}
+          VITE_AUTH_EMAIL: ${{ secrets.VITE_AUTH_EMAIL }}
+          VITE_AUTH_PASSWORD: ${{ secrets.VITE_AUTH_PASSWORD }}
+
+      - name: Deploy Jason Ruesch to Vercel
+        if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        id: deployment
+        run: |
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > /dev/stdout)
+          echo "$url"
+          echo "page_url=$url" >> $GITHUB_OUTPUT

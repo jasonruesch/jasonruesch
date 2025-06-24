@@ -4,10 +4,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  type MetaFunction,
   type LinksFunction,
+  type MetaFunction,
 } from 'react-router';
 
+import '../styles.css';
 import { AppNav } from './app-nav';
 
 export const meta: MetaFunction = () => [
