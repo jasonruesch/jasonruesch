@@ -22,6 +22,9 @@ FROM base AS build
 COPY --link package-lock.json package.json ./
 RUN npm ci --ignore-scripts
 
+# Set environment
+ENV NODE_ENV="production"
+
 # Copy application code
 COPY --link . .
 RUN npx nx build jasonruesch
@@ -34,9 +37,6 @@ FROM base
 COPY --from=build /app/apps/jasonruesch/package.json /app
 COPY --from=build /app/apps/jasonruesch/build /app/build
 RUN npm install --omit=dev
-
-# Set production environment
-ENV NODE_ENV="production"
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000

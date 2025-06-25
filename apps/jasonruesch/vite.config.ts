@@ -26,6 +26,7 @@ export default defineConfig(() => ({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    sourcemaps: !process.env.PRODCUCTION,
   },
   test: {
     watch: false,

@@ -62,7 +62,7 @@ jobs:
   deploy-jasonruesch:
     environment:
       name: Staging
-      url: https://jasonruesch.fly.dev
+      url: https://jasonruesch-staging.fly.dev
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch
     needs: main
@@ -71,6 +71,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --config apps/jasonruesch/fly.toml
+      - run: flyctl deploy --config apps/jasonruesch/fly.staging.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
