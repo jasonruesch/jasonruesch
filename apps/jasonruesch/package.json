@@ -10,12 +10,27 @@
     "isbot": "^4.4.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router": "^7.2.0"
+    "react-router": "^7.2.0",
+    "tailwindcss": "^4.1.10",
+    "react-ga4": "^2.1.0"
   },
   "devDependencies": {
     "@react-router/dev": "^7.2.0",
     "@types/node": "^20.0.0",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0"
+  },
+  "nx": {
+    "targets": {
+      "docker-build": {
+        "dependsOn": [
+          "build"
+        ],
+        "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch"
+      },
+      "deploy": {
+        "command": "flyctl deploy --config apps/jasonruesch/fly.toml"
+      }
+    }
   }
 }
