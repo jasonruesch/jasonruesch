@@ -412,7 +412,7 @@ flyctl auth login
 flyctl launch --no-deploy
 mv fly.toml apps/jasonruesch/
 rm -rf Dockerfile
-rm -rf .github/workflows/fly-deploy.yml
+rm -rf .github/workflows/ci.yml .github/workflows/fly-deploy.yml
 ```
 
 Update [apps/jasonruesch/fly.toml](../apps/jasonruesch/fly.toml) with the following:
@@ -596,16 +596,18 @@ jobs:
           delete-other-labels: true
 ```
 
-Update [.github/workflows/ci.yml](../.github/workflows/ci.yml) with the following:
+Create [.github/workflows/staging.yml](../.github/workflows/staging.yml) with the following:
 
 ```yaml
-name: CI
+name: Staging
 
 on:
   push:
     branches:
       - main
-  pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 permissions:
   actions: read
@@ -614,6 +616,8 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
+    outputs:
+      affected_build_jasonruesch: ${{ steps.affected_build_jasonruesch.outputs.projects }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -640,7 +644,17 @@ jobs:
       # - run: npx nx-cloud record -- echo Hello World
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       # When you enable task distribution, run the e2e-ci task instead of e2e
-      - run: npx nx affected -t lint test build # e2e
+      - run: npx nx affected -t lint test # e2e
+      - run: npx nx affected -t build --exclude jasonruesch
+
+      - id: affected_build_jasonruesch
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          projects=$(npx nx show projects --projects jasonruesch --affected | tr '\n' ' ' | xargs)
+          echo "projects=$projects" >> $GITHUB_OUTPUT
+
+      - if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        run: npx nx build jasonruesch
 
   deploy-jasonruesch:
     environment:
@@ -649,7 +663,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch
     needs: main
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' || needs.main.outputs.affected_build_jasonruesch != ''
     steps:
       - uses: actions/checkout@v4
 
