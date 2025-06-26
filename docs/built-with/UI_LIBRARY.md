@@ -46,7 +46,7 @@ Update [apps/jasonruesch/styles.css](../../apps/jasonruesch/styles.css) to inclu
 
 ```css
 @import 'tailwindcss';
-@source '@jasonruesch/ui';
+@source '../../libs/ui/src';
 
 @theme {
   --font-sans: Inter, sans-serif;
