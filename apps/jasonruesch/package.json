@@ -27,19 +27,30 @@
   "nx": {
     "targets": {
       "docker-build": {
-        "dependsOn": [
-          "build"
-        ],
-        "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch"
+        "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch",
+        "configurations": {
+          "production": {
+            "command": "docker build -f apps/jasonruesch/Dockerfile.production . -t jasonruesch"
+          },
+          "staging": {
+            "command": "docker build -f apps/jasonruesch/Dockerfile.staging . -t jasonruesch"
+          },
+          "preview": {
+            "command": "docker build -f apps/jasonruesch/Dockerfile.preview . -t jasonruesch"
+          }
+        }
       },
       "deploy": {
         "command": "flyctl deploy --config apps/jasonruesch/fly.toml",
         "configurations": {
           "production": {
-            "command": "flyctl deploy --config apps/jasonruesch/fly.toml"
+            "command": "flyctl deploy --config apps/jasonruesch/fly.production.toml"
           },
           "staging": {
             "command": "flyctl deploy --config apps/jasonruesch/fly.staging.toml"
+          },
+          "preview": {
+            "command": "flyctl deploy --config apps/jasonruesch/fly.preview.toml"
           }
         }
       }

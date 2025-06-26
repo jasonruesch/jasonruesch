@@ -7,7 +7,7 @@ app = 'jasonruesch'
 primary_region = 'iad'
 
 [build]
-  dockerfile = './Dockerfile'
+  dockerfile = './Dockerfile.production'
 
 [env]
   PORT = '3000'
