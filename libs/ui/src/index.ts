@@ -1,1 +1,1 @@
-export * from './lib/catalyst';
+export * from './lib';

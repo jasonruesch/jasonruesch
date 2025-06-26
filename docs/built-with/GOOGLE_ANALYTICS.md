@@ -7,7 +7,7 @@ npm install react-ga4
 Create [apps/jasonruesch/.env.example](../../apps/jasonruesch/.env.example) with the following:
 
 ```env
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID='G-XXXXXXXXXX'
 ```
 
 If desired, copy `.env.example` to `.env.local` and replace `G-XXXXXXXXXX` with your Google Analytics Measurement ID.
@@ -22,7 +22,7 @@ Update [apps/jasonruesch/app/root.tsx](../../apps/jasonruesch/app/root.tsx) with
 import ReactGA from 'react-ga4';
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
   if (measurementId) ReactGA.initialize(measurementId);
   ...
 }
