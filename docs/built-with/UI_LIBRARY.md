@@ -59,3 +59,38 @@ Install Heroicons:
 npm install @heroicons/react
 bash scripts/cp-dep.sh @heroicons/react package.json apps/jasonruesch/package.json
 ```
+
+Add the path to the UI library in the `tsconfig.base.json` file:
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "baseUrl": ".",
+    "paths": {
+      "@jasonruesch/ui": ["libs/ui/src/index.ts"]
+    }
+  }
+}
+```
+
+Install the [vite-tsconfig-paths](https://www.npmjs.com/package/vite-tsconfig-paths) plugin:
+
+```bash
+npm install -D vite-tsconfig-paths
+```
+
+Update [apps/jasonruesch/vite.config.ts](../../apps/jasonruesch/vite.config.ts) to include the `vite-tsconfig-paths` plugin:
+
+```typescript
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+export default defineConfig({
+  ...
+  plugins: [
+    ...
+    tsconfigPaths(),
+  ],
+  ...
+});
+```

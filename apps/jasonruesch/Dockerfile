@@ -4,39 +4,19 @@
 ARG NODE_VERSION=23.6.0
 FROM node:${NODE_VERSION}-slim AS base
 
-LABEL fly_launch_runtime="Node.js"
-
 # Node.js app lives here
 WORKDIR /app
 
-
-# Throw-away build stage to reduce size of final image
-FROM base AS build
-
 # Install node modules
 COPY --link package-lock.json package.json ./
-# RUN npm ci --ignore-scripts # TODO: Use this instead of the following after Nx fixes the release script issue of updating the package-lock.json file
-RUN npm install --ignore-scripts
+RUN npm install
 
 # Set environment
-ENV NODE_ENV="staging"
+ENV NODE_ENV="development"
 
 # Copy application code
 COPY --link . .
-RUN npx nx build jasonruesch
-
-
-# Final stage for app image
-FROM base
-
-# Copy built application
-COPY --from=build /app/apps/jasonruesch/package.json /app
-COPY --from=build /app/apps/jasonruesch/build /app/build
-RUN npm install --omit=dev
-
-# Set production environment
-ENV NODE_ENV="production"
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "npx", "react-router-serve", "build/server/index.js" ]
+EXPOSE 4200
+CMD [ "npx", "nx", "dev", "jasonruesch" ]
