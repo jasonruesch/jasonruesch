@@ -19,7 +19,7 @@ COPY --link package-lock.json package.json ./
 RUN npm install --ignore-scripts
 
 # Set environment
-ENV NODE_ENV="preview"
+ENV NODE_ENV="production"
 
 # Copy application code
 COPY --link . .
