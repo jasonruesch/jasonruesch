@@ -1,6 +1,6 @@
 ## [GitHub Actions](https://github.com/features/actions)
 
-Create [.github/labeler.yml](../.github/labeler.yml) with the following:
+Create [.github/labeler.yml](../../.github/labeler.yml) with the following:
 
 ```yaml
 # Single quotes are required for leading asterisks
@@ -36,7 +36,7 @@ jasonruesch:
       - any-glob-to-any-file: '**/jasonruesch/**'
 ```
 
-Create [.github/labels.yml](../.github/labels.yml) with the following:
+Create [.github/labels.yml](../../.github/labels.yml) with the following:
 
 ```yaml
 - name: root
@@ -64,7 +64,7 @@ Create [.github/labels.yml](../.github/labels.yml) with the following:
   description: 'Changes to files in any jasonruesch folder'
 ```
 
-Create [.github/workflows/labeler.yml](../.github/workflows/labeler.yml) with the following:
+Create [.github/workflows/labeler.yml](../../.github/workflows/labeler.yml) with the following:
 
 ```yaml
 # This workflow will triage pull requests and apply a label based on the
@@ -92,7 +92,7 @@ jobs:
           sync-labels: true
 ```
 
-Create [.github/workflows/labels.yml](../.github/workflows/labels.yml) with the following:
+Create [.github/workflows/labels.yml](../../.github/workflows/labels.yml) with the following:
 
 ```yaml
 # Default color paletter of GitHub labels:
@@ -141,7 +141,7 @@ jobs:
           delete-other-labels: true
 ```
 
-Create [.github/workflows/staging.yml](../.github/workflows/staging.yml) with the following:
+Create [.github/workflows/staging.yml](../../.github/workflows/staging.yml) with the following:
 
 ```yaml
 name: Staging
@@ -218,7 +218,7 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 ```
 
-Create [.github/workflows/production.yml](../.github/workflows/production.yml) with the following:
+Create [.github/workflows/production.yml](../../.github/workflows/production.yml) with the following:
 
 ```yaml
 name: Production
@@ -251,7 +251,7 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 ```
 
-Create [.github/workflows/production.yml](../.github/workflows/production.yml) with the following:
+Create [.github/workflows/production.yml](../../.github/workflows/production.yml) with the following:
 
 ```yaml
 name: Preview

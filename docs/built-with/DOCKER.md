@@ -1,6 +1,6 @@
 ## [Docker](https://www.docker.com/)
 
-Create [apps/jasonruesch/Dockerfile](../apps/jasonruesch/Dockerfile) with the following:
+Create [apps/jasonruesch/Dockerfile](../../apps/jasonruesch/Dockerfile) with the following:
 
 ```dockerfile
 # syntax = docker/dockerfile:1
@@ -44,7 +44,7 @@ EXPOSE 3000
 CMD [ "npx", "react-router-serve", "build/server/index.js" ]
 ```
 
-Update [apps/jasonruesch/package.json](../apps/jasonruesch/package.json) with the following:
+Update [apps/jasonruesch/package.json](../../apps/jasonruesch/package.json) with the following:
 
 ```json
 {

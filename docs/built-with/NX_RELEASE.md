@@ -1,6 +1,6 @@
 ## Nx Release
 
-Update [nx.json](../nx.json) with the following:
+Update [nx.json](../../nx.json) with the following:
 
 ```json
 {

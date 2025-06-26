@@ -1,3 +1,4 @@
+import ReactGA from 'react-ga4';
 import {
   Links,
   Meta,
@@ -14,7 +15,7 @@ import '../styles.css';
 
 export const meta: MetaFunction = () => [
   {
-    title: 'New Nx React Router App',
+    title: 'Jason Ruesch',
   },
 ];
 
@@ -32,6 +33,9 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  if (measurementId) ReactGA.initialize(measurementId);
+
   return (
     <html lang="en">
       <head>
@@ -51,5 +55,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <main className="px-4">
+      <Outlet />
+    </main>
+  );
 }

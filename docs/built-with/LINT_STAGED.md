@@ -4,7 +4,7 @@
 npm install -D lint-staged
 ```
 
-Create [.lintstagedrc.js](../.lintstagedrc.js) with the following:
+Create [.lintstagedrc.js](../../.lintstagedrc.js) with the following:
 
 ```typescript
 export default {

@@ -4,7 +4,7 @@
 npm install react-ga4
 ```
 
-Create [apps/jasonruesch/.env.example](../apps/jasonruesch/.env.example) with the following:
+Create [apps/jasonruesch/.env.example](../../apps/jasonruesch/.env.example) with the following:
 
 ```env
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
@@ -16,19 +16,19 @@ If desired, copy `.env.example` to `.env.local` and replace `G-XXXXXXXXXX` with 
 cp apps/jasonruesch/.env.example apps/jasonruesch/.env.local
 ```
 
-Update [apps/jasonruesch/app/app.tsx](../apps/jasonruesch/app/app.tsx) with the following:
+Update [apps/jasonruesch/app/root.tsx](../../apps/jasonruesch/app/root.tsx) with the following:
 
 ```typescript
 import ReactGA from 'react-ga4';
 
-export function App() {
+export function Layout({ children }: { children: React.ReactNode }) {
   const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
   if (measurementId) ReactGA.initialize(measurementId);
   ...
 }
 ```
 
-Create [scripts/cp-dep.sh](../scripts/cp-dep.sh) with the following to copy a dependency from `package.json` to another file:
+Create [scripts/cp-dep.sh](../../scripts/cp-dep.sh) with the following to copy a dependency from `package.json` to another file:
 
 ```bash
 #!/usr/bin/env bash
