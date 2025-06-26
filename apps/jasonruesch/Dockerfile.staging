@@ -15,6 +15,7 @@ FROM base AS build
 
 # Install node modules
 COPY --link package-lock.json package.json ./
+# RUN npm ci --ignore-scripts # TODO: Use this instead of the following after Nx fixes the release script issue of updating the package-lock.json file
 RUN npm install --ignore-scripts
 
 # Set environment
