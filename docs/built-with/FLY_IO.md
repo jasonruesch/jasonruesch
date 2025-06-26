@@ -98,3 +98,47 @@ Deploy initial version to Staging:
 ```bash
 npx nx deploy jasonruesch --configuration=staging
 ```
+
+Setup configurations for PR Previews:
+
+```bash
+cp apps/jasonruesch/Dockerfile apps/jasonruesch/Dockerfile.preview
+```
+
+Create [apps/jasonruesch/fly.preview.toml](../apps/jasonruesch/fly.preview.toml) with the following:
+
+```toml
+# fly.toml app configuration file generated for jasonruesch on 2025-06-25T15:39:53-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+primary_region = 'iad'
+
+[build]
+  dockerfile = './Dockerfile.preview'
+
+[env]
+  PORT = '3000'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+```
+
+Update [apps/jasonruesch/Dockerfile.preview](../apps/jasonruesch/Dockerfile.preview) with the following:
+
+```dockerfile
+...
+ENV NODE_ENV="development"
+...
+```
