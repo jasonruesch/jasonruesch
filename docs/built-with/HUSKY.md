@@ -6,7 +6,7 @@ npx husky add .husky/commit-msg ''
 npx husky add .husky/prepare-commit-msg ''
 ```
 
-Update [.husky/pre-commit](../.husky/pre-commit) with the following:
+Update [.husky/pre-commit](../../.husky/pre-commit) with the following:
 
 ```bash
 #!/usr/bin/env sh
@@ -15,7 +15,7 @@ Update [.husky/pre-commit](../.husky/pre-commit) with the following:
 npx lint-staged
 ```
 
-Update [.husky/commit-msg](../.husky/commit-msg) with the following:
+Update [.husky/commit-msg](../../.husky/commit-msg) with the following:
 
 ```bash
 #!/usr/bin/env sh
@@ -24,7 +24,7 @@ Update [.husky/commit-msg](../.husky/commit-msg) with the following:
 npx --no-install commitlint -V --edit "$1"
 ```
 
-Update [.husky/prepare-commit-msg](../.husky/prepare-commit-msg) with the following:
+Update [.husky/prepare-commit-msg](../../.husky/prepare-commit-msg) with the following:
 
 ```bash
 #!/usr/bin/env sh

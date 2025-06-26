@@ -12,7 +12,7 @@ npm install -D prettier@latest prettier-plugin-tailwindcss
 npm install -D tailwind-merge
 ```
 
-Update [apps/jasonruesch/vite.config.ts](../apps/jasonruesch/vite.config.ts) with the following:
+Update [apps/jasonruesch/vite.config.ts](../../apps/jasonruesch/vite.config.ts) with the following:
 
 ```typescript
 import tailwindcss from '@tailwindcss/vite';
@@ -27,13 +27,13 @@ export default defineConfig({
 });
 ```
 
-Update [apps/jasonruesch/styles.css](../apps/jasonruesch/styles.css) with the following:
+Update [apps/jasonruesch/styles.css](../../apps/jasonruesch/styles.css) with the following:
 
 ```css
 @import 'tailwindcss';
 ```
 
-Update [apps/jasonruesch/app/root.tsx](../apps/jasonruesch/app/root.tsx) with the following:
+Update [apps/jasonruesch/app/root.tsx](../../apps/jasonruesch/app/root.tsx) with the following:
 
 ```typescript
 ...
@@ -41,7 +41,7 @@ import '../styles.css';
 ...
 ```
 
-Update [.prettierrc](../.prettierrc) with the following:
+Update [.prettierrc](../../.prettierrc) with the following:
 
 ```json
 {

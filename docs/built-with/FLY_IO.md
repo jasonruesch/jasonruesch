@@ -11,7 +11,7 @@ rm -rf Dockerfile
 rm -rf .github/workflows/ci.yml .github/workflows/fly-deploy.yml
 ```
 
-Update [apps/jasonruesch/fly.toml](../apps/jasonruesch/fly.toml) with the following:
+Update [apps/jasonruesch/fly.toml](../../apps/jasonruesch/fly.toml) with the following:
 
 ```toml
 [build]
@@ -24,7 +24,7 @@ Update [apps/jasonruesch/fly.toml](../apps/jasonruesch/fly.toml) with the follow
   internal_port = 3000
 ```
 
-Update [apps/jasonruesch/package.json](../apps/jasonruesch/package.json) with the following:
+Update [apps/jasonruesch/package.json](../../apps/jasonruesch/package.json) with the following:
 
 ```json
 {
@@ -56,7 +56,7 @@ rm -rf Dockerfile
 rm -rf .github/workflows/fly-deploy.yml
 ```
 
-Update [apps/jasonruesch/fly.staging.toml](../apps/jasonruesch/fly.staging.toml) with the following:
+Update [apps/jasonruesch/fly.staging.toml](../../apps/jasonruesch/fly.staging.toml) with the following:
 
 ```toml
 [build]
@@ -69,7 +69,7 @@ Update [apps/jasonruesch/fly.staging.toml](../apps/jasonruesch/fly.staging.toml)
   internal_port = 3000
 ```
 
-Update [apps/jasonruesch/Dockerfile.staging](../apps/jasonruesch/Dockerfile.staging) with the following:
+Update [apps/jasonruesch/Dockerfile.staging](../../apps/jasonruesch/Dockerfile.staging) with the following:
 
 ```dockerfile
 ...
@@ -77,7 +77,7 @@ ENV NODE_ENV="staging"
 ...
 ```
 
-Update [apps/jasonruesch/package.json](../apps/jasonruesch/package.json) with the following:
+Update [apps/jasonruesch/package.json](../../apps/jasonruesch/package.json) with the following:
 
 ```
 "deploy": {
@@ -105,7 +105,7 @@ Setup configurations for PR Previews:
 cp apps/jasonruesch/Dockerfile apps/jasonruesch/Dockerfile.preview
 ```
 
-Create [apps/jasonruesch/fly.preview.toml](../apps/jasonruesch/fly.preview.toml) with the following:
+Create [apps/jasonruesch/fly.preview.toml](../../apps/jasonruesch/fly.preview.toml) with the following:
 
 ```toml
 # fly.toml app configuration file generated for jasonruesch on 2025-06-25T15:39:53-04:00
@@ -135,7 +135,7 @@ primary_region = 'iad'
   cpus = 1
 ```
 
-Update [apps/jasonruesch/Dockerfile.preview](../apps/jasonruesch/Dockerfile.preview) with the following:
+Update [apps/jasonruesch/Dockerfile.preview](../../apps/jasonruesch/Dockerfile.preview) with the following:
 
 ```dockerfile
 ...

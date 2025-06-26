@@ -4,7 +4,7 @@
 npm install -D @commitlint/config-nx-scopes @commitlint/cli @commitlint/config-conventional
 ```
 
-Create [commitlint.config.js](../commitlint.config.js) with the following:
+Create [commitlint.config.js](../../commitlint.config.js) with the following:
 
 ```typescript
 async function getConfig() {
