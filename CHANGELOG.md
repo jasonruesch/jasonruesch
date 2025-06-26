@@ -1,3 +1,18 @@
+## 2.3.0 (2025-06-26)
+
+### 🚀 Features
+
+- **jasonruesch:** add ui library and content to the app ([95bd562](https://github.com/jasonruesch/jasonruesch/commit/95bd562))
+- **repo:** add ui library and add catalyst ([ef6585a](https://github.com/jasonruesch/jasonruesch/commit/ef6585a))
+
+### 🩹 Fixes
+
+- **jasonruesch:** app build in Dockerfiles ([adfe09e](https://github.com/jasonruesch/jasonruesch/commit/adfe09e))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.2.0 (2025-06-26)
 
 ### 🚀 Features
