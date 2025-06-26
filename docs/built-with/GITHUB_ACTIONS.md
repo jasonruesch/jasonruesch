@@ -201,14 +201,47 @@ jobs:
       - if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         run: npx nx build jasonruesch
 
-  deploy-jasonruesch:
+  deploy-jasonruesch-staging:
     environment:
       name: Staging
       url: https://jasonruesch.fly.dev
     runs-on: ubuntu-latest
-    concurrency: deploy-jasonruesch
+    concurrency: deploy-jasonruesch-staging
     needs: main
     if: github.event_name == 'workflow_dispatch' || needs.main.outputs.affected_build_jasonruesch != ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --config apps/jasonruesch/fly.staging.toml
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+Create [.github/workflows/production.yml](../.github/workflows/production.yml) with the following:
+
+```yaml
+name: Production
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  deploy-jasonruesch:
+    environment:
+      name: Production
+      url: https://jasonruesch.fly.dev
+    runs-on: ubuntu-latest
+    concurrency: deploy-jasonruesch
     steps:
       - uses: actions/checkout@v4
 

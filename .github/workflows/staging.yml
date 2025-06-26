@@ -59,12 +59,12 @@ jobs:
       - if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
         run: npx nx build jasonruesch
 
-  deploy-jasonruesch:
+  deploy-jasonruesch-staging:
     environment:
       name: Staging
       url: https://jasonruesch-staging.fly.dev
     runs-on: ubuntu-latest
-    concurrency: deploy-jasonruesch
+    concurrency: deploy-jasonruesch-staging
     needs: main
     if: github.event_name == 'workflow_dispatch' || needs.main.outputs.affected_build_jasonruesch != ''
     steps:

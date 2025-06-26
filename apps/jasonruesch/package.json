@@ -29,7 +29,15 @@
         "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch"
       },
       "deploy": {
-        "command": "flyctl deploy --config apps/jasonruesch/fly.toml"
+        "command": "flyctl deploy --config apps/jasonruesch/fly.toml",
+        "configurations": {
+          "production": {
+            "command": "flyctl deploy --config apps/jasonruesch/fly.toml"
+          },
+          "staging": {
+            "command": "flyctl deploy --config apps/jasonruesch/fly.staging.toml"
+          }
+        }
       }
     }
   }
