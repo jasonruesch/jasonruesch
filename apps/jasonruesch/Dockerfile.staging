@@ -15,7 +15,7 @@ FROM base AS build
 
 # Install node modules
 COPY --link package-lock.json package.json ./
-RUN npm ci --ignore-scripts
+RUN npm install --ignore-scripts
 
 # Set environment
 ENV NODE_ENV="staging"
