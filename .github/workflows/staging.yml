@@ -62,7 +62,7 @@ jobs:
   deploy-jasonruesch-staging:
     environment:
       name: Staging
-      url: https://jasonruesch-staging.fly.dev
+      url: https://staging.jasonruesch.dev
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch-staging
     needs: main
