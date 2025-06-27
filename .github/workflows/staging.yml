@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  main:
+  staging:
     runs-on: ubuntu-latest
     outputs:
       affected_build_jasonruesch: ${{ steps.affected_build_jasonruesch.outputs.projects }}
@@ -65,8 +65,8 @@ jobs:
       url: https://staging.jasonruesch.dev
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch-staging
-    needs: main
-    if: github.event_name == 'workflow_dispatch' || needs.main.outputs.affected_build_jasonruesch != ''
+    needs: staging
+    if: github.event_name == 'workflow_dispatch' || needs.staging.outputs.affected_build_jasonruesch != ''
     steps:
       - uses: actions/checkout@v4
 
