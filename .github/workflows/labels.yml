@@ -1,0 +1,44 @@
+# Default color paletter of GitHub labels:
+# https://gist.github.com/borekb/d61cdc45f0c92606a92b15388cf80185
+# b60205
+# d93f0b
+# fbca04
+# 0e8a16
+# 006b75
+# 1d76db
+# 0052cc
+# 5319e7
+# e99695
+# f9d0c4
+# fef2c0
+# c2e0c6
+# bfdadc
+# c5def5
+# bfd4f2
+# d4c5f9
+
+name: Labels
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/labels.yml
+      - .github/workflows/labels.yml
+
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Sync Labels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/labels.yml
+
+      - uses: EndBug/label-sync@v2
+        with:
+          config-file: '.github/labels.yml'
+          delete-other-labels: true

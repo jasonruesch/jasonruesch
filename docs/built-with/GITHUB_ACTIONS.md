@@ -158,8 +158,14 @@ permissions:
   actions: read
   contents: read
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these deployments to complete.
+concurrency:
+  group: 'staging'
+  cancel-in-progress: false
+
 jobs:
-  main:
+  staging:
     runs-on: ubuntu-latest
     outputs:
       affected_build_jasonruesch: ${{ steps.affected_build_jasonruesch.outputs.projects }}
@@ -195,7 +201,11 @@ jobs:
       - id: affected_build_jasonruesch
         if: github.event_name != 'workflow_dispatch'
         run: |
+          npx nx show projects --projects jasonruesch --affected
           projects=$(npx nx show projects --projects jasonruesch --affected | tr '\n' ' ' | xargs)
+          if [ -z "$projects" ]; then
+            echo "No affected projects found for jasonruesch."
+          fi
           echo "projects=$projects" >> $GITHUB_OUTPUT
 
       - if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
@@ -204,15 +214,16 @@ jobs:
   deploy-jasonruesch-staging:
     environment:
       name: Staging
-      url: https://jasonruesch.fly.dev
+      url: https://staging.jasonruesch.dev
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch-staging
-    needs: main
-    if: github.event_name == 'workflow_dispatch' || needs.main.outputs.affected_build_jasonruesch != ''
+    needs: staging
+    if: github.event_name == 'workflow_dispatch' || needs.staging.outputs.affected_build_jasonruesch != ''
     steps:
       - uses: actions/checkout@v4
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
+
       - run: flyctl deploy --config apps/jasonruesch/fly.staging.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -246,12 +257,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --config apps/jasonruesch/fly.toml
+
+      - run: flyctl deploy --config apps/jasonruesch/fly.production.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 ```
 
-Create [.github/workflows/production.yml](../../.github/workflows/production.yml) with the following:
+Create [.github/workflows/preview.yml](../../.github/workflows/preview.yml) with the following:
 
 ```yaml
 name: Preview
@@ -269,6 +281,52 @@ permissions:
   contents: read
 
 jobs:
+  preview:
+    runs-on: ubuntu-latest
+    outputs:
+      affected_build_jasonruesch: ${{ steps.affected_build_jasonruesch.outputs.projects }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      # This enables task distribution via Nx Cloud
+      # Run this command as early as possible, before dependencies are installed
+      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
+      # Uncomment this line to enable task distribution
+      # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
+
+      # Cache node_modules
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci --legacy-peer-deps --ignore-scripts
+      # - run: npx playwright install --with-deps
+      - uses: nrwl/nx-set-shas@v4
+
+      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+      # - run: npx nx-cloud record -- echo Hello World
+      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
+      # When you enable task distribution, run the e2e-ci task instead of e2e
+      - run: npx nx affected -t lint test # e2e
+      - run: npx nx affected -t build --exclude jasonruesch
+
+      - id: affected_build_jasonruesch
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          npx nx show projects --projects jasonruesch --affected
+          projects=$(npx nx show projects --projects jasonruesch --affected | tr '\n' ' ' | xargs)
+          if [ -z "$projects" ]; then
+            echo "No affected projects found for jasonruesch."
+          fi
+          echo "projects=$projects" >> $GITHUB_OUTPUT
+
+      - if: github.event_name == 'workflow_dispatch' || steps.affected_build_jasonruesch.outputs.projects != ''
+        run: npx nx build jasonruesch
+
   deploy-jasonruesch-preview:
     environment:
       # Deploying apps with this "preview" environment allows the URL for the app to be displayed in the PR UI.
@@ -279,6 +337,8 @@ jobs:
     # Only run one deployment at a time per PR.
     concurrency:
       group: pr-${{ github.event.number }}
+    needs: preview
+    if: github.event_name == 'workflow_dispatch' || needs.preview.outputs.affected_build_jasonruesch != ''
     steps:
       - uses: actions/checkout@v4
 
