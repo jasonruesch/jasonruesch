@@ -13,14 +13,14 @@ FROM node:${NODE_VERSION}-slim AS base
 WORKDIR /app
 
 # Install node modules
-COPY --link package-lock.json package.json ./
+COPY package-lock.json package.json ./
 RUN npm install
 
 # Set environment
 ENV NODE_ENV="development"
 
 # Copy application code
-COPY --link . .
+COPY . .
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 4200

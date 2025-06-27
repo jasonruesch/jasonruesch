@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default defineConfig(() => ({
+export default defineConfig(({ mode }) => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/jasonruesch',
   server: {
@@ -31,7 +31,14 @@ export default defineConfig(() => ({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-    sourcemaps: process.env.NODE_ENV !== 'production',
+    sourcemap: mode !== 'production',
+    rollupOptions: {
+      onLog(level, log, handler) {
+        if (log.message.includes("Can't resolve original location of error."))
+          return;
+        handler(level, log);
+      },
+    },
   },
   test: {
     watch: false,
