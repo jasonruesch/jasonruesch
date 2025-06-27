@@ -28,7 +28,7 @@ ENV NODE_ENV="preview"
 
 # Copy application code
 COPY --link . .
-RUN npx nx build jasonruesch
+RUN npx nx build jasonruesch --mode preview
 
 
 # Final stage for app image
