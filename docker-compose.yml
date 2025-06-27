@@ -1,5 +1,7 @@
 # Run with:
-# docker compose -f docker-compose.jasonruesch.yml up
+# docker compose up
+# Include --build to rebuild the image if there are changes to the Dockerfile or package.json files
+# Optionally, use -d to run the app in detached mode
 
 services:
   jasonruesch:
