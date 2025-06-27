@@ -1,3 +1,13 @@
+## 2.5.0 (2025-06-27)
+
+### 🚀 Features
+
+- **jasonruesch:** italicize version in footer ([bbbaabf](https://github.com/jasonruesch/jasonruesch/commit/bbbaabf))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.4.0 (2025-06-27)
 
 ### 🚀 Features
