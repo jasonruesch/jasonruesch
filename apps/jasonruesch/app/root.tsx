@@ -10,7 +10,7 @@ import {
   type MetaFunction,
 } from 'react-router';
 
-import { Footer, Header } from '@jasonruesch/ui';
+import { Footer, Header, SplashScreen } from '@jasonruesch/ui';
 
 import '../styles.css';
 
@@ -147,6 +147,8 @@ export default function App() {
         </main>
         <Footer />
       </div>
+
+      <SplashScreen />
     </>
   );
 }

@@ -24,16 +24,15 @@
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [GitHub Actions](https://github.com/features/actions)
-- [Vercel](https://vercel.com/)
 - [Figma](https://www.figma.com/)
 - [Semantic Versioning](https://semver.org/)
-- [Scroll-Driven Animations](https://scroll-driven-animations.style/)
-- [ResizeObserver Polyfill](https://github.com/que-etc/resize-observer-polyfill)
-- [Framer Motion](https://www.framer.com/)
-- [react-markdown](https://github.com/remarkjs/react-markdown)
-- [React Syntax Highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/)
-- [rehype-raw](https://github.com/rehypejs/rehype-raw)
 - [Heroicons](https://heroicons.com/)
 - [HeadlessUI](https://headlessui.com/)
-- [Flagsmith](https://www.flagsmith.com/)
-- [vite-plugin-static-copy](https://github.com/sapphi-red/vite-plugin-static-copy)
+- [Framer Motion](https://www.framer.com/)
+  <!-- - [Scroll-Driven Animations](https://scroll-driven-animations.style/) -->
+  <!-- - [ResizeObserver Polyfill](https://github.com/que-etc/resize-observer-polyfill) -->
+  <!-- - [react-markdown](https://github.com/remarkjs/react-markdown) -->
+  <!-- - [React Syntax Highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/) -->
+  <!-- - [rehype-raw](https://github.com/rehypejs/rehype-raw) -->
+  <!-- - [Flagsmith](https://www.flagsmith.com/) -->
+  <!-- - [vite-plugin-static-copy](https://github.com/sapphi-red/vite-plugin-static-copy) -->
