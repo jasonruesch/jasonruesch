@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+import packageJson from './package.json';
+
 export default defineConfig(({ mode }) => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/jasonruesch',
@@ -50,5 +52,8 @@ export default defineConfig(({ mode }) => ({
       reportsDirectory: './test-output/vitest/coverage',
       provider: 'v8' as const,
     },
+  },
+  define: {
+    'import.meta.env.PACKAGE_VERSION': JSON.stringify(packageJson.version),
   },
 }));

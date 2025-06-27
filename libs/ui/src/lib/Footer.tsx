@@ -13,7 +13,7 @@ function Link({ to, children }: { to: string; children: React.ReactNode }) {
   );
 }
 
-export function Footer() {
+export function Footer({ version }: { version?: string }) {
   return (
     <footer className="mt-32 flex-none">
       <ContainerOuter>
@@ -30,6 +30,7 @@ export function Footer() {
               <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 &copy; {new Date().getFullYear()} Jason Ruesch. All rights
                 reserved.
+                {version ? <> v{version}</> : null}
               </p>
             </div>
           </ContainerInner>

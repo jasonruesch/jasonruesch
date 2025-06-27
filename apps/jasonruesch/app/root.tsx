@@ -145,7 +145,7 @@ export default function App() {
         <main id="main" className="grow">
           <Outlet />
         </main>
-        <Footer />
+        <Footer version={import.meta.env.PACKAGE_VERSION} />
       </div>
     </>
   );
