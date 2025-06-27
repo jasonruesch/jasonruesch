@@ -15,6 +15,7 @@ permissions:
 jobs:
   preview:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     outputs:
       affected_build_jasonruesch: ${{ steps.affected_build_jasonruesch.outputs.projects }}
     steps:
@@ -63,6 +64,7 @@ jobs:
     environment:
       # Deploying apps with this "preview" environment allows the URL for the app to be displayed in the PR UI.
       name: Preview
+      # name: pr-${{ github.event.number }}
       # The script in the `deploy` sets the URL output for each review app.
       url: ${{ steps.deploy.outputs.url }}
     runs-on: ubuntu-latest
@@ -70,7 +72,7 @@ jobs:
     concurrency:
       group: pr-${{ github.event.number }}
     needs: preview
-    if: github.event_name == 'workflow_dispatch' || needs.preview.outputs.affected_build_jasonruesch != ''
+    if: github.event_name == 'workflow_dispatch' || needs.preview.outputs.affected_build_jasonruesch != '' || github.event.action == 'closed'
     steps:
       - uses: actions/checkout@v4
 
@@ -81,3 +83,12 @@ jobs:
           config: apps/jasonruesch/fly.preview.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      # If using the name `pr-${{ github.event.number }}` for the environment, you can use this action to delete the environment.
+      # - name: Clean up GitHub environment
+      #   uses: strumwolf/delete-deployment-environment@v2
+      #   if: ${{ github.event.action == 'closed' }}
+      #   with:
+      #     # ⚠️ The provided token needs permission for admin write:org
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     environment: pr-${{ github.event.number }}
