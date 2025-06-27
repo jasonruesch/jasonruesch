@@ -30,7 +30,7 @@ export function Footer({ version }: { version?: string }) {
               <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 &copy; {new Date().getFullYear()} Jason Ruesch. All rights
                 reserved.
-                {version ? <> v{version}</> : null}
+                {version ? <i> v{version}</i> : null}
               </p>
             </div>
           </ContainerInner>
