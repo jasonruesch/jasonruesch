@@ -1,7 +1,7 @@
 # Table of Contents
 
 1. [Nx](./built-with/NX.md)
-1. [Tailwind CSS 4 and tailwind-merge](./built-with/TAILWINDCSS.md)
+1. [Tailwind CSS 4](./built-with/TAILWINDCSS.md)
 1. [Lint-Staged](./built-with/LINT_STAGED.md)
 1. [Commitlint and Conventional Commits](./built-with/COMMITLINT.md)
 1. [Commitizen](./built-with/COMMITIZEN.md)
