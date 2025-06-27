@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  main:
+  preview:
     runs-on: ubuntu-latest
     outputs:
       affected_build_jasonruesch: ${{ steps.affected_build_jasonruesch.outputs.projects }}
@@ -69,8 +69,8 @@ jobs:
     # Only run one deployment at a time per PR.
     concurrency:
       group: pr-${{ github.event.number }}
-    needs: main
-    if: github.event_name == 'workflow_dispatch' || needs.main.outputs.affected_build_jasonruesch != ''
+    needs: preview
+    if: github.event_name == 'workflow_dispatch' || needs.preview.outputs.affected_build_jasonruesch != ''
     steps:
       - uses: actions/checkout@v4
 
