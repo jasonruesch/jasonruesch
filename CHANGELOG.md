@@ -1,3 +1,15 @@
+## 2.4.0 (2025-06-27)
+
+### 🚀 Features
+
+- **jasonruesch:** display app version in footer ([327db2a](https://github.com/jasonruesch/jasonruesch/commit/327db2a))
+- **ui:** add splash screen component ([2feb580](https://github.com/jasonruesch/jasonruesch/commit/2feb580))
+- **ui:** remove splash screen component ([ca052fc](https://github.com/jasonruesch/jasonruesch/commit/ca052fc))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.3.0 (2025-06-26)
 
 ### 🚀 Features
