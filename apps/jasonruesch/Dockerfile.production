@@ -28,7 +28,7 @@ ENV NODE_ENV="production"
 
 # Copy application code
 COPY --link . .
-RUN npx nx build jasonruesch
+RUN npx nx build jasonruesch --mode production
 
 
 # Final stage for app image

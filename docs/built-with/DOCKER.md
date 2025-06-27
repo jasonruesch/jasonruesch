@@ -18,14 +18,14 @@ FROM node:${NODE_VERSION}-slim AS base
 WORKDIR /app
 
 # Install node modules
-COPY --link package-lock.json package.json ./
+COPY package-lock.json package.json ./
 RUN npm install
 
 # Set environment
 ENV NODE_ENV="development"
 
 # Copy application code
-COPY --link . .
+COPY . .
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 4200
@@ -37,6 +37,11 @@ CMD [ "npx", "react-router", "dev", "--host" ]
 Create [docker-compose.yml](../../docker-compose.yml) with the following to be used for starting the development container with mapped volumes:
 
 ```yaml
+# Run with:
+# docker compose up
+# Include --build to rebuild the image if there are changes to the Dockerfile or package.json files
+# Optionally, use -d to run the app in detached mode
+
 version: '3'
 
 services:
