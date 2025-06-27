@@ -41,7 +41,7 @@
         }
       },
       "deploy": {
-        "command": "flyctl deploy --config apps/jasonruesch/fly.toml",
+        "command": "YELLOW='\\033[0;33m' RESET='\\033[0m'; echo \"${YELLOW}Development deployment is not supported.${RESET}\"",
         "configurations": {
           "production": {
             "command": "flyctl deploy --config apps/jasonruesch/fly.production.toml"

@@ -1,5 +1,10 @@
 # syntax = docker/dockerfile:1
 
+# Build with:
+# docker build -t jasonruesch:dev -f apps/jasonruesch/Dockerfile .
+# Run with:
+# docker run -it --rm -p 4200:4200 --name jasonruesch-jasonruesch-dev --label com.docker.compose.project=jasonruesch jasonruesch:dev
+
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=23.6.0
 FROM node:${NODE_VERSION}-slim AS base
@@ -19,4 +24,6 @@ COPY --link . .
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 4200
-CMD [ "npx", "nx", "dev", "jasonruesch" ]
+
+WORKDIR /app/apps/jasonruesch
+CMD [ "npx", "react-router", "dev", "--host" ]
