@@ -3,7 +3,7 @@
 1. [Nx](./built-with/NX.md)
 1. [Tailwind CSS 4 and tailwind-merge](./built-with/TAILWINDCSS.md)
 1. [Lint-Staged](./built-with/LINT_STAGED.md)
-1. [Conventional Commits and Commitlint](./built-with/CONVENTIONAL_COMMITS.md)
+1. [Commitlint and Conventional Commits](./built-with/COMMITLINT.md)
 1. [Commitizen](./built-with/COMMITIZEN.md)
 1. [Husky](./built-with/HUSKY.md)
 1. [Google Analytics](./built-with/GOOGLE_ANALYTICS.md)

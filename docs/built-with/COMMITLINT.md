@@ -1,4 +1,4 @@
-## [Conventional Commits](https://www.conventionalcommits.org/) and [Commitlint](https://commitlint.js.org/)
+## [Commitlint](https://commitlint.js.org/) and [Conventional Commits](https://www.conventionalcommits.org/)
 
 ```bash
 npm install -D @commitlint/config-nx-scopes @commitlint/cli @commitlint/config-conventional
