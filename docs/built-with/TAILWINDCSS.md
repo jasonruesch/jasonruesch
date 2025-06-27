@@ -1,4 +1,4 @@
-## [Tailwind CSS 4](https://tailwindcss.com/) and [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+## [Tailwind CSS 4](https://tailwindcss.com/)
 
 ```bash
 npm uninstall -D tailwindcss postcss autoprefixer
@@ -9,7 +9,6 @@ rm -rf postcss.config.js tailwind.config.js
 cd ../../
 npm install -D @tailwindcss/vite
 npm install -D prettier@latest prettier-plugin-tailwindcss
-npm install -D tailwind-merge
 ```
 
 Update [apps/jasonruesch/vite.config.ts](../../apps/jasonruesch/vite.config.ts) with the following:
