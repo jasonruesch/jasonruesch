@@ -53,6 +53,9 @@
   "references": [
     {
       "path": "../../libs/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/data-access/tsconfig.lib.json"
     }
   ]
 }

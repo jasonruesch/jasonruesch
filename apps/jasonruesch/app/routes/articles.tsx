@@ -1,8 +1,8 @@
-// import { type ArticleWithSlug } from '../libs/data-access';
+import { type ArticleWithSlug } from '@jasonruesch/data-access';
 import { Card, SimpleLayout } from '@jasonruesch/ui';
 // import { formatDate } from '../libs/utils';
 
-function Article({ article }: { article: any /* ArticleWithSlug */ }) {
+function Article({ article }: { article: ArticleWithSlug }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
@@ -34,7 +34,7 @@ function Article({ article }: { article: any /* ArticleWithSlug */ }) {
 }
 
 export default function ArticlesIndex() {
-  const articles: any[] /* ArticleWithSlug[] */ = [
+  const articles: ArticleWithSlug[] = [
     // {
     //   slug: '#1',
     //   author: 'Jason Ruesch',
