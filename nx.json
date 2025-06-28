@@ -99,5 +99,8 @@
         "createRelease": "github"
       }
     }
+  },
+  "sync": {
+    "applyChanges": true
   }
 }

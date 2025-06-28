@@ -1,5 +1,13 @@
 import clsx from 'clsx';
 
+import { type ArticleWithSlug } from '@jasonruesch/data-access';
+import {
+  BriefcaseIcon,
+  Card,
+  Container,
+  GitHubIcon,
+  LinkedInIcon,
+} from '@jasonruesch/ui';
 import logoDegreed from '../assets/images/logos/degreed.svg';
 import logoRedRover from '../assets/images/logos/redrover.svg';
 import logoRelias from '../assets/images/logos/relias.png';
@@ -8,17 +16,9 @@ import image2 from '../assets/images/photos/image-2.jpg';
 import image3 from '../assets/images/photos/image-3.jpg';
 import image4 from '../assets/images/photos/image-4.jpg';
 import image5 from '../assets/images/photos/image-5.jpg';
-// import { type ArticleWithSlug } from '../libs/data-access';
-import {
-  BriefcaseIcon,
-  Card,
-  Container,
-  GitHubIcon,
-  LinkedInIcon,
-} from '@jasonruesch/ui';
 // import { formatDate } from '../libs/utils';
 
-function Article({ article }: { article: any /* ArticleWithSlug */ }) {
+function Article({ article }: { article: ArticleWithSlug }) {
   return (
     <Card as="article">
       <Card.Title to={`/articles/${article.slug}`}>{article.title}</Card.Title>
@@ -212,7 +212,7 @@ function Photos() {
 }
 
 export default function Home() {
-  const articles: any[] /* ArticleWithSlug[] */ = [
+  const articles: ArticleWithSlug[] = [
     // {
     //   slug: "#1",
     //   author: "Jason Ruesch",

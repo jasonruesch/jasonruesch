@@ -3,6 +3,9 @@
   "include": [],
   "references": [
     {
+      "path": "../../libs/data-access"
+    },
+    {
       "path": "../../libs/ui"
     },
     {
