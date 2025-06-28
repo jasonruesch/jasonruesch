@@ -52,10 +52,13 @@
   ],
   "references": [
     {
+      "path": "../../libs/data-access/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/ui/tsconfig.lib.json"
     },
     {
-      "path": "../../libs/data-access/tsconfig.lib.json"
+      "path": "../../libs/feature-feature-flags/tsconfig.lib.json"
     }
   ]
 }

@@ -1,0 +1,89 @@
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/react';
+import { FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { clsx } from 'clsx';
+import { useEffect, useState } from 'react';
+
+import { FeatureFlagsManager } from './feature-flags-manager';
+import { FeatureFlagsManagerButton } from './feature-flags-manager-button';
+import { useActionKey } from './hooks';
+
+export function FeatureFlagsManagerModal() {
+  const [open, setOpen] = useState(false);
+  const { ctrlKey, metaKey } = useActionKey();
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Ctrl|Command + Shift + F
+      if (
+        ((ctrlKey && event.ctrlKey) || (metaKey && event.metaKey)) &&
+        event.shiftKey &&
+        event.key === 'f'
+      ) {
+        event.preventDefault();
+
+        setOpen((open) => !open);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [ctrlKey, metaKey]);
+
+  return (
+    <>
+      <Dialog open={open} onClose={setOpen} className="relative z-50">
+        <DialogBackdrop
+          transition
+          className={clsx(
+            'fixed inset-0 bg-zinc-200/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-zinc-700/75',
+          )}
+        />
+
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto px-4 pt-20 pb-4 lg:px-20 lg:pt-32 lg:pb-20">
+          <DialogPanel
+            transition
+            className="relative mx-auto w-full max-w-lg transform overflow-hidden rounded-lg bg-white pt-5 pb-4 text-left shadow-xl transition-all data-[closed]:scale-95 data-[closed]:opacity-0 data-[enter]:duration-300 data-[enter]:ease-out data-[leave]:duration-200 data-[leave]:ease-in dark:bg-zinc-950"
+          >
+            <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="rounded-md bg-white text-zinc-400 hover:text-zinc-500 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:outline-none dark:bg-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-400 dark:focus:ring-violet-400 dark:focus:ring-offset-zinc-950"
+              >
+                <span className="sr-only">Close</span>
+                <XMarkIcon aria-hidden="true" className="size-6" />
+              </button>
+            </div>
+            <div className="px-4 sm:flex sm:items-start">
+              <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-cyan-100 sm:mx-0 sm:size-10 dark:bg-violet-600">
+                <FlagIcon
+                  aria-hidden="true"
+                  className="size-6 text-cyan-600 dark:text-violet-100"
+                />
+              </div>
+              <div className="mt-3 w-full sm:mt-0 sm:ml-4">
+                <DialogTitle
+                  as="h3"
+                  className="text-center text-zinc-900 sm:text-left dark:text-white"
+                >
+                  Flags
+                </DialogTitle>
+              </div>
+            </div>
+
+            <div className="mt-2 max-h-40 transform-gpu scroll-py-3 space-y-2 overflow-y-auto px-4 py-3 sm:ml-14 lg:max-h-96">
+              <FeatureFlagsManager />
+            </div>
+          </DialogPanel>
+        </div>
+      </Dialog>
+
+      <FeatureFlagsManagerButton onClick={() => setOpen(true)} />
+    </>
+  );
+}

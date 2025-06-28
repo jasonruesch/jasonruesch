@@ -9,6 +9,9 @@
       "path": "../../libs/ui"
     },
     {
+      "path": "../../libs/feature-feature-flags"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {

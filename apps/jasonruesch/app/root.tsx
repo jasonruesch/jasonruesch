@@ -10,6 +10,7 @@ import {
   type MetaFunction,
 } from 'react-router';
 
+import { FeatureFlagsProvider } from '@jasonruesch/feature-feature-flags';
 import { Footer, Header } from '@jasonruesch/ui';
 
 import '../styles.css';
@@ -117,7 +118,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <>
+    <FeatureFlagsProvider>
       <div
         className={clsx(
           'fixed inset-0 flex h-dvh justify-center',
@@ -147,6 +148,6 @@ export default function App() {
         </main>
         <Footer version={import.meta.env.PACKAGE_VERSION} />
       </div>
-    </>
+    </FeatureFlagsProvider>
   );
 }
