@@ -9,9 +9,9 @@ import { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
 
 import avatarImage from './assets/avatar.png';
-import { Container } from './Container';
+import { Container } from './container';
 import { navigation } from './data';
-import { ChevronDownIcon, CloseIcon } from './Icons';
+import { ChevronDownIcon, CloseIcon } from './icons';
 
 function MobileNavItem({
   to,

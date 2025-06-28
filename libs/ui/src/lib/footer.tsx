@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router';
-import { ContainerInner, ContainerOuter } from './Container';
+import { ContainerInner, ContainerOuter } from './container';
 import { navigation } from './data';
 
 function Link({ to, children }: { to: string; children: React.ReactNode }) {
