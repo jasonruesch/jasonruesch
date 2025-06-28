@@ -8,15 +8,10 @@ on:
 permissions:
   actions: read
   contents: read
+  deployments: write
 
 jobs:
   cleanup-jasonruesch-preview:
-    environment:
-      # Deploying apps with this "preview" environment allows the URL for the app to be displayed in the PR UI.
-      name: Preview
-      # name: pr-${{ github.event.number }}
-      # The script in the `deploy` sets the URL output for each review app.
-      url: ${{ steps.deploy.outputs.url }}
     runs-on: ubuntu-latest
     # Only run one deployment at a time per PR.
     concurrency:
