@@ -1,3 +1,15 @@
+## 2.6.0 (2025-06-28)
+
+### 🚀 Features
+
+- **data-access:** add data-access library ([78299cb](https://github.com/jasonruesch/jasonruesch/commit/78299cb))
+- **jasonruesch:** hide Navigation heading on mobile ([bc1e4d5](https://github.com/jasonruesch/jasonruesch/commit/bc1e4d5))
+- **jasonruesch:** show Navigation heading on mobile navigation ([7c540ed](https://github.com/jasonruesch/jasonruesch/commit/7c540ed))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.5.0 (2025-06-27)
 
 ### 🚀 Features
