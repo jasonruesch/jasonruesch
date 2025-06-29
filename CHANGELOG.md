@@ -1,3 +1,13 @@
+## 2.7.0 (2025-06-29)
+
+### 🚀 Features
+
+- **feature-feature-flags:** add feature flags library ([a48737e](https://github.com/jasonruesch/jasonruesch/commit/a48737e))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.6.0 (2025-06-28)
 
 ### 🚀 Features
