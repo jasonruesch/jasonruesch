@@ -10,7 +10,6 @@ import { NavLink, useLocation } from 'react-router';
 
 import avatarImage from './assets/avatar.png';
 import { Container } from './container';
-import { navigation } from './data';
 import { ChevronDownIcon, CloseIcon } from './icons';
 
 function MobileNavItem({
@@ -40,9 +39,11 @@ function MobileNavItem({
   );
 }
 
-function MobileNavigation(
-  props: React.ComponentPropsWithoutRef<typeof Popover>,
-) {
+type MobileNavigationProps = React.ComponentPropsWithoutRef<typeof Popover> & {
+  navigation: { to: string; name: string }[];
+};
+
+function MobileNavigation(props: MobileNavigationProps) {
   return (
     <Popover {...props}>
       <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
@@ -70,7 +71,7 @@ function MobileNavigation(
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                {navigation.map(({ to, name }) => (
+                {props.navigation.map(({ to, name }) => (
                   <MobileNavItem key={to} to={to} onClick={close}>
                     {name}
                   </MobileNavItem>
@@ -111,11 +112,15 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
   );
 }
 
-function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
+type DesktopNavigationProps = React.ComponentPropsWithoutRef<'nav'> & {
+  navigation: { to: string; name: string }[];
+};
+
+function DesktopNavigation(props: DesktopNavigationProps) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        {navigation.map(({ to, name }) => (
+        {props.navigation.map(({ to, name }) => (
           <NavItem key={to} to={to}>
             {name}
           </NavItem>
@@ -173,7 +178,11 @@ function Avatar({
   );
 }
 
-export function Header() {
+export function Header({
+  navigation,
+}: {
+  navigation: { to: string; name: string }[];
+}) {
   const { pathname } = useLocation();
   const isHomePage = pathname === '/';
 
@@ -358,8 +367,14 @@ export function Header() {
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+                <MobileNavigation
+                  navigation={navigation}
+                  className="pointer-events-auto md:hidden"
+                />
+                <DesktopNavigation
+                  navigation={navigation}
+                  className="pointer-events-auto hidden md:block"
+                />
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">

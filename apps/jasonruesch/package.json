@@ -16,7 +16,8 @@
     "@headlessui/react": "^2.2.4",
     "framer-motion": "^12.19.1",
     "clsx": "^2.1.1",
-    "@heroicons/react": "^2.2.0"
+    "@heroicons/react": "^2.2.0",
+    "flagsmith": "^9.2.2"
   },
   "devDependencies": {
     "@react-router/dev": "^7.2.0",
@@ -27,16 +28,16 @@
   "nx": {
     "targets": {
       "docker-build": {
-        "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch",
+        "command": "docker build -t jasonruesch:dev -f apps/jasonruesch/Dockerfile .",
         "configurations": {
           "production": {
-            "command": "docker build -f apps/jasonruesch/Dockerfile.production . -t jasonruesch"
+            "command": "docker build -t jasonruesch:production -f apps/jasonruesch/Dockerfile.production ."
           },
           "staging": {
-            "command": "docker build -f apps/jasonruesch/Dockerfile.staging . -t jasonruesch"
+            "command": "docker build -t jasonruesch:staging -f apps/jasonruesch/Dockerfile.staging ."
           },
           "preview": {
-            "command": "docker build -f apps/jasonruesch/Dockerfile.preview . -t jasonruesch"
+            "command": "docker build -t jasonruesch:preview -f apps/jasonruesch/Dockerfile.preview ."
           }
         }
       },

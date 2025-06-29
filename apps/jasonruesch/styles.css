@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @source '../../libs/ui/src';
+@source '../../libs/feature-feature-flags/src';
 
 @theme {
   --font-sans: Inter, sans-serif;

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router';
+
 import { ContainerInner, ContainerOuter } from './container';
-import { navigation } from './data';
 
 function Link({ to, children }: { to: string; children: React.ReactNode }) {
   return (
@@ -13,7 +13,12 @@ function Link({ to, children }: { to: string; children: React.ReactNode }) {
   );
 }
 
-export function Footer({ version }: { version?: string }) {
+interface FooterProps {
+  navigation: { to: string; name: string }[];
+  version?: string;
+}
+
+export function Footer({ navigation, version }: FooterProps) {
   return (
     <footer className="mt-32 flex-none">
       <ContainerOuter>
