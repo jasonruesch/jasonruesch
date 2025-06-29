@@ -6,12 +6,20 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   type LinksFunction,
   type MetaFunction,
 } from 'react-router';
 
+import {
+  DevFlagTogglePanel,
+  FeatureFlag,
+  FeatureFlagProvider,
+  useFeatureFlags,
+} from '@jasonruesch/feature-feature-flags';
 import { Footer, Header } from '@jasonruesch/ui';
 
+import { useMemo } from 'react';
 import '../styles.css';
 
 export const meta: MetaFunction = () => [
@@ -115,9 +123,54 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+export async function loader() {
+  const featureFlags = {
+    all_navigation: false,
+    hidden_navigation: false,
+  };
+  const navigation = [
+    { name: 'Home', to: '/' },
+    { name: 'About', to: '/about' },
+    { name: 'Articles', to: '/articles' },
+    { name: 'Projects', to: '/projects' },
+    { name: 'Speaking', to: '/speaking', hidden: true },
+    { name: 'Uses', to: '/uses' },
+  ];
+
+  return { featureFlags, navigation };
+}
+
+export function Content({ children }: { children: React.ReactNode }) {
+  const { navigation } = useLoaderData<typeof loader>();
+  const { flags } = useFeatureFlags();
+  const updatedNavigation = useMemo(() => {
+    const hiddenNavigation = flags[FeatureFlag.HiddenNavigation];
+    const allNavigation = flags[FeatureFlag.AllNavigation];
+
+    return navigation.filter(
+      (item) => !item.hidden || hiddenNavigation || allNavigation,
+    );
+  }, [flags, navigation]);
+
   return (
     <>
+      <Header navigation={updatedNavigation} />
+      <main id="main" className="grow">
+        {children}
+      </main>
+      <Footer
+        navigation={updatedNavigation}
+        version={import.meta.env.PACKAGE_VERSION}
+      />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <FeatureFlagProvider
+      flagsmithEnvironmentId={import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID}
+    >
       <div
         className={clsx(
           'fixed inset-0 flex h-dvh justify-center',
@@ -141,12 +194,12 @@ export default function App() {
           'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
         )}
       >
-        <Header />
-        <main id="main" className="grow">
+        <Content>
           <Outlet />
-        </main>
-        <Footer version={import.meta.env.PACKAGE_VERSION} />
+        </Content>
       </div>
-    </>
+
+      <DevFlagTogglePanel />
+    </FeatureFlagProvider>
   );
 }

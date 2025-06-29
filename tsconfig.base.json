@@ -20,6 +20,9 @@
     "baseUrl": ".",
     "paths": {
       "@jasonruesch/data-access": ["libs/data-access/src/index.ts"],
+      "@jasonruesch/feature-feature-flags": [
+        "libs/feature-feature-flags/src/index.ts"
+      ],
       "@jasonruesch/ui": ["libs/ui/src/index.ts"]
     }
   }
