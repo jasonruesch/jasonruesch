@@ -29,7 +29,8 @@ export const meta: MetaFunction = () => [
   },
   {
     name: 'description',
-    content: 'Personal website',
+    content:
+      'Jason Ruesch is a software engineer, designer, and open source enthusiast. Explore his projects, articles, and more.',
   },
   {
     name: 'theme-color',
