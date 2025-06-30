@@ -1,3 +1,17 @@
+## 2.8.0 (2025-06-30)
+
+### 🚀 Features
+
+- **feature-feature-flags:** update dev flags toggle panel to be a dialog ([1c8a03b](https://github.com/jasonruesch/jasonruesch/commit/1c8a03b))
+
+### 🩹 Fixes
+
+- **feature-feature-flags:** optimize provider logic ([d9ffe8a](https://github.com/jasonruesch/jasonruesch/commit/d9ffe8a))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.7.0 (2025-06-29)
 
 ### 🚀 Features
