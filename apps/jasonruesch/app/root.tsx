@@ -12,9 +12,10 @@ import {
 } from 'react-router';
 
 import {
-  DevFlagTogglePanel,
   FeatureFlag,
   FeatureFlagProvider,
+  FeatureFlags,
+  FeatureFlagToggleDialog,
   useFeatureFlags,
 } from '@jasonruesch/feature-feature-flags';
 import { Footer, Header } from '@jasonruesch/ui';
@@ -124,9 +125,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export async function loader() {
-  const featureFlags = {
-    all_navigation: false,
-    hidden_navigation: false,
+  const featureFlags: FeatureFlags = {
+    [FeatureFlag.AllNavigation]: false,
+    [FeatureFlag.HiddenNavigation]: false,
   };
   const navigation = [
     { name: 'Home', to: '/' },
@@ -199,7 +200,7 @@ export default function App() {
         </Content>
       </div>
 
-      <DevFlagTogglePanel />
+      <FeatureFlagToggleDialog />
     </FeatureFlagProvider>
   );
 }
