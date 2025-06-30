@@ -1,3 +1,14 @@
+## 2.8.1 (2025-06-30)
+
+### 🩹 Fixes
+
+- **feature-feature-flags:** hide toggle dialog when using dev query param ([c62b267](https://github.com/jasonruesch/jasonruesch/commit/c62b267))
+- **jasonruesch:** update meta description ([071f2e9](https://github.com/jasonruesch/jasonruesch/commit/071f2e9))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.8.0 (2025-06-30)
 
 ### 🚀 Features
