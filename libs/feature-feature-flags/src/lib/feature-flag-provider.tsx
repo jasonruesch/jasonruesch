@@ -10,37 +10,17 @@ import React, {
   useState,
 } from 'react';
 import { useLocation, useRouteLoaderData } from 'react-router';
+import { defaultFlags, FeatureFlag, FeatureFlags } from './feature-flag.modal';
 
-// === Types ===
+export const LOCAL_STORAGE_KEY = 'jasonruesch.featureFlags';
 
-export enum FeatureFlag {
-  AllNavigation = 'all_navigation',
-  HiddenNavigation = 'hidden_navigation',
-}
-
-export type FeatureFlags = Record<FeatureFlag | string, boolean>;
+// === Context ===
 
 interface FeatureFlagContextType {
   flags: FeatureFlags;
   setFlags: (newFlags: FeatureFlags) => void;
   resetFlags: () => void;
 }
-
-interface FeatureFlagProviderProps {
-  children: ReactNode;
-  initialFlags?: FeatureFlags;
-  flagsmithEnvironmentId?: string;
-  identity?: string;
-}
-
-const LOCAL_STORAGE_KEY = 'jasonruesch.featureFlags';
-
-const defaultFlags: FeatureFlags = {
-  [FeatureFlag.AllNavigation]: false,
-  [FeatureFlag.HiddenNavigation]: false,
-};
-
-// === Context ===
 
 const FeatureFlagContext = createContext<FeatureFlagContextType | undefined>(
   undefined,
@@ -112,6 +92,13 @@ function extractFlagsFromFlagsmith(
 }
 
 // === Provider ===
+
+interface FeatureFlagProviderProps {
+  children: ReactNode;
+  initialFlags?: FeatureFlags;
+  flagsmithEnvironmentId?: string;
+  identity?: string;
+}
 
 export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
   children,
