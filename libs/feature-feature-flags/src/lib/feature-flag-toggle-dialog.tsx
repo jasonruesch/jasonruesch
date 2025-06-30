@@ -68,6 +68,8 @@ export function FeatureFlagToggleDialog() {
   }, [ctrlKey, metaKey, pathname, search, navigate]);
 
   useEffect(() => {
+    if (import.meta.env.PROD) return;
+
     const searchParams = new URLSearchParams(search);
     if (searchParams.get('dev') === 'true') {
       setIsOpen(true);
