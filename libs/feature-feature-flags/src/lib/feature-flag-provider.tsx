@@ -3,8 +3,10 @@ import type { IFlagsmithFeature } from 'flagsmith/types';
 import React, {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { useLocation, useRouteLoaderData } from 'react-router';
@@ -88,6 +90,14 @@ function clearStoredFlags() {
   }
 }
 
+function clearFlagsInUrl(search: string, pathname: string) {
+  const queryParams = new URLSearchParams(search);
+  queryParams.delete('feature');
+  queryParams.delete('disable');
+  const newUrl = `${pathname}?${queryParams.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+}
+
 function extractFlagsFromFlagsmith(
   remoteFlags: Record<
     string,
@@ -109,19 +119,21 @@ export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
   flagsmithEnvironmentId,
   identity,
 }) => {
+  const { pathname, search } = useLocation();
   const routeData = useRouteLoaderData('root') as
     | { featureFlags?: FeatureFlags }
     | undefined;
 
-  const loaderFlags = routeData?.featureFlags ?? {};
-  const location = useLocation();
+  const loaderFlags = useMemo(() => routeData?.featureFlags ?? {}, [routeData]);
 
-  // ✅ Initial SSR-safe render
-  const [flags, setFlagsInternal] = useState<FeatureFlags>({
+  const ssrSafeFlags = {
     ...defaultFlags,
     ...loaderFlags,
     ...initialFlags,
-  });
+  };
+
+  // ✅ Initial SSR-safe render
+  const [flags, setFlagsInternal] = useState<FeatureFlags>(ssrSafeFlags);
 
   const setFlags = (newFlags: FeatureFlags) => {
     setFlagsInternal(newFlags);
@@ -130,20 +142,15 @@ export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
 
   const resetFlags = () => {
     clearStoredFlags();
-    const base = {
-      ...defaultFlags,
-      ...loaderFlags,
-      ...initialFlags,
-    };
-    setFlagsInternal(base);
-    storeFlags(base);
+    clearFlagsInUrl(search, pathname);
+    setFlagsInternal(ssrSafeFlags);
+    storeFlags(ssrSafeFlags);
   };
 
-  // ✅ Apply client-only sources on mount
-  useEffect(() => {
+  const setAndStoreFlags = useCallback(() => {
     const storedFlags = getStoredFlags();
 
-    const queryParams = new URLSearchParams(location.search);
+    const queryParams = new URLSearchParams(search);
     const enabled =
       queryParams.get('feature')?.split(',').filter(Boolean) ?? [];
     const disabled =
@@ -154,15 +161,10 @@ export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
       ...Object.fromEntries(disabled.map((key) => [key, false])),
     };
 
-    const flagsmithFlags =
-      flagsmithEnvironmentId && typeof window !== 'undefined'
-        ? extractFlagsFromFlagsmith(flagsmith.getAllFlags?.() ?? {})
-        : {};
+    const flagsmithFlags = extractFlagsFromFlagsmith(flagsmith.getAllFlags());
 
     const merged: FeatureFlags = {
-      ...defaultFlags,
-      ...loaderFlags,
-      ...initialFlags,
+      ...ssrSafeFlags,
       ...flagsmithFlags,
       ...storedFlags,
       ...urlFlags,
@@ -171,7 +173,15 @@ export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
     setFlagsInternal(merged);
     storeFlags(merged);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search, flagsmithEnvironmentId, identity]);
+  }, [search]);
+
+  // ✅ Apply client-only sources on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    setAndStoreFlags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   // ✅ Initialize Flagsmith client-side only
   useEffect(() => {
@@ -180,17 +190,7 @@ export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
     flagsmith.init({
       environmentID: flagsmithEnvironmentId,
       identity,
-      onChange: () => {
-        const remoteFlags = extractFlagsFromFlagsmith(flagsmith.getAllFlags());
-        setFlagsInternal((prev) => ({
-          ...prev,
-          ...remoteFlags,
-        }));
-        storeFlags({
-          ...flags,
-          ...remoteFlags,
-        });
-      },
+      onChange: setAndStoreFlags,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flagsmithEnvironmentId, identity]);
