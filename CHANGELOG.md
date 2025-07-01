@@ -1,3 +1,13 @@
+## 2.9.0 (2025-07-01)
+
+### 🚀 Features
+
+- **jasonruesch:** minor update to the projects placeholder content ([9ace3ad](https://github.com/jasonruesch/jasonruesch/commit/9ace3ad))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.8.2 (2025-07-01)
 
 ### 🩹 Fixes
