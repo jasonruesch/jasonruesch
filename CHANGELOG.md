@@ -1,3 +1,13 @@
+## 2.10.0 (2025-07-01)
+
+### 🚀 Features
+
+- **jasonruesch:** update meta description ([61abe80](https://github.com/jasonruesch/jasonruesch/commit/61abe80))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.9.0 (2025-07-01)
 
 ### 🚀 Features
