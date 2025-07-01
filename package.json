@@ -4,6 +4,9 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
+    "dev": "nx dev jasonruesch --host",
+    "start": "npm run dev",
+    "update-deps": "bash scripts/cp-all-deps.sh apps/jasonruesch/package.json",
     "release": "nx release --skip-publish"
   },
   "private": true,
