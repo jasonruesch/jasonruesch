@@ -258,7 +258,7 @@ jobs:
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - run: flyctl deploy --config apps/jasonruesch/fly.production.toml
+      - run: flyctl deploy --config apps/jasonruesch/fly.production.toml --image-label jasonruesch-${{ github.ref_name }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 ```
@@ -271,7 +271,7 @@ name: Preview
 on:
   # Run this workflow on every PR event. Existing preview apps will be updated when the PR is updated.
   pull_request:
-    types: [opened, reopened, synchronize, closed]
+    types: [opened, reopened, synchronize]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -331,6 +331,7 @@ jobs:
     environment:
       # Deploying apps with this "preview" environment allows the URL for the app to be displayed in the PR UI.
       name: Preview
+      # name: pr-${{ github.event.number }}
       # The script in the `deploy` sets the URL output for each review app.
       url: ${{ steps.deploy.outputs.url }}
     runs-on: ubuntu-latest

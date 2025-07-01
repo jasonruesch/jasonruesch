@@ -6,15 +6,21 @@ Update [nx.json](../../nx.json) with the following:
 {
   ...
   "release": {
-    "projects": ["jasonruesch"],
+    "projects": ["!**/*-e2e"],
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "versionActionsOptions": {
+        "skipLockFileUpdate": true
+      }
     },
     "changelog": {
       "workspaceChangelog": {
         "createRelease": "github"
       }
     }
+  },
+  "sync": {
+    "applyChanges": true
   }
 }
 ```

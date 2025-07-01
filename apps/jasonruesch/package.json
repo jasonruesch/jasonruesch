@@ -31,7 +31,7 @@
         "command": "docker build -t jasonruesch:dev -f apps/jasonruesch/Dockerfile .",
         "configurations": {
           "production": {
-            "command": "docker build -t jasonruesch:production -f apps/jasonruesch/Dockerfile.production ."
+            "command": "docker build -t jasonruesch:v$(npm --prefix apps/jasonruesch pkg get version | tr -d '\"') -f apps/jasonruesch/Dockerfile.production ."
           },
           "staging": {
             "command": "docker build -t jasonruesch:staging -f apps/jasonruesch/Dockerfile.staging ."
@@ -45,7 +45,7 @@
         "command": "YELLOW='\\033[0;33m' RESET='\\033[0m'; echo \"${YELLOW}Development deployment is not supported.${RESET}\"",
         "configurations": {
           "production": {
-            "command": "flyctl deploy --config apps/jasonruesch/fly.production.toml"
+            "command": "flyctl deploy --config apps/jasonruesch/fly.production.toml --image-label jasonruesch-v$(npm --prefix apps/jasonruesch pkg get version | tr -d '\"')"
           },
           "staging": {
             "command": "flyctl deploy --config apps/jasonruesch/fly.staging.toml"

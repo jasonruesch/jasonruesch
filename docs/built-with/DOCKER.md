@@ -52,7 +52,7 @@ services:
       context: .
       dockerfile: ./apps/jasonruesch/Dockerfile
     ports:
-      - '3000:3000'
+      - '4200:4200'
     volumes:
       - .:/app
       - /app/node_modules
@@ -83,17 +83,18 @@ WORKDIR /app
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
+# Copy application code
+COPY --link . .
+
 # Install node modules
-COPY --link package-lock.json package.json ./
 # RUN npm ci --ignore-scripts # TODO: Use this instead of the following after Nx fixes the release script issue of updating the package-lock.json file
 RUN npm install --ignore-scripts
 
 # Set environment
 ENV NODE_ENV="preview"
 
-# Copy application code
-COPY --link . .
-RUN npx nx build jasonruesch
+# Build the application
+RUN npx nx build jasonruesch --mode preview
 
 
 # Final stage for app image
@@ -132,17 +133,18 @@ WORKDIR /app
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
+# Copy application code
+COPY --link . .
+
 # Install node modules
-COPY --link package-lock.json package.json ./
 # RUN npm ci --ignore-scripts # TODO: Use this instead of the following after Nx fixes the release script issue of updating the package-lock.json file
 RUN npm install --ignore-scripts
 
 # Set environment
 ENV NODE_ENV="staging"
 
-# Copy application code
-COPY --link . .
-RUN npx nx build jasonruesch
+# Build the application
+RUN npx nx build jasonruesch --mode staging
 
 
 # Final stage for app image
@@ -164,9 +166,9 @@ Create [apps/jasonruesch/Dockerfile.production](../../apps/jasonruesch/Dockerfil
 # syntax = docker/dockerfile:1
 
 # Build with:
-# docker build -t jasonruesch:production -f apps/jasonruesch/Dockerfile.production .
+# docker build -t jasonruesch:v$(npm --prefix apps/jasonruesch pkg get version | tr -d '\"') -f apps/jasonruesch/Dockerfile.production .
 # Run with:
-# docker run -it --rm -p 3000:3000 --name jasonruesch-jasonruesch-production --label com.docker.compose.project=jasonruesch jasonruesch:production
+# docker run -it --rm -p 3000:3000 --name jasonruesch-jasonruesch-production --label com.docker.compose.project=jasonruesch jasonruesch:v$(npm --prefix apps/jasonruesch pkg get version | tr -d '\"')
 
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=23.6.0
@@ -181,17 +183,18 @@ WORKDIR /app
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
+# Copy application code
+COPY --link . .
+
 # Install node modules
-COPY --link package-lock.json package.json ./
 # RUN npm ci --ignore-scripts # TODO: Use this instead of the following after Nx fixes the release script issue of updating the package-lock.json file
 RUN npm install --ignore-scripts
 
 # Set environment
 ENV NODE_ENV="production"
 
-# Copy application code
-COPY --link . .
-RUN npx nx build jasonruesch
+# Build the application
+RUN npx nx build jasonruesch --mode production
 
 
 # Final stage for app image
@@ -218,13 +221,13 @@ Update [apps/jasonruesch/package.json](../../apps/jasonruesch/package.json) with
         "command": "docker build -f apps/jasonruesch/Dockerfile . -t jasonruesch",
         "configurations": {
           "production": {
-            "command": "docker build -f apps/jasonruesch/Dockerfile.production . -t jasonruesch"
+            "command": "docker build -t jasonruesch:v$(npm --prefix apps/jasonruesch pkg get version | tr -d '\"') -f apps/jasonruesch/Dockerfile.production ."
           },
           "staging": {
-            "command": "docker build -f apps/jasonruesch/Dockerfile.staging . -t jasonruesch"
+            "command": "docker build -t jasonruesch:staging -f apps/jasonruesch/Dockerfile.staging ."
           },
           "preview": {
-            "command": "docker build -f apps/jasonruesch/Dockerfile.preview . -t jasonruesch"
+            "command": "docker build -t jasonruesch:preview -f apps/jasonruesch/Dockerfile.preview ."
           }
         }
       }

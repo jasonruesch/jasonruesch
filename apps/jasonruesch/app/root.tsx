@@ -79,9 +79,6 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
-  if (measurementId) ReactGA.initialize(measurementId);
-
   return (
     <html lang="en">
       <head>
@@ -169,6 +166,9 @@ export function Content({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
+  if (measurementId) ReactGA.initialize(measurementId);
+
   return (
     <FeatureFlagProvider
       flagsmithEnvironmentId={import.meta.env.VITE_FLAGSMITH_ENVIRONMENT_ID}
