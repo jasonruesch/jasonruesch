@@ -90,9 +90,12 @@
     }
   },
   "release": {
-    "projects": ["jasonruesch"],
+    "projects": ["!**/*-e2e"],
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "versionActionsOptions": {
+        "skipLockFileUpdate": true
+      }
     },
     "changelog": {
       "workspaceChangelog": {
