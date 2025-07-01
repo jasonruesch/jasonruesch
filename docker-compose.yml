@@ -8,7 +8,7 @@ version: '3'
 services:
   jasonruesch:
     image: jasonruesch:dev
-    container_name: jasonruesch-jasonruesch
+    container_name: jasonruesch-jasonruesch-dev
     build:
       context: .
       dockerfile: ./apps/jasonruesch/Dockerfile
