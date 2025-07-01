@@ -1,6 +1,6 @@
 {
   "name": "@jasonruesch/feature-feature-flags",
-  "version": "0.0.1",
+  "version": "2.8.2",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

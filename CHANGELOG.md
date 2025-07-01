@@ -1,3 +1,13 @@
+## 2.8.2 (2025-07-01)
+
+### 🩹 Fixes
+
+- **ui:** add z-index to dialog overlay and panel wrapper ([4de11c2](https://github.com/jasonruesch/jasonruesch/commit/4de11c2))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.8.1 (2025-06-30)
 
 ### 🩹 Fixes
