@@ -3,7 +3,7 @@
 # Build with:
 # docker build -t jasonruesch:staging -f apps/jasonruesch/Dockerfile.staging .
 # Run with:
-# docker run -it --rm -p 3000:3000 --name jasonruesch-jasonruesch-staging --label com.docker.compose.project=jasonruesch jasonruesch:staging
+# docker run -it --rm -p 3000:3000 --name jasonruesch-jasonruesch --label com.docker.compose.project=jasonruesch jasonruesch:staging
 
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=23.6.0

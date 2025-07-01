@@ -3,7 +3,7 @@
 # Build with:
 # docker build -t jasonruesch:dev -f apps/jasonruesch/Dockerfile .
 # Run with:
-# docker run -it --rm -p 4200:4200 --name jasonruesch-jasonruesch-dev --label com.docker.compose.project=jasonruesch jasonruesch:dev
+# docker run -it --rm -p 4200:4200 --name jasonruesch-jasonruesch --label com.docker.compose.project=jasonruesch jasonruesch:dev
 
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=23.6.0
