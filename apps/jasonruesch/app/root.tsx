@@ -166,6 +166,7 @@ export function Content({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  console.log(import.meta.env);
   const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
   if (measurementId) ReactGA.initialize(measurementId);
 
