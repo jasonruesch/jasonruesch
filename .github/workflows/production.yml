@@ -24,6 +24,10 @@ jobs:
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - run: flyctl deploy --config apps/jasonruesch/fly.production.toml --image-label jasonruesch-${{ github.ref_name }}
+      - run: |
+          flyctl deploy --config apps/jasonruesch/fly.production.toml --image-label jasonruesch-${{ github.ref_name }} \
+            --build-arg VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID="${{ secrets.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID }}" \
+            --build-arg VITE_FLAGSMITH_ENVIRONMENT_ID="${{ secrets.VITE_FLAGSMITH_ENVIRONMENT_ID }}" \
+            --build-arg VITE_EMAIL_RECIPIENT="${{ secrets.VITE_EMAIL_RECIPIENT }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
