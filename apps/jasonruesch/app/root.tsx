@@ -20,7 +20,7 @@ import {
 } from '@jasonruesch/feature-feature-flags';
 import { Footer, Header } from '@jasonruesch/ui';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import '../styles.css';
 
 export const meta: MetaFunction = () => [
@@ -166,8 +166,11 @@ export function Content({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
-  if (measurementId) ReactGA.initialize(measurementId);
+  useEffect(() => {
+    console.log(import.meta.env);
+    const measurementId = import.meta.env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID;
+    if (measurementId) ReactGA.initialize(measurementId);
+  }, []);
 
   return (
     <FeatureFlagProvider
