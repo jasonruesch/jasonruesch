@@ -22,7 +22,7 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
       - run: |
-          flyctl apps destroy "${{ github.event.repository.name }}-pr-${{ github.event.number }}"
+          flyctl apps destroy "${{ github.event.repository.name }}-pr-${{ github.event.number }}" --yes
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
