@@ -42,27 +42,30 @@ function Contact() {
     window.open(`mailto:${recipient}`, '_blank');
   };
 
-  return (
-    <form
-      action="/thank-you"
-      onSubmit={handleSubmit}
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
-    >
-      <input type="hidden" name="type" value="contact" />
-      <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Get in touch</span>
-      </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Feel free to connect with me to discuss all things frontend development,
-        share recommendations for must-watch shows, or exchange thoughts on the
-        latest gaming adventures. Let's explore the digital world together!
-      </p>
-      <Button type="submit" className="mt-6 w-full">
-        Send me an email
-      </Button>
-    </form>
-  );
+  return recipient ? (
+    <div className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
+      <form
+        action="/thank-you"
+        onSubmit={handleSubmit}
+        className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+      >
+        <input type="hidden" name="type" value="contact" />
+        <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+          <MailIcon className="h-6 w-6 flex-none" />
+          <span className="ml-3">Get in touch</span>
+        </h2>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+          Feel free to connect with me to discuss all things frontend
+          development, share recommendations for must-watch shows, or exchange
+          thoughts on the latest gaming adventures. Let's explore the digital
+          world together!
+        </p>
+        <Button type="submit" className="mt-6 w-full">
+          Send me an email
+        </Button>
+      </form>
+    </div>
+  ) : null;
 }
 
 export default function About() {
@@ -123,9 +126,8 @@ export default function About() {
               Follow on LinkedIn
             </SocialLink>
           </ul>
-          <div className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
-            <Contact />
-          </div>
+
+          <Contact />
         </div>
       </div>
     </Container>
