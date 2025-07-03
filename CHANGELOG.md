@@ -1,3 +1,23 @@
+## 2.11.0 (2025-07-03)
+
+### 🚀 Features
+
+- **jasonruesch:** done debugging ([8003c64](https://github.com/jasonruesch/jasonruesch/commit/8003c64))
+- **jasonruesch:** update footer responsiveness ([94cfa27](https://github.com/jasonruesch/jasonruesch/commit/94cfa27))
+
+### 🩹 Fixes
+
+- **jasonruesch:** move google analytics init and update docs ([0f03c5c](https://github.com/jasonruesch/jasonruesch/commit/0f03c5c))
+- **jasonruesch:** remove console.log ([3c2f6d0](https://github.com/jasonruesch/jasonruesch/commit/3c2f6d0))
+- **jasonruesch:** move ga init into useEffect ([d15d690](https://github.com/jasonruesch/jasonruesch/commit/d15d690))
+- **jasonruesch:** log env variables for debugging ([04aeb54](https://github.com/jasonruesch/jasonruesch/commit/04aeb54))
+- **jasonruesch:** fallback to navigate to home on thank you page ([a3585c8](https://github.com/jasonruesch/jasonruesch/commit/a3585c8))
+- **jasonruesch:** hide contact section of no recipient [skip ci] ([16a72a1](https://github.com/jasonruesch/jasonruesch/commit/16a72a1))
+
+### ❤️ Thank You
+
+- Jason Ruesch
+
 ## 2.10.0 (2025-07-01)
 
 ### 🚀 Features
