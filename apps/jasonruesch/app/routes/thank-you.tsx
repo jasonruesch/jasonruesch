@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router';
+import { Navigate, useSearchParams } from 'react-router';
 
 import { SimpleLayout } from '@jasonruesch/ui';
 
@@ -18,5 +18,7 @@ export default function ThankYou() {
       title="Thanks for your email."
       intro="I'll get back to you as soon as I can. In the meantime, feel free to check out my latest projects."
     />
-  ) : null;
+  ) : (
+    <Navigate to="/" replace />
+  );
 }
