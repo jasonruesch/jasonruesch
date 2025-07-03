@@ -16,7 +16,7 @@ jobs:
   deploy-jasonruesch:
     environment:
       name: Production
-      url: https://jasonruesch.fly.dev
+      url: https://jasonruesch.dev
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch
     steps:
