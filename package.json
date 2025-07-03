@@ -8,7 +8,9 @@
     "start": "npm run dev",
     "update-deps": "bash scripts/cp-all-deps.sh apps/jasonruesch/package.json",
     "release": "nx release --skip-publish",
-    "postrelease": "npm i && git add . && git commit -m \"chore(repo): update package lock [skip ci]\" && git push"
+    "postrelease": "npm i && git add . && git commit -m \"chore(repo): update package lock [skip ci]\" && git push",
+    "postinstall": "bash scripts/cp-all-deps.sh apps/jasonruesch/package.json",
+    "postuninstall": "bash scripts/cp-all-deps.sh apps/jasonruesch/package.json"
   },
   "private": true,
   "dependencies": {

@@ -7,17 +7,30 @@ npm install @headlessui/react framer-motion clsx
 bash scripts/cp-dep.sh @headlessui/react package.json apps/jasonruesch/package.json
 bash scripts/cp-dep.sh framer-motion package.json apps/jasonruesch/package.json
 bash scripts/cp-dep.sh clsx package.json apps/jasonruesch/package.json
-npx nx g @nx/react:library --directory=libs/ui ui
+npx nx g @nx/react:library --directory=libs/ui ui  --importPath=@jasonruesch/ui
 rm -rf libs/ui/src/lib/ui.tsx
 ```
 
 Select `vite` as the bundler and `none` as the test runner.
 
+Update [libs/ui/tsconfig.lib.json](../../libs/ui/tsconfig.lib.json) to include the `dom` lib:
+
+```json
+{
+  ...
+  "compilerOptions": {
+    ...
+    lib: ["dom"]
+  },
+  ...
+}
+```
+
 Download [Catalyst UI Kit](https://tailwindcss.com/plus/ui-kit) and extract the typescript contents to `libs/ui/src/lib/catalyst`.
 
 Update the [libs/ui/src/lib/catalyst/link.tsx](../../libs/ui/src/lib/catalyst/link.tsx) component with the following content:
 
-```typescript
+```jsx
 import * as Headless from '@headlessui/react';
 import React, { forwardRef } from 'react';
 import { Link as RouterLink, type LinkProps } from 'react-router';
@@ -58,20 +71,6 @@ Install Heroicons:
 ```bash
 npm install @heroicons/react
 bash scripts/cp-dep.sh @heroicons/react package.json apps/jasonruesch/package.json
-```
-
-Add the path to the UI library in the `tsconfig.base.json` file:
-
-```json
-{
-  "compilerOptions": {
-    ...
-    "baseUrl": ".",
-    "paths": {
-      "@jasonruesch/ui": ["libs/ui/src/index.ts"]
-    }
-  }
-}
 ```
 
 Install the [vite-tsconfig-paths](https://www.npmjs.com/package/vite-tsconfig-paths) plugin:

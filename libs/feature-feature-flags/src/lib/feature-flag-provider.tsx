@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 import { useLocation, useRouteLoaderData } from 'react-router';
-import { defaultFlags, FeatureFlag, FeatureFlags } from './feature-flag.modal';
+import { defaultFlags, FeatureFlag, FeatureFlags } from './feature-flag.model';
 
 export const LOCAL_STORAGE_KEY = 'jasonruesch.featureFlags';
 

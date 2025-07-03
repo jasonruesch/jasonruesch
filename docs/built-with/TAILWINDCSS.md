@@ -34,7 +34,7 @@ Update [apps/jasonruesch/styles.css](../../apps/jasonruesch/styles.css) with the
 
 Update [apps/jasonruesch/app/root.tsx](../../apps/jasonruesch/app/root.tsx) with the following:
 
-```typescript
+```jsx
 ...
 import '../styles.css';
 ...

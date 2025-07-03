@@ -214,7 +214,7 @@ jobs:
   deploy-jasonruesch-staging:
     environment:
       name: Staging
-      url: https://staging.jasonruesch.dev
+      url: https://jasonruesch-staging.fly.dev
     runs-on: ubuntu-latest
     concurrency: deploy-jasonruesch-staging
     needs: staging
@@ -224,7 +224,8 @@ jobs:
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - run: flyctl deploy --config apps/jasonruesch/fly.staging.toml
+      - run: |
+          flyctl deploy --config apps/jasonruesch/fly.staging.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 ```
@@ -258,7 +259,8 @@ jobs:
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - run: flyctl deploy --config apps/jasonruesch/fly.production.toml --image-label jasonruesch-${{ github.ref_name }}
+      - run: |
+          flyctl deploy --config apps/jasonruesch/fly.production.toml --image-label jasonruesch-${{ github.ref_name }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 ```
@@ -279,6 +281,9 @@ on:
 permissions:
   actions: read
   contents: read
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
   preview:
@@ -329,13 +334,10 @@ jobs:
 
   deploy-jasonruesch-preview:
     environment:
-      # Deploying apps with this "preview" environment allows the URL for the app to be displayed in the PR UI.
       name: Preview
       # name: pr-${{ github.event.number }}
-      # The script in the `deploy` sets the URL output for each review app.
-      url: ${{ steps.deploy.outputs.url }}
+      url: ${{ steps.deploy_status.outputs.url }}
     runs-on: ubuntu-latest
-    # Only run one deployment at a time per PR.
     concurrency:
       group: pr-${{ github.event.number }}
     needs: preview
@@ -343,11 +345,69 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - id: deploy
-        uses: superfly/fly-pr-review-apps@1.3.0
-        with:
-          name: ${{ github.event.repository.name }}-pr-${{ github.event.number }}
-          config: apps/jasonruesch/fly.preview.toml
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      # Check status of app and return output if exists or not
+      - id: fly_status
+        run: |
+          if flyctl status --app "${{ github.event.repository.name }}-pr-${{ github.event.number }}"; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - if: ${{ steps.fly_status.outputs.exists == 'false' }}
+        run: |
+          flyctl apps create "${{ github.event.repository.name }}-pr-${{ github.event.number }}" \
+            --name "${{ github.event.repository.name }}-pr-${{ github.event.number }}" \
+            --yes
+
+      - run: |
+          flyctl deploy --config apps/jasonruesch/fly.preview.toml --app "${{ github.event.repository.name }}-pr-${{ github.event.number }}"
+
+      - id: deploy_status
+        run: |
+          flyctl status --app "${{ github.event.repository.name }}-pr-${{ github.event.number }}" --json > status.json
+          hostname=$(jq -r '.Hostname' status.json)
+          echo "url=https://${hostname}" >> $GITHUB_OUTPUT
+```
+
+Create [.github/workflows/preview.cleanup.yml](../../.github/workflows/preview.cleanup.yml) with the following:
+
+```yaml
+name: Preview
+
+on:
+  # Run this workflow on when PR is closed.
+  pull_request:
+    types: [closed]
+
+permissions:
+  actions: read
+  contents: read
+  deployments: write
+
+jobs:
+  cleanup-jasonruesch-preview:
+    runs-on: ubuntu-latest
+    # Only run one deployment at a time per PR.
+    concurrency:
+      group: pr-${{ github.event.number }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - run: |
+          flyctl apps destroy "${{ github.event.repository.name }}-pr-${{ github.event.number }}" --yes
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      # If using the name `pr-${{ github.event.number }}` for the environment, you can use this action to delete the environment.
+      # - name: Clean up GitHub environment
+      #   uses: strumwolf/delete-deployment-environment@v2
+      #   with:
+      #     # ⚠️ The provided token needs permission for admin write:org
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     environment: pr-${{ github.event.number }}
 ```
